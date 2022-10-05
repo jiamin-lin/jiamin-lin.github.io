@@ -1,6 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Linux</title>
+    <url>/2022/10/02/Linux/</url>
+    <content><![CDATA[<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="计算机基础"><a href="#计算机基础" class="headerlink" title="计算机基础"></a>计算机基础</h2><p><strong>1.软件程序的运行</strong></p>
+<p>硬件如同人的身体，软件如同人的灵魂。没有了灵魂的躯体也不过就是行尸走肉</p>
+<p>**1.1 **机器程序与编译程序</p>
+<p>电脑只认识0与1而已，而且电脑最重要的运算与逻辑判断是在CPU内部， 而 CPU其实是具有微指令集的。因此，我们需要CPU帮忙工作时，就得要参考微指令集的内容， 然后撰写让CPU读的懂的指令码给CPU执行，这样就能够让CPU运行了。</p>
+<p>流程：</p>
+<ul>
+<li>需要了解机器语言：机器只认识0与1，因此你必须要学习直接写给机器看的语言。</li>
+<li>需要了解所有硬件的相关功能函数：因为你的程序必须要写给机器看， 当然你就得要参考机器本身的功能，然后针对该功能去撰写程序码。</li>
+<li>程序不具有可携性：每个CPU都有独特的微指令集，同样的，每个硬件都有其功能函数。</li>
+<li>程序具有专一性：因为这样的程序必须要针对硬件功能函数来撰写， 如果已经开发了一支浏览器程序，想要再开发文件管理程序时，还是得从头再参考硬件的功能函数来继续撰写。</li>
+</ul>
+<p>所以，需要开发让人类能看得懂得程序语言。然后创造一种“编译器”让人类的写的程序语言转换为机器能看懂的机器码。常见的编译器有C,C++,Java,Fortran等等。</p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220922203728264.png" alt="image-20220922203728264"></p>
+<h2 id="关于学习Linux"><a href="#关于学习Linux" class="headerlink" title="关于学习Linux"></a>关于学习Linux</h2><p>两个重要的因素是造成我们学习的原动力： </p>
+<ul>
+<li><p>创建兴趣： Linux上面可以玩的东西真的太多了，你可以选择一个有趣的课题来深入的玩 一玩！不论是Shell还是图形接口等等， 只要能够玩出兴趣，那么再怎么苦你都会不觉得喔！</p>
+</li>
+<li><p>成就感： 成就感是怎么来的？说实在话，就是“被认同”来的！怎么被认同呢？写心得分享啊！当你写了心得分享，并且公告在 BBS 上面，自然有朋友会到你的网页去瞧一瞧， 当大家觉得你的网页内容很棒的时候， 哈哈！你肯定会加油继续的分享下去而无法自拔。</p>
+</li>
+</ul>
+<h2 id="主机规划与磁盘分区"><a href="#主机规划与磁盘分区" class="headerlink" title="主机规划与磁盘分区"></a>主机规划与磁盘分区</h2><p><strong>Linux各硬件设备在系统中为文件名</strong></p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001164035525.png" alt="image-20221001164035525"></p>
+<p><strong>磁盘分区</strong></p>
+<p><strong>MBR 主要分区、延伸分区与逻辑分区的特性：</strong></p>
+<ul>
+<li>主要分区与延伸分区最多可以有四笔（硬盘的限制） ；</li>
+<li>延伸分区最多只能有一个（操作系统的限制）；</li>
+<li>逻辑分区是由延伸分区持续切割出来的分区；</li>
+<li>能够被格式化后，作为数据存取的分区为主要分区与逻辑分区。延伸分区无法格式化； </li>
+<li>逻辑分区的数量依操作系统而不同，在Linux系统中SATA硬盘已经可以突破63个以上的分区限制；</li>
+</ul>
+<p><strong>MBR分区限制：</strong></p>
+<ul>
+<li>操作系统无法抓取到 2.2T 以上的磁盘容量</li>
+<li>MBR 仅有一个区块，若被破坏后，经常无法或很难救援</li>
+<li>MBR 内的存放开机管理程序的区块仅 446Bytes，无法容纳较多的程序码</li>
+</ul>
+<p><strong>GUID partition table, GPT 磁盘分区表：</strong></p>
+<ul>
+<li>与 MBR 仅使用第一个 512Bytes 区块来纪录不同， GPT 使用了 34 个 LBA 区块来纪录分区信息</li>
+<li>GPT 除了前面 34 个 LBA 之外，整个磁盘的最后 33 个 LBA 也拿来作为另一个备份</li>
+</ul>
+<p><strong>计算机开机流程：</strong></p>
+<ol>
+<li>BIOS：开机主动执行的固件，会认识第一个可开机的设备；</li>
+<li>MBR：第一个可开机设备的第一个扇区内的主要开机记录区块，内含开机管理程序；</li>
+<li>开机管理程序（boot loader）：一支可读取核心文件来执行的软件；</li>
+<li>核心文件：开始操作系统的功能</li>
+</ol>
+<p><strong>BIOS与UEFI BIOS区别</strong></p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001200526805.png" alt="image-20221001200526805"></p>
+<p><strong>主机硬盘的规划</strong></p>
+<p>频繁读写的目录</p>
+<ul>
+<li>boot</li>
+<li>&#x2F; </li>
+<li>&#x2F;home </li>
+<li>&#x2F;var </li>
+<li>Swap</li>
+</ul>
+<h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><ul>
+<li><p>如果磁盘容量大于 2TB 以上时，系统会自动使用 GPT 分区方式来处理磁盘分区。</p>
+</li>
+<li><p>GPT 分区已经没有延伸与逻辑分区的概念，可以想像成所有的分区都是主分区，某些操作系统要使用 GPT 分区时，必须要搭配 UEFI 的新型 BIOS 格式才可安装使用。</p>
+</li>
+<li><p>Linux操作系统的文件使用目录树系统，与磁盘的对应需要有“挂载”的动作才行；</p>
+</li>
+<li><p>开机的流程由：BIOS–&gt;MBR–&gt;–&gt;boot loader–&gt;核心文件</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+      <tags>
+        <tag>博客           //多个标签可以这样添加</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Http基础</title>
     <url>/2022/09/09/20220909Http/</url>
     <content><![CDATA[<h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><h4 id="Http及Https概念"><a href="#Http及Https概念" class="headerlink" title="Http及Https概念"></a><em>Http</em>及<em>Https</em>概念</h4><p>1.超文本传输协议（<em>HyperText Transfer Protocol</em> 即<em>http</em>）是一种用于分布式、协作式和超媒体信息系统的应用层协议，所有的www文件都必须遵守这个标准和协议。</p>
@@ -1550,88 +1632,6 @@
       <tags>
         <tag>http           //多个标签可以这样添加</tag>
         <tag>code</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux</title>
-    <url>/2022/10/02/Linux/</url>
-    <content><![CDATA[<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="计算机基础"><a href="#计算机基础" class="headerlink" title="计算机基础"></a>计算机基础</h2><p><strong>1.软件程序的运行</strong></p>
-<p>硬件如同人的身体，软件如同人的灵魂。没有了灵魂的躯体也不过就是行尸走肉</p>
-<p>**1.1 **机器程序与编译程序</p>
-<p>电脑只认识0与1而已，而且电脑最重要的运算与逻辑判断是在CPU内部， 而 CPU其实是具有微指令集的。因此，我们需要CPU帮忙工作时，就得要参考微指令集的内容， 然后撰写让CPU读的懂的指令码给CPU执行，这样就能够让CPU运行了。</p>
-<p>流程：</p>
-<ul>
-<li>需要了解机器语言：机器只认识0与1，因此你必须要学习直接写给机器看的语言。</li>
-<li>需要了解所有硬件的相关功能函数：因为你的程序必须要写给机器看， 当然你就得要参考机器本身的功能，然后针对该功能去撰写程序码。</li>
-<li>程序不具有可携性：每个CPU都有独特的微指令集，同样的，每个硬件都有其功能函数。</li>
-<li>程序具有专一性：因为这样的程序必须要针对硬件功能函数来撰写， 如果已经开发了一支浏览器程序，想要再开发文件管理程序时，还是得从头再参考硬件的功能函数来继续撰写。</li>
-</ul>
-<p>所以，需要开发让人类能看得懂得程序语言。然后创造一种“编译器”让人类的写的程序语言转换为机器能看懂的机器码。常见的编译器有C,C++,Java,Fortran等等。</p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220922203728264.png" alt="image-20220922203728264"></p>
-<h2 id="关于学习Linux"><a href="#关于学习Linux" class="headerlink" title="关于学习Linux"></a>关于学习Linux</h2><p>两个重要的因素是造成我们学习的原动力： </p>
-<ul>
-<li><p>创建兴趣： Linux上面可以玩的东西真的太多了，你可以选择一个有趣的课题来深入的玩 一玩！不论是Shell还是图形接口等等， 只要能够玩出兴趣，那么再怎么苦你都会不觉得喔！</p>
-</li>
-<li><p>成就感： 成就感是怎么来的？说实在话，就是“被认同”来的！怎么被认同呢？写心得分享啊！当你写了心得分享，并且公告在 BBS 上面，自然有朋友会到你的网页去瞧一瞧， 当大家觉得你的网页内容很棒的时候， 哈哈！你肯定会加油继续的分享下去而无法自拔。</p>
-</li>
-</ul>
-<h2 id="主机规划与磁盘分区"><a href="#主机规划与磁盘分区" class="headerlink" title="主机规划与磁盘分区"></a>主机规划与磁盘分区</h2><p><strong>Linux各硬件设备在系统中为文件名</strong></p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001164035525.png" alt="image-20221001164035525"></p>
-<p><strong>磁盘分区</strong></p>
-<p><strong>MBR 主要分区、延伸分区与逻辑分区的特性：</strong></p>
-<ul>
-<li>主要分区与延伸分区最多可以有四笔（硬盘的限制） ；</li>
-<li>延伸分区最多只能有一个（操作系统的限制）；</li>
-<li>逻辑分区是由延伸分区持续切割出来的分区；</li>
-<li>能够被格式化后，作为数据存取的分区为主要分区与逻辑分区。延伸分区无法格式化； </li>
-<li>逻辑分区的数量依操作系统而不同，在Linux系统中SATA硬盘已经可以突破63个以上的分区限制；</li>
-</ul>
-<p><strong>MBR分区限制：</strong></p>
-<ul>
-<li>操作系统无法抓取到 2.2T 以上的磁盘容量</li>
-<li>MBR 仅有一个区块，若被破坏后，经常无法或很难救援</li>
-<li>MBR 内的存放开机管理程序的区块仅 446Bytes，无法容纳较多的程序码</li>
-</ul>
-<p><strong>GUID partition table, GPT 磁盘分区表：</strong></p>
-<ul>
-<li>与 MBR 仅使用第一个 512Bytes 区块来纪录不同， GPT 使用了 34 个 LBA 区块来纪录分区信息</li>
-<li>GPT 除了前面 34 个 LBA 之外，整个磁盘的最后 33 个 LBA 也拿来作为另一个备份</li>
-</ul>
-<p><strong>计算机开机流程：</strong></p>
-<ol>
-<li>BIOS：开机主动执行的固件，会认识第一个可开机的设备；</li>
-<li>MBR：第一个可开机设备的第一个扇区内的主要开机记录区块，内含开机管理程序；</li>
-<li>开机管理程序（boot loader）：一支可读取核心文件来执行的软件；</li>
-<li>核心文件：开始操作系统的功能</li>
-</ol>
-<p><strong>BIOS与UEFI BIOS区别</strong></p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001200526805.png" alt="image-20221001200526805"></p>
-<p><strong>主机硬盘的规划</strong></p>
-<p>频繁读写的目录</p>
-<ul>
-<li>boot</li>
-<li>&#x2F; </li>
-<li>&#x2F;home </li>
-<li>&#x2F;var </li>
-<li>Swap</li>
-</ul>
-<h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><ul>
-<li><p>如果磁盘容量大于 2TB 以上时，系统会自动使用 GPT 分区方式来处理磁盘分区。</p>
-</li>
-<li><p>GPT 分区已经没有延伸与逻辑分区的概念，可以想像成所有的分区都是主分区，某些操作系统要使用 GPT 分区时，必须要搭配 UEFI 的新型 BIOS 格式才可安装使用。</p>
-</li>
-<li><p>Linux操作系统的文件使用目录树系统，与磁盘的对应需要有“挂载”的动作才行；</p>
-</li>
-<li><p>开机的流程由：BIOS–&gt;MBR–&gt;–&gt;boot loader–&gt;核心文件</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>web前端</category>
-      </categories>
-      <tags>
-        <tag>博客           //多个标签可以这样添加</tag>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
