@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）2.C R U D：增删改查的专业术语。3.层次、网状、关系型模型数据库 数据库开始 show databases; imformation_schema：信息数据库，其中保存着关于 MySQL 服务器所维护的所有其他数据库的信息，如数据库名，数据库的表，表栏的数据类型与访问权限等 mysql：保存了用户信息。 performance_sche">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/10/05/MySQL/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）2.C R U D：增删改查的专业术语。3.层次、网状、关系型模型数据库 数据库开始 show databases; imformation_schema：信息数据库，其中保存着关于 MySQL 服务器所维护的所有其他数据库的信息，如数据库名，数据库的表，表栏的数据类型与访问权限等 mysql：保存了用户信息。 performance_sche">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image002.png">
+<meta property="og:image" content="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image004.png">
+<meta property="og:image" content="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image006.png">
+<meta property="article:published_time" content="2022-10-05T08:59:51.368Z">
+<meta property="article:modified_time" content="2022-09-26T10:01:35.119Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image002.png">
+
+
+<link rel="canonical" href="http://example.com/2022/10/05/MySQL/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/10/05/MySQL/","path":"2022/10/05/MySQL/","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | Hexo</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/05/MySQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-05 16:59:51" itemprop="dateCreated datePublished" datetime="2022-10-05T16:59:51+08:00">2022-10-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-09-26 18:01:35" itemprop="dateModified" datetime="2022-09-26T18:01:35+08:00">2022-09-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）<br>2.C R U D：增删改查的专业术语。<br>3.层次、网状、关系型模型数据库</p>
+<p><strong>数据库开始</strong></p>
+<p>show databases;</p>
+<p>imformation_schema：信息数据库，其中保存着关于 MySQL 服务器所维护的所有其他数据库的信息，如数据库名，数据库的表，表栏的数据类型与访问权限等</p>
+<p>mysql：保存了用户信息。</p>
+<p>performance_schema：监控 MySQL 运行过程的资源消耗情况。</p>
+<p>sys： 通过过视图的形式把 information_schema 和 performance_schema 结合起来，查询出更加令人容易理解的数据。</p>
+<p><strong>数据库基本操作</strong></p>
+<p>创建数据库</p>
+<p>语句：</p>
+<p>create database student;</p>
+<p>判断创建语句：</p>
+<p>create database if not exists student;</p>
+<p>关键字变量名语句：</p>
+<p>create database <code>database</code>;</p>
+<p>删除数据库</p>
+<p>语句：</p>
+<p>drop database student;</p>
+<p>判断删除语句：</p>
+<p>drop database if exists student;</p>
+<p>关键字变量名语句：</p>
+<p>drop database <code>database</code>;</p>
+<p>查看创建数据库的 SQL：</p>
+<p>show create database student;</p>
+<p>回退的语句：</p>
+<p>Ctrl + C（^C）</p>
+<p>创建数据库设置指定的字符编码</p>
+<p>create database if not exists teacher charset&#x3D;gbk;</p>
+<p>修改数据库字符编码</p>
+<p>alter database student charset&#x3D;gbk;</p>
+<p><strong>表的基本操作</strong></p>
+<p>进入库:</p>
+<p>use fuck_school;</p>
+<p>展示表：</p>
+<p>show tables;</p>
+<p>制作表：</p>
+<p>create table student(</p>
+<p>Id int,</p>
+<p>name varchar(30),</p>
+<p>age int);</p>
+<p>有 B 格的写法：</p>
+<p>create table if not exists teacher(</p>
+<p>Id int auto_increment primary key comment ‘主键 Id’, </p>
+<p>name varchar(30) not null comment ‘名字’,</p>
+<p>phone varchar(20) default ‘暂时未知’ comment ‘电话’, </p>
+<p>adress varchar(100) default ‘暂时未知’ comment ‘家庭住址’</p>
+<p>)engine &#x3D; innodb;</p>
+<p>auto_increment 自动增长 用于类似于 ID 的数据（有规律性）</p>
+<p>primary key 主键 最主要的 靠它来区分表 </p>
+<p>comment 注释</p>
+<p>not null 不能为空</p>
+<p>default 默认值</p>
+<p>engine &#x3D; innodb 数据库引擎类型</p>
+<p>展示表结构</p>
+<p>desc teacher;</p>
+<p>删除表</p>
+<p>drop table if exists frank,fuck;</p>
+<p>修改表：</p>
+<p>添加元素</p>
+<p>alter table student add address varchar(20);</p>
+<p>按位元素</p>
+<p>之后</p>
+<p>alter table student add address varchar(20) after Id；</p>
+<p>位数</p>
+<p>alter table student add address varchar(30) first; </p>
+<p>删除元素</p>
+<p>alter table student drop address;</p>
+<p>修改元素</p>
+<p>alter table student change address <code>Add</code> varchar(20);</p>
+<p>修改类型</p>
+<p>alter table student modify Id varchar(11);</p>
+<p>修改表名</p>
+<p>alter table student rename to students;</p>
+<p>清空表</p>
+<p>truncate table teacher;</p>
+<p><strong>数据操作</strong></p>
+<p>插入数据</p>
+<p>insert teacher (Id, name, phone, adress) values (1, ‘Fuck’, ‘128989’, ‘GuangZhou’);</p>
+<p>查看数据</p>
+<p>select * from teacher;</p>
+<p>一次插入多条数据</p>
+<p>insert into teacher values (Null, ‘Tom’, Null, default), (Null, ‘Jack’, Null, default);</p>
+<p>删除数据( 注意 where 后面记得带上数据，否则可能误删多条数据！)</p>
+<p>delete from teacher where name &#x3D; ‘Tom’;</p>
+<p>清空表</p>
+<p>truncate table teacher;</p>
+<p>小细节</p>
+<p>delete 与 truncate 清表时，delete 会继续接下来的的顺序编号。</p>
+<p>更新数据( 同删除数据一样必须带上 where 不然可能带来灾难性的后果）</p>
+<p>update teacher set name &#x3D; ‘Frank’ where name &#x3D; ‘Fuck’(Id &#x3D; 1);</p>
+<p>查询部分数据</p>
+<p>select Id, name from teacher;</p>
+<p>理论部分</p>
+<p>DDL data definition language 数据库定义语言 create alter drop show</p>
+<p>DML data manipution language 数据库操纵语言 insert update delete select</p>
+<p>DCL data control language 数据库控制语言 </p>
+<p><strong>数据类型</strong></p>
+<p>create table emp(</p>
+<p>  -&gt; id smallint unsigned auto_increment primary key comment ‘id’, </p>
+<p>  -&gt; age tinyint unsigned comment ‘年龄’, </p>
+<p>  -&gt; fuck int(6)</p>
+<p>  -&gt; );</p>
+<p>unsigned </p>
+<p>表示正值数据</p>
+<p>double 类型精度丢失问题</p>
+<p>浮点型数据类型会有精度丢失的问题，比如小数位设置 6 位，存入 0.45，0.45 转换成二进制是个无限循环小数 0.01110011100…，无法准确表示，存储的时候会发生精度丢失。</p>
+<p>Decimal（定点数）</p>
+<p>四舍五入后用字符串类型数据进行存储</p>
+<p>VarChar 与 Char</p>
+<p>VarChar 为可变长字符串 节省空间 但是性能较低</p>
+<p>Char 为定长字符串 空间占用可能较多 但性能高</p>
+<p>性能不同原因：VarChar 存储的不仅仅是数据内容，还有字节长度以及节点位置。</p>
+<p>Boolean</p>
+<p>insert into test values(true&#x2F;false&#x2F;1&#x2F;0);</p>
+<p>enum </p>
+<p>create table Dmeo(</p>
+<p>gender enum(‘women’,’man’,’?’)</p>
+<p>);</p>
+<p>枚举类型只能用枚举列表里面的元素来赋值（也可以通过整数进行存储）</p>
+<p>好处：存储实际上使用整数，速度比字符串快，限制数据节省空间。</p>
+<p>set 集合</p>
+<p>create table Demo(</p>
+<p>hobby_novel set (‘secience’,’love’,’model’)</p>
+<p>);</p>
+<p>insert into Demo (‘seciece’,’model’);</p>
+<p>与 enum 相比可以一次选择多个元素</p>
+<p>时间</p>
+<p>create table Demo(</p>
+<p>createdTime date</p>
+<p>);</p>
+<p>insert into Demo values(‘2022-04-09 11:23:56’);</p>
+<p><strong>列属性完整性</strong></p>
+<p>设置主键</p>
+<p>alter table demo add primary key(id,name);</p>
+<p>删除主键</p>
+<p>alter table demo drop primary key;</p>
+<p>主键的唯一性</p>
+<p>一个表里只能存在一个主键（复合主键也为一个主键） 并且主键每行数据都不能为空</p>
+<p>设置唯一键</p>
+<p>alter table demo add unique (phone);</p>
+<p>删除唯一键</p>
+<p>alter table demo drop index (phone);</p>
+<p>主键和唯一键的区别</p>
+<p>1.主键不能为空，唯一键可以为空</p>
+<p>2.主键只有一个，唯一键可以存在多个</p>
+<p>3.主键可以在别的表里用，唯一键只在自己的表里瞎折腾</p>
+<p>数据库完整性</p>
+<p>1.保证字段完整 eg.保证存在主键、是设置自动增长，有唯一数据</p>
+<p>2.保证数据类型正确</p>
+<p>3.考虑表里的字段可能会被其他的表所用</p>
+<p>4.自己定义约束</p>
+<p>添加外键</p>
+<p>create table eatery(</p>
+<p>  -&gt; price int,</p>
+<p>  -&gt; stuId int(4),</p>
+<p>  -&gt; foreign key (stuId) references stuId(stuId) </p>
+<p>  -&gt; );</p>
+<p>后期加入外键</p>
+<p>alter table eatery_2 add foreign key (stuId) references stuId(stuId);</p>
+<p>删除外键</p>
+<p>先查询 show create table eatery_2;</p>
+<p>再删除 alter table eatery_2 drop foreign key eatery_2_ ibfk_1;</p>
+<p>设计时最好在定义表时就设置好外键</p>
+<p>置空：用于删除数据</p>
+<p>级联：用于更新数据</p>
+<p>操作 </p>
+<p>alter table eatery add foreign key (stuId) references stuId(stuId) on delete set null on update cascade;</p>
+<p><strong>关系型数据库</strong></p>
+<p>关系：两张表的共有字段去确定数据的完整性</p>
+<p>行：一条数据 一条数据记录 实体</p>
+<p>列：一个字段 属性</p>
+<p>数据冗余：虽然会占用空间，但是提高了性能。</p>
+<p>实体和实体的关系：一对一，一对多，多对多。</p>
+<p>Code 范式</p>
+<p>1.确保字段的原子性</p>
+<p>2.非键字段必须依赖于键字段 说白了就是别他妈没事找事</p>
+<p>3.消除传递依赖</p>
+<p><strong>数据查询语句</strong></p>
+<p><strong>单表查询</strong></p>
+<p><strong>select</strong></p>
+<p>select ‘go fuck yourself’ as qnmd;</p>
+<p>select 2*7 as result;</p>
+<p><strong>from</strong></p>
+<p>笛卡尔积 <img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image002.png" alt="img"></p>
+<p><strong>dual</strong></p>
+<p>伪表：该表主要目的是为了保证在使用 SELECT 语句中的语句的完整性而提供的。</p>
+<p>select 2*7 as result from dual;</p>
+<p><strong>where</strong> </p>
+<p>&lt; &gt; &#x3D; !&#x3D; dddd</p>
+<p>select * from t3 where age &gt;&#x3D; 18;</p>
+<p>select * from t4 where adress &#x3D; ‘Beijing’;</p>
+<p>select * from t4 where adress !&#x3D; ‘Shanghai’; </p>
+<p>&#x2F;or</p>
+<p><strong>in</strong></p>
+<p>select * from t4 where adress not in(‘Shanghai’);</p>
+<p>select * from t4 where adress in(‘Shanghai’,’Beijing’);</p>
+<p><strong>between and</strong></p>
+<p>select * from t3 where age between 15 and 20;</p>
+<p><strong>聚合函数</strong></p>
+<p>总和 select sum(english) from score;</p>
+<p>平均 select avg(english) from score;</p>
+<p>最大 select max(english) from score;</p>
+<p>最小 select min(english) from score;</p>
+<p>次数 select count(id) from score; &#x2F; select count(*) from score;</p>
+<p><strong>like</strong></p>
+<p>查询’张’后面带多个字符</p>
+<p>select * from student where name like ‘张%’;</p>
+<p>‘_’个数表示元素多少个字符</p>
+<p>select * from student where name like ‘张__’; </p>
+<p><strong>order by</strong> </p>
+<p>升序查询</p>
+<p>select * from score order by chinese asc;</p>
+<p>降序查询</p>
+<p>select * from score order by english desc;</p>
+<p><strong>group by</strong></p>
+<p>select avg(age) as ‘年龄’ , address as ‘地区’ from info group by address desc;</p>
+<p><strong>group_concat()</strong></p>
+<p>select group_concat(name) , gender as ‘性别’ from student group by gender;<img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image004.png" alt="img"></p>
+<p><strong>having</strong></p>
+<p>表示对生成的表进行查询，相当于 where</p>
+<p>select avg(age) as ‘age’ , address from info group by address having age &gt; 20;</p>
+<p><strong>limit</strong></p>
+<p>limit 开始位置，结束长度；</p>
+<p>select * from info order by age desc limit 2,3;</p>
+<p><strong>distinct all</strong></p>
+<p>去重</p>
+<p>select count(distinct address) from info; </p>
+<p><strong>多表查询</strong></p>
+<p><strong>inner join on</strong></p>
+<p>select name,chinese from student inner join score on student.id &#x3D; score.id order by english desc;</p>
+<p>注意事项：超过两张表时直接在后面继续续写一次语句。</p>
+<p><strong>left&#x2F;right join on</strong></p>
+<p>select name,english from student left&#x2F;right join score on student.id &#x3D; score.id order by english asc;</p>
+<p><strong>cross join</strong> </p>
+<p>select * from t1 cross join t3; </p>
+<p>有笛卡尔积内味了（数学组合）<img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image006.png" alt="img"></p>
+<p><strong>natural join</strong></p>
+<p>select * from t1 natural (left&#x2F;right) left join t3;</p>
+<p>ps.若两表之间无公共字段，则返回的依旧是笛卡尔积。</p>
+<p><strong>using</strong></p>
+<p>select * from t1 inner t3 using (name);</p>
+<p>ps.当两张表为相同字段时，要采用加上using的结构，否则可能empty set输出。</p>
+<p><strong>子查询</strong></p>
+<p><strong>基本语法</strong></p>
+<p>select * from student where id in(select id from score where english &lt;&#x3D; 85);</p>
+<p><strong>not in</strong></p>
+<p>select * from student where id not in(select id from score where chinese &gt;&#x3D; 85);</p>
+<p>ps.用in或者not in主要是不止一个结果。</p>
+<p><strong>exists &#x2F; not exists</strong></p>
+<p>select * from student where exists (select id from score where english &gt;&#x3D; 85); </p>
+<p>ps.只要有存在就输出。</p>
+<p><strong>JDBC</strong></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/10/05/Linux%E5%91%BD%E4%BB%A4%E7%A5%9E%E5%99%A8%20The%20Fuck/" rel="prev" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/10/05/README/" rel="next" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
