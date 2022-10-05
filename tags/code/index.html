@@ -268,7 +268,7 @@
 </div>
 <!-- 网站运行时间的设置 -->
 <span id="timeDate">载入天数...</span>
-<span id="times">载入时分秒...</span>  Sometimes your whole life boils down to one insame move.
+<span id="times">载入时分秒...</span>  
 <script>
     var now = new Date();
     function createtime() {
@@ -281,7 +281,7 @@
         seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
         snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
         document.getElementById("timeDate").innerHTML = "在风风雨雨中运行了 "+dnum+" d ";
-        document.getElementById("times").innerHTML = hnum + "h " + mnum + " m " + snum + " s";
+        document.getElementById("times").innerHTML = hnum + " h " + mnum + " m " + snum + " s";
     }
 setInterval("createtime()",250);
 </script>
