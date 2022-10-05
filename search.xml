@@ -1702,6 +1702,12 @@
   </entry>
   <entry>
     <title></title>
+    <url>/2022/10/05/README/</url>
+    <content><![CDATA[<h3 id="我的博客文章备份"><a href="#我的博客文章备份" class="headerlink" title="我的博客文章备份"></a>我的博客文章备份</h3><p>访问 <a href="https://dreamin.space/">https://dreamin.space</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
     <url>/2022/10/05/MySQL/</url>
     <content><![CDATA[<p>1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）<br>2.C R U D：增删改查的专业术语。<br>3.层次、网状、关系型模型数据库</p>
 <p><strong>数据库开始</strong></p>
@@ -1959,12 +1965,6 @@
   </entry>
   <entry>
     <title></title>
-    <url>/2022/10/05/README/</url>
-    <content><![CDATA[<h3 id="我的博客文章备份"><a href="#我的博客文章备份" class="headerlink" title="我的博客文章备份"></a>我的博客文章备份</h3><p>访问 <a href="https://dreamin.space/">https://dreamin.space</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
     <url>/2022/10/05/Tomcai/</url>
     <content><![CDATA[<p><strong>林佳敏周报（10.1-10.7）</strong></p>
 <table>
@@ -2098,30 +2098,6 @@
 <p><strong>代码实现</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyHashSet</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] data;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">int</span> <span class="variable">SIZE</span> <span class="operator">=</span> <span class="number">13_333</span>;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">int</span> <span class="variable">ISNULL</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">int</span> <span class="variable">DELETE</span> <span class="operator">=</span> -<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">hash</span><span class="params">(<span class="type">int</span> key)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> key % SIZE;</span><br><span class="line">        <span class="keyword">while</span>(data[i] != key &amp;&amp; data[i] != ISNULL) &#123;</span><br><span class="line">            i = (i + <span class="number">1</span>) % SIZE;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyHashSet</span><span class="params">()</span> &#123;</span><br><span class="line">        data = <span class="keyword">new</span> <span class="title class_">int</span>[SIZE];</span><br><span class="line">        Arrays.fill(data,ISNULL);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> key)</span> &#123;</span><br><span class="line">        data[hash(key)] = key;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(<span class="type">int</span> key)</span> &#123;</span><br><span class="line">        data[hash(key)] = DELETE;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">contains</span><span class="params">(<span class="type">int</span> key)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> data[hash(key)] != ISNULL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2022/10/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E8%B7%AF/</url>
-    <content><![CDATA[<h2 id="什么是Internet"><a href="#什么是Internet" class="headerlink" title="什么是Internet"></a>什么是Internet</h2><p><strong>网络协议</strong></p>
-<p>协议 (protocol) 定义了在两个或多个通信实体之间交换的报文的格式和顺 序，以及报文发送和或接收一条报文或其他事件所采取的动作</p>
-<p>掌握计算机网络领域知识的过程就是理解网络协议的构成原理和工作方式的过程。</p>
-<p><strong>网络边缘</strong></p>
-<p>处于互联网的边缘，与因特网相连的计算机和其他设备称为端系统。包括了桌面计算机、服务器、和移动计算机。</p>
-<p>网络核心&lt;——&gt;主机 互相连接</p>
-<p>端系统（主机）</p>
-<ul>
-<li>运行应用程序</li>
-<li>如Web、email</li>
-</ul>
-<p>C&#x2F;S模式</p>
-<ul>
-<li>客户端向服务器请求、接收服务</li>
-</ul>
-<p>对等(peer-peer)模式（迅雷P2P</p>
-<ul>
-<li>没有专门的服务器</li>
-</ul>
 ]]></content>
   </entry>
   <entry>
@@ -2273,6 +2249,30 @@
 <p>mpv 是著名开源项目 MPlayer 的分支，因其对最新软硬件平台、视频标准以及各种高画质选项的支持而广受好评，也是目前非 Windows 平台上高画质播放器的不二选择。</p>
 <ul>
 <li>[<a href="https://vcb-s.com/archives/7594">VCB-Studio 科普教程 2.3] 跨平台播放器 mpv 配置入门</a></li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/10/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E8%B7%AF/</url>
+    <content><![CDATA[<h2 id="什么是Internet"><a href="#什么是Internet" class="headerlink" title="什么是Internet"></a>什么是Internet</h2><p><strong>网络协议</strong></p>
+<p>协议 (protocol) 定义了在两个或多个通信实体之间交换的报文的格式和顺 序，以及报文发送和或接收一条报文或其他事件所采取的动作</p>
+<p>掌握计算机网络领域知识的过程就是理解网络协议的构成原理和工作方式的过程。</p>
+<p><strong>网络边缘</strong></p>
+<p>处于互联网的边缘，与因特网相连的计算机和其他设备称为端系统。包括了桌面计算机、服务器、和移动计算机。</p>
+<p>网络核心&lt;——&gt;主机 互相连接</p>
+<p>端系统（主机）</p>
+<ul>
+<li>运行应用程序</li>
+<li>如Web、email</li>
+</ul>
+<p>C&#x2F;S模式</p>
+<ul>
+<li>客户端向服务器请求、接收服务</li>
+</ul>
+<p>对等(peer-peer)模式（迅雷P2P</p>
+<ul>
+<li>没有专门的服务器</li>
 </ul>
 ]]></content>
   </entry>
