@@ -1721,18 +1721,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title></title>
-    <url>/2022/10/05/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</url>
-    <content><![CDATA[<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><blockquote>
-<p><strong>「二分查找算法（Binary Search Algorithm）」</strong>：也叫做 <strong>「折半查找算法」</strong>、<strong>「对数查找算法」</strong>。是一种在有序数组中查找某一特定元素的搜索算法。</p>
-<p><strong>基本算法思想：</strong>先确定待查找元素所在的区间范围，在逐步缩小范围，直到找到元素或找不到该元素位置。</p>
-</blockquote>
-<h4 id="查找过程"><a href="#查找过程" class="headerlink" title="查找过程"></a>查找过程</h4><p>1.每次查找从数组的中间元素开始，如果中间元素正好是要查找的元素，则搜索过程结束；</p>
-<p>2.如果某一特定元素大于或小于中间元素，则在数组大于或小于中间元素的那一半中查找，而且跟开始一样从中间元素开始比较；</p>
-<p>3.如果某步骤的数组为空，则代表找不到。</p>
-]]></content>
-  </entry>
-  <entry>
     <title>Mysql基础</title>
     <url>/2022/09/09/MySQL/</url>
     <content><![CDATA[<p>1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）<br>2.C R U D：增删改查的专业术语。<br>3.层次、网状、关系型模型数据库</p>
@@ -1997,49 +1985,8 @@
       </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/2022/10/05/Tomcai/</url>
-    <content><![CDATA[<p><strong>林佳敏周报（10.1-10.7）</strong></p>
-<table>
-<thead>
-<tr>
-<th>本周安排</th>
-<th>计划用时</th>
-<th>完成度</th>
-<th>实际用时</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1.计算机网络（网络边缘、结构核心以及ISP）</td>
-<td>2d</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>2.SpringBoot配置与实践</td>
-<td>2.5d</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>3.Linux主机规划以及磁盘分区</td>
-<td>1d</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>4.Docker基本操作</td>
-<td>0.5d</td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>学习来源：<a href="https://www.bilibili.com/video/BV1JV411t7ow">计算机网络</a>	<a href="https://www.bilibili.com/video/BV19K4y1L7MT?p=1">SpringBoot2</a>	《鸟叔的Linux私房菜》	<a href="https://www.bilibili.com/video/BV11L411g7U1">Docker</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2022/10/05/%E5%9F%BA%E4%BA%8E%E8%85%BE%E8%AE%AF%E4%BA%91%E7%9A%84Typora/</url>
+    <title>基于腾讯云的Typora图床</title>
+    <url>/2022/09/10/%E5%9F%BA%E4%BA%8E%E8%85%BE%E8%AE%AF%E4%BA%91%E7%9A%84Typora/</url>
     <content><![CDATA[<h2 id="术前准备"><a href="#术前准备" class="headerlink" title="术前准备"></a>术前准备</h2><ul>
 <li><p>安装好 <em>Typora</em> ： <a href="https://pan.xunlei.com/s/VNB_VLRHiLk6wUoyXr4mCWM6A1">提取码：h9bb</a>    <em>PicGo</em>  ：<a href="https://pan.xunlei.com/s/VNB_WALBOdxS0Hkp49VZlZT_A1">提取码：k77e</a></p>
 </li>
@@ -2054,29 +2001,29 @@
 <ul>
 <li>点击 <code>储存桶列表</code>-&gt; <code>创建储存桶</code> -&gt; <em>进行以下配置</em></li>
 </ul>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220910162226526.png" alt="image-20220910162226526"></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210751246.png" alt="image-20221005210751246"></p>
 <ul>
 <li>访问权限选择<strong>公有读私有写</strong>，否则图片无法读取，其他的根据自己往下填写就可以。 地域建议离你所在的位置越近越好。</li>
 </ul>
 <h3 id="03-获取密钥"><a href="#03-获取密钥" class="headerlink" title="03.获取密钥"></a>03.获取密钥</h3><ul>
 <li>腾讯云头像–&gt;<a href="https://cloud.tencent.com/product/cam?from=10680">访问管理</a>–&gt; API密钥管理，创建密钥，就会生成 <strong>APPID、SecretId和SecretKey</strong></li>
 </ul>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220910162556056.png" alt="image-20220910162556056"></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210756892.png" alt="image-20221005210756892"></p>
 <h3 id="04-PicGo配置"><a href="#04-PicGo配置" class="headerlink" title="04.PicGo配置"></a>04.<em>PicGo</em>配置</h3><ul>
 <li>点击<code>图床设置</code>-&gt; <code>腾讯云COS</code>-&gt; 填写好刚刚的密钥和存储桶的名称，记得<strong>设置COS版本为V5</strong></li>
 </ul>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220910162842723.png" alt="image-20220910162842723"></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210801870.png" alt="image-20221005210801870"></p>
 <ul>
 <li>自定义域名和存储路径未进行CDN加速可默认为空</li>
 </ul>
 <p><strong>上传测试</strong></p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220910163005832.png" alt="image-20220910163005832"></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210812201.png" alt="image-20221005210812201"></p>
 <p><strong>查看文件是否有保存</strong></p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220910163038658.png" alt="image-20220910163038658"></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210807383.png" alt="image-20221005210807383"></p>
 <h3 id="05-Typora配置"><a href="#05-Typora配置" class="headerlink" title="05.Typora配置"></a>05.Typora配置</h3><ul>
 <li>点击 <code>文件</code>-&gt;  <code>偏好设置</code> -&gt; <code>图像</code></li>
 </ul>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220910163202939.png" alt="image-20220910163202939"></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210821839.png" alt="image-20221005210821839"></p>
 <ul>
 <li>如上图配置即可使用</li>
 </ul>
@@ -2087,16 +2034,17 @@
 </li>
 </ul>
 ]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>code</tag>
+        <tag>Typora           //多个标签可以这样添加</tag>
+      </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/2022/10/05/%E6%90%9C%E7%B4%A0/</url>
-    <content><![CDATA[<p>10.1</p>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2022/10/05/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%8A%BD%E5%B1%89%EF%BC%88Windows%EF%BC%89/</url>
+    <title>程序员的软件抽屉(Windows)</title>
+    <url>/2022/09/26/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%8A%BD%E5%B1%89%EF%BC%88Windows%EF%BC%89/</url>
     <content><![CDATA[<h2 id="工具篇-强烈推荐安装"><a href="#工具篇-强烈推荐安装" class="headerlink" title="工具篇(强烈推荐安装)"></a>工具篇(强烈推荐安装)</h2><h3 id="以打包"><a href="#以打包" class="headerlink" title="以打包"></a>以打包</h3><p>迅雷网盘<a href="https://pan.xunlei.com/s/VND5y3hj863AQVp7dM7UTo0DA1">提取码：atsp</a></p>
 <blockquote>
 <p> <a href="https://geekuninstaller.com/">Geek Uninstaller</a></p>
@@ -2105,33 +2053,33 @@
 <li>小巧（2 MB ）、绿色（无需安装）、易用（单文件）的卸载工具。</li>
 <li>卸载完成，Geek Uninstaller 会自动扫描残留的文件（夹）和注册表项目。</li>
 </ul>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220929090838609.png" alt="image-20220929090838609"></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210331754.png" alt="image-20221005210331754"></p>
 <blockquote>
 <p>Gism++</p>
 </blockquote>
 <p>Windows 上最强大的系统工具，简洁好用。用来清理电脑垃圾再好不过</p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220929093319638.png" alt="image-20220929093319638"></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210337740.png" alt="image-20221005210337740"></p>
 <blockquote>
 <p>图吧工具箱</p>
 </blockquote>
 <p>整合了大量硬件检测的工具，这不比那个经常抽烟的鲁大师好多了。</p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220929093833884.png" alt="image-20220929093833884"></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210346337.png" alt="image-20221005210346337"></p>
 <blockquote>
 <p>Snipaste</p>
 </blockquote>
 <p>史上最好用的截图软件，功能丰富，用了你就知道了。</p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220929094509371.png" alt="image-20220929094509371"></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210352208.png" alt="image-20221005210352208"></p>
 <blockquote>
 <p>FSCapture</p>
 </blockquote>
 <p>属于录屏软件的一股清流吧，大小仅为5.4M，功能却十分齐全！</p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220929094709750.png" alt="image-20220929094709750"></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210402012.png" alt="image-20221005210402012"></p>
 <blockquote>
 <p>TrafficMonitor</p>
 </blockquote>
 <p>用来监控现在电脑的各种硬件状态，直接在任务栏显示，简洁清楚。</p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220929095403544.png" alt="image-20220929095403544"></p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220929095241266.png" alt="image-20220929095241266"></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210410408.png" alt="image-20221005210410408"></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210415503.png" alt="image-20221005210415503"></p>
 <h2 id="程序员的软件抽屉（Windows）"><a href="#程序员的软件抽屉（Windows）" class="headerlink" title="程序员的软件抽屉（Windows）"></a>程序员的软件抽屉（Windows）</h2><h3 id="杀毒软件（不需要"><a href="#杀毒软件（不需要" class="headerlink" title="杀毒软件（不需要"></a>杀毒软件（不需要</h3><p>2202年，都已经Windows11了，其实不太需要杀毒软件了，自带的 Windows defender已经足矣。</p>
 <p>如果硬要装一个，那么最推荐的应该是火绒了</p>
 <blockquote>
@@ -2245,69 +2193,12 @@
 <li>[<a href="https://vcb-s.com/archives/7594">VCB-Studio 科普教程 2.3] 跨平台播放器 mpv 配置入门</a></li>
 </ul>
 ]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2022/10/05/%E6%95%A3%E5%88%97%E8%A1%A8/</url>
-    <content><![CDATA[<h2 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h2><p>散列表的查找算法分为两步</p>
-<ul>
-<li>用散列函数将被查找的键转化为数组的一个索引</li>
-<li>处理碰撞冲突的过程</li>
-</ul>
-<p>解决散列创建以及查找时相同的办法：<code>拉链法</code>和<code>线性探测法</code>。</p>
-<h3 id="拉链法"><a href="#拉链法" class="headerlink" title="拉链法"></a>拉链法</h3><ul>
-<li>使用原始的链表数据类型来扩展。</li>
-<li>为M个元素分别构建符号来保存散列到这里的键</li>
-<li>再利用链表的方法进行散列表的CRUD操作</li>
-</ul>
-<p><strong>代码实现</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyHashSet</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">int</span> <span class="variable">M</span> <span class="operator">=</span> <span class="number">997</span>;</span><br><span class="line">    LinkedList&lt;Integer&gt;[] h = <span class="keyword">new</span> <span class="title class_">LinkedList</span>[M]; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyHashSet</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; M;i++) &#123;</span><br><span class="line">            h[i] = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">find</span><span class="params">(<span class="type">int</span> k,<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i &lt; h[k].size();i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(h[k].get(i) == x) &#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">hash</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (x % M + M) % M;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> key)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> hash(key),t = find(k,key);</span><br><span class="line">        <span class="keyword">if</span>(t == -<span class="number">1</span>) &#123;</span><br><span class="line">            h[k].add(key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(<span class="type">int</span> key)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> hash(key),t = find(k,key);</span><br><span class="line">        <span class="keyword">if</span>(t != -<span class="number">1</span>) &#123;</span><br><span class="line">            h[k].remove(t);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">contains</span><span class="params">(<span class="type">int</span> key)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> hash(key),t = find(k,key);</span><br><span class="line">        <span class="keyword">return</span> t != -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="线性探测法"><a href="#线性探测法" class="headerlink" title="线性探测法"></a>线性探测法</h3><ul>
-<li>实现一条保存键，一条保存值，用散列函数产生所需的数组索引</li>
-<li>当碰撞发生时，直接检查散列表的下一个位置（索引值++）</li>
-<li>索引到未发生碰撞的位置</li>
-</ul>
-<p><strong>代码实现</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyHashSet</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] data;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">int</span> <span class="variable">SIZE</span> <span class="operator">=</span> <span class="number">13_333</span>;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">int</span> <span class="variable">ISNULL</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">int</span> <span class="variable">DELETE</span> <span class="operator">=</span> -<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">hash</span><span class="params">(<span class="type">int</span> key)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> key % SIZE;</span><br><span class="line">        <span class="keyword">while</span>(data[i] != key &amp;&amp; data[i] != ISNULL) &#123;</span><br><span class="line">            i = (i + <span class="number">1</span>) % SIZE;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyHashSet</span><span class="params">()</span> &#123;</span><br><span class="line">        data = <span class="keyword">new</span> <span class="title class_">int</span>[SIZE];</span><br><span class="line">        Arrays.fill(data,ISNULL);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> key)</span> &#123;</span><br><span class="line">        data[hash(key)] = key;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(<span class="type">int</span> key)</span> &#123;</span><br><span class="line">        data[hash(key)] = DELETE;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">contains</span><span class="params">(<span class="type">int</span> key)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> data[hash(key)] != ISNULL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2022/10/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E8%B7%AF/</url>
-    <content><![CDATA[<h2 id="什么是Internet"><a href="#什么是Internet" class="headerlink" title="什么是Internet"></a>什么是Internet</h2><p><strong>网络协议</strong></p>
-<p>协议 (protocol) 定义了在两个或多个通信实体之间交换的报文的格式和顺 序，以及报文发送和或接收一条报文或其他事件所采取的动作</p>
-<p>掌握计算机网络领域知识的过程就是理解网络协议的构成原理和工作方式的过程。</p>
-<p><strong>网络边缘</strong></p>
-<p>处于互联网的边缘，与因特网相连的计算机和其他设备称为端系统。包括了桌面计算机、服务器、和移动计算机。</p>
-<p>网络核心&lt;——&gt;主机 互相连接</p>
-<p>端系统（主机）</p>
-<ul>
-<li>运行应用程序</li>
-<li>如Web、email</li>
-</ul>
-<p>C&#x2F;S模式</p>
-<ul>
-<li>客户端向服务器请求、接收服务</li>
-</ul>
-<p>对等(peer-peer)模式（迅雷P2P</p>
-<ul>
-<li>没有专门的服务器</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2022/10/05/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><p><em>一种在每一步选择中都采取在当前状态下最好或最优（即最有利）的选择，从而希望导致结果是最好或最优的算法</em></p>
-<h3 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h3><ul>
-<li>创建数学模型描述问题</li>
-<li>把求解的问题分解为若干个子问题</li>
-<li>对每一个子问题求解，得到子问题的局部最优解</li>
-<li>把子问题的解局部最优解合成原来解问题的一个解</li>
-</ul>
-<h3 id="实现该算法的过程"><a href="#实现该算法的过程" class="headerlink" title="实现该算法的过程"></a>实现该算法的过程</h3><p><em>从问题的某一初始解出发；while 能朝给定总目标前进一步 do，求出可行解的一个解元素；<br>最后，由所有解元素组合成问题的一个可行解。</em></p>
-]]></content>
+      <categories>
+        <category>windows</category>
+      </categories>
+      <tags>
+        <tag>toy</tag>
+        <tag>windows           //多个标签可以这样添加</tag>
+      </tags>
   </entry>
 </search>
