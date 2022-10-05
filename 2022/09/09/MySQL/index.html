@@ -22,29 +22,31 @@
 
     <meta name="description" content="1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）2.C R U D：增删改查的专业术语。3.层次、网状、关系型模型数据库 数据库开始 show databases; imformation_schema：信息数据库，其中保存着关于 MySQL 服务器所维护的所有其他数据库的信息，如数据库名，数据库的表，表栏的数据类型与访问权限等 mysql：保存了用户信息。 performance_sche">
 <meta property="og:type" content="article">
-<meta property="og:title" content="好好学习，天天向上">
-<meta property="og:url" content="http://example.com/2022/10/05/MySQL/index.html">
+<meta property="og:title" content="Mysql基础">
+<meta property="og:url" content="http://example.com/2022/09/09/MySQL/index.html">
 <meta property="og:site_name" content="好好学习，天天向上">
 <meta property="og:description" content="1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）2.C R U D：增删改查的专业术语。3.层次、网状、关系型模型数据库 数据库开始 show databases; imformation_schema：信息数据库，其中保存着关于 MySQL 服务器所维护的所有其他数据库的信息，如数据库名，数据库的表，表栏的数据类型与访问权限等 mysql：保存了用户信息。 performance_sche">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image002.png">
-<meta property="og:image" content="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image004.png">
-<meta property="og:image" content="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image006.png">
-<meta property="article:published_time" content="2022-10-05T08:59:51.368Z">
-<meta property="article:modified_time" content="2022-09-26T10:01:35.119Z">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205749815.png">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205759542.png">
+<meta property="article:published_time" content="2022-09-09T03:11:10.000Z">
+<meta property="article:modified_time" content="2022-10-05T12:59:55.514Z">
 <meta property="article:author" content="Dreamin">
+<meta property="article:tag" content="code">
+<meta property="article:tag" content="Mysql           &#x2F;&#x2F;多个标签可以这样添加">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image002.png">
 
 
-<link rel="canonical" href="http://example.com/2022/10/05/MySQL/">
+<link rel="canonical" href="http://example.com/2022/09/09/MySQL/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/10/05/MySQL/","path":"2022/10/05/MySQL/","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/09/09/MySQL/","path":"2022/09/09/MySQL/","title":"Mysql基础"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title> | 好好学习，天天向上</title>
+<title>Mysql基础 | 好好学习，天天向上</title>
   
 
 
@@ -129,11 +131,11 @@
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -172,7 +174,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/05/MySQL/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/09/MySQL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -185,12 +187,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 好好学习，天天向上">
+      <meta itemprop="name" content="Mysql基础 | 好好学习，天天向上">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          Mysql基础
         </h1>
 
         <div class="post-meta-container">
@@ -201,14 +203,23 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2022-10-05 16:59:51" itemprop="dateCreated datePublished" datetime="2022-10-05T16:59:51+08:00">2022-10-05</time>
+      <time title="创建时间：2022-09-09 11:11:10" itemprop="dateCreated datePublished" datetime="2022-09-09T11:11:10+08:00">2022-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-26 18:01:35" itemprop="dateModified" datetime="2022-09-26T18:01:35+08:00">2022-09-26</time>
+      <time title="修改时间：2022-10-05 20:59:55" itemprop="dateModified" datetime="2022-10-05T20:59:55+08:00">2022-10-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a>
+        </span>
     </span>
 
   
@@ -438,7 +449,7 @@
 <p><strong>group by</strong></p>
 <p>select avg(age) as ‘年龄’ , address as ‘地区’ from info group by address desc;</p>
 <p><strong>group_concat()</strong></p>
-<p>select group_concat(name) , gender as ‘性别’ from student group by gender;<img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image004.png" alt="img"></p>
+<p>select group_concat(name) , gender as ‘性别’ from student group by gender;<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205749815.png" alt="image-20221005205749815"></p>
 <p><strong>having</strong></p>
 <p>表示对生成的表进行查询，相当于 where</p>
 <p>select avg(age) as ‘age’ , address from info group by address having age &gt; 20;</p>
@@ -456,7 +467,7 @@
 <p>select name,english from student left&#x2F;right join score on student.id &#x3D; score.id order by english asc;</p>
 <p><strong>cross join</strong> </p>
 <p>select * from t1 cross join t3; </p>
-<p>有笛卡尔积内味了（数学组合）<img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image006.png" alt="img"></p>
+<p>有笛卡尔积内味了（数学组合）<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205759542.png" alt="image-20221005205759542"></p>
 <p><strong>natural join</strong></p>
 <p>select * from t1 natural (left&#x2F;right) left join t3;</p>
 <p>ps.若两表之间无公共字段，则返回的依旧是笛卡尔积。</p>
@@ -483,18 +494,22 @@
 
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/code/" rel="tag"># code</a>
+              <a href="/tags/Mysql-%E5%A4%9A%E4%B8%AA%E6%A0%87%E7%AD%BE%E5%8F%AF%E4%BB%A5%E8%BF%99%E6%A0%B7%E6%B7%BB%E5%8A%A0/" rel="tag"># Mysql           //多个标签可以这样添加</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/10/05/Linux%E5%91%BD%E4%BB%A4%E7%A5%9E%E5%99%A8%20The%20Fuck/" rel="prev" title="">
-                  <i class="fa fa-chevron-left"></i> 
+                <a href="/2018/08/02/Linux/" rel="prev" title="Linux">
+                  <i class="fa fa-chevron-left"></i> Linux
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/10/05/README/" rel="next" title="">
-                   <i class="fa fa-chevron-right"></i>
+                <a href="/2022/09/09/20220909Http/" rel="next" title="Http基础">
+                  Http基础 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
