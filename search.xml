@@ -1635,6 +1635,64 @@
       </tags>
   </entry>
   <entry>
+    <title>基于腾讯云的Typora图床</title>
+    <url>/2022/09/10/%E5%9F%BA%E4%BA%8E%E8%85%BE%E8%AE%AF%E4%BA%91%E7%9A%84Typora/</url>
+    <content><![CDATA[<h2 id="术前准备"><a href="#术前准备" class="headerlink" title="术前准备"></a>术前准备</h2><ul>
+<li><p>安装好 <em>Typora</em> ： <a href="https://pan.xunlei.com/s/VNB_VLRHiLk6wUoyXr4mCWM6A1">提取码：h9bb</a>    <em>PicGo</em>  ：<a href="https://pan.xunlei.com/s/VNB_WALBOdxS0Hkp49VZlZT_A1">提取码：k77e</a></p>
+</li>
+<li><p>环境配置 <em>nodejs</em>：<a href="https://nodejs.org/en/">https://nodejs.org/en/</a></p>
+</li>
+<li><p><em>Gitee</em> 账户：<a href="https://gitee.com/">https://gitee.com/</a></p>
+</li>
+</ul>
+<h2 id="开搞"><a href="#开搞" class="headerlink" title="开搞"></a>开搞</h2><h3 id="01-配置完nodejs"><a href="#01-配置完nodejs" class="headerlink" title="01.配置完nodejs"></a>01.配置完<em>nodejs</em></h3><figure class="highlight plaintext"><figcaption><span>--version</span></figcaption><table><tr><td class="code"><pre><span class="line">C:\&gt;node --version</span><br><span class="line">v16.17.0</span><br><span class="line">C:\&gt;npm --verison</span><br><span class="line">8.15.0</span><br></pre></td></tr></table></figure>
+
+<h3 id="02-配置腾讯云对象储存"><a href="#02-配置腾讯云对象储存" class="headerlink" title="02.配置腾讯云对象储存"></a>02.配置腾讯云对象储存</h3><p><strong>创建储存桶</strong></p>
+<ul>
+<li>点击 <code>储存桶列表</code>-&gt; <code>创建储存桶</code> -&gt; <em>进行以下配置</em></li>
+</ul>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210751246.png" alt="image-20221005210751246"></p>
+<ul>
+<li>访问权限选择<strong>公有读私有写</strong>，否则图片无法读取，其他的根据自己往下填写就可以。 地域建议离你所在的位置越近越好。</li>
+</ul>
+<h3 id="03-获取密钥"><a href="#03-获取密钥" class="headerlink" title="03.获取密钥"></a>03.获取密钥</h3><ul>
+<li>腾讯云头像–&gt;<a href="https://cloud.tencent.com/product/cam?from=10680">访问管理</a>–&gt; API密钥管理，创建密钥，就会生成 <strong>APPID、SecretId和SecretKey</strong></li>
+</ul>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210756892.png" alt="image-20221005210756892"></p>
+<h3 id="04-PicGo配置"><a href="#04-PicGo配置" class="headerlink" title="04.PicGo配置"></a>04.<em>PicGo</em>配置</h3><ul>
+<li>点击<code>图床设置</code>-&gt; <code>腾讯云COS</code>-&gt; 填写好刚刚的密钥和存储桶的名称，记得<strong>设置COS版本为V5</strong></li>
+</ul>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210801870.png" alt="image-20221005210801870"></p>
+<ul>
+<li>自定义域名和存储路径未进行CDN加速可默认为空</li>
+</ul>
+<p><strong>上传测试</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210812201.png" alt="image-20221005210812201"></p>
+<p><strong>查看文件是否有保存</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210807383.png" alt="image-20221005210807383"></p>
+<h3 id="05-Typora配置"><a href="#05-Typora配置" class="headerlink" title="05.Typora配置"></a>05.Typora配置</h3><ul>
+<li>点击 <code>文件</code>-&gt;  <code>偏好设置</code> -&gt; <code>图像</code></li>
+</ul>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210821839.png" alt="image-20221005210821839"></p>
+<ul>
+<li>如上图配置即可使用</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><p><a href="https://blog.csdn.net/haojie_duan/article/details/120400386">https://blog.csdn.net/haojie_duan/article/details/120400386</a></p>
+</li>
+<li><p><a href="https://cloud.tencent.com/developer/article/1834573">https://cloud.tencent.com/developer/article/1834573</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>code</tag>
+        <tag>Typora           //多个标签可以这样添加</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux toy合集</title>
     <url>/2022/09/15/Linux%E5%91%BD%E4%BB%A4%E7%A5%9E%E5%99%A8%20The%20Fuck/</url>
     <content><![CDATA[<h1 id="Linux命令神器-The-Fuck"><a href="#Linux命令神器-The-Fuck" class="headerlink" title="Linux命令神器 The Fuck"></a>Linux命令神器 <code>The Fuck</code></h1><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/example.gif" alt="example"></p>
@@ -2135,64 +2193,6 @@
       <tags>
         <tag>toy</tag>
         <tag>windows           //多个标签可以这样添加</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于腾讯云的Typora图床</title>
-    <url>/2022/09/10/%E5%9F%BA%E4%BA%8E%E8%85%BE%E8%AE%AF%E4%BA%91%E7%9A%84Typora/</url>
-    <content><![CDATA[<h2 id="术前准备"><a href="#术前准备" class="headerlink" title="术前准备"></a>术前准备</h2><ul>
-<li><p>安装好 <em>Typora</em> ： <a href="https://pan.xunlei.com/s/VNB_VLRHiLk6wUoyXr4mCWM6A1">提取码：h9bb</a>    <em>PicGo</em>  ：<a href="https://pan.xunlei.com/s/VNB_WALBOdxS0Hkp49VZlZT_A1">提取码：k77e</a></p>
-</li>
-<li><p>环境配置 <em>nodejs</em>：<a href="https://nodejs.org/en/">https://nodejs.org/en/</a></p>
-</li>
-<li><p><em>Gitee</em> 账户：<a href="https://gitee.com/">https://gitee.com/</a></p>
-</li>
-</ul>
-<h2 id="开搞"><a href="#开搞" class="headerlink" title="开搞"></a>开搞</h2><h3 id="01-配置完nodejs"><a href="#01-配置完nodejs" class="headerlink" title="01.配置完nodejs"></a>01.配置完<em>nodejs</em></h3><figure class="highlight plaintext"><figcaption><span>--version</span></figcaption><table><tr><td class="code"><pre><span class="line">C:\&gt;node --version</span><br><span class="line">v16.17.0</span><br><span class="line">C:\&gt;npm --verison</span><br><span class="line">8.15.0</span><br></pre></td></tr></table></figure>
-
-<h3 id="02-配置腾讯云对象储存"><a href="#02-配置腾讯云对象储存" class="headerlink" title="02.配置腾讯云对象储存"></a>02.配置腾讯云对象储存</h3><p><strong>创建储存桶</strong></p>
-<ul>
-<li>点击 <code>储存桶列表</code>-&gt; <code>创建储存桶</code> -&gt; <em>进行以下配置</em></li>
-</ul>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210751246.png" alt="image-20221005210751246"></p>
-<ul>
-<li>访问权限选择<strong>公有读私有写</strong>，否则图片无法读取，其他的根据自己往下填写就可以。 地域建议离你所在的位置越近越好。</li>
-</ul>
-<h3 id="03-获取密钥"><a href="#03-获取密钥" class="headerlink" title="03.获取密钥"></a>03.获取密钥</h3><ul>
-<li>腾讯云头像–&gt;<a href="https://cloud.tencent.com/product/cam?from=10680">访问管理</a>–&gt; API密钥管理，创建密钥，就会生成 <strong>APPID、SecretId和SecretKey</strong></li>
-</ul>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210756892.png" alt="image-20221005210756892"></p>
-<h3 id="04-PicGo配置"><a href="#04-PicGo配置" class="headerlink" title="04.PicGo配置"></a>04.<em>PicGo</em>配置</h3><ul>
-<li>点击<code>图床设置</code>-&gt; <code>腾讯云COS</code>-&gt; 填写好刚刚的密钥和存储桶的名称，记得<strong>设置COS版本为V5</strong></li>
-</ul>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210801870.png" alt="image-20221005210801870"></p>
-<ul>
-<li>自定义域名和存储路径未进行CDN加速可默认为空</li>
-</ul>
-<p><strong>上传测试</strong></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210812201.png" alt="image-20221005210812201"></p>
-<p><strong>查看文件是否有保存</strong></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210807383.png" alt="image-20221005210807383"></p>
-<h3 id="05-Typora配置"><a href="#05-Typora配置" class="headerlink" title="05.Typora配置"></a>05.Typora配置</h3><ul>
-<li>点击 <code>文件</code>-&gt;  <code>偏好设置</code> -&gt; <code>图像</code></li>
-</ul>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210821839.png" alt="image-20221005210821839"></p>
-<ul>
-<li>如上图配置即可使用</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><p><a href="https://blog.csdn.net/haojie_duan/article/details/120400386">https://blog.csdn.net/haojie_duan/article/details/120400386</a></p>
-</li>
-<li><p><a href="https://cloud.tencent.com/developer/article/1834573">https://cloud.tencent.com/developer/article/1834573</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>code</tag>
-        <tag>Typora           //多个标签可以这样添加</tag>
       </tags>
   </entry>
 </search>
