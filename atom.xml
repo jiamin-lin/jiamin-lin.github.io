@@ -148,6 +148,35 @@
   </entry>
   
   <entry>
+    <title>在线code安装教程</title>
+    <link href="http://example.com/2022/09/12/code-server%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    <id>http://example.com/2022/09/12/code-server%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</id>
+    <published>2022-09-12T03:11:10.000Z</published>
+    <updated>2022-10-06T06:16:57.864Z</updated>
+    
+    <content type="html"><![CDATA[<p>##前置条件：</p><ol><li>云服务器</li><li>ssh的连接工具 如<a href="https://www.putty.org/">putty</a>，<a href="https://termius.com/">Termius</a>，mac用户可以直接用终端连接.</li></ol><h2 id="安装教程"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程</h2><p>首先使用你的ssh工具连接服务器</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//输入命令下载codeserver</span><br><span class="line">wget https://github.com/coder/code-server/releases/download/v4.6.1/code-server-4.6.1-linux-amd64.tar.gz</span><br><span class="line">//解压</span><br><span class="line">tar -zxvf code-server-4.6.1-linux-amd64.tar.gz</span><br><span class="line">//进入codeserver目录</span><br><span class="line">cd code-server-4.6.1-linux-amd64</span><br><span class="line">//设置密码(密码在双引号内)</span><br><span class="line">export PASSWORD=123456</span><br><span class="line">//启动codeserver</span><br><span class="line">./code-server --port 8081 --host 0.0.0.0 --auth password</span><br></pre></td></tr></table></figure><p>在浏览器上方输入<code>你的服务器IP:8081</code> 即可进入登录界面</p><p>这个时候输入之前设置的密码就可以进入codeserver了</p><h2 id="配置Screen进程守护"><a href="#配置Screen进程守护" class="headerlink" title="配置Screen进程守护"></a>配置Screen进程守护</h2><p>之前的步骤有一个问题,就是当你退出ssh进程的时候,你会发现网站进不去了。</p><p>因为当ssh进程关闭的时候，会自动清除当前进程。</p><p>我们得下载Screen来给codeserver进行进程守护，防止进程自动退出。</p><h2 id="安装Screen"><a href="#安装Screen" class="headerlink" title="安装Screen"></a>安装Screen</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//复制适合自己系统的命令安装</span><br><span class="line">//Centos系统</span><br><span class="line">yum install screen</span><br><span class="line">//Debian/Ubuntu系统</span><br><span class="line">apt-get install screen</span><br></pre></td></tr></table></figure><h2 id="保护进程实现后台运行"><a href="#保护进程实现后台运行" class="headerlink" title="保护进程实现后台运行"></a>保护进程实现后台运行</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//以code_server为名字建立进程</span><br><span class="line">screen -S code_server</span><br><span class="line">//再次输入以下命令</span><br><span class="line">cd code-server-4.6.1-linux-amd64</span><br><span class="line">export PASSWORD=123456</span><br><span class="line">./code-server --port 8081 --host 0.0.0.0 --auth password</span><br></pre></td></tr></table></figure><p>此时关闭ssh终端,也可以照常进入网页啦！</p><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE-2022-09-06-215111.jpg"></p><p>微软官方<a href="https://vscode.dev/">请输入链接描述</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;##前置条件：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;云服务器&lt;/li&gt;
+&lt;li&gt;ssh的连接工具 如&lt;a href=&quot;https://www.putty.org/&quot;&gt;putty&lt;/a&gt;，&lt;a href=&quot;https://termius.com/&quot;&gt;Termius&lt;/a&gt;，mac用户可</summary>
+      
+    
+    
+    
+    <category term="toy" scheme="http://example.com/categories/toy/"/>
+    
+    
+    <category term="Linux" scheme="http://example.com/tags/Linux/"/>
+    
+    <category term="toy" scheme="http://example.com/tags/toy/"/>
+    
+  </entry>
+  
+  <entry>
     <title>基于腾讯云的Typora图床</title>
     <link href="http://example.com/2022/09/10/%E5%9F%BA%E4%BA%8E%E8%85%BE%E8%AE%AF%E4%BA%91%E7%9A%84Typora/"/>
     <id>http://example.com/2022/09/10/%E5%9F%BA%E4%BA%8E%E8%85%BE%E8%AE%AF%E4%BA%91%E7%9A%84Typora/</id>
