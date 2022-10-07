@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-10-06T06:08:01.437Z</updated>
+  <updated>2022-10-07T14:12:27.370Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>基于Github的Typora图床</title>
+    <link href="http://example.com/2022/10/07/Github%E5%9B%BE%E5%BA%8A/"/>
+    <id>http://example.com/2022/10/07/Github%E5%9B%BE%E5%BA%8A/</id>
+    <published>2022-10-07T15:11:10.000Z</published>
+    <updated>2022-10-07T14:12:27.370Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>考虑到有部分人没有服务器，所以这里用免费的github作为图床</strong></p><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul><li>安装好 <em>Typora</em> ： <a href="https://pan.xunlei.com/s/VNB_VLRHiLk6wUoyXr4mCWM6A1">提取码：h9bb</a>    <em>PicGo</em>  ：<a href="https://pan.xunlei.com/s/VNB_WALBOdxS0Hkp49VZlZT_A1">提取码：k77e</a></li><li><em>Gitee</em> 账户：<a href="https://github.com/">https://github.com/</a></li></ul><h2 id="开搞"><a href="#开搞" class="headerlink" title="开搞"></a>开搞</h2><h3 id="使用Github作为图床"><a href="#使用Github作为图床" class="headerlink" title="使用Github作为图床"></a>使用Github作为图床</h3><p><strong>1.新建一个仓库</strong></p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221007215042471.png" alt="image-20221007215042471" style="zoom:50%;" /><p><strong>2.设置好仓库名 仓库为开放状态 并且添加README文件</strong></p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221007215229045.png" alt="image-20221007215229045" style="zoom:50%;" /><p><strong>3.获取Token（记得备份）</strong></p><p>创建一个token，依次选择<code>Settings —&gt; Developer settings—&gt; Personal access tokens</code>，点击<code>Generate new token</code>创建token。</p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221007215855658.png" alt="image-20221007215855658" style="zoom:67%;" /><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221007220120150.png" alt="image-20221007220120150" style="zoom:67%;" /><h3 id="配置PicGo"><a href="#配置PicGo" class="headerlink" title="配置PicGo"></a>配置PicGo</h3><p><strong>1.自定义安装PicGo，首先选择“PicGo设置”，点击“设置Server”，开启Server，设置监听地址为主机127.0.0.1，端口号为36677</strong></p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/PicGo%E9%85%8D%E7%BD%AE-1.png" alt="image-20221007220311253" style="zoom:50%;" /><p><strong>2.建议将“时间戳重命名”开启（也可以将上传前重命名开启，自己命名图片名称。这里重命名优先权大于时间命名），避免上传图片重名</strong></p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210072205359.png" alt="image-20221007220545297" style="zoom:50%;" /><p><strong>3. 选择“图床设置”—&gt;“GitHub图床”，进行设置</strong></p><p>仓库名： 使用 用户名 + 仓库名</p><p>分支名： 默认为master或main（看仓库具体分支是什么）</p><p>token： 使用上述创建的token</p><p>存储路径：这里使用上述创建仓库的img目录</p><p>自定义域名：不必填，默认格式：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://raw.githubusercontent.com/[用户名]/[仓库名]/master</span><br></pre></td></tr></table></figure><p>但是自己平常访问Github经常404的话建议改为</p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">https:</span>/<span class="regexp">/cdn.jsdelivr.net/gh</span><span class="regexp">/用户名/</span>仓库名/文件路径</span><br></pre></td></tr></table></figure><p>对于使用存储在GitHub上面的<strong>静态文件</strong>，可使用jsDelivr CDN快速访问</p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210072207463.png" alt="image-20221007220730401" style="zoom:50%;" /><p><strong>上传测试</strong></p><img src="../AppData/Roaming/Typora/typora-user-images/image-20221007220926556.png" alt="image-20221007220926556" style="zoom:50%;" /><p><strong>文件保存成功</strong></p><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210072210888.png" alt="image-20221007221015835"></p><h3 id="Typora配置"><a href="#Typora配置" class="headerlink" title="Typora配置"></a>Typora配置</h3><ul><li>点击 <code>文件</code>-&gt;  <code>偏好设置</code> -&gt; <code>图像</code></li></ul><p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220910163202939.png" alt="image-20220910163202939"></p><ul><li>如上图配置即可使用</li></ul><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul><li><p><a href="https://blog.csdn.net/haojie_duan/article/details/120400386">https://blog.csdn.net/haojie_duan/article/details/120400386</a></p></li><li><p><a href="https://cloud.tencent.com/developer/article/1834573">https://cloud.tencent.com/developer/article/1834573</a></p></li><li><p><a href="https://juejin.cn/post/7099811254864674823">https://juejin.cn/post/7099811254864674823</a></p></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;strong&gt;考虑到有部分人没有服务器，所以这里用免费的github作为图床&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;准备&quot;&gt;&lt;a href=&quot;#准备&quot; class=&quot;headerlink&quot; title=&quot;准备&quot;&gt;&lt;/a&gt;准备&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;安装好 &lt;em&gt;</summary>
+      
+    
+    
+    
+    <category term="code" scheme="http://example.com/categories/code/"/>
+    
+    
+    <category term="code" scheme="http://example.com/tags/code/"/>
+    
+    <category term="Typora" scheme="http://example.com/tags/Typora/"/>
+    
+  </entry>
   
   <entry>
     <title>基于青龙面板薅JD羊毛</title>
