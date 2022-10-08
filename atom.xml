@@ -38,9 +38,9 @@
     <category term="code" scheme="http://example.com/categories/code/"/>
     
     
-    <category term="code" scheme="http://example.com/tags/code/"/>
-    
     <category term="Typora" scheme="http://example.com/tags/Typora/"/>
+    
+    <category term="code" scheme="http://example.com/tags/code/"/>
     
   </entry>
   
@@ -169,9 +169,9 @@
     <category term="http" scheme="http://example.com/categories/http/"/>
     
     
-    <category term="http" scheme="http://example.com/tags/http/"/>
-    
     <category term="code" scheme="http://example.com/tags/code/"/>
+    
+    <category term="http" scheme="http://example.com/tags/http/"/>
     
   </entry>
   
@@ -225,9 +225,9 @@
     <category term="code" scheme="http://example.com/categories/code/"/>
     
     
-    <category term="code" scheme="http://example.com/tags/code/"/>
-    
     <category term="Typora" scheme="http://example.com/tags/Typora/"/>
+    
+    <category term="code" scheme="http://example.com/tags/code/"/>
     
   </entry>
   
