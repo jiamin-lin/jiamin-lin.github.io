@@ -18,8 +18,8 @@
   
   <entry>
     <title>基于Github的Typora图床</title>
-    <link href="http://example.com/2022/10/07/Github%E5%9B%BE%E5%BA%8A/"/>
-    <id>http://example.com/2022/10/07/Github%E5%9B%BE%E5%BA%8A/</id>
+    <link href="http://example.com/2022/10/07/Githubed/"/>
+    <id>http://example.com/2022/10/07/Githubed/</id>
     <published>2022-10-07T15:11:10.000Z</published>
     <updated>2022-10-07T14:12:27.370Z</updated>
     
@@ -46,8 +46,8 @@
   
   <entry>
     <title>基于青龙面板薅JD羊毛</title>
-    <link href="http://example.com/2022/10/05/%E5%9F%BA%E4%BA%8E%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2Docker%E4%BB%A5%E5%8F%8A%E9%9D%92%E9%BE%99%E9%9D%A2%E6%9D%BF%E8%96%85%E4%BA%AC%E4%B8%9C%E7%BE%8A%E6%AF%9B/"/>
-    <id>http://example.com/2022/10/05/%E5%9F%BA%E4%BA%8E%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2Docker%E4%BB%A5%E5%8F%8A%E9%9D%92%E9%BE%99%E9%9D%A2%E6%9D%BF%E8%96%85%E4%BA%AC%E4%B8%9C%E7%BE%8A%E6%AF%9B/</id>
+    <link href="http://example.com/2022/10/05/qlfuckjd/"/>
+    <id>http://example.com/2022/10/05/qlfuckjd/</id>
     <published>2022-10-05T03:41:10.000Z</published>
     <updated>2022-10-06T06:08:01.437Z</updated>
     
@@ -99,8 +99,8 @@
   
   <entry>
     <title>程序员的软件抽屉(Windows)</title>
-    <link href="http://example.com/2022/09/26/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%8A%BD%E5%B1%89%EF%BC%88Windows%EF%BC%89/"/>
-    <id>http://example.com/2022/09/26/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%8A%BD%E5%B1%89%EF%BC%88Windows%EF%BC%89/</id>
+    <link href="http://example.com/2022/09/26/softbox/"/>
+    <id>http://example.com/2022/09/26/softbox/</id>
     <published>2022-09-26T03:11:10.000Z</published>
     <updated>2022-10-06T03:51:57.523Z</updated>
     
@@ -125,8 +125,8 @@
   
   <entry>
     <title>Linux toy合集</title>
-    <link href="http://example.com/2022/09/15/Linux%E5%91%BD%E4%BB%A4%E7%A5%9E%E5%99%A8%20The%20Fuck/"/>
-    <id>http://example.com/2022/09/15/Linux%E5%91%BD%E4%BB%A4%E7%A5%9E%E5%99%A8%20The%20Fuck/</id>
+    <link href="http://example.com/2022/09/15/fucktoy/"/>
+    <id>http://example.com/2022/09/15/fucktoy/</id>
     <published>2022-09-15T03:41:10.000Z</published>
     <updated>2022-10-06T03:47:13.147Z</updated>
     
@@ -143,16 +143,16 @@
     <category term="Linux" scheme="http://example.com/categories/Linux/"/>
     
     
-    <category term="Linux" scheme="http://example.com/tags/Linux/"/>
-    
     <category term="toy" scheme="http://example.com/tags/toy/"/>
+    
+    <category term="Linux" scheme="http://example.com/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>Http基础</title>
-    <link href="http://example.com/2022/09/12/20220909Http/"/>
-    <id>http://example.com/2022/09/12/20220909Http/</id>
+    <link href="http://example.com/2022/09/12/Http/"/>
+    <id>http://example.com/2022/09/12/Http/</id>
     <published>2022-09-12T03:11:10.000Z</published>
     <updated>2022-10-06T03:51:59.289Z</updated>
     
@@ -177,8 +177,8 @@
   
   <entry>
     <title>在线code安装教程</title>
-    <link href="http://example.com/2022/09/12/code-server%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
-    <id>http://example.com/2022/09/12/code-server%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</id>
+    <link href="http://example.com/2022/09/12/codeinstall/"/>
+    <id>http://example.com/2022/09/12/codeinstall/</id>
     <published>2022-09-12T03:11:10.000Z</published>
     <updated>2022-10-06T06:16:57.864Z</updated>
     
@@ -198,16 +198,16 @@
     <category term="toy" scheme="http://example.com/categories/toy/"/>
     
     
-    <category term="Linux" scheme="http://example.com/tags/Linux/"/>
-    
     <category term="toy" scheme="http://example.com/tags/toy/"/>
+    
+    <category term="Linux" scheme="http://example.com/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>基于腾讯云的Typora图床</title>
-    <link href="http://example.com/2022/09/10/%E5%9F%BA%E4%BA%8E%E8%85%BE%E8%AE%AF%E4%BA%91%E7%9A%84Typora/"/>
-    <id>http://example.com/2022/09/10/%E5%9F%BA%E4%BA%8E%E8%85%BE%E8%AE%AF%E4%BA%91%E7%9A%84Typora/</id>
+    <link href="http://example.com/2022/09/10/maBed/"/>
+    <id>http://example.com/2022/09/10/maBed/</id>
     <published>2022-09-10T03:11:10.000Z</published>
     <updated>2022-10-06T03:46:56.097Z</updated>
     
