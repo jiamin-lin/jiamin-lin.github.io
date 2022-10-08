@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">安装教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEScreen%E8%BF%9B%E7%A8%8B%E5%AE%88%E6%8A%A4"><span class="nav-number">2.</span> <span class="nav-text">配置Screen进程守护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Screen"><span class="nav-number">3.</span> <span class="nav-text">安装Screen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E6%8A%A4%E8%BF%9B%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C"><span class="nav-number">4.</span> <span class="nav-text">保护进程实现后台运行</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B"><span class="nav-text">安装教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEScreen%E8%BF%9B%E7%A8%8B%E5%AE%88%E6%8A%A4"><span class="nav-text">配置Screen进程守护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Screen"><span class="nav-text">安装Screen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E6%8A%A4%E8%BF%9B%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C"><span class="nav-text">保护进程实现后台运行</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -279,6 +279,21 @@
     </span>
 
   
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>855</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
 </div>
 
         </div>
@@ -294,15 +309,15 @@
 <li>ssh的连接工具 如<a target="_blank" rel="noopener" href="https://www.putty.org/">putty</a>，<a target="_blank" rel="noopener" href="https://termius.com/">Termius</a>，mac用户可以直接用终端连接.</li>
 </ol>
 <h2 id="安装教程"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程</h2><p>首先使用你的ssh工具连接服务器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//输入命令下载codeserver</span><br><span class="line">wget https://github.com/coder/code-server/releases/download/v4.6.1/code-server-4.6.1-linux-amd64.tar.gz</span><br><span class="line">//解压</span><br><span class="line">tar -zxvf code-server-4.6.1-linux-amd64.tar.gz</span><br><span class="line">//进入codeserver目录</span><br><span class="line">cd code-server-4.6.1-linux-amd64</span><br><span class="line">//设置密码(密码在双引号内)</span><br><span class="line">export PASSWORD=123456</span><br><span class="line">//启动codeserver</span><br><span class="line">./code-server --port 8081 --host 0.0.0.0 --auth password</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>输入命令下载codeserver</span><br><span class="line">wget https:<span class="regexp">//gi</span>thub.com<span class="regexp">/coder/</span>code-server<span class="regexp">/releases/</span>download<span class="regexp">/v4.6.1/</span>code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>解压</span><br><span class="line">tar -zxvf code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>进入codeserver目录</span><br><span class="line">cd code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64</span><br><span class="line"><span class="regexp">//</span>设置密码(密码在双引号内)</span><br><span class="line">export PASSWORD=<span class="number">123456</span></span><br><span class="line"><span class="regexp">//</span>启动codeserver</span><br><span class="line">./code-server --port <span class="number">8081</span> --host <span class="number">0.0</span>.<span class="number">0.0</span> --auth password</span><br></pre></td></tr></table></figure>
 
 <p>在浏览器上方输入<code>你的服务器IP:8081</code> 即可进入登录界面</p>
 <p>这个时候输入之前设置的密码就可以进入codeserver了</p>
 <h2 id="配置Screen进程守护"><a href="#配置Screen进程守护" class="headerlink" title="配置Screen进程守护"></a>配置Screen进程守护</h2><p>之前的步骤有一个问题,就是当你退出ssh进程的时候,你会发现网站进不去了。</p>
 <p>因为当ssh进程关闭的时候，会自动清除当前进程。</p>
 <p>我们得下载Screen来给codeserver进行进程守护，防止进程自动退出。</p>
-<h2 id="安装Screen"><a href="#安装Screen" class="headerlink" title="安装Screen"></a>安装Screen</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//复制适合自己系统的命令安装</span><br><span class="line">//Centos系统</span><br><span class="line">yum install screen</span><br><span class="line">//Debian/Ubuntu系统</span><br><span class="line">apt-get install screen</span><br></pre></td></tr></table></figure>
-<h2 id="保护进程实现后台运行"><a href="#保护进程实现后台运行" class="headerlink" title="保护进程实现后台运行"></a>保护进程实现后台运行</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//以code_server为名字建立进程</span><br><span class="line">screen -S code_server</span><br><span class="line">//再次输入以下命令</span><br><span class="line">cd code-server-4.6.1-linux-amd64</span><br><span class="line">export PASSWORD=123456</span><br><span class="line">./code-server --port 8081 --host 0.0.0.0 --auth password</span><br></pre></td></tr></table></figure>
+<h2 id="安装Screen"><a href="#安装Screen" class="headerlink" title="安装Screen"></a>安装Screen</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>复制适合自己系统的命令安装</span><br><span class="line"><span class="regexp">//</span>Centos系统</span><br><span class="line">yum install screen</span><br><span class="line"><span class="regexp">//</span>Debian/Ubuntu系统</span><br><span class="line">apt-get install screen</span><br></pre></td></tr></table></figure>
+<h2 id="保护进程实现后台运行"><a href="#保护进程实现后台运行" class="headerlink" title="保护进程实现后台运行"></a>保护进程实现后台运行</h2><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">//</span>以code_server为名字建立进程</span><br><span class="line">screen -S code_server</span><br><span class="line"><span class="string">//</span>再次输入以下命令</span><br><span class="line"><span class="keyword">cd</span> code-server-4.6.1-linux-amd64</span><br><span class="line">export PASSWORD=123456</span><br><span class="line"><span class="string">./code-server</span> <span class="params">--port</span> 8081 <span class="params">--host</span> 0.0.0.0 <span class="params">--auth</span> password</span><br></pre></td></tr></table></figure>
 
 
 
@@ -377,6 +392,22 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Dreamin</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">34k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">31 分钟</span>
+  </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
