@@ -40,10 +40,7 @@
 <p>对于使用存储在GitHub上面的<strong>静态文件</strong>，可使用jsDelivr CDN快速访问</p>
 <img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210072207463.png" alt="image-20221007220730401" style="zoom:50%;" />
 
-<p><strong>上传测试</strong></p>
-<img src="../AppData/Roaming/Typora/typora-user-images/image-20221007220926556.png" alt="image-20221007220926556" style="zoom:50%;" />
-
-<p><strong>文件保存成功</strong></p>
+<p><strong>测试文件保存成功</strong></p>
 <p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210072210888.png" alt="image-20221007221015835"></p>
 <h3 id="Typora配置"><a href="#Typora配置" class="headerlink" title="Typora配置"></a>Typora配置</h3><ul>
 <li>点击 <code>文件</code>-&gt;  <code>偏好设置</code> -&gt; <code>图像</code></li>
@@ -1999,63 +1996,6 @@
       </tags>
   </entry>
   <entry>
-    <title>基于青龙面板薅JD羊毛</title>
-    <url>/2022/10/05/qlfuckjd/</url>
-    <content><![CDATA[<h2 id="术前准备"><a href="#术前准备" class="headerlink" title="术前准备"></a>术前准备</h2><ul>
-<li><p><strong>云服务器一台</strong>（记得开放8888以及5700端口）</p>
-</li>
-<li><p><strong>点击<a href="https://www.bt.cn/new/download.html">安装宝塔Linux</a></strong></p>
-</li>
-</ul>
-<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="1-进入宝塔面板"><a href="#1-进入宝塔面板" class="headerlink" title="1.进入宝塔面板"></a>1.进入宝塔面板</h3><p>点击<code>软件商店</code>-&gt;<code>搜索docker</code>-&gt;<code>点击安装</code></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140520473.png" alt="image-20221006140520473"></p>
-<h3 id="2-拉取青龙镜像"><a href="#2-拉取青龙镜像" class="headerlink" title="2.拉取青龙镜像"></a>2.拉取青龙镜像</h3><p>选完安装面板和设置IP后一路回车到底</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/lang1.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140528809.png" alt="image-20221006140528809"></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140534814.png" alt="image-20221006140534814"></p>
-<h3 id="3-添加拉库命令"><a href="#3-添加拉库命令" class="headerlink" title="3.添加拉库命令"></a>3.添加拉库命令</h3><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140538948.png" alt="image-20221006140538948"></p>
-<p>添加一个定时任务,定时拉库命令,就可以定时更新仓库。可设置为 <code>0 */12 * * *</code> 每天0点和12点运行一次更新。</p>
-<p><strong>KingRan库【集合库，推荐</strong>】</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/KingRan/</span>KR.git <span class="string">&quot;jd_|jx_|jdCookie&quot;</span> <span class="string">&quot;activity|backUp&quot;</span> <span class="string">&quot;^jd[^_]|USER|utils|function|sign|sendNotify|ql|magic|JDJR&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>Faker3【集合库】</strong></p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/shufflewzc/</span>faker3.git <span class="string">&quot;jd_|jx_|gua_|jddj_|jdCookie&quot;</span> <span class="string">&quot;activity|backUp&quot;</span> <span class="string">&quot;^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator&quot;</span> <span class="string">&quot;main&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>yyds【集合库】</strong></p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">YYDS</span><br><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/okyyds/yy</span>ds.git <span class="string">&quot;jd_|jx_|gua_|jddj_|jdCookie&quot;</span> <span class="string">&quot;activity|backUp&quot;</span> <span class="string">&quot;^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator&quot;</span> <span class="string">&quot;master&quot;</span></span><br><span class="line"></span><br><span class="line">YYDS_Pure</span><br><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/okyyds/yy</span>dspure.git <span class="string">&quot;jd_|jx_|gua_|jddj_|jdCookie&quot;</span> <span class="string">&quot;activity|backUp&quot;</span> <span class="string">&quot;^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator&quot;</span> <span class="string">&quot;master&quot;</span></span><br><span class="line">【注意】拉库前请打开青龙面板-配置文件 第<span class="number">18</span>行 GithubProxyUrl=<span class="string">&quot;&quot;</span> 双引号中的内容删除。</span><br></pre></td></tr></table></figure>
-
-<p><strong>smiek2121【开卡，建议】</strong></p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/smiek2121/</span>scripts.git <span class="string">&quot;gua_&quot;</span> <span class="string">&quot;&quot;</span> <span class="string">&quot;ZooFaker_Necklace.js|JDJRValidator_Pure.js|sign_graphics_validate.js|cleancart_activity.js|jdCookie.js|sendNotify.js&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>ccwav大佬的通知增强版和CK检测【建议】</strong></p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>不包含sendNotify:</span><br><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/ccwav/</span>QLScript2.git <span class="string">&quot;jd_&quot;</span> <span class="string">&quot;sendNotify|NoUsed&quot;</span> <span class="string">&quot;ql&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>包含sendNotify:</span><br><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/ccwav/</span>QLScript2.git <span class="string">&quot;jd_&quot;</span> <span class="string">&quot;NoUsed&quot;</span> <span class="string">&quot;ql|sendNotify&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>【zero205】【集合库，拉KR即可】</strong></p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/zero205/</span>JD_tencent_scf.git <span class="string">&quot;jd_|jx_|jdCookie&quot;</span> <span class="string">&quot;backUp|icon&quot;</span> <span class="string">&quot;^jd[^_]|USER|sendNotify|sign_graphics_validate|JDJR|JDSign|ql&quot;</span> <span class="string">&quot;main&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="4-添加京东COOKIE"><a href="#4-添加京东COOKIE" class="headerlink" title="4.添加京东COOKIE"></a>4.添加京东COOKIE</h3><p>提取COOKIE软件地址：<a href="https://pan.xunlei.com/s/VNBvHoZT5uASNqnZyeN7x_fFA1">提取码7yxt</a></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140547643.png" alt="image-20221006140547643"></p>
-<h2 id="添加依赖-重要"><a href="#添加依赖-重要" class="headerlink" title="添加依赖(重要)"></a>添加依赖(重要)</h2><p><strong>进入<code>依赖管理</code>-&gt;<code>新建依赖</code></strong></p>
-<p>1.<em>NodeJs</em></p>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">NodeJs里面所需依赖 添加依赖---&gt;选择自动拆分，把以下内容全部复制到名称里，之后点击确定</span><br><span class="line">ts-md5</span><br><span class="line">@types/<span class="keyword">node</span></span><br><span class="line"><span class="title">prettytable</span></span><br><span class="line"><span class="keyword">node</span><span class="title">-telegram-bot-api</span></span><br><span class="line">tslib</span><br><span class="line">ql</span><br><span class="line">common</span><br><span class="line">fs</span><br><span class="line">typescript</span><br><span class="line">axios</span><br><span class="line">png-js</span><br><span class="line">axios</span><br><span class="line">ws@<span class="number">7.4</span>.<span class="number">3</span></span><br><span class="line">crypto-js</span><br><span class="line">jieba</span><br><span class="line">global-agent</span><br><span class="line">jsdom -g</span><br><span class="line">moment</span><br><span class="line">form-data</span><br><span class="line"><span class="keyword">date</span>-fns</span><br><span class="line"><span class="keyword">node</span><span class="title">-jsencrypt</span></span><br><span class="line">require</span><br><span class="line">js-base64</span><br><span class="line">tough-cookie</span><br><span class="line">json5</span><br><span class="line">jsdom</span><br><span class="line">dotenv</span><br><span class="line">qs</span><br></pre></td></tr></table></figure>
-
-<p>2.<em>Python3</em></p>
-<figure class="highlight xl"><table><tr><td class="code"><pre><span class="line">P<span class="function"><span class="title">ython3</span>依赖 添加依赖---&gt;</span>选择自动拆分，把以下内容全部复制到名称里，之后点击确定</span><br><span class="line">ping3</span><br><span class="line">canvas</span><br><span class="line">requests</span><br><span class="line">jieba</span><br><span class="line">PyExecJS</span><br><span class="line">httpx</span><br></pre></td></tr></table></figure>
-
-<p>3.<em>Linux</em></p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">Linux依赖 添加依赖---&gt;选择自动拆分，把以下内容全部复制到名称里，之后点击确定</span><br><span class="line">lxml</span><br><span class="line"><span class="keyword">bizMsg</span></span><br><span class="line"><span class="keyword"></span><span class="keyword">bizCode</span></span><br><span class="line"><span class="keyword"></span>gcc</span><br><span class="line">python-devel</span><br><span class="line">aiohttp</span><br><span class="line">magic</span><br></pre></td></tr></table></figure>
-
-<p>*ps:*一些定时规则</p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">*/5 * * * * ?    <span class="comment">#每隔 5 秒执行一次</span></span><br><span class="line">0 */1 * * * ?    <span class="comment">#每隔 1 分钟执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>2<span class="number"> 1 </span>* ? *    <span class="comment">#每月 1 日的凌晨 2 点执行一次</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? *    <span class="comment">#MON-FRI 周一到周五每天上午 10：15 执行</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? 6L    <span class="comment">#2002-2006 2002 年至 2006 年的每个月的最后一个星期五上午 10:15 执行</span></span><br><span class="line">0<span class="number"> 0 </span>23 * * ?    <span class="comment">#每天 23 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>1 * * ?    <span class="comment">#每天凌晨 1 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>1<span class="number"> 1 </span>* ?     <span class="comment">#每月 1 日凌晨 1 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>23 L * ?    <span class="comment">#每月最后一天 23 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>1 ? * L    <span class="comment">#每周星期天凌晨 1 点执行一次</span></span><br><span class="line">0 26,29,33 * * * ?    <span class="comment">#在 26 分、29 分、33 分执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>0,13,18,21 * * ?    <span class="comment">#每天的 0 点、13 点、18 点、21 点都执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>10,14,16 * * ?    <span class="comment">#每天上午 10 点，下午 2 点，4 点执行一次</span></span><br><span class="line">0 0/30 9-17 * * ?    <span class="comment">#朝九晚五工作时间内每半小时执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>12 ? * WED    <span class="comment">#每个星期三中午 12 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>12 * * ?    <span class="comment">#每天中午 12 点触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * *    <span class="comment">#每天上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 * * ?    <span class="comment">#每天上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 * * ? *    <span class="comment">#每天上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 * * ?    <span class="comment">#2005 2005 年的每天上午 10:15 触发</span></span><br><span class="line">0 *<span class="number"> 14 </span>* * ?    <span class="comment">#每天下午 2 点到 2:59 期间的每 1 分钟触发</span></span><br><span class="line">0 0/5<span class="number"> 14 </span>* * ?    <span class="comment">#每天下午 2 点到 2:55 期间的每 5 分钟触发</span></span><br><span class="line">0 0/5 14,18 * * ?    <span class="comment">#每天下午 2 点到 2:55 期间和下午 6 点到 6:55 期间的每 5 分钟触发</span></span><br><span class="line">0 0-5<span class="number"> 14 </span>* * ?    <span class="comment">#每天下午 2 点到 2:05 期间的每 1 分钟触发</span></span><br><span class="line">0 10,44<span class="number"> 14 </span>?<span class="number"> 3 </span>WED    <span class="comment">#每年三月的星期三的下午 2:10 和 2:44 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * MON-FRI    <span class="comment">#周一至周五的上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10<span class="number"> 15 </span>* ?    <span class="comment">#每月 15 日上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 L * ?    <span class="comment">#每月最后一日的上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * 6L    <span class="comment">#每月的最后一个星期五上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * 6L    <span class="comment">#2002-2005 2002 年至 2005 年的每月的最后一个星期五上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * 6<span class="comment">#3    #每月的第三个星期五上午 10:15 触发</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>Docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux</title>
     <url>/2022/10/02/Linux/</url>
     <content><![CDATA[<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="计算机基础"><a href="#计算机基础" class="headerlink" title="计算机基础"></a>计算机基础</h2><p><strong>1.软件程序的运行</strong></p>
@@ -2352,6 +2292,63 @@
       <tags>
         <tag>toy</tag>
         <tag>windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于青龙面板薅JD羊毛</title>
+    <url>/2022/10/05/qinglong/</url>
+    <content><![CDATA[<h2 id="术前准备"><a href="#术前准备" class="headerlink" title="术前准备"></a>术前准备</h2><ul>
+<li><p><strong>云服务器一台</strong>（记得开放8888以及5700端口）</p>
+</li>
+<li><p><strong>点击<a href="https://www.bt.cn/new/download.html">安装宝塔Linux</a></strong></p>
+</li>
+</ul>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="1-进入宝塔面板"><a href="#1-进入宝塔面板" class="headerlink" title="1.进入宝塔面板"></a>1.进入宝塔面板</h3><p>点击<code>软件商店</code>-&gt;<code>搜索docker</code>-&gt;<code>点击安装</code></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140520473.png" alt="image-20221006140520473"></p>
+<h3 id="2-拉取青龙镜像"><a href="#2-拉取青龙镜像" class="headerlink" title="2.拉取青龙镜像"></a>2.拉取青龙镜像</h3><p>选完安装面板和设置IP后一路回车到底</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/lang1.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140528809.png" alt="image-20221006140528809"></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140534814.png" alt="image-20221006140534814"></p>
+<h3 id="3-添加拉库命令"><a href="#3-添加拉库命令" class="headerlink" title="3.添加拉库命令"></a>3.添加拉库命令</h3><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140538948.png" alt="image-20221006140538948"></p>
+<p>添加一个定时任务,定时拉库命令,就可以定时更新仓库。可设置为 <code>0 */12 * * *</code> 每天0点和12点运行一次更新。</p>
+<p><strong>KingRan库【集合库，推荐</strong>】</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/KingRan/</span>KR.git <span class="string">&quot;jd_|jx_|jdCookie&quot;</span> <span class="string">&quot;activity|backUp&quot;</span> <span class="string">&quot;^jd[^_]|USER|utils|function|sign|sendNotify|ql|magic|JDJR&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Faker3【集合库】</strong></p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/shufflewzc/</span>faker3.git <span class="string">&quot;jd_|jx_|gua_|jddj_|jdCookie&quot;</span> <span class="string">&quot;activity|backUp&quot;</span> <span class="string">&quot;^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator&quot;</span> <span class="string">&quot;main&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>yyds【集合库】</strong></p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">YYDS</span><br><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/okyyds/yy</span>ds.git <span class="string">&quot;jd_|jx_|gua_|jddj_|jdCookie&quot;</span> <span class="string">&quot;activity|backUp&quot;</span> <span class="string">&quot;^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator&quot;</span> <span class="string">&quot;master&quot;</span></span><br><span class="line"></span><br><span class="line">YYDS_Pure</span><br><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/okyyds/yy</span>dspure.git <span class="string">&quot;jd_|jx_|gua_|jddj_|jdCookie&quot;</span> <span class="string">&quot;activity|backUp&quot;</span> <span class="string">&quot;^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator&quot;</span> <span class="string">&quot;master&quot;</span></span><br><span class="line">【注意】拉库前请打开青龙面板-配置文件 第<span class="number">18</span>行 GithubProxyUrl=<span class="string">&quot;&quot;</span> 双引号中的内容删除。</span><br></pre></td></tr></table></figure>
+
+<p><strong>smiek2121【开卡，建议】</strong></p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/smiek2121/</span>scripts.git <span class="string">&quot;gua_&quot;</span> <span class="string">&quot;&quot;</span> <span class="string">&quot;ZooFaker_Necklace.js|JDJRValidator_Pure.js|sign_graphics_validate.js|cleancart_activity.js|jdCookie.js|sendNotify.js&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>ccwav大佬的通知增强版和CK检测【建议】</strong></p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>不包含sendNotify:</span><br><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/ccwav/</span>QLScript2.git <span class="string">&quot;jd_&quot;</span> <span class="string">&quot;sendNotify|NoUsed&quot;</span> <span class="string">&quot;ql&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>包含sendNotify:</span><br><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/ccwav/</span>QLScript2.git <span class="string">&quot;jd_&quot;</span> <span class="string">&quot;NoUsed&quot;</span> <span class="string">&quot;ql|sendNotify&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>【zero205】【集合库，拉KR即可】</strong></p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/zero205/</span>JD_tencent_scf.git <span class="string">&quot;jd_|jx_|jdCookie&quot;</span> <span class="string">&quot;backUp|icon&quot;</span> <span class="string">&quot;^jd[^_]|USER|sendNotify|sign_graphics_validate|JDJR|JDSign|ql&quot;</span> <span class="string">&quot;main&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-添加京东COOKIE"><a href="#4-添加京东COOKIE" class="headerlink" title="4.添加京东COOKIE"></a>4.添加京东COOKIE</h3><p>提取COOKIE软件地址：<a href="https://pan.xunlei.com/s/VNBvHoZT5uASNqnZyeN7x_fFA1">提取码7yxt</a></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140547643.png" alt="image-20221006140547643"></p>
+<h2 id="添加依赖-重要"><a href="#添加依赖-重要" class="headerlink" title="添加依赖(重要)"></a>添加依赖(重要)</h2><p><strong>进入<code>依赖管理</code>-&gt;<code>新建依赖</code></strong></p>
+<p>1.<em>NodeJs</em></p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">NodeJs里面所需依赖 添加依赖---&gt;选择自动拆分，把以下内容全部复制到名称里，之后点击确定</span><br><span class="line">ts-md5</span><br><span class="line">@types/<span class="keyword">node</span></span><br><span class="line"><span class="title">prettytable</span></span><br><span class="line"><span class="keyword">node</span><span class="title">-telegram-bot-api</span></span><br><span class="line">tslib</span><br><span class="line">ql</span><br><span class="line">common</span><br><span class="line">fs</span><br><span class="line">typescript</span><br><span class="line">axios</span><br><span class="line">png-js</span><br><span class="line">axios</span><br><span class="line">ws@<span class="number">7.4</span>.<span class="number">3</span></span><br><span class="line">crypto-js</span><br><span class="line">jieba</span><br><span class="line">global-agent</span><br><span class="line">jsdom -g</span><br><span class="line">moment</span><br><span class="line">form-data</span><br><span class="line"><span class="keyword">date</span>-fns</span><br><span class="line"><span class="keyword">node</span><span class="title">-jsencrypt</span></span><br><span class="line">require</span><br><span class="line">js-base64</span><br><span class="line">tough-cookie</span><br><span class="line">json5</span><br><span class="line">jsdom</span><br><span class="line">dotenv</span><br><span class="line">qs</span><br></pre></td></tr></table></figure>
+
+<p>2.<em>Python3</em></p>
+<figure class="highlight xl"><table><tr><td class="code"><pre><span class="line">P<span class="function"><span class="title">ython3</span>依赖 添加依赖---&gt;</span>选择自动拆分，把以下内容全部复制到名称里，之后点击确定</span><br><span class="line">ping3</span><br><span class="line">canvas</span><br><span class="line">requests</span><br><span class="line">jieba</span><br><span class="line">PyExecJS</span><br><span class="line">httpx</span><br></pre></td></tr></table></figure>
+
+<p>3.<em>Linux</em></p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">Linux依赖 添加依赖---&gt;选择自动拆分，把以下内容全部复制到名称里，之后点击确定</span><br><span class="line">lxml</span><br><span class="line"><span class="keyword">bizMsg</span></span><br><span class="line"><span class="keyword"></span><span class="keyword">bizCode</span></span><br><span class="line"><span class="keyword"></span>gcc</span><br><span class="line">python-devel</span><br><span class="line">aiohttp</span><br><span class="line">magic</span><br></pre></td></tr></table></figure>
+
+<p>*ps:*一些定时规则</p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">*/5 * * * * ?    <span class="comment">#每隔 5 秒执行一次</span></span><br><span class="line">0 */1 * * * ?    <span class="comment">#每隔 1 分钟执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>2<span class="number"> 1 </span>* ? *    <span class="comment">#每月 1 日的凌晨 2 点执行一次</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? *    <span class="comment">#MON-FRI 周一到周五每天上午 10：15 执行</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? 6L    <span class="comment">#2002-2006 2002 年至 2006 年的每个月的最后一个星期五上午 10:15 执行</span></span><br><span class="line">0<span class="number"> 0 </span>23 * * ?    <span class="comment">#每天 23 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>1 * * ?    <span class="comment">#每天凌晨 1 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>1<span class="number"> 1 </span>* ?     <span class="comment">#每月 1 日凌晨 1 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>23 L * ?    <span class="comment">#每月最后一天 23 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>1 ? * L    <span class="comment">#每周星期天凌晨 1 点执行一次</span></span><br><span class="line">0 26,29,33 * * * ?    <span class="comment">#在 26 分、29 分、33 分执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>0,13,18,21 * * ?    <span class="comment">#每天的 0 点、13 点、18 点、21 点都执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>10,14,16 * * ?    <span class="comment">#每天上午 10 点，下午 2 点，4 点执行一次</span></span><br><span class="line">0 0/30 9-17 * * ?    <span class="comment">#朝九晚五工作时间内每半小时执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>12 ? * WED    <span class="comment">#每个星期三中午 12 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>12 * * ?    <span class="comment">#每天中午 12 点触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * *    <span class="comment">#每天上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 * * ?    <span class="comment">#每天上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 * * ? *    <span class="comment">#每天上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 * * ?    <span class="comment">#2005 2005 年的每天上午 10:15 触发</span></span><br><span class="line">0 *<span class="number"> 14 </span>* * ?    <span class="comment">#每天下午 2 点到 2:59 期间的每 1 分钟触发</span></span><br><span class="line">0 0/5<span class="number"> 14 </span>* * ?    <span class="comment">#每天下午 2 点到 2:55 期间的每 5 分钟触发</span></span><br><span class="line">0 0/5 14,18 * * ?    <span class="comment">#每天下午 2 点到 2:55 期间和下午 6 点到 6:55 期间的每 5 分钟触发</span></span><br><span class="line">0 0-5<span class="number"> 14 </span>* * ?    <span class="comment">#每天下午 2 点到 2:05 期间的每 1 分钟触发</span></span><br><span class="line">0 10,44<span class="number"> 14 </span>?<span class="number"> 3 </span>WED    <span class="comment">#每年三月的星期三的下午 2:10 和 2:44 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * MON-FRI    <span class="comment">#周一至周五的上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10<span class="number"> 15 </span>* ?    <span class="comment">#每月 15 日上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 L * ?    <span class="comment">#每月最后一日的上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * 6L    <span class="comment">#每月的最后一个星期五上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * 6L    <span class="comment">#2002-2005 2002 年至 2005 年的每月的最后一个星期五上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * 6<span class="comment">#3    #每月的第三个星期五上午 10:15 触发</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
       </tags>
   </entry>
 </search>
