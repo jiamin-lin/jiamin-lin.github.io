@@ -67,88 +67,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux</title>
-    <url>/2022/10/02/Linux/</url>
-    <content><![CDATA[<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="计算机基础"><a href="#计算机基础" class="headerlink" title="计算机基础"></a>计算机基础</h2><p><strong>1.软件程序的运行</strong></p>
-<p>硬件如同人的身体，软件如同人的灵魂。没有了灵魂的躯体也不过就是行尸走肉</p>
-<p>**1.1 **机器程序与编译程序</p>
-<p>电脑只认识0与1而已，而且电脑最重要的运算与逻辑判断是在CPU内部， 而 CPU其实是具有微指令集的。因此，我们需要CPU帮忙工作时，就得要参考微指令集的内容， 然后撰写让CPU读的懂的指令码给CPU执行，这样就能够让CPU运行了。</p>
-<p>流程：</p>
-<ul>
-<li>需要了解机器语言：机器只认识0与1，因此你必须要学习直接写给机器看的语言。</li>
-<li>需要了解所有硬件的相关功能函数：因为你的程序必须要写给机器看， 当然你就得要参考机器本身的功能，然后针对该功能去撰写程序码。</li>
-<li>程序不具有可携性：每个CPU都有独特的微指令集，同样的，每个硬件都有其功能函数。</li>
-<li>程序具有专一性：因为这样的程序必须要针对硬件功能函数来撰写， 如果已经开发了一支浏览器程序，想要再开发文件管理程序时，还是得从头再参考硬件的功能函数来继续撰写。</li>
-</ul>
-<p>所以，需要开发让人类能看得懂得程序语言。然后创造一种“编译器”让人类的写的程序语言转换为机器能看懂的机器码。常见的编译器有C,C++,Java,Fortran等等。</p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220922203728264.png" alt="image-20220922203728264"></p>
-<h2 id="关于学习Linux"><a href="#关于学习Linux" class="headerlink" title="关于学习Linux"></a>关于学习Linux</h2><p>两个重要的因素是造成我们学习的原动力： </p>
-<ul>
-<li><p>创建兴趣： Linux上面可以玩的东西真的太多了，你可以选择一个有趣的课题来深入的玩 一玩！不论是Shell还是图形接口等等， 只要能够玩出兴趣，那么再怎么苦你都会不觉得喔！</p>
-</li>
-<li><p>成就感： 成就感是怎么来的？说实在话，就是“被认同”来的！怎么被认同呢？写心得分享啊！当你写了心得分享，并且公告在 BBS 上面，自然有朋友会到你的网页去瞧一瞧， 当大家觉得你的网页内容很棒的时候， 哈哈！你肯定会加油继续的分享下去而无法自拔。</p>
-</li>
-</ul>
-<h2 id="主机规划与磁盘分区"><a href="#主机规划与磁盘分区" class="headerlink" title="主机规划与磁盘分区"></a>主机规划与磁盘分区</h2><p><strong>Linux各硬件设备在系统中为文件名</strong></p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001164035525.png" alt="image-20221001164035525"></p>
-<p><strong>磁盘分区</strong></p>
-<p><strong>MBR 主要分区、延伸分区与逻辑分区的特性：</strong></p>
-<ul>
-<li>主要分区与延伸分区最多可以有四笔（硬盘的限制） ；</li>
-<li>延伸分区最多只能有一个（操作系统的限制）；</li>
-<li>逻辑分区是由延伸分区持续切割出来的分区；</li>
-<li>能够被格式化后，作为数据存取的分区为主要分区与逻辑分区。延伸分区无法格式化； </li>
-<li>逻辑分区的数量依操作系统而不同，在Linux系统中SATA硬盘已经可以突破63个以上的分区限制；</li>
-</ul>
-<p><strong>MBR分区限制：</strong></p>
-<ul>
-<li>操作系统无法抓取到 2.2T 以上的磁盘容量</li>
-<li>MBR 仅有一个区块，若被破坏后，经常无法或很难救援</li>
-<li>MBR 内的存放开机管理程序的区块仅 446Bytes，无法容纳较多的程序码</li>
-</ul>
-<p><strong>GUID partition table, GPT 磁盘分区表：</strong></p>
-<ul>
-<li>与 MBR 仅使用第一个 512Bytes 区块来纪录不同， GPT 使用了 34 个 LBA 区块来纪录分区信息</li>
-<li>GPT 除了前面 34 个 LBA 之外，整个磁盘的最后 33 个 LBA 也拿来作为另一个备份</li>
-</ul>
-<p><strong>计算机开机流程：</strong></p>
-<ol>
-<li>BIOS：开机主动执行的固件，会认识第一个可开机的设备；</li>
-<li>MBR：第一个可开机设备的第一个扇区内的主要开机记录区块，内含开机管理程序；</li>
-<li>开机管理程序（boot loader）：一支可读取核心文件来执行的软件；</li>
-<li>核心文件：开始操作系统的功能</li>
-</ol>
-<p><strong>BIOS与UEFI BIOS区别</strong></p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001200526805.png" alt="image-20221001200526805"></p>
-<p><strong>主机硬盘的规划</strong></p>
-<p>频繁读写的目录</p>
-<ul>
-<li>boot</li>
-<li>&#x2F; </li>
-<li>&#x2F;home </li>
-<li>&#x2F;var </li>
-<li>Swap</li>
-</ul>
-<h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><ul>
-<li><p>如果磁盘容量大于 2TB 以上时，系统会自动使用 GPT 分区方式来处理磁盘分区。</p>
-</li>
-<li><p>GPT 分区已经没有延伸与逻辑分区的概念，可以想像成所有的分区都是主分区，某些操作系统要使用 GPT 分区时，必须要搭配 UEFI 的新型 BIOS 格式才可安装使用。</p>
-</li>
-<li><p>Linux操作系统的文件使用目录树系统，与磁盘的对应需要有“挂载”的动作才行；</p>
-</li>
-<li><p>开机的流程由：BIOS–&gt;MBR–&gt;–&gt;boot loader–&gt;核心文件</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>web前端</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Http基础</title>
     <url>/2022/09/12/Http/</url>
     <content><![CDATA[<h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><h4 id="Http及Https概念"><a href="#Http及Https概念" class="headerlink" title="Http及Https概念"></a><em>Http</em>及<em>Https</em>概念</h4><p>1.超文本传输协议（<em>HyperText Transfer Protocol</em> 即<em>http</em>）是一种用于分布式、协作式和超媒体信息系统的应用层协议，所有的www文件都必须遵守这个标准和协议。</p>
@@ -1701,6 +1619,201 @@
       </tags>
   </entry>
   <entry>
+    <title>在线code安装教程</title>
+    <url>/2022/09/12/codeinstall/</url>
+    <content><![CDATA[<p>##前置条件：</p>
+<ol>
+<li>云服务器</li>
+<li>ssh的连接工具 如<a href="https://www.putty.org/">putty</a>，<a href="https://termius.com/">Termius</a>，mac用户可以直接用终端连接.</li>
+</ol>
+<h2 id="安装教程"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程</h2><p>首先使用你的ssh工具连接服务器</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>输入命令下载codeserver</span><br><span class="line">wget https:<span class="regexp">//gi</span>thub.com<span class="regexp">/coder/</span>code-server<span class="regexp">/releases/</span>download<span class="regexp">/v4.6.1/</span>code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>解压</span><br><span class="line">tar -zxvf code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>进入codeserver目录</span><br><span class="line">cd code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64</span><br><span class="line"><span class="regexp">//</span>设置密码(密码在双引号内)</span><br><span class="line">export PASSWORD=<span class="number">123456</span></span><br><span class="line"><span class="regexp">//</span>启动codeserver</span><br><span class="line">./code-server --port <span class="number">8081</span> --host <span class="number">0.0</span>.<span class="number">0.0</span> --auth password</span><br></pre></td></tr></table></figure>
+
+<p>在浏览器上方输入<code>你的服务器IP:8081</code> 即可进入登录界面</p>
+<p>这个时候输入之前设置的密码就可以进入codeserver了</p>
+<h2 id="配置Screen进程守护"><a href="#配置Screen进程守护" class="headerlink" title="配置Screen进程守护"></a>配置Screen进程守护</h2><p>之前的步骤有一个问题,就是当你退出ssh进程的时候,你会发现网站进不去了。</p>
+<p>因为当ssh进程关闭的时候，会自动清除当前进程。</p>
+<p>我们得下载Screen来给codeserver进行进程守护，防止进程自动退出。</p>
+<h2 id="安装Screen"><a href="#安装Screen" class="headerlink" title="安装Screen"></a>安装Screen</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>复制适合自己系统的命令安装</span><br><span class="line"><span class="regexp">//</span>Centos系统</span><br><span class="line">yum install screen</span><br><span class="line"><span class="regexp">//</span>Debian/Ubuntu系统</span><br><span class="line">apt-get install screen</span><br></pre></td></tr></table></figure>
+<h2 id="保护进程实现后台运行"><a href="#保护进程实现后台运行" class="headerlink" title="保护进程实现后台运行"></a>保护进程实现后台运行</h2><figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">//</span>以code_server为名字建立进程</span><br><span class="line">screen -S code_server</span><br><span class="line"><span class="string">//</span>再次输入以下命令</span><br><span class="line"><span class="keyword">cd</span> code-server-4.6.1-linux-amd64</span><br><span class="line">export PASSWORD=123456</span><br><span class="line"><span class="string">./code-server</span> <span class="params">--port</span> 8081 <span class="params">--host</span> 0.0.0.0 <span class="params">--auth</span> password</span><br></pre></td></tr></table></figure>
+
+
+
+<p>此时关闭ssh终端,也可以照常进入网页啦！</p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE-2022-09-06-215111.jpg"></p>
+<p>微软官方<a href="https://vscode.dev/">请输入链接描述</a></p>
+]]></content>
+      <categories>
+        <category>toy</category>
+      </categories>
+      <tags>
+        <tag>toy</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux</title>
+    <url>/2022/10/02/Linux/</url>
+    <content><![CDATA[<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="计算机基础"><a href="#计算机基础" class="headerlink" title="计算机基础"></a>计算机基础</h2><p><strong>1.软件程序的运行</strong></p>
+<p>硬件如同人的身体，软件如同人的灵魂。没有了灵魂的躯体也不过就是行尸走肉</p>
+<p>**1.1 **机器程序与编译程序</p>
+<p>电脑只认识0与1而已，而且电脑最重要的运算与逻辑判断是在CPU内部， 而 CPU其实是具有微指令集的。因此，我们需要CPU帮忙工作时，就得要参考微指令集的内容， 然后撰写让CPU读的懂的指令码给CPU执行，这样就能够让CPU运行了。</p>
+<p>流程：</p>
+<ul>
+<li>需要了解机器语言：机器只认识0与1，因此你必须要学习直接写给机器看的语言。</li>
+<li>需要了解所有硬件的相关功能函数：因为你的程序必须要写给机器看， 当然你就得要参考机器本身的功能，然后针对该功能去撰写程序码。</li>
+<li>程序不具有可携性：每个CPU都有独特的微指令集，同样的，每个硬件都有其功能函数。</li>
+<li>程序具有专一性：因为这样的程序必须要针对硬件功能函数来撰写， 如果已经开发了一支浏览器程序，想要再开发文件管理程序时，还是得从头再参考硬件的功能函数来继续撰写。</li>
+</ul>
+<p>所以，需要开发让人类能看得懂得程序语言。然后创造一种“编译器”让人类的写的程序语言转换为机器能看懂的机器码。常见的编译器有C,C++,Java,Fortran等等。</p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220922203728264.png" alt="image-20220922203728264"></p>
+<h2 id="关于学习Linux"><a href="#关于学习Linux" class="headerlink" title="关于学习Linux"></a>关于学习Linux</h2><p>两个重要的因素是造成我们学习的原动力： </p>
+<ul>
+<li><p>创建兴趣： Linux上面可以玩的东西真的太多了，你可以选择一个有趣的课题来深入的玩 一玩！不论是Shell还是图形接口等等， 只要能够玩出兴趣，那么再怎么苦你都会不觉得喔！</p>
+</li>
+<li><p>成就感： 成就感是怎么来的？说实在话，就是“被认同”来的！怎么被认同呢？写心得分享啊！当你写了心得分享，并且公告在 BBS 上面，自然有朋友会到你的网页去瞧一瞧， 当大家觉得你的网页内容很棒的时候， 哈哈！你肯定会加油继续的分享下去而无法自拔。</p>
+</li>
+</ul>
+<h2 id="主机规划与磁盘分区"><a href="#主机规划与磁盘分区" class="headerlink" title="主机规划与磁盘分区"></a>主机规划与磁盘分区</h2><p><strong>Linux各硬件设备在系统中为文件名</strong></p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001164035525.png" alt="image-20221001164035525"></p>
+<p><strong>磁盘分区</strong></p>
+<p><strong>MBR 主要分区、延伸分区与逻辑分区的特性：</strong></p>
+<ul>
+<li>主要分区与延伸分区最多可以有四笔（硬盘的限制） ；</li>
+<li>延伸分区最多只能有一个（操作系统的限制）；</li>
+<li>逻辑分区是由延伸分区持续切割出来的分区；</li>
+<li>能够被格式化后，作为数据存取的分区为主要分区与逻辑分区。延伸分区无法格式化； </li>
+<li>逻辑分区的数量依操作系统而不同，在Linux系统中SATA硬盘已经可以突破63个以上的分区限制；</li>
+</ul>
+<p><strong>MBR分区限制：</strong></p>
+<ul>
+<li>操作系统无法抓取到 2.2T 以上的磁盘容量</li>
+<li>MBR 仅有一个区块，若被破坏后，经常无法或很难救援</li>
+<li>MBR 内的存放开机管理程序的区块仅 446Bytes，无法容纳较多的程序码</li>
+</ul>
+<p><strong>GUID partition table, GPT 磁盘分区表：</strong></p>
+<ul>
+<li>与 MBR 仅使用第一个 512Bytes 区块来纪录不同， GPT 使用了 34 个 LBA 区块来纪录分区信息</li>
+<li>GPT 除了前面 34 个 LBA 之外，整个磁盘的最后 33 个 LBA 也拿来作为另一个备份</li>
+</ul>
+<p><strong>计算机开机流程：</strong></p>
+<ol>
+<li>BIOS：开机主动执行的固件，会认识第一个可开机的设备；</li>
+<li>MBR：第一个可开机设备的第一个扇区内的主要开机记录区块，内含开机管理程序；</li>
+<li>开机管理程序（boot loader）：一支可读取核心文件来执行的软件；</li>
+<li>核心文件：开始操作系统的功能</li>
+</ol>
+<p><strong>BIOS与UEFI BIOS区别</strong></p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001200526805.png" alt="image-20221001200526805"></p>
+<p><strong>主机硬盘的规划</strong></p>
+<p>频繁读写的目录</p>
+<ul>
+<li>boot</li>
+<li>&#x2F; </li>
+<li>&#x2F;home </li>
+<li>&#x2F;var </li>
+<li>Swap</li>
+</ul>
+<h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><ul>
+<li><p>如果磁盘容量大于 2TB 以上时，系统会自动使用 GPT 分区方式来处理磁盘分区。</p>
+</li>
+<li><p>GPT 分区已经没有延伸与逻辑分区的概念，可以想像成所有的分区都是主分区，某些操作系统要使用 GPT 分区时，必须要搭配 UEFI 的新型 BIOS 格式才可安装使用。</p>
+</li>
+<li><p>Linux操作系统的文件使用目录树系统，与磁盘的对应需要有“挂载”的动作才行；</p>
+</li>
+<li><p>开机的流程由：BIOS–&gt;MBR–&gt;–&gt;boot loader–&gt;核心文件</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux toy合集</title>
+    <url>/2022/09/15/fucktoy/</url>
+    <content><![CDATA[<h1 id="Linux命令神器-The-Fuck"><a href="#Linux命令神器-The-Fuck" class="headerlink" title="Linux命令神器 The Fuck"></a>Linux命令神器 <code>The Fuck</code></h1><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/example.gif" alt="example"></p>
+<p><strong><code>The Fuck</code>是一款能够自动修复你的错误命令行的终端应用。</strong></p>
+<p>相信大家每个人都有敲错过命令的时候,把<code>python</code><br>输入成 <code>puthon</code><br>.手速过快把<code>ls -alh</code><br>输入成 <code>ls a-lh</code><br>等等等,这时候是不是想拍一下键盘说一声<code>fuck</code></p>
+<h2 id="术前要求"><a href="#术前要求" class="headerlink" title="术前要求"></a>术前要求</h2><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Python</span> (<span class="number">2</span>.<span class="number">7</span>+ or <span class="number">3</span>.<span class="number">3</span>+)</span><br><span class="line"><span class="attribute">pip</span></span><br><span class="line"><span class="attribute">Python</span>-dev</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><p><strong>Mac 下使用 <a href="https://brew.sh/">Homebrew</a> 安装：</strong></p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>thefuck</span><br></pre></td></tr></table></figure>
+
+<p><strong>Ubuntu 下安装：</strong></p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">sudo apt <span class="keyword">update</span></span><br><span class="line">sudo apt install <span class="keyword">python3</span>-dev <span class="keyword">python3</span>-pip</span><br><span class="line">sudo pip3 install thefuck</span><br></pre></td></tr></table></figure>
+
+<p><strong>其他操作系统你可以使用 Python 的 pip 安装：</strong></p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">pip <span class="keyword">install</span> thefuck</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><strong>最后，不要忘记为 The Fuck 设置 alias</strong></p>
+<p>暂时命令</p>
+<figure class="highlight mel"><table><tr><td class="code"><pre><span class="line"><span class="keyword">eval</span> $(thefuck --<span class="keyword">alias</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在文件中永久配置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#编辑bashrc配置文件</span></span><br><span class="line">vim ~/.bashrc</span><br><span class="line"><span class="comment">#在文件尾加入一行给thefuck取别名fuck</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(thefuck --alias fuck)</span>&quot;</span></span><br><span class="line"><span class="comment">#使生效</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>最后就可以痛快的使用啦！附上<a href="https://github.com/nvbn/thefuck"><code>TheFuck</code>官方链接</a></p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><blockquote>
+<p>其实<code>TheFuck</code>的原理就是规则匹配（正则表达式），如果找到匹配规则的命令，则创建一个命令给用户选择或直接运行。</p>
+</blockquote>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line">cat_dir - 当你尝试cat目录的时候，用<span class="keyword">ls</span>替换cat;</span><br><span class="line"><span class="keyword">cd</span>_correction – 拼写检查和纠正失败的<span class="keyword">cd</span>命令；</span><br><span class="line"><span class="keyword">cd</span>_mkdir – 在进入目录之前创建目录；</span><br><span class="line"><span class="keyword">cd</span>_parent – 更改 <span class="keyword">cd</span>.. 为<span class="keyword">cd</span> <span class="string">..</span>；</span><br><span class="line">dry – 修复类似的重复问题：git git push；</span><br><span class="line">fix_alt_space – 用空格字符代替Alt + Space；</span><br><span class="line"><span class="comment"># 还有很多可以参考https://github.com/nvbn/thefuck#how-it-works</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ls的翻篇小火车sl"><a href="#ls的翻篇小火车sl" class="headerlink" title="ls的翻篇小火车sl"></a>ls的翻篇小火车<code>sl</code></h2><p><strong>敲下以下命令</strong></p>
+<p><strong>Ubantu</strong></p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">sudo</span> apt-<span class="meta">get</span> install <span class="built_in">sl</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>CentOs</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install sl </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205546460.png" alt="image-20221005205546460"></p>
+<p>嘟嘟嘟嘟~~就会看到一个小火车，从你屏幕缓缓驰过….</p>
+<p>还可以配合fuck使用就是</p>
+<figure class="highlight pf"><table><tr><td class="code"><pre><span class="line">root@iZ2ze2p9tolfgje8qghiy0Z: sudo aptget install sl</span><br><span class="line">sudo: aptget: command not found</span><br><span class="line">root@iZ2ze2p9tolfgje8qghiy0Z:~<span class="comment"># fuck</span></span><br><span class="line">sudo apt-get install sl [enter/↑/↓/ctrl+c]</span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree       </span><br><span class="line">Reading <span class="keyword">state</span> information... Done</span><br></pre></td></tr></table></figure>
+
+<h2 id="反向装逼-tac"><a href="#反向装逼-tac" class="headerlink" title="反向装逼 tac"></a>反向装逼 <code>tac</code></h2><p> <strong>Ubantu</strong></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install tac</span><br></pre></td></tr></table></figure>
+
+<p><strong>CentOs</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install tac</span><br></pre></td></tr></table></figure>
+
+<p><em>用cat看代码时</em></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205556042.png" alt="image-20221005205556042"></p>
+<p><em>tac呢</em></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205604369.png" alt="image-20221005205604369"></p>
+<h2 id="自己是黑客-jpg"><a href="#自己是黑客-jpg" class="headerlink" title="自己是黑客.jpg"></a>自己是黑客.jpg</h2><p> <strong>Ubantu</strong></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install cmatrix</span><br></pre></td></tr></table></figure>
+
+<p><strong>CentOs</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install cmatrix</span><br></pre></td></tr></table></figure>
+
+<p>安装好后只要在命令行输入</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">cmatrix</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205611298.png" alt="image-20221005205611298"></p>
+<p>Wow~</p>
+<p>只要按Ctrl+C就可以退出，适合当息屏显示</p>
+<h2 id="谨慎使用fork"><a href="#谨慎使用fork" class="headerlink" title="谨慎使用fork"></a>谨慎使用<code>fork</code></h2><p>根据你的shell，选择如下2个命令中的1个，一条命令弄死Linux：</p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="meta">:() &#123; :|:&amp;</span> &#125;;:</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">.() &#123; .<span class="string">|.&amp; &#125;;.</span></span><br></pre></td></tr></table></figure>
+
+<p>接着就可以重启啦</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>toy</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mysql基础</title>
     <url>/2022/09/09/MySQL/</url>
     <content><![CDATA[<p>1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）<br>2.C R U D：增删改查的专业术语。<br>3.层次、网状、关系型模型数据库</p>
@@ -1965,119 +2078,6 @@
       </tags>
   </entry>
   <entry>
-    <title>在线code安装教程</title>
-    <url>/2022/09/12/codeinstall/</url>
-    <content><![CDATA[<p>##前置条件：</p>
-<ol>
-<li>云服务器</li>
-<li>ssh的连接工具 如<a href="https://www.putty.org/">putty</a>，<a href="https://termius.com/">Termius</a>，mac用户可以直接用终端连接.</li>
-</ol>
-<h2 id="安装教程"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程</h2><p>首先使用你的ssh工具连接服务器</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>输入命令下载codeserver</span><br><span class="line">wget https:<span class="regexp">//gi</span>thub.com<span class="regexp">/coder/</span>code-server<span class="regexp">/releases/</span>download<span class="regexp">/v4.6.1/</span>code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>解压</span><br><span class="line">tar -zxvf code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>进入codeserver目录</span><br><span class="line">cd code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64</span><br><span class="line"><span class="regexp">//</span>设置密码(密码在双引号内)</span><br><span class="line">export PASSWORD=<span class="number">123456</span></span><br><span class="line"><span class="regexp">//</span>启动codeserver</span><br><span class="line">./code-server --port <span class="number">8081</span> --host <span class="number">0.0</span>.<span class="number">0.0</span> --auth password</span><br></pre></td></tr></table></figure>
-
-<p>在浏览器上方输入<code>你的服务器IP:8081</code> 即可进入登录界面</p>
-<p>这个时候输入之前设置的密码就可以进入codeserver了</p>
-<h2 id="配置Screen进程守护"><a href="#配置Screen进程守护" class="headerlink" title="配置Screen进程守护"></a>配置Screen进程守护</h2><p>之前的步骤有一个问题,就是当你退出ssh进程的时候,你会发现网站进不去了。</p>
-<p>因为当ssh进程关闭的时候，会自动清除当前进程。</p>
-<p>我们得下载Screen来给codeserver进行进程守护，防止进程自动退出。</p>
-<h2 id="安装Screen"><a href="#安装Screen" class="headerlink" title="安装Screen"></a>安装Screen</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>复制适合自己系统的命令安装</span><br><span class="line"><span class="regexp">//</span>Centos系统</span><br><span class="line">yum install screen</span><br><span class="line"><span class="regexp">//</span>Debian/Ubuntu系统</span><br><span class="line">apt-get install screen</span><br></pre></td></tr></table></figure>
-<h2 id="保护进程实现后台运行"><a href="#保护进程实现后台运行" class="headerlink" title="保护进程实现后台运行"></a>保护进程实现后台运行</h2><figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">//</span>以code_server为名字建立进程</span><br><span class="line">screen -S code_server</span><br><span class="line"><span class="string">//</span>再次输入以下命令</span><br><span class="line"><span class="keyword">cd</span> code-server-4.6.1-linux-amd64</span><br><span class="line">export PASSWORD=123456</span><br><span class="line"><span class="string">./code-server</span> <span class="params">--port</span> 8081 <span class="params">--host</span> 0.0.0.0 <span class="params">--auth</span> password</span><br></pre></td></tr></table></figure>
-
-
-
-<p>此时关闭ssh终端,也可以照常进入网页啦！</p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE-2022-09-06-215111.jpg"></p>
-<p>微软官方<a href="https://vscode.dev/">请输入链接描述</a></p>
-]]></content>
-      <categories>
-        <category>toy</category>
-      </categories>
-      <tags>
-        <tag>toy</tag>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux toy合集</title>
-    <url>/2022/09/15/fucktoy/</url>
-    <content><![CDATA[<h1 id="Linux命令神器-The-Fuck"><a href="#Linux命令神器-The-Fuck" class="headerlink" title="Linux命令神器 The Fuck"></a>Linux命令神器 <code>The Fuck</code></h1><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/example.gif" alt="example"></p>
-<p><strong><code>The Fuck</code>是一款能够自动修复你的错误命令行的终端应用。</strong></p>
-<p>相信大家每个人都有敲错过命令的时候,把<code>python</code><br>输入成 <code>puthon</code><br>.手速过快把<code>ls -alh</code><br>输入成 <code>ls a-lh</code><br>等等等,这时候是不是想拍一下键盘说一声<code>fuck</code></p>
-<h2 id="术前要求"><a href="#术前要求" class="headerlink" title="术前要求"></a>术前要求</h2><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Python</span> (<span class="number">2</span>.<span class="number">7</span>+ or <span class="number">3</span>.<span class="number">3</span>+)</span><br><span class="line"><span class="attribute">pip</span></span><br><span class="line"><span class="attribute">Python</span>-dev</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><p><strong>Mac 下使用 <a href="https://brew.sh/">Homebrew</a> 安装：</strong></p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>thefuck</span><br></pre></td></tr></table></figure>
-
-<p><strong>Ubuntu 下安装：</strong></p>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">sudo apt <span class="keyword">update</span></span><br><span class="line">sudo apt install <span class="keyword">python3</span>-dev <span class="keyword">python3</span>-pip</span><br><span class="line">sudo pip3 install thefuck</span><br></pre></td></tr></table></figure>
-
-<p><strong>其他操作系统你可以使用 Python 的 pip 安装：</strong></p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">pip <span class="keyword">install</span> thefuck</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><strong>最后，不要忘记为 The Fuck 设置 alias</strong></p>
-<p>暂时命令</p>
-<figure class="highlight mel"><table><tr><td class="code"><pre><span class="line"><span class="keyword">eval</span> $(thefuck --<span class="keyword">alias</span>)</span><br></pre></td></tr></table></figure>
-
-<p>在文件中永久配置</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#编辑bashrc配置文件</span></span><br><span class="line">vim ~/.bashrc</span><br><span class="line"><span class="comment">#在文件尾加入一行给thefuck取别名fuck</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(thefuck --alias fuck)</span>&quot;</span></span><br><span class="line"><span class="comment">#使生效</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
-
-<p>最后就可以痛快的使用啦！附上<a href="https://github.com/nvbn/thefuck"><code>TheFuck</code>官方链接</a></p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><blockquote>
-<p>其实<code>TheFuck</code>的原理就是规则匹配（正则表达式），如果找到匹配规则的命令，则创建一个命令给用户选择或直接运行。</p>
-</blockquote>
-<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line">cat_dir - 当你尝试cat目录的时候，用<span class="keyword">ls</span>替换cat;</span><br><span class="line"><span class="keyword">cd</span>_correction – 拼写检查和纠正失败的<span class="keyword">cd</span>命令；</span><br><span class="line"><span class="keyword">cd</span>_mkdir – 在进入目录之前创建目录；</span><br><span class="line"><span class="keyword">cd</span>_parent – 更改 <span class="keyword">cd</span>.. 为<span class="keyword">cd</span> <span class="string">..</span>；</span><br><span class="line">dry – 修复类似的重复问题：git git push；</span><br><span class="line">fix_alt_space – 用空格字符代替Alt + Space；</span><br><span class="line"><span class="comment"># 还有很多可以参考https://github.com/nvbn/thefuck#how-it-works</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="ls的翻篇小火车sl"><a href="#ls的翻篇小火车sl" class="headerlink" title="ls的翻篇小火车sl"></a>ls的翻篇小火车<code>sl</code></h2><p><strong>敲下以下命令</strong></p>
-<p><strong>Ubantu</strong></p>
-<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">sudo</span> apt-<span class="meta">get</span> install <span class="built_in">sl</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>CentOs</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install sl </span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205546460.png" alt="image-20221005205546460"></p>
-<p>嘟嘟嘟嘟~~就会看到一个小火车，从你屏幕缓缓驰过….</p>
-<p>还可以配合fuck使用就是</p>
-<figure class="highlight pf"><table><tr><td class="code"><pre><span class="line">root@iZ2ze2p9tolfgje8qghiy0Z: sudo aptget install sl</span><br><span class="line">sudo: aptget: command not found</span><br><span class="line">root@iZ2ze2p9tolfgje8qghiy0Z:~<span class="comment"># fuck</span></span><br><span class="line">sudo apt-get install sl [enter/↑/↓/ctrl+c]</span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree       </span><br><span class="line">Reading <span class="keyword">state</span> information... Done</span><br></pre></td></tr></table></figure>
-
-<h2 id="反向装逼-tac"><a href="#反向装逼-tac" class="headerlink" title="反向装逼 tac"></a>反向装逼 <code>tac</code></h2><p> <strong>Ubantu</strong></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install tac</span><br></pre></td></tr></table></figure>
-
-<p><strong>CentOs</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install tac</span><br></pre></td></tr></table></figure>
-
-<p><em>用cat看代码时</em></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205556042.png" alt="image-20221005205556042"></p>
-<p><em>tac呢</em></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205604369.png" alt="image-20221005205604369"></p>
-<h2 id="自己是黑客-jpg"><a href="#自己是黑客-jpg" class="headerlink" title="自己是黑客.jpg"></a>自己是黑客.jpg</h2><p> <strong>Ubantu</strong></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install cmatrix</span><br></pre></td></tr></table></figure>
-
-<p><strong>CentOs</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install cmatrix</span><br></pre></td></tr></table></figure>
-
-<p>安装好后只要在命令行输入</p>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">cmatrix</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205611298.png" alt="image-20221005205611298"></p>
-<p>Wow~</p>
-<p>只要按Ctrl+C就可以退出，适合当息屏显示</p>
-<h2 id="谨慎使用fork"><a href="#谨慎使用fork" class="headerlink" title="谨慎使用fork"></a>谨慎使用<code>fork</code></h2><p>根据你的shell，选择如下2个命令中的1个，一条命令弄死Linux：</p>
-<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="meta">:() &#123; :|:&amp;</span> &#125;;:</span><br></pre></td></tr></table></figure>
-
-<p>或者</p>
-<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">.() &#123; .<span class="string">|.&amp; &#125;;.</span></span><br></pre></td></tr></table></figure>
-
-<p>接着就可以重启啦</p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>toy</tag>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>基于腾讯云的Typora图床</title>
     <url>/2022/09/10/maBed/</url>
     <content><![CDATA[<h2 id="术前准备"><a href="#术前准备" class="headerlink" title="术前准备"></a>术前准备</h2><ul>
@@ -2133,6 +2133,63 @@
       <tags>
         <tag>Typora</tag>
         <tag>code</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于青龙面板薅JD羊毛</title>
+    <url>/2022/10/05/qinglong/</url>
+    <content><![CDATA[<h2 id="术前准备"><a href="#术前准备" class="headerlink" title="术前准备"></a>术前准备</h2><ul>
+<li><p><strong>云服务器一台</strong>（记得开放8888以及5700端口）</p>
+</li>
+<li><p><strong>点击<a href="https://www.bt.cn/new/download.html">安装宝塔Linux</a></strong></p>
+</li>
+</ul>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="1-进入宝塔面板"><a href="#1-进入宝塔面板" class="headerlink" title="1.进入宝塔面板"></a>1.进入宝塔面板</h3><p>点击<code>软件商店</code>-&gt;<code>搜索docker</code>-&gt;<code>点击安装</code></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140520473.png" alt="image-20221006140520473"></p>
+<h3 id="2-拉取青龙镜像"><a href="#2-拉取青龙镜像" class="headerlink" title="2.拉取青龙镜像"></a>2.拉取青龙镜像</h3><p>选完安装面板和设置IP后一路回车到底</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/lang1.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140528809.png" alt="image-20221006140528809"></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140534814.png" alt="image-20221006140534814"></p>
+<h3 id="3-添加拉库命令"><a href="#3-添加拉库命令" class="headerlink" title="3.添加拉库命令"></a>3.添加拉库命令</h3><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140538948.png" alt="image-20221006140538948"></p>
+<p>添加一个定时任务,定时拉库命令,就可以定时更新仓库。可设置为 <code>0 */12 * * *</code> 每天0点和12点运行一次更新。</p>
+<p><strong>KingRan库【集合库，推荐</strong>】</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/KingRan/</span>KR.git <span class="string">&quot;jd_|jx_|jdCookie&quot;</span> <span class="string">&quot;activity|backUp&quot;</span> <span class="string">&quot;^jd[^_]|USER|utils|function|sign|sendNotify|ql|magic|JDJR&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Faker3【集合库】</strong></p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/shufflewzc/</span>faker3.git <span class="string">&quot;jd_|jx_|gua_|jddj_|jdCookie&quot;</span> <span class="string">&quot;activity|backUp&quot;</span> <span class="string">&quot;^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator&quot;</span> <span class="string">&quot;main&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>yyds【集合库】</strong></p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">YYDS</span><br><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/okyyds/yy</span>ds.git <span class="string">&quot;jd_|jx_|gua_|jddj_|jdCookie&quot;</span> <span class="string">&quot;activity|backUp&quot;</span> <span class="string">&quot;^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator&quot;</span> <span class="string">&quot;master&quot;</span></span><br><span class="line"></span><br><span class="line">YYDS_Pure</span><br><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/okyyds/yy</span>dspure.git <span class="string">&quot;jd_|jx_|gua_|jddj_|jdCookie&quot;</span> <span class="string">&quot;activity|backUp&quot;</span> <span class="string">&quot;^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator&quot;</span> <span class="string">&quot;master&quot;</span></span><br><span class="line">【注意】拉库前请打开青龙面板-配置文件 第<span class="number">18</span>行 GithubProxyUrl=<span class="string">&quot;&quot;</span> 双引号中的内容删除。</span><br></pre></td></tr></table></figure>
+
+<p><strong>smiek2121【开卡，建议】</strong></p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/smiek2121/</span>scripts.git <span class="string">&quot;gua_&quot;</span> <span class="string">&quot;&quot;</span> <span class="string">&quot;ZooFaker_Necklace.js|JDJRValidator_Pure.js|sign_graphics_validate.js|cleancart_activity.js|jdCookie.js|sendNotify.js&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>ccwav大佬的通知增强版和CK检测【建议】</strong></p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>不包含sendNotify:</span><br><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/ccwav/</span>QLScript2.git <span class="string">&quot;jd_&quot;</span> <span class="string">&quot;sendNotify|NoUsed&quot;</span> <span class="string">&quot;ql&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>包含sendNotify:</span><br><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/ccwav/</span>QLScript2.git <span class="string">&quot;jd_&quot;</span> <span class="string">&quot;NoUsed&quot;</span> <span class="string">&quot;ql|sendNotify&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>【zero205】【集合库，拉KR即可】</strong></p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/zero205/</span>JD_tencent_scf.git <span class="string">&quot;jd_|jx_|jdCookie&quot;</span> <span class="string">&quot;backUp|icon&quot;</span> <span class="string">&quot;^jd[^_]|USER|sendNotify|sign_graphics_validate|JDJR|JDSign|ql&quot;</span> <span class="string">&quot;main&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-添加京东COOKIE"><a href="#4-添加京东COOKIE" class="headerlink" title="4.添加京东COOKIE"></a>4.添加京东COOKIE</h3><p>提取COOKIE软件地址：<a href="https://pan.xunlei.com/s/VNBvHoZT5uASNqnZyeN7x_fFA1">提取码7yxt</a></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140547643.png" alt="image-20221006140547643"></p>
+<h2 id="添加依赖-重要"><a href="#添加依赖-重要" class="headerlink" title="添加依赖(重要)"></a>添加依赖(重要)</h2><p><strong>进入<code>依赖管理</code>-&gt;<code>新建依赖</code></strong></p>
+<p>1.<em>NodeJs</em></p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">NodeJs里面所需依赖 添加依赖---&gt;选择自动拆分，把以下内容全部复制到名称里，之后点击确定</span><br><span class="line">ts-md5</span><br><span class="line">@types/<span class="keyword">node</span></span><br><span class="line"><span class="title">prettytable</span></span><br><span class="line"><span class="keyword">node</span><span class="title">-telegram-bot-api</span></span><br><span class="line">tslib</span><br><span class="line">ql</span><br><span class="line">common</span><br><span class="line">fs</span><br><span class="line">typescript</span><br><span class="line">axios</span><br><span class="line">png-js</span><br><span class="line">axios</span><br><span class="line">ws@<span class="number">7.4</span>.<span class="number">3</span></span><br><span class="line">crypto-js</span><br><span class="line">jieba</span><br><span class="line">global-agent</span><br><span class="line">jsdom -g</span><br><span class="line">moment</span><br><span class="line">form-data</span><br><span class="line"><span class="keyword">date</span>-fns</span><br><span class="line"><span class="keyword">node</span><span class="title">-jsencrypt</span></span><br><span class="line">require</span><br><span class="line">js-base64</span><br><span class="line">tough-cookie</span><br><span class="line">json5</span><br><span class="line">jsdom</span><br><span class="line">dotenv</span><br><span class="line">qs</span><br></pre></td></tr></table></figure>
+
+<p>2.<em>Python3</em></p>
+<figure class="highlight xl"><table><tr><td class="code"><pre><span class="line">P<span class="function"><span class="title">ython3</span>依赖 添加依赖---&gt;</span>选择自动拆分，把以下内容全部复制到名称里，之后点击确定</span><br><span class="line">ping3</span><br><span class="line">canvas</span><br><span class="line">requests</span><br><span class="line">jieba</span><br><span class="line">PyExecJS</span><br><span class="line">httpx</span><br></pre></td></tr></table></figure>
+
+<p>3.<em>Linux</em></p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">Linux依赖 添加依赖---&gt;选择自动拆分，把以下内容全部复制到名称里，之后点击确定</span><br><span class="line">lxml</span><br><span class="line"><span class="keyword">bizMsg</span></span><br><span class="line"><span class="keyword"></span><span class="keyword">bizCode</span></span><br><span class="line"><span class="keyword"></span>gcc</span><br><span class="line">python-devel</span><br><span class="line">aiohttp</span><br><span class="line">magic</span><br></pre></td></tr></table></figure>
+
+<p>*ps:*一些定时规则</p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">*/5 * * * * ?    <span class="comment">#每隔 5 秒执行一次</span></span><br><span class="line">0 */1 * * * ?    <span class="comment">#每隔 1 分钟执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>2<span class="number"> 1 </span>* ? *    <span class="comment">#每月 1 日的凌晨 2 点执行一次</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? *    <span class="comment">#MON-FRI 周一到周五每天上午 10：15 执行</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? 6L    <span class="comment">#2002-2006 2002 年至 2006 年的每个月的最后一个星期五上午 10:15 执行</span></span><br><span class="line">0<span class="number"> 0 </span>23 * * ?    <span class="comment">#每天 23 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>1 * * ?    <span class="comment">#每天凌晨 1 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>1<span class="number"> 1 </span>* ?     <span class="comment">#每月 1 日凌晨 1 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>23 L * ?    <span class="comment">#每月最后一天 23 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>1 ? * L    <span class="comment">#每周星期天凌晨 1 点执行一次</span></span><br><span class="line">0 26,29,33 * * * ?    <span class="comment">#在 26 分、29 分、33 分执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>0,13,18,21 * * ?    <span class="comment">#每天的 0 点、13 点、18 点、21 点都执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>10,14,16 * * ?    <span class="comment">#每天上午 10 点，下午 2 点，4 点执行一次</span></span><br><span class="line">0 0/30 9-17 * * ?    <span class="comment">#朝九晚五工作时间内每半小时执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>12 ? * WED    <span class="comment">#每个星期三中午 12 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>12 * * ?    <span class="comment">#每天中午 12 点触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * *    <span class="comment">#每天上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 * * ?    <span class="comment">#每天上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 * * ? *    <span class="comment">#每天上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 * * ?    <span class="comment">#2005 2005 年的每天上午 10:15 触发</span></span><br><span class="line">0 *<span class="number"> 14 </span>* * ?    <span class="comment">#每天下午 2 点到 2:59 期间的每 1 分钟触发</span></span><br><span class="line">0 0/5<span class="number"> 14 </span>* * ?    <span class="comment">#每天下午 2 点到 2:55 期间的每 5 分钟触发</span></span><br><span class="line">0 0/5 14,18 * * ?    <span class="comment">#每天下午 2 点到 2:55 期间和下午 6 点到 6:55 期间的每 5 分钟触发</span></span><br><span class="line">0 0-5<span class="number"> 14 </span>* * ?    <span class="comment">#每天下午 2 点到 2:05 期间的每 1 分钟触发</span></span><br><span class="line">0 10,44<span class="number"> 14 </span>?<span class="number"> 3 </span>WED    <span class="comment">#每年三月的星期三的下午 2:10 和 2:44 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * MON-FRI    <span class="comment">#周一至周五的上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10<span class="number"> 15 </span>* ?    <span class="comment">#每月 15 日上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 L * ?    <span class="comment">#每月最后一日的上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * 6L    <span class="comment">#每月的最后一个星期五上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * 6L    <span class="comment">#2002-2005 2002 年至 2005 年的每月的最后一个星期五上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * 6<span class="comment">#3    #每月的第三个星期五上午 10:15 触发</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
@@ -2404,63 +2461,6 @@ $$
       <tags>
         <tag>code</tag>
         <tag>computer network</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于青龙面板薅JD羊毛</title>
-    <url>/2022/10/05/qinglong/</url>
-    <content><![CDATA[<h2 id="术前准备"><a href="#术前准备" class="headerlink" title="术前准备"></a>术前准备</h2><ul>
-<li><p><strong>云服务器一台</strong>（记得开放8888以及5700端口）</p>
-</li>
-<li><p><strong>点击<a href="https://www.bt.cn/new/download.html">安装宝塔Linux</a></strong></p>
-</li>
-</ul>
-<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="1-进入宝塔面板"><a href="#1-进入宝塔面板" class="headerlink" title="1.进入宝塔面板"></a>1.进入宝塔面板</h3><p>点击<code>软件商店</code>-&gt;<code>搜索docker</code>-&gt;<code>点击安装</code></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140520473.png" alt="image-20221006140520473"></p>
-<h3 id="2-拉取青龙镜像"><a href="#2-拉取青龙镜像" class="headerlink" title="2.拉取青龙镜像"></a>2.拉取青龙镜像</h3><p>选完安装面板和设置IP后一路回车到底</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/lang1.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140528809.png" alt="image-20221006140528809"></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140534814.png" alt="image-20221006140534814"></p>
-<h3 id="3-添加拉库命令"><a href="#3-添加拉库命令" class="headerlink" title="3.添加拉库命令"></a>3.添加拉库命令</h3><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140538948.png" alt="image-20221006140538948"></p>
-<p>添加一个定时任务,定时拉库命令,就可以定时更新仓库。可设置为 <code>0 */12 * * *</code> 每天0点和12点运行一次更新。</p>
-<p><strong>KingRan库【集合库，推荐</strong>】</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/KingRan/</span>KR.git <span class="string">&quot;jd_|jx_|jdCookie&quot;</span> <span class="string">&quot;activity|backUp&quot;</span> <span class="string">&quot;^jd[^_]|USER|utils|function|sign|sendNotify|ql|magic|JDJR&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>Faker3【集合库】</strong></p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/shufflewzc/</span>faker3.git <span class="string">&quot;jd_|jx_|gua_|jddj_|jdCookie&quot;</span> <span class="string">&quot;activity|backUp&quot;</span> <span class="string">&quot;^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator&quot;</span> <span class="string">&quot;main&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>yyds【集合库】</strong></p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">YYDS</span><br><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/okyyds/yy</span>ds.git <span class="string">&quot;jd_|jx_|gua_|jddj_|jdCookie&quot;</span> <span class="string">&quot;activity|backUp&quot;</span> <span class="string">&quot;^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator&quot;</span> <span class="string">&quot;master&quot;</span></span><br><span class="line"></span><br><span class="line">YYDS_Pure</span><br><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/okyyds/yy</span>dspure.git <span class="string">&quot;jd_|jx_|gua_|jddj_|jdCookie&quot;</span> <span class="string">&quot;activity|backUp&quot;</span> <span class="string">&quot;^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator&quot;</span> <span class="string">&quot;master&quot;</span></span><br><span class="line">【注意】拉库前请打开青龙面板-配置文件 第<span class="number">18</span>行 GithubProxyUrl=<span class="string">&quot;&quot;</span> 双引号中的内容删除。</span><br></pre></td></tr></table></figure>
-
-<p><strong>smiek2121【开卡，建议】</strong></p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/smiek2121/</span>scripts.git <span class="string">&quot;gua_&quot;</span> <span class="string">&quot;&quot;</span> <span class="string">&quot;ZooFaker_Necklace.js|JDJRValidator_Pure.js|sign_graphics_validate.js|cleancart_activity.js|jdCookie.js|sendNotify.js&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>ccwav大佬的通知增强版和CK检测【建议】</strong></p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>不包含sendNotify:</span><br><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/ccwav/</span>QLScript2.git <span class="string">&quot;jd_&quot;</span> <span class="string">&quot;sendNotify|NoUsed&quot;</span> <span class="string">&quot;ql&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>包含sendNotify:</span><br><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/ccwav/</span>QLScript2.git <span class="string">&quot;jd_&quot;</span> <span class="string">&quot;NoUsed&quot;</span> <span class="string">&quot;ql|sendNotify&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>【zero205】【集合库，拉KR即可】</strong></p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ql repo https:<span class="regexp">//gi</span>thub.com<span class="regexp">/zero205/</span>JD_tencent_scf.git <span class="string">&quot;jd_|jx_|jdCookie&quot;</span> <span class="string">&quot;backUp|icon&quot;</span> <span class="string">&quot;^jd[^_]|USER|sendNotify|sign_graphics_validate|JDJR|JDSign|ql&quot;</span> <span class="string">&quot;main&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="4-添加京东COOKIE"><a href="#4-添加京东COOKIE" class="headerlink" title="4.添加京东COOKIE"></a>4.添加京东COOKIE</h3><p>提取COOKIE软件地址：<a href="https://pan.xunlei.com/s/VNBvHoZT5uASNqnZyeN7x_fFA1">提取码7yxt</a></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221006140547643.png" alt="image-20221006140547643"></p>
-<h2 id="添加依赖-重要"><a href="#添加依赖-重要" class="headerlink" title="添加依赖(重要)"></a>添加依赖(重要)</h2><p><strong>进入<code>依赖管理</code>-&gt;<code>新建依赖</code></strong></p>
-<p>1.<em>NodeJs</em></p>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">NodeJs里面所需依赖 添加依赖---&gt;选择自动拆分，把以下内容全部复制到名称里，之后点击确定</span><br><span class="line">ts-md5</span><br><span class="line">@types/<span class="keyword">node</span></span><br><span class="line"><span class="title">prettytable</span></span><br><span class="line"><span class="keyword">node</span><span class="title">-telegram-bot-api</span></span><br><span class="line">tslib</span><br><span class="line">ql</span><br><span class="line">common</span><br><span class="line">fs</span><br><span class="line">typescript</span><br><span class="line">axios</span><br><span class="line">png-js</span><br><span class="line">axios</span><br><span class="line">ws@<span class="number">7.4</span>.<span class="number">3</span></span><br><span class="line">crypto-js</span><br><span class="line">jieba</span><br><span class="line">global-agent</span><br><span class="line">jsdom -g</span><br><span class="line">moment</span><br><span class="line">form-data</span><br><span class="line"><span class="keyword">date</span>-fns</span><br><span class="line"><span class="keyword">node</span><span class="title">-jsencrypt</span></span><br><span class="line">require</span><br><span class="line">js-base64</span><br><span class="line">tough-cookie</span><br><span class="line">json5</span><br><span class="line">jsdom</span><br><span class="line">dotenv</span><br><span class="line">qs</span><br></pre></td></tr></table></figure>
-
-<p>2.<em>Python3</em></p>
-<figure class="highlight xl"><table><tr><td class="code"><pre><span class="line">P<span class="function"><span class="title">ython3</span>依赖 添加依赖---&gt;</span>选择自动拆分，把以下内容全部复制到名称里，之后点击确定</span><br><span class="line">ping3</span><br><span class="line">canvas</span><br><span class="line">requests</span><br><span class="line">jieba</span><br><span class="line">PyExecJS</span><br><span class="line">httpx</span><br></pre></td></tr></table></figure>
-
-<p>3.<em>Linux</em></p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">Linux依赖 添加依赖---&gt;选择自动拆分，把以下内容全部复制到名称里，之后点击确定</span><br><span class="line">lxml</span><br><span class="line"><span class="keyword">bizMsg</span></span><br><span class="line"><span class="keyword"></span><span class="keyword">bizCode</span></span><br><span class="line"><span class="keyword"></span>gcc</span><br><span class="line">python-devel</span><br><span class="line">aiohttp</span><br><span class="line">magic</span><br></pre></td></tr></table></figure>
-
-<p>*ps:*一些定时规则</p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">*/5 * * * * ?    <span class="comment">#每隔 5 秒执行一次</span></span><br><span class="line">0 */1 * * * ?    <span class="comment">#每隔 1 分钟执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>2<span class="number"> 1 </span>* ? *    <span class="comment">#每月 1 日的凌晨 2 点执行一次</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? *    <span class="comment">#MON-FRI 周一到周五每天上午 10：15 执行</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? 6L    <span class="comment">#2002-2006 2002 年至 2006 年的每个月的最后一个星期五上午 10:15 执行</span></span><br><span class="line">0<span class="number"> 0 </span>23 * * ?    <span class="comment">#每天 23 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>1 * * ?    <span class="comment">#每天凌晨 1 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>1<span class="number"> 1 </span>* ?     <span class="comment">#每月 1 日凌晨 1 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>23 L * ?    <span class="comment">#每月最后一天 23 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>1 ? * L    <span class="comment">#每周星期天凌晨 1 点执行一次</span></span><br><span class="line">0 26,29,33 * * * ?    <span class="comment">#在 26 分、29 分、33 分执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>0,13,18,21 * * ?    <span class="comment">#每天的 0 点、13 点、18 点、21 点都执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>10,14,16 * * ?    <span class="comment">#每天上午 10 点，下午 2 点，4 点执行一次</span></span><br><span class="line">0 0/30 9-17 * * ?    <span class="comment">#朝九晚五工作时间内每半小时执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>12 ? * WED    <span class="comment">#每个星期三中午 12 点执行一次</span></span><br><span class="line">0<span class="number"> 0 </span>12 * * ?    <span class="comment">#每天中午 12 点触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * *    <span class="comment">#每天上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 * * ?    <span class="comment">#每天上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 * * ? *    <span class="comment">#每天上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 * * ?    <span class="comment">#2005 2005 年的每天上午 10:15 触发</span></span><br><span class="line">0 *<span class="number"> 14 </span>* * ?    <span class="comment">#每天下午 2 点到 2:59 期间的每 1 分钟触发</span></span><br><span class="line">0 0/5<span class="number"> 14 </span>* * ?    <span class="comment">#每天下午 2 点到 2:55 期间的每 5 分钟触发</span></span><br><span class="line">0 0/5 14,18 * * ?    <span class="comment">#每天下午 2 点到 2:55 期间和下午 6 点到 6:55 期间的每 5 分钟触发</span></span><br><span class="line">0 0-5<span class="number"> 14 </span>* * ?    <span class="comment">#每天下午 2 点到 2:05 期间的每 1 分钟触发</span></span><br><span class="line">0 10,44<span class="number"> 14 </span>?<span class="number"> 3 </span>WED    <span class="comment">#每年三月的星期三的下午 2:10 和 2:44 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * MON-FRI    <span class="comment">#周一至周五的上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10<span class="number"> 15 </span>* ?    <span class="comment">#每月 15 日上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 L * ?    <span class="comment">#每月最后一日的上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * 6L    <span class="comment">#每月的最后一个星期五上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * 6L    <span class="comment">#2002-2005 2002 年至 2005 年的每月的最后一个星期五上午 10:15 触发</span></span><br><span class="line">0<span class="number"> 15 </span>10 ? * 6<span class="comment">#3    #每月的第三个星期五上午 10:15 触发</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>

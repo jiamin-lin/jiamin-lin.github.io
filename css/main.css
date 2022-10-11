@@ -1593,9 +1593,10 @@ pre code {
   width: 100%;
 }
 .with-love {
-  color: #f00;
+  color: #257dd0;
   display: inline-block;
   margin: 0 5px;
+  animation: icon-animate 1.33s ease-in-out infinite;
 }
 @-moz-keyframes icon-animate {
   0%, 100% {
@@ -2750,7 +2751,7 @@ mark.search-keyword {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #5e37db;
+  background: #ff6516;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
