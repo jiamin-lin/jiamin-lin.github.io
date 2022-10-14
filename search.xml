@@ -67,137 +67,39 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux</title>
-    <url>/2022/10/02/Linux/</url>
-    <content><![CDATA[<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="计算机基础"><a href="#计算机基础" class="headerlink" title="计算机基础"></a>计算机基础</h2><p><strong>1.软件程序的运行</strong></p>
-<p>硬件如同人的身体，软件如同人的灵魂。没有了灵魂的躯体也不过就是行尸走肉</p>
-<p>**1.1 **机器程序与编译程序</p>
-<p>电脑只认识0与1而已，而且电脑最重要的运算与逻辑判断是在CPU内部， 而 CPU其实是具有微指令集的。因此，我们需要CPU帮忙工作时，就得要参考微指令集的内容， 然后撰写让CPU读的懂的指令码给CPU执行，这样就能够让CPU运行了。</p>
-<p>流程：</p>
-<ul>
-<li>需要了解机器语言：机器只认识0与1，因此你必须要学习直接写给机器看的语言。</li>
-<li>需要了解所有硬件的相关功能函数：因为你的程序必须要写给机器看， 当然你就得要参考机器本身的功能，然后针对该功能去撰写程序码。</li>
-<li>程序不具有可携性：每个CPU都有独特的微指令集，同样的，每个硬件都有其功能函数。</li>
-<li>程序具有专一性：因为这样的程序必须要针对硬件功能函数来撰写， 如果已经开发了一支浏览器程序，想要再开发文件管理程序时，还是得从头再参考硬件的功能函数来继续撰写。</li>
-</ul>
-<p>所以，需要开发让人类能看得懂得程序语言。然后创造一种“编译器”让人类的写的程序语言转换为机器能看懂的机器码。常见的编译器有C,C++,Java,Fortran等等。</p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220922203728264.png" alt="image-20220922203728264"></p>
-<h2 id="关于学习Linux"><a href="#关于学习Linux" class="headerlink" title="关于学习Linux"></a>关于学习Linux</h2><p>两个重要的因素是造成我们学习的原动力： </p>
-<ul>
-<li><p>创建兴趣： Linux上面可以玩的东西真的太多了，你可以选择一个有趣的课题来深入的玩 一玩！不论是Shell还是图形接口等等， 只要能够玩出兴趣，那么再怎么苦你都会不觉得喔！</p>
-</li>
-<li><p>成就感： 成就感是怎么来的？说实在话，就是“被认同”来的！怎么被认同呢？写心得分享啊！当你写了心得分享，并且公告在 BBS 上面，自然有朋友会到你的网页去瞧一瞧， 当大家觉得你的网页内容很棒的时候， 哈哈！你肯定会加油继续的分享下去而无法自拔。</p>
-</li>
-</ul>
-<h2 id="主机规划与磁盘分区"><a href="#主机规划与磁盘分区" class="headerlink" title="主机规划与磁盘分区"></a>主机规划与磁盘分区</h2><p><strong>Linux各硬件设备在系统中为文件名</strong></p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001164035525.png" alt="image-20221001164035525"></p>
-<p><strong>磁盘分区</strong></p>
-<p><strong>MBR 主要分区、延伸分区与逻辑分区的特性：</strong></p>
-<ul>
-<li>主要分区与延伸分区最多可以有四笔（硬盘的限制） ；</li>
-<li>延伸分区最多只能有一个（操作系统的限制）；</li>
-<li>逻辑分区是由延伸分区持续切割出来的分区；</li>
-<li>能够被格式化后，作为数据存取的分区为主要分区与逻辑分区。延伸分区无法格式化； </li>
-<li>逻辑分区的数量依操作系统而不同，在Linux系统中SATA硬盘已经可以突破63个以上的分区限制；</li>
-</ul>
-<p><strong>MBR分区限制：</strong></p>
-<ul>
-<li>操作系统无法抓取到 2.2T 以上的磁盘容量</li>
-<li>MBR 仅有一个区块，若被破坏后，经常无法或很难救援</li>
-<li>MBR 内的存放开机管理程序的区块仅 446Bytes，无法容纳较多的程序码</li>
-</ul>
-<p><strong>GUID partition table, GPT 磁盘分区表：</strong></p>
-<ul>
-<li>与 MBR 仅使用第一个 512Bytes 区块来纪录不同， GPT 使用了 34 个 LBA 区块来纪录分区信息</li>
-<li>GPT 除了前面 34 个 LBA 之外，整个磁盘的最后 33 个 LBA 也拿来作为另一个备份</li>
-</ul>
-<p><strong>计算机开机流程：</strong></p>
-<ol>
-<li>BIOS：开机主动执行的固件，会认识第一个可开机的设备；</li>
-<li>MBR：第一个可开机设备的第一个扇区内的主要开机记录区块，内含开机管理程序；</li>
-<li>开机管理程序（boot loader）：一支可读取核心文件来执行的软件；</li>
-<li>核心文件：开始操作系统的功能</li>
-</ol>
-<p><strong>BIOS与UEFI BIOS区别</strong></p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001200526805.png" alt="image-20221001200526805"></p>
-<p><strong>主机硬盘的规划</strong></p>
-<p>频繁读写的目录</p>
-<ul>
-<li>boot</li>
-<li>&#x2F; </li>
-<li>&#x2F;home </li>
-<li>&#x2F;var </li>
-<li>Swap</li>
-</ul>
-<h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><ul>
-<li><p>如果磁盘容量大于 2TB 以上时，系统会自动使用 GPT 分区方式来处理磁盘分区。</p>
-</li>
-<li><p>GPT 分区已经没有延伸与逻辑分区的概念，可以想像成所有的分区都是主分区，某些操作系统要使用 GPT 分区时，必须要搭配 UEFI 的新型 BIOS 格式才可安装使用。</p>
-</li>
-<li><p>Linux操作系统的文件使用目录树系统，与磁盘的对应需要有“挂载”的动作才行；</p>
-</li>
-<li><p>开机的流程由：BIOS–&gt;MBR–&gt;–&gt;boot loader–&gt;核心文件</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>web前端</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Mysql基础</title>
     <url>/2022/09/09/MySQL/</url>
     <content><![CDATA[<p>1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）<br>2.C R U D：增删改查的专业术语。<br>3.层次、网状、关系型模型数据库</p>
-<p><strong>数据库开始</strong></p>
-<p>show databases;</p>
+<h2 id="数据库开始"><a href="#数据库开始" class="headerlink" title="数据库开始"></a><strong>数据库开始</strong></h2><p>show databases;</p>
 <p>imformation_schema：信息数据库，其中保存着关于 MySQL 服务器所维护的所有其他数据库的信息，如数据库名，数据库的表，表栏的数据类型与访问权限等</p>
 <p>mysql：保存了用户信息。</p>
 <p>performance_schema：监控 MySQL 运行过程的资源消耗情况。</p>
 <p>sys： 通过过视图的形式把 information_schema 和 performance_schema 结合起来，查询出更加令人容易理解的数据。</p>
-<p><strong>数据库基本操作</strong></p>
-<p>创建数据库</p>
-<p>语句：</p>
-<p>create database student;</p>
-<p>判断创建语句：</p>
-<p>create database if not exists student;</p>
-<p>关键字变量名语句：</p>
-<p>create database <code>database</code>;</p>
+<h2 id="数据库基本操作"><a href="#数据库基本操作" class="headerlink" title="数据库基本操作"></a><strong>数据库基本操作</strong></h2><p>创建数据库</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line">语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> student;</span><br><span class="line"></span><br><span class="line">判断创建语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> student;</span><br><span class="line"></span><br><span class="line">关键字变量名语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="symbol">`database`</span>;</span><br></pre></td></tr></table></figure>
+
 <p>删除数据库</p>
-<p>语句：</p>
-<p>drop database student;</p>
-<p>判断删除语句：</p>
-<p>drop database if exists student;</p>
-<p>关键字变量名语句：</p>
-<p>drop database <code>database</code>;</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line">语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> student;</span><br><span class="line"></span><br><span class="line">判断删除语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">exists</span> student;</span><br><span class="line"></span><br><span class="line">关键字变量名语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> <span class="symbol">`database`</span>;</span><br></pre></td></tr></table></figure>
+
 <p>查看创建数据库的 SQL：</p>
-<p>show create database student;</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">database</span> student;</span><br></pre></td></tr></table></figure>
+
 <p>回退的语句：</p>
 <p>Ctrl + C（^C）</p>
 <p>创建数据库设置指定的字符编码</p>
-<p>create database if not exists teacher charset&#x3D;gbk;</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> teacher charset=gbk;</span><br></pre></td></tr></table></figure>
+
 <p>修改数据库字符编码</p>
-<p>alter database student charset&#x3D;gbk;</p>
-<p><strong>表的基本操作</strong></p>
-<p>进入库:</p>
-<p>use fuck_school;</p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">alter database student charset<span class="operator">=</span>gbk<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="表的基本操作"><a href="#表的基本操作" class="headerlink" title="表的基本操作"></a><strong>表的基本操作</strong></h3><p>进入库:</p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">use fuck_school<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 <p>展示表：</p>
-<p>show tables;</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">tables</span>;</span><br></pre></td></tr></table></figure>
 <p>制作表：</p>
-<p>create table student(</p>
-<p>Id int,</p>
-<p>name varchar(30),</p>
-<p>age int);</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> student(</span><br><span class="line"></span><br><span class="line">Id <span class="type">int</span>,</span><br><span class="line"></span><br><span class="line"><span class="type">name</span> <span class="type">varchar</span>(<span class="number">30</span>),</span><br><span class="line"></span><br><span class="line">age <span class="type">int</span>);</span><br></pre></td></tr></table></figure>
 <p>有 B 格的写法：</p>
-<p>create table if not exists teacher(</p>
-<p>Id int auto_increment primary key comment ‘主键 Id’, </p>
-<p>name varchar(30) not null comment ‘名字’,</p>
-<p>phone varchar(20) default ‘暂时未知’ comment ‘电话’, </p>
-<p>adress varchar(100) default ‘暂时未知’ comment ‘家庭住址’</p>
-<p>)engine &#x3D; innodb;</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> teacher(</span><br><span class="line"></span><br><span class="line">Id <span class="type">int</span> auto_increment <span class="keyword">primary key</span> <span class="keyword">comment</span> <span class="string">&#x27;主键 Id&#x27;</span>, </span><br><span class="line"></span><br><span class="line"><span class="type">name</span> <span class="type">varchar</span>(<span class="number">30</span>) <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">comment</span> <span class="string">&#x27;名字&#x27;</span>,</span><br><span class="line"></span><br><span class="line">phone <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">default</span> <span class="string">&#x27;暂时未知&#x27;</span> <span class="keyword">comment</span> <span class="string">&#x27;电话&#x27;</span>, </span><br><span class="line"></span><br><span class="line">adress <span class="type">varchar</span>(<span class="number">100</span>) <span class="keyword">default</span> <span class="string">&#x27;暂时未知&#x27;</span> <span class="keyword">comment</span> <span class="string">&#x27;家庭住址&#x27;</span></span><br><span class="line"></span><br><span class="line">)engine = innodb;</span><br></pre></td></tr></table></figure>
 <p>auto_increment 自动增长 用于类似于 ID 的数据（有规律性）</p>
 <p>primary key 主键 最主要的 靠它来区分表 </p>
 <p>comment 注释</p>
@@ -205,63 +107,59 @@
 <p>default 默认值</p>
 <p>engine &#x3D; innodb 数据库引擎类型</p>
 <p>展示表结构</p>
-<p>desc teacher;</p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">desc teacher<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 <p>删除表</p>
-<p>drop table if exists frank,fuck;</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> frank,fuck;</span><br></pre></td></tr></table></figure>
 <p>修改表：</p>
 <p>添加元素</p>
-<p>alter table student add address varchar(20);</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> address <span class="type">varchar</span>(<span class="number">20</span>);</span><br></pre></td></tr></table></figure>
 <p>按位元素</p>
 <p>之后</p>
-<p>alter table student add address varchar(20) after Id；</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> address <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">after</span> Id；</span><br></pre></td></tr></table></figure>
 <p>位数</p>
-<p>alter table student add address varchar(30) first; </p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> address <span class="type">varchar</span>(<span class="number">30</span>) <span class="keyword">first</span>; </span><br></pre></td></tr></table></figure>
 <p>删除元素</p>
-<p>alter table student drop address;</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> address;</span><br></pre></td></tr></table></figure>
 <p>修改元素</p>
-<p>alter table student change address <code>Add</code> varchar(20);</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student change address `<span class="keyword">Add</span>` <span class="type">varchar</span>(<span class="number">20</span>);</span><br></pre></td></tr></table></figure>
 <p>修改类型</p>
-<p>alter table student modify Id varchar(11);</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student modify Id <span class="type">varchar</span>(<span class="number">11</span>);</span><br></pre></td></tr></table></figure>
 <p>修改表名</p>
-<p>alter table student rename to students;</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">rename</span> <span class="keyword">to</span> students;</span><br></pre></td></tr></table></figure>
 <p>清空表</p>
-<p>truncate table teacher;</p>
-<p><strong>数据操作</strong></p>
-<p>插入数据</p>
-<p>insert teacher (Id, name, phone, adress) values (1, ‘Fuck’, ‘128989’, ‘GuangZhou’);</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">truncate</span> <span class="keyword">table</span> teacher;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a><strong>数据操作</strong></h3><p>插入数据</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> teacher (Id, <span class="type">name</span>, phone, adress) <span class="keyword">values</span> (<span class="number">1</span>, <span class="string">&#x27;Fuck&#x27;</span>, <span class="string">&#x27;128989&#x27;</span>, <span class="string">&#x27;GuangZhou&#x27;</span>);</span><br></pre></td></tr></table></figure>
 <p>查看数据</p>
-<p>select * from teacher;</p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> teacher;</span><br></pre></td></tr></table></figure>
 <p>一次插入多条数据</p>
-<p>insert into teacher values (Null, ‘Tom’, Null, default), (Null, ‘Jack’, Null, default);</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacher <span class="keyword">values</span> (<span class="keyword">Null</span>, <span class="string">&#x27;Tom&#x27;</span>, <span class="keyword">Null</span>, <span class="keyword">default</span>), (<span class="keyword">Null</span>, <span class="string">&#x27;Jack&#x27;</span>, <span class="keyword">Null</span>, <span class="keyword">default</span>);</span><br></pre></td></tr></table></figure>
 <p>删除数据( 注意 where 后面记得带上数据，否则可能误删多条数据！)</p>
-<p>delete from teacher where name &#x3D; ‘Tom’;</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> teacher <span class="keyword">where</span> <span class="type">name</span> = <span class="string">&#x27;Tom&#x27;</span>;</span><br></pre></td></tr></table></figure>
 <p>清空表</p>
-<p>truncate table teacher;</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">truncate</span> <span class="keyword">table</span> teacher;</span><br></pre></td></tr></table></figure>
 <p>小细节</p>
 <p>delete 与 truncate 清表时，delete 会继续接下来的的顺序编号。</p>
 <p>更新数据( 同删除数据一样必须带上 where 不然可能带来灾难性的后果）</p>
-<p>update teacher set name &#x3D; ‘Frank’ where name &#x3D; ‘Fuck’(Id &#x3D; 1);</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">update</span> teacher <span class="keyword">set</span> <span class="type">name</span> = <span class="string">&#x27;Frank&#x27;</span> <span class="keyword">where</span> <span class="type">name</span> = <span class="string">&#x27;Fuck&#x27;</span>(Id = <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
 <p>查询部分数据</p>
-<p>select Id, name from teacher;</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> Id, <span class="type">name</span> <span class="keyword">from</span> teacher;</span><br></pre></td></tr></table></figure>
 <p>理论部分</p>
 <p>DDL data definition language 数据库定义语言 create alter drop show</p>
 <p>DML data manipution language 数据库操纵语言 insert update delete select</p>
 <p>DCL data control language 数据库控制语言 </p>
-<p><strong>数据类型</strong></p>
-<p>create table emp(</p>
-<p>  -&gt; id smallint unsigned auto_increment primary key comment ‘id’, </p>
-<p>  -&gt; age tinyint unsigned comment ‘年龄’, </p>
-<p>  -&gt; fuck int(6)</p>
-<p>  -&gt; );</p>
-<p>unsigned </p>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a><strong>数据类型</strong></h3><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp(</span><br><span class="line"></span><br><span class="line">  -&gt; id <span class="type">smallint</span> unsigned auto_increment <span class="keyword">primary key</span> <span class="keyword">comment</span> <span class="string">&#x27;id&#x27;</span>, </span><br><span class="line"></span><br><span class="line">  -&gt; age tinyint unsigned <span class="keyword">comment</span> <span class="string">&#x27;年龄&#x27;</span>, </span><br><span class="line"></span><br><span class="line">  -&gt; fuck <span class="type">int</span>(<span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">  -&gt; );</span><br></pre></td></tr></table></figure>
+<p><code>unsigned </code></p>
 <p>表示正值数据</p>
-<p>double 类型精度丢失问题</p>
+<p><code>double</code> 类型精度丢失问题</p>
 <p>浮点型数据类型会有精度丢失的问题，比如小数位设置 6 位，存入 0.45，0.45 转换成二进制是个无限循环小数 0.01110011100…，无法准确表示，存储的时候会发生精度丢失。</p>
-<p>Decimal（定点数）</p>
+<p><code>Decimal</code>（定点数）</p>
 <p>四舍五入后用字符串类型数据进行存储</p>
 <p>VarChar 与 Char</p>
-<p>VarChar 为可变长字符串 节省空间 但是性能较低</p>
-<p>Char 为定长字符串 空间占用可能较多 但性能高</p>
+<p><code>VarChar</code> 为可变长字符串 节省空间 但是性能较低</p>
+<p><code>Char</code> 为定长字符串 空间占用可能较多 但性能高</p>
 <p>性能不同原因：VarChar 存储的不仅仅是数据内容，还有字节长度以及节点位置。</p>
 <p>Boolean</p>
 <p>insert into test values(true&#x2F;false&#x2F;1&#x2F;0);</p>
@@ -272,27 +170,23 @@
 <p>枚举类型只能用枚举列表里面的元素来赋值（也可以通过整数进行存储）</p>
 <p>好处：存储实际上使用整数，速度比字符串快，限制数据节省空间。</p>
 <p>set 集合</p>
-<p>create table Demo(</p>
-<p>hobby_novel set (‘secience’,’love’,’model’)</p>
-<p>);</p>
-<p>insert into Demo (‘seciece’,’model’);</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> Demo(</span><br><span class="line"></span><br><span class="line">hobby_novel <span class="keyword">set</span> (<span class="string">&#x27;secience&#x27;</span>,<span class="string">&#x27;love&#x27;</span>,<span class="string">&#x27;model&#x27;</span>)</span><br><span class="line"></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Demo (<span class="string">&#x27;seciece&#x27;</span>,<span class="string">&#x27;model&#x27;</span>);</span><br></pre></td></tr></table></figure>
 <p>与 enum 相比可以一次选择多个元素</p>
 <p>时间</p>
 <p>create table Demo(</p>
 <p>createdTime date</p>
 <p>);</p>
 <p>insert into Demo values(‘2022-04-09 11:23:56’);</p>
-<p><strong>列属性完整性</strong></p>
-<p>设置主键</p>
-<p>alter table demo add primary key(id,name);</p>
+<h3 id="列属性完整性"><a href="#列属性完整性" class="headerlink" title="列属性完整性"></a><strong>列属性完整性</strong></h3><p>设置主键</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo <span class="keyword">add</span> <span class="keyword">primary key</span>(id,<span class="type">name</span>);</span><br></pre></td></tr></table></figure>
 <p>删除主键</p>
-<p>alter table demo drop primary key;</p>
+<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo <span class="keyword">drop</span> <span class="keyword">primary</span> <span class="keyword">key</span>;</span><br></pre></td></tr></table></figure>
 <p>主键的唯一性</p>
 <p>一个表里只能存在一个主键（复合主键也为一个主键） 并且主键每行数据都不能为空</p>
 <p>设置唯一键</p>
-<p>alter table demo add unique (phone);</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo <span class="keyword">add</span> <span class="keyword">unique</span> (phone);</span><br></pre></td></tr></table></figure>
 <p>删除唯一键</p>
-<p>alter table demo drop index (phone);</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo <span class="keyword">drop</span> <span class="keyword">index</span> (phone);</span><br></pre></td></tr></table></figure>
 <p>主键和唯一键的区别</p>
 <p>1.主键不能为空，唯一键可以为空</p>
 <p>2.主键只有一个，唯一键可以存在多个</p>
@@ -303,23 +197,18 @@
 <p>3.考虑表里的字段可能会被其他的表所用</p>
 <p>4.自己定义约束</p>
 <p>添加外键</p>
-<p>create table eatery(</p>
-<p>  -&gt; price int,</p>
-<p>  -&gt; stuId int(4),</p>
-<p>  -&gt; foreign key (stuId) references stuId(stuId) </p>
-<p>  -&gt; );</p>
+<figure class="highlight livescript"><table><tr><td class="code"><pre><span class="line">create table eatery(</span><br><span class="line"></span><br><span class="line">  -&gt; price int,</span><br><span class="line"></span><br><span class="line">  -&gt; stuId int(<span class="number">4</span>),</span><br><span class="line"></span><br><span class="line">  -&gt; foreign key <span class="function"><span class="params">(stuId)</span> <span class="title">references</span> <span class="title">stuId</span><span class="params">(stuId)</span> </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">  -&gt;</span> );</span><br></pre></td></tr></table></figure>
 <p>后期加入外键</p>
-<p>alter table eatery_2 add foreign key (stuId) references stuId(stuId);</p>
+<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> eatery_2 <span class="keyword">add</span> <span class="keyword">foreign</span> <span class="keyword">key</span> (stuId) <span class="keyword">references</span> stuId(stuId);</span><br></pre></td></tr></table></figure>
 <p>删除外键</p>
-<p>先查询 show create table eatery_2;</p>
-<p>再删除 alter table eatery_2 drop foreign key eatery_2_ ibfk_1;</p>
+<p>先查询 <code>show create table eatery_2;</code></p>
+<p>再删除 <code>alter table eatery_2 drop foreign key eatery_2_ ibfk_1;</code></p>
 <p>设计时最好在定义表时就设置好外键</p>
 <p>置空：用于删除数据</p>
 <p>级联：用于更新数据</p>
 <p>操作 </p>
-<p>alter table eatery add foreign key (stuId) references stuId(stuId) on delete set null on update cascade;</p>
-<p><strong>关系型数据库</strong></p>
-<p>关系：两张表的共有字段去确定数据的完整性</p>
+<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> eatery <span class="keyword">add</span> <span class="keyword">foreign</span> <span class="keyword">key</span> (stuId) <span class="keyword">references</span> stuId(stuId) <span class="keyword">on</span> <span class="keyword">delete</span> <span class="keyword">set</span> <span class="keyword">null</span> <span class="keyword">on</span> <span class="keyword">update</span> <span class="keyword">cascade</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a><strong>关系型数据库</strong></h2><p>关系：两张表的共有字段去确定数据的完整性</p>
 <p>行：一条数据 一条数据记录 实体</p>
 <p>列：一个字段 属性</p>
 <p>数据冗余：虽然会占用空间，但是提高了性能。</p>
@@ -331,76 +220,73 @@
 <p><strong>数据查询语句</strong></p>
 <p><strong>单表查询</strong></p>
 <p><strong>select</strong></p>
-<p>select ‘go fuck yourself’ as qnmd;</p>
-<p>select 2*7 as result;</p>
+<figure class="highlight oxygene"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="string">&#x27;go fuck yourself&#x27;</span> <span class="keyword">as</span> qnmd<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="number">2</span>*<span class="number">7</span> <span class="keyword">as</span> <span class="keyword">result</span><span class="punctuation">;</span></span><br></pre></td></tr></table></figure>
 <p><strong>from</strong></p>
-<p>笛卡尔积 <img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image002.png" alt="img"></p>
 <p><strong>dual</strong></p>
 <p>伪表：该表主要目的是为了保证在使用 SELECT 语句中的语句的完整性而提供的。</p>
-<p>select 2*7 as result from dual;</p>
+<figure class="highlight oxygene"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="number">2</span>*<span class="number">7</span> <span class="keyword">as</span> <span class="keyword">result</span> <span class="keyword">from</span> dual<span class="punctuation">;</span></span><br></pre></td></tr></table></figure>
 <p><strong>where</strong> </p>
 <p>&lt; &gt; &#x3D; !&#x3D; dddd</p>
-<p>select * from t3 where age &gt;&#x3D; 18;</p>
-<p>select * from t4 where adress &#x3D; ‘Beijing’;</p>
-<p>select * from t4 where adress !&#x3D; ‘Shanghai’; </p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t3 <span class="keyword">where</span> age &gt;= <span class="number">18</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t4 <span class="keyword">where</span> adress = <span class="string">&#x27;Beijing&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t4 <span class="keyword">where</span> adress != <span class="string">&#x27;Shanghai&#x27;</span>; </span><br></pre></td></tr></table></figure>
 <p>&#x2F;or</p>
 <p><strong>in</strong></p>
-<p>select * from t4 where adress not in(‘Shanghai’);</p>
-<p>select * from t4 where adress in(‘Shanghai’,’Beijing’);</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> t4 <span class="keyword">where</span> adress <span class="keyword">not</span> <span class="title">in</span>(<span class="params"><span class="string">&#x27;Shanghai&#x27;</span></span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> t4 <span class="keyword">where</span> adress <span class="title">in</span>(<span class="params"><span class="string">&#x27;Shanghai&#x27;</span>,<span class="string">&#x27;Beijing&#x27;</span></span>)</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>between and</strong></p>
-<p>select * from t3 where age between 15 and 20;</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t3 <span class="keyword">where</span> age <span class="keyword">between</span> <span class="number">15</span> <span class="keyword">and</span> <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>聚合函数</strong></p>
-<p>总和 select sum(english) from score;</p>
-<p>平均 select avg(english) from score;</p>
-<p>最大 select max(english) from score;</p>
-<p>最小 select min(english) from score;</p>
-<p>次数 select count(id) from score; &#x2F; select count(*) from score;</p>
+<p>总和<code> select sum(english) from score;</code></p>
+<p>平均 <code>select avg(english) from score;</code></p>
+<p>最大<code> select max(english) from score;</code></p>
+<p>最小<code>select min(english) from score;</code></p>
+<p>次数<code> select count(id) from score; / select count(*) from score;</code></p>
 <p><strong>like</strong></p>
 <p>查询’张’后面带多个字符</p>
-<p>select * from student where name like ‘张%’;</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">name</span> <span class="keyword">like</span> <span class="string">&#x27;张%&#x27;</span>;</span><br></pre></td></tr></table></figure>
 <p>‘_’个数表示元素多少个字符</p>
-<p>select * from student where name like ‘张__’; </p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">name</span> <span class="keyword">like</span> <span class="string">&#x27;张__&#x27;</span>; </span><br></pre></td></tr></table></figure>
 <p><strong>order by</strong> </p>
 <p>升序查询</p>
-<p>select * from score order by chinese asc;</p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> score <span class="keyword">order</span> <span class="keyword">by</span> chinese <span class="keyword">asc</span>;</span><br></pre></td></tr></table></figure>
 <p>降序查询</p>
-<p>select * from score order by english desc;</p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> score <span class="keyword">order</span> <span class="keyword">by</span> english <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>group by</strong></p>
-<p>select avg(age) as ‘年龄’ , address as ‘地区’ from info group by address desc;</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> avg(age) <span class="keyword">as</span> <span class="string">&#x27;年龄&#x27;</span> , address <span class="keyword">as</span> <span class="string">&#x27;地区&#x27;</span> <span class="keyword">from</span> <span class="keyword">info</span> <span class="keyword">group</span> <span class="keyword">by</span> address <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>group_concat()</strong></p>
-<p>select group_concat(name) , gender as ‘性别’ from student group by gender;<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205749815.png" alt="image-20221005205749815"></p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> group_concat(<span class="type">name</span>) , gender <span class="keyword">as</span> <span class="string">&#x27;性别&#x27;</span> <span class="keyword">from</span> student <span class="keyword">group</span> <span class="keyword">by</span> gender;</span><br></pre></td></tr></table></figure>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210141915708.png" alt="image-20221014191523641" style="zoom:33%;" />
+
 <p><strong>having</strong></p>
 <p>表示对生成的表进行查询，相当于 where</p>
-<p>select avg(age) as ‘age’ , address from info group by address having age &gt; 20;</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> avg(age) <span class="keyword">as</span> <span class="string">&#x27;age&#x27;</span> , address <span class="keyword">from</span> <span class="keyword">info</span> <span class="keyword">group</span> <span class="keyword">by</span> address <span class="keyword">having</span> age &gt; <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>limit</strong></p>
 <p>limit 开始位置，结束长度；</p>
-<p>select * from info order by age desc limit 2,3;</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">info</span> <span class="keyword">order</span> <span class="keyword">by</span> age <span class="keyword">desc</span> <span class="keyword">limit</span> <span class="number">2</span>,<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>distinct all</strong></p>
 <p>去重</p>
-<p>select count(distinct address) from info; </p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> count(<span class="keyword">distinct</span> address) <span class="keyword">from</span> <span class="keyword">info</span>; </span><br></pre></td></tr></table></figure>
 <p><strong>多表查询</strong></p>
 <p><strong>inner join on</strong></p>
-<p>select name,chinese from student inner join score on student.id &#x3D; score.id order by english desc;</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="type">name</span>,chinese <span class="keyword">from</span> student <span class="keyword">inner</span> <span class="keyword">join</span> score <span class="keyword">on</span> student.id = score.id <span class="keyword">order</span> <span class="keyword">by</span> english <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
 <p>注意事项：超过两张表时直接在后面继续续写一次语句。</p>
 <p><strong>left&#x2F;right join on</strong></p>
-<p>select name,english from student left&#x2F;right join score on student.id &#x3D; score.id order by english asc;</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> name,english <span class="keyword">from</span> student <span class="keyword">left</span>/<span class="keyword">right</span> <span class="keyword">join</span> score <span class="keyword">on</span> student.id = score.id <span class="keyword">order</span> <span class="keyword">by</span> english <span class="keyword">asc</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>cross join</strong> </p>
-<p>select * from t1 cross join t3; </p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">cross</span> <span class="keyword">join</span> t3; </span><br></pre></td></tr></table></figure>
 <p>有笛卡尔积内味了（数学组合）<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205759542.png" alt="image-20221005205759542"></p>
 <p><strong>natural join</strong></p>
-<p>select * from t1 natural (left&#x2F;right) left join t3;</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">natural</span> (<span class="keyword">left</span><span class="operator">/</span><span class="keyword">right</span>) <span class="keyword">left</span> <span class="keyword">join</span> t3;</span><br></pre></td></tr></table></figure>
 <p>ps.若两表之间无公共字段，则返回的依旧是笛卡尔积。</p>
 <p><strong>using</strong></p>
-<p>select * from t1 inner t3 using (name);</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t1 <span class="keyword">inner</span> t3 <span class="keyword">using</span> (<span class="type">name</span>);</span><br></pre></td></tr></table></figure>
 <p>ps.当两张表为相同字段时，要采用加上using的结构，否则可能empty set输出。</p>
 <p><strong>子查询</strong></p>
 <p><strong>基本语法</strong></p>
-<p>select * from student where id in(select id from score where english &lt;&#x3D; 85);</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> student <span class="keyword">where</span> id <span class="title">in</span>(<span class="params"><span class="keyword">select</span> id <span class="keyword">from</span> score <span class="keyword">where</span> english &lt;= <span class="number">85</span></span>)</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>not in</strong></p>
-<p>select * from student where id not in(select id from score where chinese &gt;&#x3D; 85);</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> student <span class="keyword">where</span> id <span class="keyword">not</span> <span class="title">in</span>(<span class="params"><span class="keyword">select</span> id <span class="keyword">from</span> score <span class="keyword">where</span> chinese &gt;= <span class="number">85</span></span>)</span>;</span><br></pre></td></tr></table></figure>
 <p>ps.用in或者not in主要是不止一个结果。</p>
 <p><strong>exists &#x2F; not exists</strong></p>
-<p>select * from student where exists (select id from score where english &gt;&#x3D; 85); </p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">exists</span> (<span class="keyword">select</span> id <span class="keyword">from</span> score <span class="keyword">where</span> english &gt;= <span class="number">85</span>); </span><br></pre></td></tr></table></figure>
 <p>ps.只要有存在就输出。</p>
 <p><strong>JDBC</strong></p>
 ]]></content>
@@ -410,86 +296,6 @@
       <tags>
         <tag>code</tag>
         <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux toy合集</title>
-    <url>/2022/09/15/fucktoy/</url>
-    <content><![CDATA[<h1 id="Linux命令神器-The-Fuck"><a href="#Linux命令神器-The-Fuck" class="headerlink" title="Linux命令神器 The Fuck"></a>Linux命令神器 <code>The Fuck</code></h1><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/example.gif" alt="example"></p>
-<p><strong><code>The Fuck</code>是一款能够自动修复你的错误命令行的终端应用。</strong></p>
-<p>相信大家每个人都有敲错过命令的时候,把<code>python</code><br>输入成 <code>puthon</code><br>.手速过快把<code>ls -alh</code><br>输入成 <code>ls a-lh</code><br>等等等,这时候是不是想拍一下键盘说一声<code>fuck</code></p>
-<h2 id="术前要求"><a href="#术前要求" class="headerlink" title="术前要求"></a>术前要求</h2><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Python</span> (<span class="number">2</span>.<span class="number">7</span>+ or <span class="number">3</span>.<span class="number">3</span>+)</span><br><span class="line"><span class="attribute">pip</span></span><br><span class="line"><span class="attribute">Python</span>-dev</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><p><strong>Mac 下使用 <a href="https://brew.sh/">Homebrew</a> 安装：</strong></p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>thefuck</span><br></pre></td></tr></table></figure>
-
-<p><strong>Ubuntu 下安装：</strong></p>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">sudo apt <span class="keyword">update</span></span><br><span class="line">sudo apt install <span class="keyword">python3</span>-dev <span class="keyword">python3</span>-pip</span><br><span class="line">sudo pip3 install thefuck</span><br></pre></td></tr></table></figure>
-
-<p><strong>其他操作系统你可以使用 Python 的 pip 安装：</strong></p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">pip <span class="keyword">install</span> thefuck</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><strong>最后，不要忘记为 The Fuck 设置 alias</strong></p>
-<p>暂时命令</p>
-<figure class="highlight mel"><table><tr><td class="code"><pre><span class="line"><span class="keyword">eval</span> $(thefuck --<span class="keyword">alias</span>)</span><br></pre></td></tr></table></figure>
-
-<p>在文件中永久配置</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#编辑bashrc配置文件</span></span><br><span class="line">vim ~/.bashrc</span><br><span class="line"><span class="comment">#在文件尾加入一行给thefuck取别名fuck</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(thefuck --alias fuck)</span>&quot;</span></span><br><span class="line"><span class="comment">#使生效</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
-
-<p>最后就可以痛快的使用啦！附上<a href="https://github.com/nvbn/thefuck"><code>TheFuck</code>官方链接</a></p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><blockquote>
-<p>其实<code>TheFuck</code>的原理就是规则匹配（正则表达式），如果找到匹配规则的命令，则创建一个命令给用户选择或直接运行。</p>
-</blockquote>
-<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line">cat_dir - 当你尝试cat目录的时候，用<span class="keyword">ls</span>替换cat;</span><br><span class="line"><span class="keyword">cd</span>_correction – 拼写检查和纠正失败的<span class="keyword">cd</span>命令；</span><br><span class="line"><span class="keyword">cd</span>_mkdir – 在进入目录之前创建目录；</span><br><span class="line"><span class="keyword">cd</span>_parent – 更改 <span class="keyword">cd</span>.. 为<span class="keyword">cd</span> <span class="string">..</span>；</span><br><span class="line">dry – 修复类似的重复问题：git git push；</span><br><span class="line">fix_alt_space – 用空格字符代替Alt + Space；</span><br><span class="line"><span class="comment"># 还有很多可以参考https://github.com/nvbn/thefuck#how-it-works</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="ls的翻篇小火车sl"><a href="#ls的翻篇小火车sl" class="headerlink" title="ls的翻篇小火车sl"></a>ls的翻篇小火车<code>sl</code></h2><p><strong>敲下以下命令</strong></p>
-<p><strong>Ubantu</strong></p>
-<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">sudo</span> apt-<span class="meta">get</span> install <span class="built_in">sl</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>CentOs</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install sl </span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205546460.png" alt="image-20221005205546460"></p>
-<p>嘟嘟嘟嘟~~就会看到一个小火车，从你屏幕缓缓驰过….</p>
-<p>还可以配合fuck使用就是</p>
-<figure class="highlight pf"><table><tr><td class="code"><pre><span class="line">root@iZ2ze2p9tolfgje8qghiy0Z: sudo aptget install sl</span><br><span class="line">sudo: aptget: command not found</span><br><span class="line">root@iZ2ze2p9tolfgje8qghiy0Z:~<span class="comment"># fuck</span></span><br><span class="line">sudo apt-get install sl [enter/↑/↓/ctrl+c]</span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree       </span><br><span class="line">Reading <span class="keyword">state</span> information... Done</span><br></pre></td></tr></table></figure>
-
-<h2 id="反向装逼-tac"><a href="#反向装逼-tac" class="headerlink" title="反向装逼 tac"></a>反向装逼 <code>tac</code></h2><p> <strong>Ubantu</strong></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install tac</span><br></pre></td></tr></table></figure>
-
-<p><strong>CentOs</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install tac</span><br></pre></td></tr></table></figure>
-
-<p><em>用cat看代码时</em></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205556042.png" alt="image-20221005205556042"></p>
-<p><em>tac呢</em></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205604369.png" alt="image-20221005205604369"></p>
-<h2 id="自己是黑客-jpg"><a href="#自己是黑客-jpg" class="headerlink" title="自己是黑客.jpg"></a>自己是黑客.jpg</h2><p> <strong>Ubantu</strong></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install cmatrix</span><br></pre></td></tr></table></figure>
-
-<p><strong>CentOs</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install cmatrix</span><br></pre></td></tr></table></figure>
-
-<p>安装好后只要在命令行输入</p>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">cmatrix</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205611298.png" alt="image-20221005205611298"></p>
-<p>Wow~</p>
-<p>只要按Ctrl+C就可以退出，适合当息屏显示</p>
-<h2 id="谨慎使用fork"><a href="#谨慎使用fork" class="headerlink" title="谨慎使用fork"></a>谨慎使用<code>fork</code></h2><p>根据你的shell，选择如下2个命令中的1个，一条命令弄死Linux：</p>
-<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="meta">:() &#123; :|:&amp;</span> &#125;;:</span><br></pre></td></tr></table></figure>
-
-<p>或者</p>
-<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">.() &#123; .<span class="string">|.&amp; &#125;;.</span></span><br></pre></td></tr></table></figure>
-
-<p>接着就可以重启啦</p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>toy</tag>
       </tags>
   </entry>
   <entry>
@@ -2045,6 +1851,88 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux</title>
+    <url>/2022/10/02/Linux/</url>
+    <content><![CDATA[<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="计算机基础"><a href="#计算机基础" class="headerlink" title="计算机基础"></a>计算机基础</h2><p><strong>1.软件程序的运行</strong></p>
+<p>硬件如同人的身体，软件如同人的灵魂。没有了灵魂的躯体也不过就是行尸走肉</p>
+<p>**1.1 **机器程序与编译程序</p>
+<p>电脑只认识0与1而已，而且电脑最重要的运算与逻辑判断是在CPU内部， 而 CPU其实是具有微指令集的。因此，我们需要CPU帮忙工作时，就得要参考微指令集的内容， 然后撰写让CPU读的懂的指令码给CPU执行，这样就能够让CPU运行了。</p>
+<p>流程：</p>
+<ul>
+<li>需要了解机器语言：机器只认识0与1，因此你必须要学习直接写给机器看的语言。</li>
+<li>需要了解所有硬件的相关功能函数：因为你的程序必须要写给机器看， 当然你就得要参考机器本身的功能，然后针对该功能去撰写程序码。</li>
+<li>程序不具有可携性：每个CPU都有独特的微指令集，同样的，每个硬件都有其功能函数。</li>
+<li>程序具有专一性：因为这样的程序必须要针对硬件功能函数来撰写， 如果已经开发了一支浏览器程序，想要再开发文件管理程序时，还是得从头再参考硬件的功能函数来继续撰写。</li>
+</ul>
+<p>所以，需要开发让人类能看得懂得程序语言。然后创造一种“编译器”让人类的写的程序语言转换为机器能看懂的机器码。常见的编译器有C,C++,Java,Fortran等等。</p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220922203728264.png" alt="image-20220922203728264"></p>
+<h2 id="关于学习Linux"><a href="#关于学习Linux" class="headerlink" title="关于学习Linux"></a>关于学习Linux</h2><p>两个重要的因素是造成我们学习的原动力： </p>
+<ul>
+<li><p>创建兴趣： Linux上面可以玩的东西真的太多了，你可以选择一个有趣的课题来深入的玩 一玩！不论是Shell还是图形接口等等， 只要能够玩出兴趣，那么再怎么苦你都会不觉得喔！</p>
+</li>
+<li><p>成就感： 成就感是怎么来的？说实在话，就是“被认同”来的！怎么被认同呢？写心得分享啊！当你写了心得分享，并且公告在 BBS 上面，自然有朋友会到你的网页去瞧一瞧， 当大家觉得你的网页内容很棒的时候， 哈哈！你肯定会加油继续的分享下去而无法自拔。</p>
+</li>
+</ul>
+<h2 id="主机规划与磁盘分区"><a href="#主机规划与磁盘分区" class="headerlink" title="主机规划与磁盘分区"></a>主机规划与磁盘分区</h2><p><strong>Linux各硬件设备在系统中为文件名</strong></p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001164035525.png" alt="image-20221001164035525"></p>
+<p><strong>磁盘分区</strong></p>
+<p><strong>MBR 主要分区、延伸分区与逻辑分区的特性：</strong></p>
+<ul>
+<li>主要分区与延伸分区最多可以有四笔（硬盘的限制） ；</li>
+<li>延伸分区最多只能有一个（操作系统的限制）；</li>
+<li>逻辑分区是由延伸分区持续切割出来的分区；</li>
+<li>能够被格式化后，作为数据存取的分区为主要分区与逻辑分区。延伸分区无法格式化； </li>
+<li>逻辑分区的数量依操作系统而不同，在Linux系统中SATA硬盘已经可以突破63个以上的分区限制；</li>
+</ul>
+<p><strong>MBR分区限制：</strong></p>
+<ul>
+<li>操作系统无法抓取到 2.2T 以上的磁盘容量</li>
+<li>MBR 仅有一个区块，若被破坏后，经常无法或很难救援</li>
+<li>MBR 内的存放开机管理程序的区块仅 446Bytes，无法容纳较多的程序码</li>
+</ul>
+<p><strong>GUID partition table, GPT 磁盘分区表：</strong></p>
+<ul>
+<li>与 MBR 仅使用第一个 512Bytes 区块来纪录不同， GPT 使用了 34 个 LBA 区块来纪录分区信息</li>
+<li>GPT 除了前面 34 个 LBA 之外，整个磁盘的最后 33 个 LBA 也拿来作为另一个备份</li>
+</ul>
+<p><strong>计算机开机流程：</strong></p>
+<ol>
+<li>BIOS：开机主动执行的固件，会认识第一个可开机的设备；</li>
+<li>MBR：第一个可开机设备的第一个扇区内的主要开机记录区块，内含开机管理程序；</li>
+<li>开机管理程序（boot loader）：一支可读取核心文件来执行的软件；</li>
+<li>核心文件：开始操作系统的功能</li>
+</ol>
+<p><strong>BIOS与UEFI BIOS区别</strong></p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001200526805.png" alt="image-20221001200526805"></p>
+<p><strong>主机硬盘的规划</strong></p>
+<p>频繁读写的目录</p>
+<ul>
+<li>boot</li>
+<li>&#x2F; </li>
+<li>&#x2F;home </li>
+<li>&#x2F;var </li>
+<li>Swap</li>
+</ul>
+<h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><ul>
+<li><p>如果磁盘容量大于 2TB 以上时，系统会自动使用 GPT 分区方式来处理磁盘分区。</p>
+</li>
+<li><p>GPT 分区已经没有延伸与逻辑分区的概念，可以想像成所有的分区都是主分区，某些操作系统要使用 GPT 分区时，必须要搭配 UEFI 的新型 BIOS 格式才可安装使用。</p>
+</li>
+<li><p>Linux操作系统的文件使用目录树系统，与磁盘的对应需要有“挂载”的动作才行；</p>
+</li>
+<li><p>开机的流程由：BIOS–&gt;MBR–&gt;–&gt;boot loader–&gt;核心文件</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>在线code安装教程</title>
     <url>/2022/09/12/codeinstall/</url>
     <content><![CDATA[<p>##前置条件：</p>
@@ -2073,8 +1961,88 @@
         <category>toy</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
         <tag>toy</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux toy合集</title>
+    <url>/2022/09/15/fucktoy/</url>
+    <content><![CDATA[<h1 id="Linux命令神器-The-Fuck"><a href="#Linux命令神器-The-Fuck" class="headerlink" title="Linux命令神器 The Fuck"></a>Linux命令神器 <code>The Fuck</code></h1><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/example.gif" alt="example"></p>
+<p><strong><code>The Fuck</code>是一款能够自动修复你的错误命令行的终端应用。</strong></p>
+<p>相信大家每个人都有敲错过命令的时候,把<code>python</code><br>输入成 <code>puthon</code><br>.手速过快把<code>ls -alh</code><br>输入成 <code>ls a-lh</code><br>等等等,这时候是不是想拍一下键盘说一声<code>fuck</code></p>
+<h2 id="术前要求"><a href="#术前要求" class="headerlink" title="术前要求"></a>术前要求</h2><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Python</span> (<span class="number">2</span>.<span class="number">7</span>+ or <span class="number">3</span>.<span class="number">3</span>+)</span><br><span class="line"><span class="attribute">pip</span></span><br><span class="line"><span class="attribute">Python</span>-dev</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><p><strong>Mac 下使用 <a href="https://brew.sh/">Homebrew</a> 安装：</strong></p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>thefuck</span><br></pre></td></tr></table></figure>
+
+<p><strong>Ubuntu 下安装：</strong></p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">sudo apt <span class="keyword">update</span></span><br><span class="line">sudo apt install <span class="keyword">python3</span>-dev <span class="keyword">python3</span>-pip</span><br><span class="line">sudo pip3 install thefuck</span><br></pre></td></tr></table></figure>
+
+<p><strong>其他操作系统你可以使用 Python 的 pip 安装：</strong></p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">pip <span class="keyword">install</span> thefuck</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><strong>最后，不要忘记为 The Fuck 设置 alias</strong></p>
+<p>暂时命令</p>
+<figure class="highlight mel"><table><tr><td class="code"><pre><span class="line"><span class="keyword">eval</span> $(thefuck --<span class="keyword">alias</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在文件中永久配置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#编辑bashrc配置文件</span></span><br><span class="line">vim ~/.bashrc</span><br><span class="line"><span class="comment">#在文件尾加入一行给thefuck取别名fuck</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(thefuck --alias fuck)</span>&quot;</span></span><br><span class="line"><span class="comment">#使生效</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>最后就可以痛快的使用啦！附上<a href="https://github.com/nvbn/thefuck"><code>TheFuck</code>官方链接</a></p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><blockquote>
+<p>其实<code>TheFuck</code>的原理就是规则匹配（正则表达式），如果找到匹配规则的命令，则创建一个命令给用户选择或直接运行。</p>
+</blockquote>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line">cat_dir - 当你尝试cat目录的时候，用<span class="keyword">ls</span>替换cat;</span><br><span class="line"><span class="keyword">cd</span>_correction – 拼写检查和纠正失败的<span class="keyword">cd</span>命令；</span><br><span class="line"><span class="keyword">cd</span>_mkdir – 在进入目录之前创建目录；</span><br><span class="line"><span class="keyword">cd</span>_parent – 更改 <span class="keyword">cd</span>.. 为<span class="keyword">cd</span> <span class="string">..</span>；</span><br><span class="line">dry – 修复类似的重复问题：git git push；</span><br><span class="line">fix_alt_space – 用空格字符代替Alt + Space；</span><br><span class="line"><span class="comment"># 还有很多可以参考https://github.com/nvbn/thefuck#how-it-works</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ls的翻篇小火车sl"><a href="#ls的翻篇小火车sl" class="headerlink" title="ls的翻篇小火车sl"></a>ls的翻篇小火车<code>sl</code></h2><p><strong>敲下以下命令</strong></p>
+<p><strong>Ubantu</strong></p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">sudo</span> apt-<span class="meta">get</span> install <span class="built_in">sl</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>CentOs</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install sl </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205546460.png" alt="image-20221005205546460"></p>
+<p>嘟嘟嘟嘟~~就会看到一个小火车，从你屏幕缓缓驰过….</p>
+<p>还可以配合fuck使用就是</p>
+<figure class="highlight pf"><table><tr><td class="code"><pre><span class="line">root@iZ2ze2p9tolfgje8qghiy0Z: sudo aptget install sl</span><br><span class="line">sudo: aptget: command not found</span><br><span class="line">root@iZ2ze2p9tolfgje8qghiy0Z:~<span class="comment"># fuck</span></span><br><span class="line">sudo apt-get install sl [enter/↑/↓/ctrl+c]</span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree       </span><br><span class="line">Reading <span class="keyword">state</span> information... Done</span><br></pre></td></tr></table></figure>
+
+<h2 id="反向装逼-tac"><a href="#反向装逼-tac" class="headerlink" title="反向装逼 tac"></a>反向装逼 <code>tac</code></h2><p> <strong>Ubantu</strong></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install tac</span><br></pre></td></tr></table></figure>
+
+<p><strong>CentOs</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install tac</span><br></pre></td></tr></table></figure>
+
+<p><em>用cat看代码时</em></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205556042.png" alt="image-20221005205556042"></p>
+<p><em>tac呢</em></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205604369.png" alt="image-20221005205604369"></p>
+<h2 id="自己是黑客-jpg"><a href="#自己是黑客-jpg" class="headerlink" title="自己是黑客.jpg"></a>自己是黑客.jpg</h2><p> <strong>Ubantu</strong></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install cmatrix</span><br></pre></td></tr></table></figure>
+
+<p><strong>CentOs</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install cmatrix</span><br></pre></td></tr></table></figure>
+
+<p>安装好后只要在命令行输入</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">cmatrix</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205611298.png" alt="image-20221005205611298"></p>
+<p>Wow~</p>
+<p>只要按Ctrl+C就可以退出，适合当息屏显示</p>
+<h2 id="谨慎使用fork"><a href="#谨慎使用fork" class="headerlink" title="谨慎使用fork"></a>谨慎使用<code>fork</code></h2><p>根据你的shell，选择如下2个命令中的1个，一条命令弄死Linux：</p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="meta">:() &#123; :|:&amp;</span> &#125;;:</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">.() &#123; .<span class="string">|.&amp; &#125;;.</span></span><br></pre></td></tr></table></figure>
+
+<p>接着就可以重启啦</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>toy</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>

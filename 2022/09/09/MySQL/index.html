@@ -20,23 +20,22 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","width":300,"display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）2.C R U D：增删改查的专业术语。3.层次、网状、关系型模型数据库 数据库开始 show databases; imformation_schema：信息数据库，其中保存着关于 MySQL 服务器所维护的所有其他数据库的信息，如数据库名，数据库的表，表栏的数据类型与访问权限等 mysql：保存了用户信息。 performance_sche">
+    <meta name="description" content="1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）2.C R U D：增删改查的专业术语。3.层次、网状、关系型模型数据库 数据库开始show databases; imformation_schema：信息数据库，其中保存着关于 MySQL 服务器所维护的所有其他数据库的信息，如数据库名，数据库的表，表栏的数据类型与访问权限等 mysql：保存了用户信息。 performance_schem">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql基础">
 <meta property="og:url" content="http://example.com/2022/09/09/MySQL/index.html">
 <meta property="og:site_name" content="Drzone">
-<meta property="og:description" content="1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）2.C R U D：增删改查的专业术语。3.层次、网状、关系型模型数据库 数据库开始 show databases; imformation_schema：信息数据库，其中保存着关于 MySQL 服务器所维护的所有其他数据库的信息，如数据库名，数据库的表，表栏的数据类型与访问权限等 mysql：保存了用户信息。 performance_sche">
+<meta property="og:description" content="1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）2.C R U D：增删改查的专业术语。3.层次、网状、关系型模型数据库 数据库开始show databases; imformation_schema：信息数据库，其中保存着关于 MySQL 服务器所维护的所有其他数据库的信息，如数据库名，数据库的表，表栏的数据类型与访问权限等 mysql：保存了用户信息。 performance_schem">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image002.png">
-<meta property="og:image" content="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205749815.png">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210141915708.png">
 <meta property="og:image" content="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205759542.png">
 <meta property="article:published_time" content="2022-09-09T03:11:10.000Z">
-<meta property="article:modified_time" content="2022-10-06T03:47:21.549Z">
+<meta property="article:modified_time" content="2022-10-14T11:22:14.284Z">
 <meta property="article:author" content="Dreamin">
 <meta property="article:tag" content="code">
 <meta property="article:tag" content="Mysql">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image002.png">
+<meta name="twitter:image" content="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210141915708.png">
 
 
 <link rel="canonical" href="http://example.com/2022/09/09/MySQL/">
@@ -141,7 +140,7 @@
   <aside class="sidebar">
 
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -155,6 +154,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%A7%8B"><span class="nav-text">数据库开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-text">数据库基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-text">表的基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="nav-text">数据操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E5%B1%9E%E6%80%A7%E5%AE%8C%E6%95%B4%E6%80%A7"><span class="nav-text">列属性完整性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">关系型数据库</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -274,7 +274,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-10-06 11:47:21" itemprop="dateModified" datetime="2022-10-06T11:47:21+08:00">2022-10-06</time>
+      <time title="修改时间：2022-10-14 19:22:14" itemprop="dateModified" datetime="2022-10-14T19:22:14+08:00">2022-10-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -293,7 +293,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.5k</span>
+      <span>5.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -312,52 +312,36 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）<br>2.C R U D：增删改查的专业术语。<br>3.层次、网状、关系型模型数据库</p>
-<p><strong>数据库开始</strong></p>
-<p>show databases;</p>
+<h2 id="数据库开始"><a href="#数据库开始" class="headerlink" title="数据库开始"></a><strong>数据库开始</strong></h2><p>show databases;</p>
 <p>imformation_schema：信息数据库，其中保存着关于 MySQL 服务器所维护的所有其他数据库的信息，如数据库名，数据库的表，表栏的数据类型与访问权限等</p>
 <p>mysql：保存了用户信息。</p>
 <p>performance_schema：监控 MySQL 运行过程的资源消耗情况。</p>
 <p>sys： 通过过视图的形式把 information_schema 和 performance_schema 结合起来，查询出更加令人容易理解的数据。</p>
-<p><strong>数据库基本操作</strong></p>
-<p>创建数据库</p>
-<p>语句：</p>
-<p>create database student;</p>
-<p>判断创建语句：</p>
-<p>create database if not exists student;</p>
-<p>关键字变量名语句：</p>
-<p>create database <code>database</code>;</p>
+<h2 id="数据库基本操作"><a href="#数据库基本操作" class="headerlink" title="数据库基本操作"></a><strong>数据库基本操作</strong></h2><p>创建数据库</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> student;</span><br><span class="line"></span><br><span class="line">判断创建语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> student;</span><br><span class="line"></span><br><span class="line">关键字变量名语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="symbol">`database`</span>;</span><br></pre></td></tr></table></figure>
+
 <p>删除数据库</p>
-<p>语句：</p>
-<p>drop database student;</p>
-<p>判断删除语句：</p>
-<p>drop database if exists student;</p>
-<p>关键字变量名语句：</p>
-<p>drop database <code>database</code>;</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> student;</span><br><span class="line"></span><br><span class="line">判断删除语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">exists</span> student;</span><br><span class="line"></span><br><span class="line">关键字变量名语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> <span class="symbol">`database`</span>;</span><br></pre></td></tr></table></figure>
+
 <p>查看创建数据库的 SQL：</p>
-<p>show create database student;</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">database</span> student;</span><br></pre></td></tr></table></figure>
+
 <p>回退的语句：</p>
 <p>Ctrl + C（^C）</p>
 <p>创建数据库设置指定的字符编码</p>
-<p>create database if not exists teacher charset&#x3D;gbk;</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> teacher charset=gbk;</span><br></pre></td></tr></table></figure>
+
 <p>修改数据库字符编码</p>
-<p>alter database student charset&#x3D;gbk;</p>
-<p><strong>表的基本操作</strong></p>
-<p>进入库:</p>
-<p>use fuck_school;</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">alter database student charset<span class="operator">=</span>gbk<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="表的基本操作"><a href="#表的基本操作" class="headerlink" title="表的基本操作"></a><strong>表的基本操作</strong></h3><p>进入库:</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use fuck_school<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 <p>展示表：</p>
-<p>show tables;</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">tables</span>;</span><br></pre></td></tr></table></figure>
 <p>制作表：</p>
-<p>create table student(</p>
-<p>Id int,</p>
-<p>name varchar(30),</p>
-<p>age int);</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> student(</span><br><span class="line"></span><br><span class="line">Id <span class="type">int</span>,</span><br><span class="line"></span><br><span class="line"><span class="type">name</span> <span class="type">varchar</span>(<span class="number">30</span>),</span><br><span class="line"></span><br><span class="line">age <span class="type">int</span>);</span><br></pre></td></tr></table></figure>
 <p>有 B 格的写法：</p>
-<p>create table if not exists teacher(</p>
-<p>Id int auto_increment primary key comment ‘主键 Id’, </p>
-<p>name varchar(30) not null comment ‘名字’,</p>
-<p>phone varchar(20) default ‘暂时未知’ comment ‘电话’, </p>
-<p>adress varchar(100) default ‘暂时未知’ comment ‘家庭住址’</p>
-<p>)engine &#x3D; innodb;</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> teacher(</span><br><span class="line"></span><br><span class="line">Id <span class="type">int</span> auto_increment <span class="keyword">primary key</span> <span class="keyword">comment</span> <span class="string">&#x27;主键 Id&#x27;</span>, </span><br><span class="line"></span><br><span class="line"><span class="type">name</span> <span class="type">varchar</span>(<span class="number">30</span>) <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">comment</span> <span class="string">&#x27;名字&#x27;</span>,</span><br><span class="line"></span><br><span class="line">phone <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">default</span> <span class="string">&#x27;暂时未知&#x27;</span> <span class="keyword">comment</span> <span class="string">&#x27;电话&#x27;</span>, </span><br><span class="line"></span><br><span class="line">adress <span class="type">varchar</span>(<span class="number">100</span>) <span class="keyword">default</span> <span class="string">&#x27;暂时未知&#x27;</span> <span class="keyword">comment</span> <span class="string">&#x27;家庭住址&#x27;</span></span><br><span class="line"></span><br><span class="line">)engine = innodb;</span><br></pre></td></tr></table></figure>
 <p>auto_increment 自动增长 用于类似于 ID 的数据（有规律性）</p>
 <p>primary key 主键 最主要的 靠它来区分表 </p>
 <p>comment 注释</p>
@@ -365,63 +349,59 @@
 <p>default 默认值</p>
 <p>engine &#x3D; innodb 数据库引擎类型</p>
 <p>展示表结构</p>
-<p>desc teacher;</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc teacher<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 <p>删除表</p>
-<p>drop table if exists frank,fuck;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> frank,fuck;</span><br></pre></td></tr></table></figure>
 <p>修改表：</p>
 <p>添加元素</p>
-<p>alter table student add address varchar(20);</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> address <span class="type">varchar</span>(<span class="number">20</span>);</span><br></pre></td></tr></table></figure>
 <p>按位元素</p>
 <p>之后</p>
-<p>alter table student add address varchar(20) after Id；</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> address <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">after</span> Id；</span><br></pre></td></tr></table></figure>
 <p>位数</p>
-<p>alter table student add address varchar(30) first; </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> address <span class="type">varchar</span>(<span class="number">30</span>) <span class="keyword">first</span>; </span><br></pre></td></tr></table></figure>
 <p>删除元素</p>
-<p>alter table student drop address;</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> address;</span><br></pre></td></tr></table></figure>
 <p>修改元素</p>
-<p>alter table student change address <code>Add</code> varchar(20);</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student change address `<span class="keyword">Add</span>` <span class="type">varchar</span>(<span class="number">20</span>);</span><br></pre></td></tr></table></figure>
 <p>修改类型</p>
-<p>alter table student modify Id varchar(11);</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student modify Id <span class="type">varchar</span>(<span class="number">11</span>);</span><br></pre></td></tr></table></figure>
 <p>修改表名</p>
-<p>alter table student rename to students;</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">rename</span> <span class="keyword">to</span> students;</span><br></pre></td></tr></table></figure>
 <p>清空表</p>
-<p>truncate table teacher;</p>
-<p><strong>数据操作</strong></p>
-<p>插入数据</p>
-<p>insert teacher (Id, name, phone, adress) values (1, ‘Fuck’, ‘128989’, ‘GuangZhou’);</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">truncate</span> <span class="keyword">table</span> teacher;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a><strong>数据操作</strong></h3><p>插入数据</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> teacher (Id, <span class="type">name</span>, phone, adress) <span class="keyword">values</span> (<span class="number">1</span>, <span class="string">&#x27;Fuck&#x27;</span>, <span class="string">&#x27;128989&#x27;</span>, <span class="string">&#x27;GuangZhou&#x27;</span>);</span><br></pre></td></tr></table></figure>
 <p>查看数据</p>
-<p>select * from teacher;</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> teacher;</span><br></pre></td></tr></table></figure>
 <p>一次插入多条数据</p>
-<p>insert into teacher values (Null, ‘Tom’, Null, default), (Null, ‘Jack’, Null, default);</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacher <span class="keyword">values</span> (<span class="keyword">Null</span>, <span class="string">&#x27;Tom&#x27;</span>, <span class="keyword">Null</span>, <span class="keyword">default</span>), (<span class="keyword">Null</span>, <span class="string">&#x27;Jack&#x27;</span>, <span class="keyword">Null</span>, <span class="keyword">default</span>);</span><br></pre></td></tr></table></figure>
 <p>删除数据( 注意 where 后面记得带上数据，否则可能误删多条数据！)</p>
-<p>delete from teacher where name &#x3D; ‘Tom’;</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> teacher <span class="keyword">where</span> <span class="type">name</span> = <span class="string">&#x27;Tom&#x27;</span>;</span><br></pre></td></tr></table></figure>
 <p>清空表</p>
-<p>truncate table teacher;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">truncate</span> <span class="keyword">table</span> teacher;</span><br></pre></td></tr></table></figure>
 <p>小细节</p>
 <p>delete 与 truncate 清表时，delete 会继续接下来的的顺序编号。</p>
 <p>更新数据( 同删除数据一样必须带上 where 不然可能带来灾难性的后果）</p>
-<p>update teacher set name &#x3D; ‘Frank’ where name &#x3D; ‘Fuck’(Id &#x3D; 1);</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> teacher <span class="keyword">set</span> <span class="type">name</span> = <span class="string">&#x27;Frank&#x27;</span> <span class="keyword">where</span> <span class="type">name</span> = <span class="string">&#x27;Fuck&#x27;</span>(Id = <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
 <p>查询部分数据</p>
-<p>select Id, name from teacher;</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> Id, <span class="type">name</span> <span class="keyword">from</span> teacher;</span><br></pre></td></tr></table></figure>
 <p>理论部分</p>
 <p>DDL data definition language 数据库定义语言 create alter drop show</p>
 <p>DML data manipution language 数据库操纵语言 insert update delete select</p>
 <p>DCL data control language 数据库控制语言 </p>
-<p><strong>数据类型</strong></p>
-<p>create table emp(</p>
-<p>  -&gt; id smallint unsigned auto_increment primary key comment ‘id’, </p>
-<p>  -&gt; age tinyint unsigned comment ‘年龄’, </p>
-<p>  -&gt; fuck int(6)</p>
-<p>  -&gt; );</p>
-<p>unsigned </p>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a><strong>数据类型</strong></h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp(</span><br><span class="line"></span><br><span class="line">  -&gt; id <span class="type">smallint</span> unsigned auto_increment <span class="keyword">primary key</span> <span class="keyword">comment</span> <span class="string">&#x27;id&#x27;</span>, </span><br><span class="line"></span><br><span class="line">  -&gt; age tinyint unsigned <span class="keyword">comment</span> <span class="string">&#x27;年龄&#x27;</span>, </span><br><span class="line"></span><br><span class="line">  -&gt; fuck <span class="type">int</span>(<span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">  -&gt; );</span><br></pre></td></tr></table></figure>
+<p><code>unsigned </code></p>
 <p>表示正值数据</p>
-<p>double 类型精度丢失问题</p>
+<p><code>double</code> 类型精度丢失问题</p>
 <p>浮点型数据类型会有精度丢失的问题，比如小数位设置 6 位，存入 0.45，0.45 转换成二进制是个无限循环小数 0.01110011100…，无法准确表示，存储的时候会发生精度丢失。</p>
-<p>Decimal（定点数）</p>
+<p><code>Decimal</code>（定点数）</p>
 <p>四舍五入后用字符串类型数据进行存储</p>
 <p>VarChar 与 Char</p>
-<p>VarChar 为可变长字符串 节省空间 但是性能较低</p>
-<p>Char 为定长字符串 空间占用可能较多 但性能高</p>
+<p><code>VarChar</code> 为可变长字符串 节省空间 但是性能较低</p>
+<p><code>Char</code> 为定长字符串 空间占用可能较多 但性能高</p>
 <p>性能不同原因：VarChar 存储的不仅仅是数据内容，还有字节长度以及节点位置。</p>
 <p>Boolean</p>
 <p>insert into test values(true&#x2F;false&#x2F;1&#x2F;0);</p>
@@ -432,27 +412,23 @@
 <p>枚举类型只能用枚举列表里面的元素来赋值（也可以通过整数进行存储）</p>
 <p>好处：存储实际上使用整数，速度比字符串快，限制数据节省空间。</p>
 <p>set 集合</p>
-<p>create table Demo(</p>
-<p>hobby_novel set (‘secience’,’love’,’model’)</p>
-<p>);</p>
-<p>insert into Demo (‘seciece’,’model’);</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> Demo(</span><br><span class="line"></span><br><span class="line">hobby_novel <span class="keyword">set</span> (<span class="string">&#x27;secience&#x27;</span>,<span class="string">&#x27;love&#x27;</span>,<span class="string">&#x27;model&#x27;</span>)</span><br><span class="line"></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Demo (<span class="string">&#x27;seciece&#x27;</span>,<span class="string">&#x27;model&#x27;</span>);</span><br></pre></td></tr></table></figure>
 <p>与 enum 相比可以一次选择多个元素</p>
 <p>时间</p>
 <p>create table Demo(</p>
 <p>createdTime date</p>
 <p>);</p>
 <p>insert into Demo values(‘2022-04-09 11:23:56’);</p>
-<p><strong>列属性完整性</strong></p>
-<p>设置主键</p>
-<p>alter table demo add primary key(id,name);</p>
+<h3 id="列属性完整性"><a href="#列属性完整性" class="headerlink" title="列属性完整性"></a><strong>列属性完整性</strong></h3><p>设置主键</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo <span class="keyword">add</span> <span class="keyword">primary key</span>(id,<span class="type">name</span>);</span><br></pre></td></tr></table></figure>
 <p>删除主键</p>
-<p>alter table demo drop primary key;</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo <span class="keyword">drop</span> <span class="keyword">primary</span> <span class="keyword">key</span>;</span><br></pre></td></tr></table></figure>
 <p>主键的唯一性</p>
 <p>一个表里只能存在一个主键（复合主键也为一个主键） 并且主键每行数据都不能为空</p>
 <p>设置唯一键</p>
-<p>alter table demo add unique (phone);</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo <span class="keyword">add</span> <span class="keyword">unique</span> (phone);</span><br></pre></td></tr></table></figure>
 <p>删除唯一键</p>
-<p>alter table demo drop index (phone);</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo <span class="keyword">drop</span> <span class="keyword">index</span> (phone);</span><br></pre></td></tr></table></figure>
 <p>主键和唯一键的区别</p>
 <p>1.主键不能为空，唯一键可以为空</p>
 <p>2.主键只有一个，唯一键可以存在多个</p>
@@ -463,23 +439,18 @@
 <p>3.考虑表里的字段可能会被其他的表所用</p>
 <p>4.自己定义约束</p>
 <p>添加外键</p>
-<p>create table eatery(</p>
-<p>  -&gt; price int,</p>
-<p>  -&gt; stuId int(4),</p>
-<p>  -&gt; foreign key (stuId) references stuId(stuId) </p>
-<p>  -&gt; );</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">create table eatery(</span><br><span class="line"></span><br><span class="line">  -&gt; price int,</span><br><span class="line"></span><br><span class="line">  -&gt; stuId int(<span class="number">4</span>),</span><br><span class="line"></span><br><span class="line">  -&gt; foreign key <span class="function"><span class="params">(stuId)</span> <span class="title">references</span> <span class="title">stuId</span><span class="params">(stuId)</span> </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">  -&gt;</span> );</span><br></pre></td></tr></table></figure>
 <p>后期加入外键</p>
-<p>alter table eatery_2 add foreign key (stuId) references stuId(stuId);</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> eatery_2 <span class="keyword">add</span> <span class="keyword">foreign</span> <span class="keyword">key</span> (stuId) <span class="keyword">references</span> stuId(stuId);</span><br></pre></td></tr></table></figure>
 <p>删除外键</p>
-<p>先查询 show create table eatery_2;</p>
-<p>再删除 alter table eatery_2 drop foreign key eatery_2_ ibfk_1;</p>
+<p>先查询 <code>show create table eatery_2;</code></p>
+<p>再删除 <code>alter table eatery_2 drop foreign key eatery_2_ ibfk_1;</code></p>
 <p>设计时最好在定义表时就设置好外键</p>
 <p>置空：用于删除数据</p>
 <p>级联：用于更新数据</p>
 <p>操作 </p>
-<p>alter table eatery add foreign key (stuId) references stuId(stuId) on delete set null on update cascade;</p>
-<p><strong>关系型数据库</strong></p>
-<p>关系：两张表的共有字段去确定数据的完整性</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> eatery <span class="keyword">add</span> <span class="keyword">foreign</span> <span class="keyword">key</span> (stuId) <span class="keyword">references</span> stuId(stuId) <span class="keyword">on</span> <span class="keyword">delete</span> <span class="keyword">set</span> <span class="keyword">null</span> <span class="keyword">on</span> <span class="keyword">update</span> <span class="keyword">cascade</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a><strong>关系型数据库</strong></h2><p>关系：两张表的共有字段去确定数据的完整性</p>
 <p>行：一条数据 一条数据记录 实体</p>
 <p>列：一个字段 属性</p>
 <p>数据冗余：虽然会占用空间，但是提高了性能。</p>
@@ -491,76 +462,73 @@
 <p><strong>数据查询语句</strong></p>
 <p><strong>单表查询</strong></p>
 <p><strong>select</strong></p>
-<p>select ‘go fuck yourself’ as qnmd;</p>
-<p>select 2*7 as result;</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="string">&#x27;go fuck yourself&#x27;</span> <span class="keyword">as</span> qnmd<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="number">2</span>*<span class="number">7</span> <span class="keyword">as</span> <span class="keyword">result</span><span class="punctuation">;</span></span><br></pre></td></tr></table></figure>
 <p><strong>from</strong></p>
-<p>笛卡尔积 <img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/clip_image002.png" alt="img"></p>
 <p><strong>dual</strong></p>
 <p>伪表：该表主要目的是为了保证在使用 SELECT 语句中的语句的完整性而提供的。</p>
-<p>select 2*7 as result from dual;</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="number">2</span>*<span class="number">7</span> <span class="keyword">as</span> <span class="keyword">result</span> <span class="keyword">from</span> dual<span class="punctuation">;</span></span><br></pre></td></tr></table></figure>
 <p><strong>where</strong> </p>
 <p>&lt; &gt; &#x3D; !&#x3D; dddd</p>
-<p>select * from t3 where age &gt;&#x3D; 18;</p>
-<p>select * from t4 where adress &#x3D; ‘Beijing’;</p>
-<p>select * from t4 where adress !&#x3D; ‘Shanghai’; </p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t3 <span class="keyword">where</span> age &gt;= <span class="number">18</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t4 <span class="keyword">where</span> adress = <span class="string">&#x27;Beijing&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t4 <span class="keyword">where</span> adress != <span class="string">&#x27;Shanghai&#x27;</span>; </span><br></pre></td></tr></table></figure>
 <p>&#x2F;or</p>
 <p><strong>in</strong></p>
-<p>select * from t4 where adress not in(‘Shanghai’);</p>
-<p>select * from t4 where adress in(‘Shanghai’,’Beijing’);</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> t4 <span class="keyword">where</span> adress <span class="keyword">not</span> <span class="title">in</span>(<span class="params"><span class="string">&#x27;Shanghai&#x27;</span></span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> t4 <span class="keyword">where</span> adress <span class="title">in</span>(<span class="params"><span class="string">&#x27;Shanghai&#x27;</span>,<span class="string">&#x27;Beijing&#x27;</span></span>)</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>between and</strong></p>
-<p>select * from t3 where age between 15 and 20;</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t3 <span class="keyword">where</span> age <span class="keyword">between</span> <span class="number">15</span> <span class="keyword">and</span> <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>聚合函数</strong></p>
-<p>总和 select sum(english) from score;</p>
-<p>平均 select avg(english) from score;</p>
-<p>最大 select max(english) from score;</p>
-<p>最小 select min(english) from score;</p>
-<p>次数 select count(id) from score; &#x2F; select count(*) from score;</p>
+<p>总和<code> select sum(english) from score;</code></p>
+<p>平均 <code>select avg(english) from score;</code></p>
+<p>最大<code> select max(english) from score;</code></p>
+<p>最小<code>select min(english) from score;</code></p>
+<p>次数<code> select count(id) from score; / select count(*) from score;</code></p>
 <p><strong>like</strong></p>
 <p>查询’张’后面带多个字符</p>
-<p>select * from student where name like ‘张%’;</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">name</span> <span class="keyword">like</span> <span class="string">&#x27;张%&#x27;</span>;</span><br></pre></td></tr></table></figure>
 <p>‘_’个数表示元素多少个字符</p>
-<p>select * from student where name like ‘张__’; </p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">name</span> <span class="keyword">like</span> <span class="string">&#x27;张__&#x27;</span>; </span><br></pre></td></tr></table></figure>
 <p><strong>order by</strong> </p>
 <p>升序查询</p>
-<p>select * from score order by chinese asc;</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> score <span class="keyword">order</span> <span class="keyword">by</span> chinese <span class="keyword">asc</span>;</span><br></pre></td></tr></table></figure>
 <p>降序查询</p>
-<p>select * from score order by english desc;</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> score <span class="keyword">order</span> <span class="keyword">by</span> english <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>group by</strong></p>
-<p>select avg(age) as ‘年龄’ , address as ‘地区’ from info group by address desc;</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> avg(age) <span class="keyword">as</span> <span class="string">&#x27;年龄&#x27;</span> , address <span class="keyword">as</span> <span class="string">&#x27;地区&#x27;</span> <span class="keyword">from</span> <span class="keyword">info</span> <span class="keyword">group</span> <span class="keyword">by</span> address <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>group_concat()</strong></p>
-<p>select group_concat(name) , gender as ‘性别’ from student group by gender;<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205749815.png" alt="image-20221005205749815"></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> group_concat(<span class="type">name</span>) , gender <span class="keyword">as</span> <span class="string">&#x27;性别&#x27;</span> <span class="keyword">from</span> student <span class="keyword">group</span> <span class="keyword">by</span> gender;</span><br></pre></td></tr></table></figure>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210141915708.png" alt="image-20221014191523641" style="zoom:33%;" />
+
 <p><strong>having</strong></p>
 <p>表示对生成的表进行查询，相当于 where</p>
-<p>select avg(age) as ‘age’ , address from info group by address having age &gt; 20;</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> avg(age) <span class="keyword">as</span> <span class="string">&#x27;age&#x27;</span> , address <span class="keyword">from</span> <span class="keyword">info</span> <span class="keyword">group</span> <span class="keyword">by</span> address <span class="keyword">having</span> age &gt; <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>limit</strong></p>
 <p>limit 开始位置，结束长度；</p>
-<p>select * from info order by age desc limit 2,3;</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">info</span> <span class="keyword">order</span> <span class="keyword">by</span> age <span class="keyword">desc</span> <span class="keyword">limit</span> <span class="number">2</span>,<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>distinct all</strong></p>
 <p>去重</p>
-<p>select count(distinct address) from info; </p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> count(<span class="keyword">distinct</span> address) <span class="keyword">from</span> <span class="keyword">info</span>; </span><br></pre></td></tr></table></figure>
 <p><strong>多表查询</strong></p>
 <p><strong>inner join on</strong></p>
-<p>select name,chinese from student inner join score on student.id &#x3D; score.id order by english desc;</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="type">name</span>,chinese <span class="keyword">from</span> student <span class="keyword">inner</span> <span class="keyword">join</span> score <span class="keyword">on</span> student.id = score.id <span class="keyword">order</span> <span class="keyword">by</span> english <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
 <p>注意事项：超过两张表时直接在后面继续续写一次语句。</p>
 <p><strong>left&#x2F;right join on</strong></p>
-<p>select name,english from student left&#x2F;right join score on student.id &#x3D; score.id order by english asc;</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> name,english <span class="keyword">from</span> student <span class="keyword">left</span>/<span class="keyword">right</span> <span class="keyword">join</span> score <span class="keyword">on</span> student.id = score.id <span class="keyword">order</span> <span class="keyword">by</span> english <span class="keyword">asc</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>cross join</strong> </p>
-<p>select * from t1 cross join t3; </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">cross</span> <span class="keyword">join</span> t3; </span><br></pre></td></tr></table></figure>
 <p>有笛卡尔积内味了（数学组合）<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205759542.png" alt="image-20221005205759542"></p>
 <p><strong>natural join</strong></p>
-<p>select * from t1 natural (left&#x2F;right) left join t3;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">natural</span> (<span class="keyword">left</span><span class="operator">/</span><span class="keyword">right</span>) <span class="keyword">left</span> <span class="keyword">join</span> t3;</span><br></pre></td></tr></table></figure>
 <p>ps.若两表之间无公共字段，则返回的依旧是笛卡尔积。</p>
 <p><strong>using</strong></p>
-<p>select * from t1 inner t3 using (name);</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t1 <span class="keyword">inner</span> t3 <span class="keyword">using</span> (<span class="type">name</span>);</span><br></pre></td></tr></table></figure>
 <p>ps.当两张表为相同字段时，要采用加上using的结构，否则可能empty set输出。</p>
 <p><strong>子查询</strong></p>
 <p><strong>基本语法</strong></p>
-<p>select * from student where id in(select id from score where english &lt;&#x3D; 85);</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> student <span class="keyword">where</span> id <span class="title">in</span>(<span class="params"><span class="keyword">select</span> id <span class="keyword">from</span> score <span class="keyword">where</span> english &lt;= <span class="number">85</span></span>)</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>not in</strong></p>
-<p>select * from student where id not in(select id from score where chinese &gt;&#x3D; 85);</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> student <span class="keyword">where</span> id <span class="keyword">not</span> <span class="title">in</span>(<span class="params"><span class="keyword">select</span> id <span class="keyword">from</span> score <span class="keyword">where</span> chinese &gt;= <span class="number">85</span></span>)</span>;</span><br></pre></td></tr></table></figure>
 <p>ps.用in或者not in主要是不止一个结果。</p>
 <p><strong>exists &#x2F; not exists</strong></p>
-<p>select * from student where exists (select id from score where english &gt;&#x3D; 85); </p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">exists</span> (<span class="keyword">select</span> id <span class="keyword">from</span> score <span class="keyword">where</span> english &gt;= <span class="number">85</span>); </span><br></pre></td></tr></table></figure>
 <p>ps.只要有存在就输出。</p>
 <p><strong>JDBC</strong></p>
 
