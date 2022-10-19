@@ -1858,6 +1858,23 @@
 <p>Temptable</p>
 </blockquote>
 <p>临时表算法，创建一个临时表用于数据的填充以及查询，当数据量越大时，效率越低，且该视图无法进行update的操作。</p>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><p><strong>开启事务</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">start</span> <span class="keyword">transaction</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>回滚事务</strong></p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">rollback<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p><strong>提交事务</strong></p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">commit<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210191611437.png" alt="image-20221019161158358" style="zoom:50%;" />
+
+<p><strong>保存回滚点</strong></p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">savapoint</span> *；</span><br></pre></td></tr></table></figure>
+
+<p><strong>回到回滚点</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">rollback</span> <span class="keyword">to</span> *;</span><br></pre></td></tr></table></figure>
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210191627722.png" alt="image-20221019162715657" style="zoom: 67%;" />
+
 ]]></content>
       <categories>
         <category>Mysql</category>
