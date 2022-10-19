@@ -1873,8 +1873,7 @@
 <p><strong>回到回滚点</strong></p>
 <figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">rollback</span> <span class="keyword">to</span> *;</span><br></pre></td></tr></table></figure>
 
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210191627722.png" alt="image-20221019162715657" style="zoom: 67%;" />
-
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210191631958.png" alt="image-20221019163142908"></p>
 ]]></content>
       <categories>
         <category>Mysql</category>
