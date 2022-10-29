@@ -1925,6 +1925,86 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux toy合集</title>
+    <url>/2022/09/15/fucktoy/</url>
+    <content><![CDATA[<h1 id="Linux命令神器-The-Fuck"><a href="#Linux命令神器-The-Fuck" class="headerlink" title="Linux命令神器 The Fuck"></a>Linux命令神器 <code>The Fuck</code></h1><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/example.gif" alt="example"></p>
+<p><strong><code>The Fuck</code>是一款能够自动修复你的错误命令行的终端应用。</strong></p>
+<p>相信大家每个人都有敲错过命令的时候,把<code>python</code><br>输入成 <code>puthon</code><br>.手速过快把<code>ls -alh</code><br>输入成 <code>ls a-lh</code><br>等等等,这时候是不是想拍一下键盘说一声<code>fuck</code></p>
+<h2 id="术前要求"><a href="#术前要求" class="headerlink" title="术前要求"></a>术前要求</h2><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Python</span> (<span class="number">2</span>.<span class="number">7</span>+ or <span class="number">3</span>.<span class="number">3</span>+)</span><br><span class="line"><span class="attribute">pip</span></span><br><span class="line"><span class="attribute">Python</span>-dev</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><p><strong>Mac 下使用 <a href="https://brew.sh/">Homebrew</a> 安装：</strong></p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>thefuck</span><br></pre></td></tr></table></figure>
+
+<p><strong>Ubuntu 下安装：</strong></p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">sudo apt <span class="keyword">update</span></span><br><span class="line">sudo apt install <span class="keyword">python3</span>-dev <span class="keyword">python3</span>-pip</span><br><span class="line">sudo pip3 install thefuck</span><br></pre></td></tr></table></figure>
+
+<p><strong>其他操作系统你可以使用 Python 的 pip 安装：</strong></p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">pip <span class="keyword">install</span> thefuck</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><strong>最后，不要忘记为 The Fuck 设置 alias</strong></p>
+<p>暂时命令</p>
+<figure class="highlight mel"><table><tr><td class="code"><pre><span class="line"><span class="keyword">eval</span> $(thefuck --<span class="keyword">alias</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在文件中永久配置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#编辑bashrc配置文件</span></span><br><span class="line">vim ~/.bashrc</span><br><span class="line"><span class="comment">#在文件尾加入一行给thefuck取别名fuck</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(thefuck --alias fuck)</span>&quot;</span></span><br><span class="line"><span class="comment">#使生效</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>最后就可以痛快的使用啦！附上<a href="https://github.com/nvbn/thefuck"><code>TheFuck</code>官方链接</a></p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><blockquote>
+<p>其实<code>TheFuck</code>的原理就是规则匹配（正则表达式），如果找到匹配规则的命令，则创建一个命令给用户选择或直接运行。</p>
+</blockquote>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line">cat_dir - 当你尝试cat目录的时候，用<span class="keyword">ls</span>替换cat;</span><br><span class="line"><span class="keyword">cd</span>_correction – 拼写检查和纠正失败的<span class="keyword">cd</span>命令；</span><br><span class="line"><span class="keyword">cd</span>_mkdir – 在进入目录之前创建目录；</span><br><span class="line"><span class="keyword">cd</span>_parent – 更改 <span class="keyword">cd</span>.. 为<span class="keyword">cd</span> <span class="string">..</span>；</span><br><span class="line">dry – 修复类似的重复问题：git git push；</span><br><span class="line">fix_alt_space – 用空格字符代替Alt + Space；</span><br><span class="line"><span class="comment"># 还有很多可以参考https://github.com/nvbn/thefuck#how-it-works</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ls的翻篇小火车sl"><a href="#ls的翻篇小火车sl" class="headerlink" title="ls的翻篇小火车sl"></a>ls的翻篇小火车<code>sl</code></h2><p><strong>敲下以下命令</strong></p>
+<p><strong>Ubantu</strong></p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">sudo</span> apt-<span class="meta">get</span> install <span class="built_in">sl</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>CentOs</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install sl </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205546460.png" alt="image-20221005205546460"></p>
+<p>嘟嘟嘟嘟~~就会看到一个小火车，从你屏幕缓缓驰过….</p>
+<p>还可以配合fuck使用就是</p>
+<figure class="highlight pf"><table><tr><td class="code"><pre><span class="line">root@iZ2ze2p9tolfgje8qghiy0Z: sudo aptget install sl</span><br><span class="line">sudo: aptget: command not found</span><br><span class="line">root@iZ2ze2p9tolfgje8qghiy0Z:~<span class="comment"># fuck</span></span><br><span class="line">sudo apt-get install sl [enter/↑/↓/ctrl+c]</span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree       </span><br><span class="line">Reading <span class="keyword">state</span> information... Done</span><br></pre></td></tr></table></figure>
+
+<h2 id="反向装逼-tac"><a href="#反向装逼-tac" class="headerlink" title="反向装逼 tac"></a>反向装逼 <code>tac</code></h2><p> <strong>Ubantu</strong></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install tac</span><br></pre></td></tr></table></figure>
+
+<p><strong>CentOs</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install tac</span><br></pre></td></tr></table></figure>
+
+<p><em>用cat看代码时</em></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205556042.png" alt="image-20221005205556042"></p>
+<p><em>tac呢</em></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205604369.png" alt="image-20221005205604369"></p>
+<h2 id="自己是黑客-jpg"><a href="#自己是黑客-jpg" class="headerlink" title="自己是黑客.jpg"></a>自己是黑客.jpg</h2><p> <strong>Ubantu</strong></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install cmatrix</span><br></pre></td></tr></table></figure>
+
+<p><strong>CentOs</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install cmatrix</span><br></pre></td></tr></table></figure>
+
+<p>安装好后只要在命令行输入</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">cmatrix</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205611298.png" alt="image-20221005205611298"></p>
+<p>Wow~</p>
+<p>只要按Ctrl+C就可以退出，适合当息屏显示</p>
+<h2 id="谨慎使用fork"><a href="#谨慎使用fork" class="headerlink" title="谨慎使用fork"></a>谨慎使用<code>fork</code></h2><p>根据你的shell，选择如下2个命令中的1个，一条命令弄死Linux：</p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="meta">:() &#123; :|:&amp;</span> &#125;;:</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">.() &#123; .<span class="string">|.&amp; &#125;;.</span></span><br></pre></td></tr></table></figure>
+
+<p>接着就可以重启啦</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>toy</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux</title>
     <url>/2022/10/02/Linux/</url>
     <content><![CDATA[<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="计算机基础"><a href="#计算机基础" class="headerlink" title="计算机基础"></a>计算机基础</h2><p><strong>1.软件程序的运行</strong></p>
@@ -2093,97 +2173,6 @@
       <tags>
         <tag>博客</tag>
         <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在线code安装教程</title>
-    <url>/2022/09/12/codeinstall/</url>
-    <content><![CDATA[<p>##前置条件：</p>
-<ol>
-<li>云服务器</li>
-<li>ssh的连接工具 如<a href="https://www.putty.org/">putty</a>，<a href="https://termius.com/">Termius</a>，mac用户可以直接用终端连接.</li>
-</ol>
-<h2 id="安装教程"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程</h2><p>首先使用你的ssh工具连接服务器</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>输入命令下载codeserver</span><br><span class="line">wget https:<span class="regexp">//gi</span>thub.com<span class="regexp">/coder/</span>code-server<span class="regexp">/releases/</span>download<span class="regexp">/v4.6.1/</span>code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>解压</span><br><span class="line">tar -zxvf code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>进入codeserver目录</span><br><span class="line">cd code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64</span><br><span class="line"><span class="regexp">//</span>设置密码(密码在双引号内)</span><br><span class="line">export PASSWORD=<span class="number">123456</span></span><br><span class="line"><span class="regexp">//</span>启动codeserver</span><br><span class="line">./code-server --port <span class="number">8081</span> --host <span class="number">0.0</span>.<span class="number">0.0</span> --auth password</span><br></pre></td></tr></table></figure>
-
-<p>在浏览器上方输入<code>你的服务器IP:8081</code> 即可进入登录界面</p>
-<p>这个时候输入之前设置的密码就可以进入codeserver了</p>
-<h2 id="配置Screen进程守护"><a href="#配置Screen进程守护" class="headerlink" title="配置Screen进程守护"></a>配置Screen进程守护</h2><p>之前的步骤有一个问题,就是当你退出ssh进程的时候,你会发现网站进不去了。</p>
-<p>因为当ssh进程关闭的时候，会自动清除当前进程。</p>
-<p>我们得下载Screen来给codeserver进行进程守护，防止进程自动退出。</p>
-<h2 id="安装Screen"><a href="#安装Screen" class="headerlink" title="安装Screen"></a>安装Screen</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>复制适合自己系统的命令安装</span><br><span class="line"><span class="regexp">//</span>Centos系统</span><br><span class="line">yum install screen</span><br><span class="line"><span class="regexp">//</span>Debian/Ubuntu系统</span><br><span class="line">apt-get install screen</span><br></pre></td></tr></table></figure>
-<h2 id="保护进程实现后台运行"><a href="#保护进程实现后台运行" class="headerlink" title="保护进程实现后台运行"></a>保护进程实现后台运行</h2><figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">//</span>以code_server为名字建立进程</span><br><span class="line">screen -S code_server</span><br><span class="line"><span class="string">//</span>再次输入以下命令</span><br><span class="line"><span class="keyword">cd</span> code-server-4.6.1-linux-amd64</span><br><span class="line">export PASSWORD=123456</span><br><span class="line"><span class="string">./code-server</span> <span class="params">--port</span> 8081 <span class="params">--host</span> 0.0.0.0 <span class="params">--auth</span> password</span><br></pre></td></tr></table></figure>
-
-
-
-<p>此时关闭ssh终端,也可以照常进入网页啦！</p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE-2022-09-06-215111.jpg"></p>
-<p>微软官方<a href="https://vscode.dev/">请输入链接描述</a></p>
-]]></content>
-      <categories>
-        <category>toy</category>
-      </categories>
-      <tags>
-        <tag>toy</tag>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于腾讯云的Typora图床</title>
-    <url>/2022/09/10/maBed/</url>
-    <content><![CDATA[<h2 id="术前准备"><a href="#术前准备" class="headerlink" title="术前准备"></a>术前准备</h2><ul>
-<li><p>安装好 <em>Typora</em> ： <a href="https://pan.xunlei.com/s/VNB_VLRHiLk6wUoyXr4mCWM6A1">提取码：h9bb</a>    <em>PicGo</em>  ：<a href="https://pan.xunlei.com/s/VNB_WALBOdxS0Hkp49VZlZT_A1">提取码：k77e</a></p>
-</li>
-<li><p>环境配置 <em>nodejs</em>：<a href="https://nodejs.org/en/">https://nodejs.org/en/</a></p>
-</li>
-<li><p><em>Gitee</em> 账户：<a href="https://gitee.com/">https://gitee.com/</a></p>
-</li>
-</ul>
-<h2 id="开搞"><a href="#开搞" class="headerlink" title="开搞"></a>开搞</h2><h3 id="01-配置完nodejs"><a href="#01-配置完nodejs" class="headerlink" title="01.配置完nodejs"></a>01.配置完<em>nodejs</em></h3><figure class="highlight plaintext"><figcaption><span>--version</span></figcaption><table><tr><td class="code"><pre><span class="line">C:\&gt;node --version</span><br><span class="line">v16.17.0</span><br><span class="line">C:\&gt;npm --verison</span><br><span class="line">8.15.0</span><br></pre></td></tr></table></figure>
-
-<h3 id="02-配置腾讯云对象储存"><a href="#02-配置腾讯云对象储存" class="headerlink" title="02.配置腾讯云对象储存"></a>02.配置腾讯云对象储存</h3><p><strong>创建储存桶</strong></p>
-<ul>
-<li>点击 <code>储存桶列表</code>-&gt; <code>创建储存桶</code> -&gt; <em>进行以下配置</em></li>
-</ul>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210751246.png" alt="image-20221005210751246"></p>
-<ul>
-<li>访问权限选择<strong>公有读私有写</strong>，否则图片无法读取，其他的根据自己往下填写就可以。 地域建议离你所在的位置越近越好。</li>
-</ul>
-<h3 id="03-获取密钥"><a href="#03-获取密钥" class="headerlink" title="03.获取密钥"></a>03.获取密钥</h3><ul>
-<li>腾讯云头像–&gt;<a href="https://cloud.tencent.com/product/cam?from=10680">访问管理</a>–&gt; API密钥管理，创建密钥，就会生成 <strong>APPID、SecretId和SecretKey</strong></li>
-</ul>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210756892.png" alt="image-20221005210756892"></p>
-<h3 id="04-PicGo配置"><a href="#04-PicGo配置" class="headerlink" title="04.PicGo配置"></a>04.<em>PicGo</em>配置</h3><ul>
-<li>点击<code>图床设置</code>-&gt; <code>腾讯云COS</code>-&gt; 填写好刚刚的密钥和存储桶的名称，记得<strong>设置COS版本为V5</strong></li>
-</ul>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210801870.png" alt="image-20221005210801870"></p>
-<ul>
-<li>自定义域名和存储路径未进行CDN加速可默认为空</li>
-</ul>
-<p><strong>上传测试</strong></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210812201.png" alt="image-20221005210812201"></p>
-<p><strong>查看文件是否有保存</strong></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210807383.png" alt="image-20221005210807383"></p>
-<h3 id="05-Typora配置"><a href="#05-Typora配置" class="headerlink" title="05.Typora配置"></a>05.Typora配置</h3><ul>
-<li>点击 <code>文件</code>-&gt;  <code>偏好设置</code> -&gt; <code>图像</code></li>
-</ul>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210821839.png" alt="image-20221005210821839"></p>
-<ul>
-<li>如上图配置即可使用</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><p><a href="https://blog.csdn.net/haojie_duan/article/details/120400386">https://blog.csdn.net/haojie_duan/article/details/120400386</a></p>
-</li>
-<li><p><a href="https://cloud.tencent.com/developer/article/1834573">https://cloud.tencent.com/developer/article/1834573</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>Typora</tag>
-        <tag>code</tag>
       </tags>
   </entry>
   <entry>
@@ -3001,7 +2990,7 @@ $$
 <ul>
 <li>IP地址标识主机、路由器</li>
 <li>但IP地址不好记忆，不便人类使用(没有意义)</li>
-<li>人类一般倾向于使用一些有意义的字符串来标识Internet上的设备<br>例如：<a href="mailto:&#113;&#122;&#x68;&#101;&#x6e;&#103;&#64;&#x75;&#x73;&#116;&#99;&#46;&#101;&#100;&#x75;&#x2e;&#x63;&#x6e;">&#113;&#122;&#x68;&#101;&#x6e;&#103;&#64;&#x75;&#x73;&#116;&#99;&#46;&#101;&#100;&#x75;&#x2e;&#x63;&#x6e;</a> 所在的邮件服务器<br><a href="http://www.ustc.edu.cn/">www.ustc.edu.cn</a> 所在的web服务器</li>
+<li>人类一般倾向于使用一些有意义的字符串来标识Internet上的设备<br>例如：<a href="mailto:&#113;&#x7a;&#104;&#101;&#x6e;&#x67;&#x40;&#117;&#x73;&#x74;&#99;&#x2e;&#101;&#x64;&#x75;&#x2e;&#x63;&#110;">&#113;&#x7a;&#104;&#101;&#x6e;&#x67;&#x40;&#117;&#x73;&#x74;&#99;&#x2e;&#101;&#x64;&#x75;&#x2e;&#x63;&#110;</a> 所在的邮件服务器<br><a href="http://www.ustc.edu.cn/">www.ustc.edu.cn</a> 所在的web服务器</li>
 <li>存在着“字符串”—IP地址的转换的必要性</li>
 <li>人类用户提供要访问机器的“字符串”名称</li>
 <li>由DNS负责转换成为二进制的网络地址</li>
@@ -3066,8 +3055,10 @@ $$
 <li>每个(子)域下面可划分为若干子域(subdomains)</li>
 <li>树叶是主</li>
 </ul>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210271055314.png" alt="image-20221027105515254"></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210271100862.png" alt="image-20221027110023799"></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210271055314.png" alt="image-20221027105515254" style="zoom:50%;" />
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210271100862.png" alt="image-20221027110023799" style="zoom:50%;" />
+
 <ul>
 <li><p>域名的管理</p>
 <ul>
@@ -3174,7 +3165,7 @@ $$
 </li>
 </ul>
 <p>当与本地名字服务器不能解析名字时，联系根名字服务器顺着根-TLD一直找到权威名字服务器。</p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210271142467.png" alt="image-20221027114248425" style="zoom: 33%;" />
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210271142467.png" alt="image-20221027114248425" style="zoom: 50%;" />
 
 <p><strong>递归查询</strong></p>
 <ul>
@@ -3200,9 +3191,10 @@ $$
 <img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210271156706.png" alt="image-20221027115618660" style="zoom: 50%;" />
 
 <p><em>DNS协议：查询和响应报文的报文格式相同</em></p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210271159768.png" alt="image-20221027115915717" style="zoom: 67%;" />
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210271159768.png" alt="image-20221027115915717" style="zoom: 50%;" />
 
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210271159759.png" alt="image-20221027115951702"></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210271159759.png" alt="image-20221027115951702" style="zoom:50%;" />
+
 <p><strong>提高性能：缓存</strong></p>
 <ul>
 <li>一旦名字服务器学到了一个映射，就将该映射缓存起来</li>
@@ -3259,6 +3251,373 @@ $$
 <li>查询放大，响应报文比查询报文大</li>
 <li>效果有限</li>
 </ul>
+<h3 id="P2P应用"><a href="#P2P应用" class="headerlink" title="P2P应用"></a>P2P应用</h3><p><strong>纯P2P架构</strong></p>
+<ul>
+<li>没有（或极少）一直运行的服务器</li>
+<li>任意端系统都可以直接通信</li>
+<li>利用peer的服务能力</li>
+<li>Peer节点间歇上网，每次IP地址都有可能变化</li>
+</ul>
+<p>例子:</p>
+<ul>
+<li>文件分发 (BitTorrent)</li>
+<li>流媒体(KanKan)</li>
+<li>VoIP (Skype)</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210290949818.png" alt="image-20221029094951733" style="zoom:50%;" />
+
+<p><em>文件分发: C&#x2F;S vs P2P</em></p>
+<blockquote>
+<p>从一台服务器分发文件（大小F）到N个peer需要多少时间？</p>
+</blockquote>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210291014883.png" alt="image-20221029101421842" style="zoom: 67%;" />
+
+
+<p><strong>文件分发时间: C&#x2F;S模式</strong></p>
+<p>服务器传输： 都是由服务器发送给peer，服务器必须顺序传输（上载）N个文件拷贝:</p>
+<ul>
+<li>发送一个copy: F&#x2F;Us</li>
+<li>发送N个copy： NF&#x2F;Us</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210291011901.png" alt="image-20221029101124855" style="zoom: 50%;" />
+
+<ul>
+<li>客户端: 每个客户端必须下载一个文件拷贝</li>
+<li>d(min) &#x3D; 客户端最小的下载速率</li>
+<li>下载带宽最小的客户端下载的时间：F&#x2F;d(min)</li>
+</ul>
+<p>文件下载耗时（随着N线性增长）<br>Dc-s &gt; max{NF&#x2F;us,,F&#x2F;dmin</p>
+<p><strong>文件分发时间: P2P模式</strong></p>
+<ul>
+<li>服务器传输：最少需要上载一份拷贝<ul>
+<li>发送一个拷贝的时间：F&#x2F;us</li>
+</ul>
+</li>
+<li>客户端: 每个客户端必须下载一个拷贝<ul>
+<li>最小下载带宽客户单耗时：: F&#x2F;dmin</li>
+</ul>
+</li>
+<li>客户端: 所有客户端总体下载量NF<ul>
+<li>最大上载带宽是：us+Sui</li>
+<li>除了服务器可以上载，其他所有的peer节点都可以上载</li>
+</ul>
+</li>
+</ul>
+<p>文件下载耗时（分子随着N线性变化，每个节点需要下载，整体下载量随着N增大，分母也是如此,随着peer节点的增多 每个peer也带了服务能力）<br>DP2P &gt; max{F&#x2F;us,,F&#x2F;dmin,,NF&#x2F;(us + Sui)}</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210291048048.png" alt="image-20221029104814996" style="zoom:50%;" />
+
+<p><strong>P2P文件分发： BitTorrent</strong></p>
+<ul>
+<li>文件被分为一个个块256KB</li>
+<li>网络中的这些peers发送接收文件块，相互服务</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210291059943.png" alt="image-20221029105916875" style="zoom:50%;" />
+
+<ul>
+<li>Peer加入torrent: <ul>
+<li>一开始没有块，但是将会通过其他节点处累积文件块</li>
+<li>向跟踪服务器注册，获得peer节点列表，和部分peer节点构成邻居关系 (“连接”)</li>
+</ul>
+</li>
+<li>当peer下载时，该peer可以同时向其他节点提供上载服务</li>
+<li>Peer可能会变换用于交换块的peer节点</li>
+<li>扰动churn: peer节点可能会上线或者下线</li>
+<li>一旦一个peer拥有整个文件，它会（自私的）离开或者保留（利他主义）在torrent中</li>
+</ul>
+<p><strong>BitTorrent: 请求，发送文件块</strong></p>
+<p>请求块：</p>
+<ul>
+<li>在任何给定时间，不同peer节点拥有一个文件块的子集</li>
+<li>周期性的，Alice节点向邻居询问他们拥有哪些块的信息</li>
+<li>Alice向peer节点请求它希望的块，稀缺的块</li>
+</ul>
+<p>发送块：一报还一报 tit-for-tat</p>
+<ul>
+<li>Alice向4个peer发送块，这些块向它自己提供最大带宽的服务<ul>
+<li>其他peer被Alice阻塞 (将不会从Alice处获得服务)</li>
+<li>每10秒重新评估一次：前4位</li>
+</ul>
+</li>
+<li>每个30秒：随机选择其他peer节点，向这个节点发送块<ul>
+<li>“优化疏通” 这个节点</li>
+<li>新选择的节点可以加入这个top</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>BitTorrent: tit-for-tat</p>
+</blockquote>
+<p>(1) Alice “优化疏通” Bob<br>(2) Alice 变成了Bob的前4位提供者; Bob答谢Alice<br>(3) Bob 变成了Alice的前4提供者</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210291104005.png" alt="image-20221029110439941" style="zoom:50%;" />
+
+<blockquote>
+<p>两大问题：</p>
+</blockquote>
+<ul>
+<li>如何定位所需资源</li>
+<li>如何处理对等方的加入与离开</li>
+</ul>
+<blockquote>
+<p>可能的方案</p>
+</blockquote>
+<ul>
+<li>集中</li>
+<li>分散</li>
+<li>半分散</li>
+</ul>
+<p><strong>P2P：集中式目录</strong><br>最初的“Napster”设计</p>
+<ol>
+<li>当对等方连接时，它告知中心服务器：</li>
+</ol>
+<ul>
+<li>IP地址</li>
+<li>内容</li>
+</ul>
+<ol start="2">
+<li>Alice查询 “双截棍.MP3”</li>
+<li>Alice从Bob处请求文件</li>
+</ol>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210291107182.png" alt="image-20221029110754130" style="zoom:50%;" />
+
+<blockquote>
+<p>存在的问题：文件传输是分散的，而定位内容则是高度集中的</p>
+</blockquote>
+<ul>
+<li>单点故障</li>
+<li>性能瓶颈</li>
+<li>侵犯版权</li>
+</ul>
+<p><strong>查询洪泛：Gnutella</strong></p>
+<ul>
+<li>全分布式<ul>
+<li>没有中心服务器</li>
+</ul>
+</li>
+<li>开放文件共享协议</li>
+<li>许多Gnutella客户端实现了Gnutella协议<ul>
+<li>类似HTTP有许多的浏览器</li>
+</ul>
+</li>
+</ul>
+<p>覆盖网络：图</p>
+<ul>
+<li>如果X和Y之间有一个TCP连接，则二者之间存在一条边</li>
+<li>所有活动的对等方和边就是覆盖网络</li>
+<li>边并不是物理链路</li>
+<li>给定一个对等方，通常所连接的节点少于10个</li>
+</ul>
+<p><strong>Gnutella：协议</strong></p>
+<ul>
+<li>在已有的TCP连接上发送查询报文</li>
+<li>对等方转发查询报文</li>
+<li>以反方向返回查询命中报文</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210291114139.png" alt="image-20221029111411086" style="zoom:50%;" />
+
+<p>可扩展性：限制范围的洪泛查询</p>
+<p><strong>Gnutella：对等方加入</strong></p>
+<p>   1.对等方X必须首先发现某些已经在覆盖网络中的其他对等方：使用可用对等方列表</p>
+<ul>
+<li>自己维持一张对等方列表（经常开机的对等方的IP）联系维持列表的Gnutella站点</li>
+</ul>
+<ol start="2">
+<li>X接着试图与该列表上的对等方建立TCP连接，直到与某个对等方Y建立连接</li>
+<li>X向Y发送一个Ping报文，Y转发该Ping报文</li>
+<li>所有收到Ping报文的对等方以Pong报文响应IP地址、共享文件的数量及总字节数</li>
+<li>X收到许多Pong报文，然后它能建立其他TCP连接</li>
+</ol>
+<p><strong>利用不匀称性：KaZaA</strong></p>
+<ul>
+<li>每个对等方要么是一个组长，要么隶属于一个组长<ul>
+<li>对等方与其组长之间有TCP连接</li>
+<li>组长对之间有TCP连接</li>
+</ul>
+</li>
+<li>组长跟踪其所有的孩子的内容</li>
+<li>组长与其他组长联系<ul>
+<li>转发查询到其他组长</li>
+<li>获得其他组长的数据拷贝</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210291134187.png" alt="image-20221029113407144" style="zoom:50%;" />
+
+<p><strong>KaZaA：查询</strong></p>
+<ul>
+<li>每个文件有一个散列标识码和一个描述符</li>
+<li>客户端向其组长发送关键字查询</li>
+<li>组长用匹配进行响应：<ul>
+<li>对每个匹配：元数据、散列标识码和IP地址</li>
+</ul>
+</li>
+<li>如果组长将查询转发给其他组长，其他组长也可以匹配进行响应</li>
+<li>客户端选择要下载的文件<ul>
+<li>向拥有文件的对等方发送一个带散列标识码的HTTP请求</li>
+</ul>
+</li>
+</ul>
+<p><strong>Kazaa小技巧</strong></p>
+<ul>
+<li>请求排队<ul>
+<li>限制并行上载的数量</li>
+<li>确保每个被传输的文件从上载节点接收一定量的带宽</li>
+</ul>
+</li>
+<li>激励优先权<ul>
+<li>鼓励用户上载文件</li>
+<li>加强系统的扩展性</li>
+</ul>
+</li>
+<li>并行下载<ul>
+<li>从多个对等方下载同一个文件的不同部分<ul>
+<li>HTTP的字节范围首部</li>
+<li>更快地检索</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Distributed Hash Table (DHT)</p>
+</blockquote>
+<ul>
+<li>哈希表</li>
+<li>DHT方案</li>
+<li>环形DHT以及覆盖网络</li>
+<li>Peer波</li>
+</ul>
+<h3 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h3><p><strong>存储视频的流化服务</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210291556188.png" alt="image-20221029155627137" style="zoom:50%;" />
+
+<p><strong>多媒体流化服务：DASH</strong></p>
+<ul>
+<li><p>DASH: Dynamic, Adaptive Streaming over HTTP</p>
+</li>
+<li><p>服务器:</p>
+<ul>
+<li>将视频文件分割成多个块</li>
+<li>每个块独立存储，编码于不同码率（8-10种）</li>
+<li>告示文件（manifest file）: 提供不同块的URL</li>
+</ul>
+</li>
+<li><p>客户端:</p>
+<ul>
+<li>先获取告示文件</li>
+<li>周期性地测量服务器到客户端的带宽</li>
+<li>查询告示文件,在一个时刻请求一个块，HTTP头部指定字节范围<ul>
+<li>如果带宽足够，选择最大码率的视频块</li>
+<li>会话中的不同时刻，可以切换请求不同的编码块 (取决于当时的可用带宽)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>“智能”客户端: 客户端自适应决定</p>
+<ul>
+<li>什么时候去请求块 (不至于缓存挨饿，或者溢出)</li>
+<li>请求什么编码速率的视频块 (当带宽够用时，请求高质量的视频块)</li>
+<li>哪里去请求块 (可以向离自己近的服务器发送URL，或者向高可用带宽的服务器请求)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Content Distribution Networks</strong></p>
+<blockquote>
+<p>服务器如何通过网络向上百万用户同时流化视频内容?</p>
+</blockquote>
+<p>1.单个的、大的超级服务中心“mega-server”</p>
+<ul>
+<li>服务器到客户端路径上跳数较多，瓶颈链路的带宽小导致停顿</li>
+<li>“二八规律”决定了网络同时充斥着同一个视频的多个拷贝，效率低（付费高、带宽浪费、效果差）</li>
+<li>单点故障点，性能瓶颈</li>
+<li>周边网络的拥塞</li>
+</ul>
+<p>评述：相当简单，但是这个方法不可扩展</p>
+<p>2.通过CDN，全网部署缓存节点，存储服务内容，就近为用户提供服务，提高用户体验</p>
+<ul>
+<li><p>enter deep: 将CDN服务器深入到许多接入网</p>
+<ul>
+<li>更接近用户，数量多，离用户近，管理困难</li>
+<li>Akamai, 1700个位置</li>
+</ul>
+</li>
+<li><p>bring home: 部署在少数(10个左右)关键位置，如将服务器簇安装于POP附近（离若干1stISP POP较近）</p>
+<ul>
+<li>采用租用线路将服务器簇连接起来</li>
+<li>Limelight</li>
+</ul>
+</li>
+<li><p>CDN: 在CDN节点中存储内容的多个拷贝<br>• e.g. Netflix stores copies of MadMen</p>
+</li>
+<li><p>用户从CDN中请求内容<br>• 重定向到最近的拷贝，请求内容<br>• 如果网络路径拥塞，可能选择不同的拷贝</p>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210291608197.png" alt="image-20221029160806137" style="zoom:67%;" />
+
+<p>OTT 挑战: 在拥塞的互联网上复制内容</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210291609698.png" alt="image-20221029160951642" style="zoom: 50%;" />
+
+<ul>
+<li>从哪个CDN节点中获取内容？–最近的</li>
+<li>用户在网络拥塞时的行为？</li>
+<li>在哪些CDN节点中存储什么内容？</li>
+</ul>
+<p>案例   1.<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210291720097.png" alt="image-20221029172037028" style="zoom:50%;" /></p>
+<p>案例   2.<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210291721404.png" alt="image-20221029172146337" style="zoom: 50%;" /></p>
+<h3 id="套接字编程"><a href="#套接字编程" class="headerlink" title="套接字编程"></a>套接字编程</h3><p><strong>Socket编程</strong></p>
+<p>应用进程使用传输层提供的服务才能够交换报文，实现应用协议，实现应用</p>
+<ul>
+<li>TCP&#x2F;IP：应用进程使用Socket API访问传输服务</li>
+<li>地点：界面上的SAP(Socket） 方式：Socket API</li>
+<li>目标: 学习如何构建能借助sockets进行通信的C&#x2F;S应用程序</li>
+<li>socket: 分布式应用进程之间的门，传输层协议提供的端到端服务接口</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210291729027.png" alt="image-20221029172912971" style="zoom:50%;" />
+
+<p>2种传输层服务的socket类型:</p>
+<ul>
+<li>TCP: 可靠的、字节流的服务</li>
+<li>UDP: 不可靠（数据UDP数据报）服务</li>
+</ul>
+<h4 id="TCP套接字"><a href="#TCP套接字" class="headerlink" title="TCP套接字"></a>TCP套接字</h4><p>套接字：应用进程与端到端传输协议（TCP或UDP）之间的门户<br>TCP服务：从一个进程向另一个进程可靠地传输字节流</p>
+<p>服务器首先运行，等待连接建立</p>
+<p>1：服务器进程必须先处于运行状态</p>
+<ul>
+<li>创建欢迎socket</li>
+<li>和本地端口捆绑</li>
+<li>在欢迎socket上阻塞式等待接收用户的连接</li>
+</ul>
+<p>客户端主动和服务器建立连接：</p>
+<p>2：创建客户端本地套接字（隐式捆绑到本地port）</p>
+<ul>
+<li>指定服务器进程的IP地址和端口号，与服务器进程连接</li>
+</ul>
+<p>3 ：当与客户端连接请求到来时</p>
+<ul>
+<li>服务器接受来自用户端的请求，解除阻塞式等待，返回一个新的socket（与欢迎socket不一样），与客户端通信<ul>
+<li>允许服务器与多个客户端通信</li>
+<li>使用源IP和源端口来区分不同的客户端</li>
+</ul>
+</li>
+</ul>
+<p>4：连接API调用有效时，客户端P与服务器建立了TCP连接</p>
+<p>从应用程序的角度<br>TCP在客户端和服务器进程之间提供了可靠的、字节流（管道）服务</p>
+<p>C&#x2F;S模式的应用样例:</p>
+<ol>
+<li>客户端从标准输入装置读取一行字符，发送给服务器</li>
+<li>服务器从socket读取字符</li>
+<li>服务器将字符转换成大写，然后返回给客户端</li>
+<li>客户端从socket中读取一行字符，然后打印出来</li>
+</ol>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210291741987.png" alt="image-20221029174116934" style="zoom: 50%;" />
+
+<p><strong>TCP Socket交互</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210292017493.png" alt="image-20221029201725425" style="zoom:50%;" />
+
+<h4 id="UDP套接字"><a href="#UDP套接字" class="headerlink" title="UDP套接字"></a>UDP套接字</h4><p>UDP: 在客户端和服务器之间没有连接</p>
+<p>• 没有握手<br>• 发送端在每一个报文中明确地指定目标的IP地址和端口号<br>• 服务器必须从收到的分组中提取出发送端的IP地址和端口号</p>
+<p>UDP: 传送的数据可能乱序，也可能丢失</p>
+<p>进程视角看UDP服务<br>UDP 为客户端和服务器提供不可靠的字节组的传送服务</p>
+<p><strong>UDP Socket交互</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210292018020.png" alt="image-20221029201810960" style="zoom:50%;" />
 ]]></content>
       <categories>
         <category>Base</category>
@@ -3323,6 +3682,64 @@ $$
       </categories>
       <tags>
         <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于腾讯云的Typora图床</title>
+    <url>/2022/09/10/maBed/</url>
+    <content><![CDATA[<h2 id="术前准备"><a href="#术前准备" class="headerlink" title="术前准备"></a>术前准备</h2><ul>
+<li><p>安装好 <em>Typora</em> ： <a href="https://pan.xunlei.com/s/VNB_VLRHiLk6wUoyXr4mCWM6A1">提取码：h9bb</a>    <em>PicGo</em>  ：<a href="https://pan.xunlei.com/s/VNB_WALBOdxS0Hkp49VZlZT_A1">提取码：k77e</a></p>
+</li>
+<li><p>环境配置 <em>nodejs</em>：<a href="https://nodejs.org/en/">https://nodejs.org/en/</a></p>
+</li>
+<li><p><em>Gitee</em> 账户：<a href="https://gitee.com/">https://gitee.com/</a></p>
+</li>
+</ul>
+<h2 id="开搞"><a href="#开搞" class="headerlink" title="开搞"></a>开搞</h2><h3 id="01-配置完nodejs"><a href="#01-配置完nodejs" class="headerlink" title="01.配置完nodejs"></a>01.配置完<em>nodejs</em></h3><figure class="highlight plaintext"><figcaption><span>--version</span></figcaption><table><tr><td class="code"><pre><span class="line">C:\&gt;node --version</span><br><span class="line">v16.17.0</span><br><span class="line">C:\&gt;npm --verison</span><br><span class="line">8.15.0</span><br></pre></td></tr></table></figure>
+
+<h3 id="02-配置腾讯云对象储存"><a href="#02-配置腾讯云对象储存" class="headerlink" title="02.配置腾讯云对象储存"></a>02.配置腾讯云对象储存</h3><p><strong>创建储存桶</strong></p>
+<ul>
+<li>点击 <code>储存桶列表</code>-&gt; <code>创建储存桶</code> -&gt; <em>进行以下配置</em></li>
+</ul>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210751246.png" alt="image-20221005210751246"></p>
+<ul>
+<li>访问权限选择<strong>公有读私有写</strong>，否则图片无法读取，其他的根据自己往下填写就可以。 地域建议离你所在的位置越近越好。</li>
+</ul>
+<h3 id="03-获取密钥"><a href="#03-获取密钥" class="headerlink" title="03.获取密钥"></a>03.获取密钥</h3><ul>
+<li>腾讯云头像–&gt;<a href="https://cloud.tencent.com/product/cam?from=10680">访问管理</a>–&gt; API密钥管理，创建密钥，就会生成 <strong>APPID、SecretId和SecretKey</strong></li>
+</ul>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210756892.png" alt="image-20221005210756892"></p>
+<h3 id="04-PicGo配置"><a href="#04-PicGo配置" class="headerlink" title="04.PicGo配置"></a>04.<em>PicGo</em>配置</h3><ul>
+<li>点击<code>图床设置</code>-&gt; <code>腾讯云COS</code>-&gt; 填写好刚刚的密钥和存储桶的名称，记得<strong>设置COS版本为V5</strong></li>
+</ul>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210801870.png" alt="image-20221005210801870"></p>
+<ul>
+<li>自定义域名和存储路径未进行CDN加速可默认为空</li>
+</ul>
+<p><strong>上传测试</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210812201.png" alt="image-20221005210812201"></p>
+<p><strong>查看文件是否有保存</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210807383.png" alt="image-20221005210807383"></p>
+<h3 id="05-Typora配置"><a href="#05-Typora配置" class="headerlink" title="05.Typora配置"></a>05.Typora配置</h3><ul>
+<li>点击 <code>文件</code>-&gt;  <code>偏好设置</code> -&gt; <code>图像</code></li>
+</ul>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210821839.png" alt="image-20221005210821839"></p>
+<ul>
+<li>如上图配置即可使用</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><p><a href="https://blog.csdn.net/haojie_duan/article/details/120400386">https://blog.csdn.net/haojie_duan/article/details/120400386</a></p>
+</li>
+<li><p><a href="https://cloud.tencent.com/developer/article/1834573">https://cloud.tencent.com/developer/article/1834573</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>Typora</tag>
+        <tag>code</tag>
       </tags>
   </entry>
   <entry>
@@ -3485,83 +3902,36 @@ $$
       </tags>
   </entry>
   <entry>
-    <title>Linux toy合集</title>
-    <url>/2022/09/15/fucktoy/</url>
-    <content><![CDATA[<h1 id="Linux命令神器-The-Fuck"><a href="#Linux命令神器-The-Fuck" class="headerlink" title="Linux命令神器 The Fuck"></a>Linux命令神器 <code>The Fuck</code></h1><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/example.gif" alt="example"></p>
-<p><strong><code>The Fuck</code>是一款能够自动修复你的错误命令行的终端应用。</strong></p>
-<p>相信大家每个人都有敲错过命令的时候,把<code>python</code><br>输入成 <code>puthon</code><br>.手速过快把<code>ls -alh</code><br>输入成 <code>ls a-lh</code><br>等等等,这时候是不是想拍一下键盘说一声<code>fuck</code></p>
-<h2 id="术前要求"><a href="#术前要求" class="headerlink" title="术前要求"></a>术前要求</h2><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Python</span> (<span class="number">2</span>.<span class="number">7</span>+ or <span class="number">3</span>.<span class="number">3</span>+)</span><br><span class="line"><span class="attribute">pip</span></span><br><span class="line"><span class="attribute">Python</span>-dev</span><br></pre></td></tr></table></figure>
+    <title>在线code安装教程</title>
+    <url>/2022/09/12/codeinstall/</url>
+    <content><![CDATA[<p>##前置条件：</p>
+<ol>
+<li>云服务器</li>
+<li>ssh的连接工具 如<a href="https://www.putty.org/">putty</a>，<a href="https://termius.com/">Termius</a>，mac用户可以直接用终端连接.</li>
+</ol>
+<h2 id="安装教程"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程</h2><p>首先使用你的ssh工具连接服务器</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>输入命令下载codeserver</span><br><span class="line">wget https:<span class="regexp">//gi</span>thub.com<span class="regexp">/coder/</span>code-server<span class="regexp">/releases/</span>download<span class="regexp">/v4.6.1/</span>code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>解压</span><br><span class="line">tar -zxvf code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>进入codeserver目录</span><br><span class="line">cd code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64</span><br><span class="line"><span class="regexp">//</span>设置密码(密码在双引号内)</span><br><span class="line">export PASSWORD=<span class="number">123456</span></span><br><span class="line"><span class="regexp">//</span>启动codeserver</span><br><span class="line">./code-server --port <span class="number">8081</span> --host <span class="number">0.0</span>.<span class="number">0.0</span> --auth password</span><br></pre></td></tr></table></figure>
 
-<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><p><strong>Mac 下使用 <a href="https://brew.sh/">Homebrew</a> 安装：</strong></p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>thefuck</span><br></pre></td></tr></table></figure>
+<p>在浏览器上方输入<code>你的服务器IP:8081</code> 即可进入登录界面</p>
+<p>这个时候输入之前设置的密码就可以进入codeserver了</p>
+<h2 id="配置Screen进程守护"><a href="#配置Screen进程守护" class="headerlink" title="配置Screen进程守护"></a>配置Screen进程守护</h2><p>之前的步骤有一个问题,就是当你退出ssh进程的时候,你会发现网站进不去了。</p>
+<p>因为当ssh进程关闭的时候，会自动清除当前进程。</p>
+<p>我们得下载Screen来给codeserver进行进程守护，防止进程自动退出。</p>
+<h2 id="安装Screen"><a href="#安装Screen" class="headerlink" title="安装Screen"></a>安装Screen</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>复制适合自己系统的命令安装</span><br><span class="line"><span class="regexp">//</span>Centos系统</span><br><span class="line">yum install screen</span><br><span class="line"><span class="regexp">//</span>Debian/Ubuntu系统</span><br><span class="line">apt-get install screen</span><br></pre></td></tr></table></figure>
+<h2 id="保护进程实现后台运行"><a href="#保护进程实现后台运行" class="headerlink" title="保护进程实现后台运行"></a>保护进程实现后台运行</h2><figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">//</span>以code_server为名字建立进程</span><br><span class="line">screen -S code_server</span><br><span class="line"><span class="string">//</span>再次输入以下命令</span><br><span class="line"><span class="keyword">cd</span> code-server-4.6.1-linux-amd64</span><br><span class="line">export PASSWORD=123456</span><br><span class="line"><span class="string">./code-server</span> <span class="params">--port</span> 8081 <span class="params">--host</span> 0.0.0.0 <span class="params">--auth</span> password</span><br></pre></td></tr></table></figure>
 
-<p><strong>Ubuntu 下安装：</strong></p>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">sudo apt <span class="keyword">update</span></span><br><span class="line">sudo apt install <span class="keyword">python3</span>-dev <span class="keyword">python3</span>-pip</span><br><span class="line">sudo pip3 install thefuck</span><br></pre></td></tr></table></figure>
 
-<p><strong>其他操作系统你可以使用 Python 的 pip 安装：</strong></p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">pip <span class="keyword">install</span> thefuck</span><br></pre></td></tr></table></figure>
 
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><strong>最后，不要忘记为 The Fuck 设置 alias</strong></p>
-<p>暂时命令</p>
-<figure class="highlight mel"><table><tr><td class="code"><pre><span class="line"><span class="keyword">eval</span> $(thefuck --<span class="keyword">alias</span>)</span><br></pre></td></tr></table></figure>
-
-<p>在文件中永久配置</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#编辑bashrc配置文件</span></span><br><span class="line">vim ~/.bashrc</span><br><span class="line"><span class="comment">#在文件尾加入一行给thefuck取别名fuck</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(thefuck --alias fuck)</span>&quot;</span></span><br><span class="line"><span class="comment">#使生效</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
-
-<p>最后就可以痛快的使用啦！附上<a href="https://github.com/nvbn/thefuck"><code>TheFuck</code>官方链接</a></p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><blockquote>
-<p>其实<code>TheFuck</code>的原理就是规则匹配（正则表达式），如果找到匹配规则的命令，则创建一个命令给用户选择或直接运行。</p>
-</blockquote>
-<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line">cat_dir - 当你尝试cat目录的时候，用<span class="keyword">ls</span>替换cat;</span><br><span class="line"><span class="keyword">cd</span>_correction – 拼写检查和纠正失败的<span class="keyword">cd</span>命令；</span><br><span class="line"><span class="keyword">cd</span>_mkdir – 在进入目录之前创建目录；</span><br><span class="line"><span class="keyword">cd</span>_parent – 更改 <span class="keyword">cd</span>.. 为<span class="keyword">cd</span> <span class="string">..</span>；</span><br><span class="line">dry – 修复类似的重复问题：git git push；</span><br><span class="line">fix_alt_space – 用空格字符代替Alt + Space；</span><br><span class="line"><span class="comment"># 还有很多可以参考https://github.com/nvbn/thefuck#how-it-works</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="ls的翻篇小火车sl"><a href="#ls的翻篇小火车sl" class="headerlink" title="ls的翻篇小火车sl"></a>ls的翻篇小火车<code>sl</code></h2><p><strong>敲下以下命令</strong></p>
-<p><strong>Ubantu</strong></p>
-<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">sudo</span> apt-<span class="meta">get</span> install <span class="built_in">sl</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>CentOs</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install sl </span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205546460.png" alt="image-20221005205546460"></p>
-<p>嘟嘟嘟嘟~~就会看到一个小火车，从你屏幕缓缓驰过….</p>
-<p>还可以配合fuck使用就是</p>
-<figure class="highlight pf"><table><tr><td class="code"><pre><span class="line">root@iZ2ze2p9tolfgje8qghiy0Z: sudo aptget install sl</span><br><span class="line">sudo: aptget: command not found</span><br><span class="line">root@iZ2ze2p9tolfgje8qghiy0Z:~<span class="comment"># fuck</span></span><br><span class="line">sudo apt-get install sl [enter/↑/↓/ctrl+c]</span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree       </span><br><span class="line">Reading <span class="keyword">state</span> information... Done</span><br></pre></td></tr></table></figure>
-
-<h2 id="反向装逼-tac"><a href="#反向装逼-tac" class="headerlink" title="反向装逼 tac"></a>反向装逼 <code>tac</code></h2><p> <strong>Ubantu</strong></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install tac</span><br></pre></td></tr></table></figure>
-
-<p><strong>CentOs</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install tac</span><br></pre></td></tr></table></figure>
-
-<p><em>用cat看代码时</em></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205556042.png" alt="image-20221005205556042"></p>
-<p><em>tac呢</em></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205604369.png" alt="image-20221005205604369"></p>
-<h2 id="自己是黑客-jpg"><a href="#自己是黑客-jpg" class="headerlink" title="自己是黑客.jpg"></a>自己是黑客.jpg</h2><p> <strong>Ubantu</strong></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install cmatrix</span><br></pre></td></tr></table></figure>
-
-<p><strong>CentOs</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install cmatrix</span><br></pre></td></tr></table></figure>
-
-<p>安装好后只要在命令行输入</p>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">cmatrix</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205611298.png" alt="image-20221005205611298"></p>
-<p>Wow~</p>
-<p>只要按Ctrl+C就可以退出，适合当息屏显示</p>
-<h2 id="谨慎使用fork"><a href="#谨慎使用fork" class="headerlink" title="谨慎使用fork"></a>谨慎使用<code>fork</code></h2><p>根据你的shell，选择如下2个命令中的1个，一条命令弄死Linux：</p>
-<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="meta">:() &#123; :|:&amp;</span> &#125;;:</span><br></pre></td></tr></table></figure>
-
-<p>或者</p>
-<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">.() &#123; .<span class="string">|.&amp; &#125;;.</span></span><br></pre></td></tr></table></figure>
-
-<p>接着就可以重启啦</p>
+<p>此时关闭ssh终端,也可以照常进入网页啦！</p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE-2022-09-06-215111.jpg"></p>
+<p>微软官方<a href="https://vscode.dev/">请输入链接描述</a></p>
 ]]></content>
       <categories>
-        <category>Linux</category>
+        <category>toy</category>
       </categories>
       <tags>
-        <tag>toy</tag>
         <tag>Linux</tag>
+        <tag>toy</tag>
       </tags>
   </entry>
 </search>
