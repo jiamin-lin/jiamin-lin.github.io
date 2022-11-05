@@ -67,516 +67,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Mysql基础</title>
-    <url>/2022/09/09/MySQL/</url>
-    <content><![CDATA[<p>1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）<br>2.C R U D：增删改查的专业术语。<br>3.层次、网状、关系型模型数据库</p>
-<h2 id="数据库开始"><a href="#数据库开始" class="headerlink" title="数据库开始"></a><strong>数据库开始</strong></h2><p>show databases;</p>
-<p>imformation_schema：信息数据库，其中保存着关于 MySQL 服务器所维护的所有其他数据库的信息，如数据库名，数据库的表，表栏的数据类型与访问权限等</p>
-<p>mysql：保存了用户信息。</p>
-<p>performance_schema：监控 MySQL 运行过程的资源消耗情况。</p>
-<p>sys： 通过过视图的形式把 information_schema 和 performance_schema 结合起来，查询出更加令人容易理解的数据。</p>
-<h2 id="数据库基本操作"><a href="#数据库基本操作" class="headerlink" title="数据库基本操作"></a><strong>数据库基本操作</strong></h2><p>创建数据库</p>
-<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line">语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> student;</span><br><span class="line"></span><br><span class="line">判断创建语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> student;</span><br><span class="line"></span><br><span class="line">关键字变量名语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="symbol">`database`</span>;</span><br></pre></td></tr></table></figure>
-
-<p>删除数据库</p>
-<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line">语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> student;</span><br><span class="line"></span><br><span class="line">判断删除语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">exists</span> student;</span><br><span class="line"></span><br><span class="line">关键字变量名语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> <span class="symbol">`database`</span>;</span><br></pre></td></tr></table></figure>
-
-<p>查看创建数据库的 SQL：</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">database</span> student;</span><br></pre></td></tr></table></figure>
-
-<p>回退的语句：</p>
-<p>Ctrl + C（^C）</p>
-<p>创建数据库设置指定的字符编码</p>
-<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> teacher charset=gbk;</span><br></pre></td></tr></table></figure>
-
-<p>修改数据库字符编码</p>
-<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">alter database student charset<span class="operator">=</span>gbk<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a><strong>表操作</strong></h3><p>进入库:</p>
-<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">use fuck_school<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>展示表：</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">tables</span>;</span><br></pre></td></tr></table></figure>
-<p>制作表：</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> student(</span><br><span class="line"></span><br><span class="line">Id <span class="type">int</span>,</span><br><span class="line"></span><br><span class="line"><span class="type">name</span> <span class="type">varchar</span>(<span class="number">30</span>),</span><br><span class="line"></span><br><span class="line">age <span class="type">int</span>);</span><br></pre></td></tr></table></figure>
-<p>有 B 格的写法：</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> teacher(</span><br><span class="line"></span><br><span class="line">Id <span class="type">int</span> auto_increment <span class="keyword">primary key</span> <span class="keyword">comment</span> <span class="string">&#x27;主键 Id&#x27;</span>, </span><br><span class="line"></span><br><span class="line"><span class="type">name</span> <span class="type">varchar</span>(<span class="number">30</span>) <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">comment</span> <span class="string">&#x27;名字&#x27;</span>,</span><br><span class="line"></span><br><span class="line">phone <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">default</span> <span class="string">&#x27;暂时未知&#x27;</span> <span class="keyword">comment</span> <span class="string">&#x27;电话&#x27;</span>, </span><br><span class="line"></span><br><span class="line">adress <span class="type">varchar</span>(<span class="number">100</span>) <span class="keyword">default</span> <span class="string">&#x27;暂时未知&#x27;</span> <span class="keyword">comment</span> <span class="string">&#x27;家庭住址&#x27;</span></span><br><span class="line"></span><br><span class="line">)engine = innodb;</span><br></pre></td></tr></table></figure>
-<p>auto_increment 自动增长 用于类似于 ID 的数据（有规律性）</p>
-<p>primary key 主键 最主要的 靠它来区分表 </p>
-<p>comment 注释</p>
-<p>not null 不能为空</p>
-<p>default 默认值</p>
-<p>engine &#x3D; innodb 数据库引擎类型</p>
-<p>展示表结构</p>
-<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">desc teacher<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>删除表</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> frank,fuck;</span><br></pre></td></tr></table></figure>
-<p>修改表：</p>
-<p>添加元素</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> address <span class="type">varchar</span>(<span class="number">20</span>);</span><br></pre></td></tr></table></figure>
-<p>按位元素</p>
-<p>之后</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> address <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">after</span> Id；</span><br></pre></td></tr></table></figure>
-<p>位数</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> address <span class="type">varchar</span>(<span class="number">30</span>) <span class="keyword">first</span>; </span><br></pre></td></tr></table></figure>
-<p>删除元素</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> address;</span><br></pre></td></tr></table></figure>
-<p>修改元素</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student change address `<span class="keyword">Add</span>` <span class="type">varchar</span>(<span class="number">20</span>);</span><br></pre></td></tr></table></figure>
-<p>修改类型</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student modify Id <span class="type">varchar</span>(<span class="number">11</span>);</span><br></pre></td></tr></table></figure>
-<p>修改表名</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">rename</span> <span class="keyword">to</span> students;</span><br></pre></td></tr></table></figure>
-<p>清空表</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">truncate</span> <span class="keyword">table</span> teacher;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a><strong>数据操作</strong></h3><p>插入数据</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> teacher (Id, <span class="type">name</span>, phone, adress) <span class="keyword">values</span> (<span class="number">1</span>, <span class="string">&#x27;Fuck&#x27;</span>, <span class="string">&#x27;128989&#x27;</span>, <span class="string">&#x27;GuangZhou&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<p>查看数据</p>
-<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> teacher;</span><br></pre></td></tr></table></figure>
-<p>一次插入多条数据</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacher <span class="keyword">values</span> (<span class="keyword">Null</span>, <span class="string">&#x27;Tom&#x27;</span>, <span class="keyword">Null</span>, <span class="keyword">default</span>), (<span class="keyword">Null</span>, <span class="string">&#x27;Jack&#x27;</span>, <span class="keyword">Null</span>, <span class="keyword">default</span>);</span><br></pre></td></tr></table></figure>
-<p>删除数据( 注意 where 后面记得带上数据，否则可能误删多条数据！)</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> teacher <span class="keyword">where</span> <span class="type">name</span> = <span class="string">&#x27;Tom&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p>清空表</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">truncate</span> <span class="keyword">table</span> teacher;</span><br></pre></td></tr></table></figure>
-<p>小细节</p>
-<p>delete 与 truncate 清表时，delete 会继续接下来的的顺序编号。</p>
-<p>更新数据( 同删除数据一样必须带上 where 不然可能带来灾难性的后果）</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">update</span> teacher <span class="keyword">set</span> <span class="type">name</span> = <span class="string">&#x27;Frank&#x27;</span> <span class="keyword">where</span> <span class="type">name</span> = <span class="string">&#x27;Fuck&#x27;</span>(Id = <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-<p>查询部分数据</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> Id, <span class="type">name</span> <span class="keyword">from</span> teacher;</span><br></pre></td></tr></table></figure>
-<p>理论部分</p>
-<p>DDL data definition language 数据库定义语言 create alter drop show</p>
-<p>DML data manipution language 数据库操纵语言 insert update delete select</p>
-<p>DCL data control language 数据库控制语言 </p>
-<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a><strong>数据类型</strong></h3><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp(</span><br><span class="line"></span><br><span class="line">  -&gt; id <span class="type">smallint</span> unsigned auto_increment <span class="keyword">primary key</span> <span class="keyword">comment</span> <span class="string">&#x27;id&#x27;</span>, </span><br><span class="line"></span><br><span class="line">  -&gt; age tinyint unsigned <span class="keyword">comment</span> <span class="string">&#x27;年龄&#x27;</span>, </span><br><span class="line"></span><br><span class="line">  -&gt; fuck <span class="type">int</span>(<span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">  -&gt; );</span><br></pre></td></tr></table></figure>
-<p><code>unsigned </code></p>
-<p>表示正值数据</p>
-<p><code>double</code> 类型精度丢失问题</p>
-<p>浮点型数据类型会有精度丢失的问题，比如小数位设置 6 位，存入 0.45，0.45 转换成二进制是个无限循环小数 0.01110011100…，无法准确表示，存储的时候会发生精度丢失。</p>
-<p><code>Decimal</code>（定点数）</p>
-<p>四舍五入后用字符串类型数据进行存储</p>
-<p>VarChar 与 Char</p>
-<p><code>VarChar</code> 为可变长字符串 节省空间 但是性能较低</p>
-<p><code>Char</code> 为定长字符串 空间占用可能较多 但性能高</p>
-<p>性能不同原因：VarChar 存储的不仅仅是数据内容，还有字节长度以及节点位置。</p>
-<p>Boolean</p>
-<p>insert into test values(true&#x2F;false&#x2F;1&#x2F;0);</p>
-<p>enum </p>
-<p>create table Dmeo(</p>
-<p>gender enum(‘women’,’man’,’?’)</p>
-<p>);</p>
-<p>枚举类型只能用枚举列表里面的元素来赋值（也可以通过整数进行存储）</p>
-<p>好处：存储实际上使用整数，速度比字符串快，限制数据节省空间。</p>
-<p>set 集合</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> Demo(</span><br><span class="line"></span><br><span class="line">hobby_novel <span class="keyword">set</span> (<span class="string">&#x27;secience&#x27;</span>,<span class="string">&#x27;love&#x27;</span>,<span class="string">&#x27;model&#x27;</span>)</span><br><span class="line"></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Demo (<span class="string">&#x27;seciece&#x27;</span>,<span class="string">&#x27;model&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<p>与 enum 相比可以一次选择多个元素</p>
-<p>时间</p>
-<p>create table Demo(</p>
-<p>createdTime date</p>
-<p>);</p>
-<p>insert into Demo values(‘2022-04-09 11:23:56’);</p>
-<h3 id="列属性完整性"><a href="#列属性完整性" class="headerlink" title="列属性完整性"></a><strong>列属性完整性</strong></h3><h3 id="主键"><a href="#主键" class="headerlink" title="主键"></a>主键</h3><p>设置主键</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo <span class="keyword">add</span> <span class="keyword">primary key</span>(id,<span class="type">name</span>);</span><br></pre></td></tr></table></figure>
-<p>删除主键</p>
-<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo <span class="keyword">drop</span> <span class="keyword">primary</span> <span class="keyword">key</span>;</span><br></pre></td></tr></table></figure>
-<p>主键的唯一性</p>
-<p>一个表里只能存在一个主键（复合主键也为一个主键） 并且主键每行数据都不能为空</p>
-<h3 id="唯一键"><a href="#唯一键" class="headerlink" title="唯一键"></a>唯一键</h3><p>设置唯一键</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo <span class="keyword">add</span> <span class="keyword">unique</span> (phone);</span><br></pre></td></tr></table></figure>
-<p>删除唯一键</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo <span class="keyword">drop</span> <span class="keyword">index</span> (phone);</span><br></pre></td></tr></table></figure>
-<p>主键和唯一键的区别</p>
-<p>1.主键不能为空，唯一键可以为空</p>
-<p>2.主键只有一个，唯一键可以存在多个</p>
-<p>3.主键可以在别的表里用，唯一键只在自己的表里瞎折腾</p>
-<p>数据库完整性</p>
-<p>1.保证字段完整 eg.保证存在主键、是设置自动增长，有唯一数据</p>
-<p>2.保证数据类型正确</p>
-<p>3.考虑表里的字段可能会被其他的表所用</p>
-<p>4.自己定义约束</p>
-<h3 id="外键"><a href="#外键" class="headerlink" title="外键"></a>外键</h3><p>添加外键</p>
-<figure class="highlight livescript"><table><tr><td class="code"><pre><span class="line">create table eatery(</span><br><span class="line"></span><br><span class="line">  -&gt; price int,</span><br><span class="line"></span><br><span class="line">  -&gt; stuId int(<span class="number">4</span>),</span><br><span class="line"></span><br><span class="line">  -&gt; foreign key <span class="function"><span class="params">(stuId)</span> <span class="title">references</span> <span class="title">stuId</span><span class="params">(stuId)</span> </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">  -&gt;</span> );</span><br></pre></td></tr></table></figure>
-<p>后期加入外键</p>
-<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> eatery_2 <span class="keyword">add</span> <span class="keyword">foreign</span> <span class="keyword">key</span> (stuId) <span class="keyword">references</span> stuId(stuId);</span><br></pre></td></tr></table></figure>
-<p>删除外键</p>
-<p>先查询 <code>show create table eatery_2;</code></p>
-<p>再删除 <code>alter table eatery_2 drop foreign key eatery_2_ ibfk_1;</code></p>
-<p>设计时最好在定义表时就设置好外键</p>
-<p>置空：用于删除数据</p>
-<p>级联：用于更新数据</p>
-<p>操作 </p>
-<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> eatery <span class="keyword">add</span> <span class="keyword">foreign</span> <span class="keyword">key</span> (stuId) <span class="keyword">references</span> stuId(stuId) <span class="keyword">on</span> <span class="keyword">delete</span> <span class="keyword">set</span> <span class="keyword">null</span> <span class="keyword">on</span> <span class="keyword">update</span> <span class="keyword">cascade</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a><strong>关系型数据库</strong></h2><p>关系：两张表的共有字段去确定数据的完整性</p>
-<p>行：一条数据 一条数据记录 实体</p>
-<p>列：一个字段 属性</p>
-<p>数据冗余：虽然会占用空间，但是提高了性能。</p>
-<p>实体和实体的关系：一对一，一对多，多对多。</p>
-<p>Code 范式</p>
-<p>1.确保字段的原子性</p>
-<p>2.非键字段必须依赖于键字段 说白了就是别他妈没事找事</p>
-<p>3.消除传递依赖</p>
-<h3 id="数据查询语句"><a href="#数据查询语句" class="headerlink" title="数据查询语句"></a><strong>数据查询语句</strong></h3><p><strong>单表查询</strong></p>
-<p><strong>select</strong></p>
-<figure class="highlight oxygene"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="string">&#x27;go fuck yourself&#x27;</span> <span class="keyword">as</span> qnmd<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="number">2</span>*<span class="number">7</span> <span class="keyword">as</span> <span class="keyword">result</span><span class="punctuation">;</span></span><br></pre></td></tr></table></figure>
-<p><strong>from</strong></p>
-<p><strong>dual</strong></p>
-<p>伪表：该表主要目的是为了保证在使用 SELECT 语句中的语句的完整性而提供的。</p>
-<figure class="highlight oxygene"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="number">2</span>*<span class="number">7</span> <span class="keyword">as</span> <span class="keyword">result</span> <span class="keyword">from</span> dual<span class="punctuation">;</span></span><br></pre></td></tr></table></figure>
-<p><strong>where</strong> </p>
-<p>&lt; &gt; &#x3D; !&#x3D; dddd</p>
-<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t3 <span class="keyword">where</span> age &gt;= <span class="number">18</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t4 <span class="keyword">where</span> adress = <span class="string">&#x27;Beijing&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t4 <span class="keyword">where</span> adress != <span class="string">&#x27;Shanghai&#x27;</span>; </span><br></pre></td></tr></table></figure>
-<p>&#x2F;or</p>
-<p><strong>in</strong></p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> t4 <span class="keyword">where</span> adress <span class="keyword">not</span> <span class="title">in</span>(<span class="params"><span class="string">&#x27;Shanghai&#x27;</span></span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> t4 <span class="keyword">where</span> adress <span class="title">in</span>(<span class="params"><span class="string">&#x27;Shanghai&#x27;</span>,<span class="string">&#x27;Beijing&#x27;</span></span>)</span>;</span><br></pre></td></tr></table></figure>
-<p><strong>between and</strong></p>
-<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t3 <span class="keyword">where</span> age <span class="keyword">between</span> <span class="number">15</span> <span class="keyword">and</span> <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a><strong>聚合函数</strong></h3><p>总和<code> select sum(english) from score;</code></p>
-<p>平均 <code>select avg(english) from score;</code></p>
-<p>最大<code> select max(english) from score;</code></p>
-<p>最小<code>select min(english) from score;</code></p>
-<p>次数<code> select count(id) from score; / select count(*) from score;</code></p>
-<p><strong>like</strong></p>
-<p>查询’张’后面带多个字符</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">name</span> <span class="keyword">like</span> <span class="string">&#x27;张%&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p>‘_’个数表示元素多少个字符</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">name</span> <span class="keyword">like</span> <span class="string">&#x27;张__&#x27;</span>; </span><br></pre></td></tr></table></figure>
-<p><strong>order by</strong> </p>
-<p>升序查询</p>
-<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> score <span class="keyword">order</span> <span class="keyword">by</span> chinese <span class="keyword">asc</span>;</span><br></pre></td></tr></table></figure>
-<p>降序查询</p>
-<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> score <span class="keyword">order</span> <span class="keyword">by</span> english <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
-<p><strong>group by</strong></p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> avg(age) <span class="keyword">as</span> <span class="string">&#x27;年龄&#x27;</span> , address <span class="keyword">as</span> <span class="string">&#x27;地区&#x27;</span> <span class="keyword">from</span> <span class="keyword">info</span> <span class="keyword">group</span> <span class="keyword">by</span> address <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
-<p><strong>group_concat()</strong></p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> group_concat(<span class="type">name</span>) , gender <span class="keyword">as</span> <span class="string">&#x27;性别&#x27;</span> <span class="keyword">from</span> student <span class="keyword">group</span> <span class="keyword">by</span> gender;</span><br></pre></td></tr></table></figure>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210141915708.png" alt="image-20221014191523641" style="zoom:33%;" />
-
-<p><strong>having</strong></p>
-<p>表示对生成的表进行查询，相当于 where</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> avg(age) <span class="keyword">as</span> <span class="string">&#x27;age&#x27;</span> , address <span class="keyword">from</span> <span class="keyword">info</span> <span class="keyword">group</span> <span class="keyword">by</span> address <span class="keyword">having</span> age &gt; <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
-<p><strong>limit</strong></p>
-<p>limit 开始位置，结束长度；</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">info</span> <span class="keyword">order</span> <span class="keyword">by</span> age <span class="keyword">desc</span> <span class="keyword">limit</span> <span class="number">2</span>,<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
-<p><strong>distinct all</strong></p>
-<p>去重</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> count(<span class="keyword">distinct</span> address) <span class="keyword">from</span> <span class="keyword">info</span>; </span><br></pre></td></tr></table></figure>
-<h3 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a><strong>多表查询</strong></h3><p><strong>inner join on</strong></p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="type">name</span>,chinese <span class="keyword">from</span> student <span class="keyword">inner</span> <span class="keyword">join</span> score <span class="keyword">on</span> student.id = score.id <span class="keyword">order</span> <span class="keyword">by</span> english <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
-<p>注意事项：超过两张表时直接在后面继续续写一次语句。</p>
-<p><strong>left&#x2F;right join on</strong></p>
-<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> name,english <span class="keyword">from</span> student <span class="keyword">left</span>/<span class="keyword">right</span> <span class="keyword">join</span> score <span class="keyword">on</span> student.id = score.id <span class="keyword">order</span> <span class="keyword">by</span> english <span class="keyword">asc</span>;</span><br></pre></td></tr></table></figure>
-<p><strong>cross join</strong> </p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">cross</span> <span class="keyword">join</span> t3; </span><br></pre></td></tr></table></figure>
-<p>有笛卡尔积内味了（数学组合）</p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205759542.png" alt="image-20221005205759542" style="zoom: 33%;" />
-
-<p><strong>natural join</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">natural</span> (<span class="keyword">left</span><span class="operator">/</span><span class="keyword">right</span>) <span class="keyword">left</span> <span class="keyword">join</span> t3;</span><br></pre></td></tr></table></figure>
-<p>ps.若两表之间无公共字段，则返回的依旧是笛卡尔积。</p>
-<p><strong>using</strong></p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t1 <span class="keyword">inner</span> t3 <span class="keyword">using</span> (<span class="type">name</span>);</span><br></pre></td></tr></table></figure>
-<p>ps.当两张表为相同字段时，要采用加上using的结构，否则可能empty set输出。</p>
-<h3 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a><strong>子查询</strong></h3><p><strong>基本语法</strong></p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> student <span class="keyword">where</span> id <span class="title">in</span>(<span class="params"><span class="keyword">select</span> id <span class="keyword">from</span> score <span class="keyword">where</span> english &lt;= <span class="number">85</span></span>)</span>;</span><br></pre></td></tr></table></figure>
-<p><strong>not in</strong></p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> student <span class="keyword">where</span> id <span class="keyword">not</span> <span class="title">in</span>(<span class="params"><span class="keyword">select</span> id <span class="keyword">from</span> score <span class="keyword">where</span> chinese &gt;= <span class="number">85</span></span>)</span>;</span><br></pre></td></tr></table></figure>
-<p>ps.用in或者not in主要是不止一个结果。</p>
-<p><strong>exists &#x2F; not exists</strong></p>
-<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">exists</span> (<span class="keyword">select</span> id <span class="keyword">from</span> score <span class="keyword">where</span> english &gt;= <span class="number">85</span>); </span><br></pre></td></tr></table></figure>
-<p>ps.只要有存在就输出。</p>
-<h2 id="高级部分"><a href="#高级部分" class="headerlink" title="高级部分"></a>高级部分</h2><h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p> <strong>视图的创建与查询</strong></p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> stu_all <span class="keyword">as</span> <span class="keyword">select</span> <span class="type">name</span>,phone,score <span class="keyword">from</span> student </span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> vw_stu_all</span><br></pre></td></tr></table></figure>
-
-<p><strong>修改视图</strong></p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">view</span> stu_all <span class="keyword">as</span> <span class="keyword">select</span> <span class="type">name</span>,phone <span class="keyword">from</span> student</span><br></pre></td></tr></table></figure>
-
-<p><strong>删除视图</strong></p>
-<figure class="highlight gauss"><table><tr><td class="code"><pre><span class="line"><span class="built_in">drop</span> <span class="built_in">view</span> vw_stu_all</span><br></pre></td></tr></table></figure>
-
-<p><strong>视图算法</strong></p>
-<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> algorithm=<span class="keyword">merge</span> <span class="keyword">view</span> stu_all <span class="keyword">as</span> <span class="keyword">select</span> name,phone,score <span class="keyword">from</span> student </span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Merge算法</p>
-</blockquote>
-<p>合并算法，每当执行的时候,先将视图的sql语句与外部查询视图的sql语句,合并在一起,最终执行；这样操作对效率基本上没有什么影响</p>
-<blockquote>
-<p>Temptable</p>
-</blockquote>
-<p>临时表算法，创建一个临时表用于数据的填充以及查询，当数据量越大时，效率越低，且该视图无法进行update的操作。</p>
-<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><p><strong>开启事务</strong></p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">start</span> <span class="keyword">transaction</span>;</span><br></pre></td></tr></table></figure>
-<p><strong>回滚事务</strong></p>
-<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">rollback<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p><strong>提交事务</strong></p>
-<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">commit<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210191611437.png" alt="image-20221019161158358" style="zoom:50%;" />
-
-<p><strong>保存回滚点</strong></p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">savapoint</span> *；</span><br></pre></td></tr></table></figure>
-
-<p><strong>回到回滚点</strong></p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">rollback</span> <span class="keyword">to</span> *;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210191631958.png" alt="image-20221019163142908"></p>
-<p><strong>特性：ACID（InnoDB引擎下）</strong></p>
-<p>原子性（atomicity，或称不可分割性）、一致性（consistency）、隔离性（isolation，又称独立性）、持久性（durability）。</p>
-<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>增删改很慢，查很快</p>
-<p><strong>创建索引</strong></p>
-<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">index</span> money_index <span class="keyword">on</span> wallet(id);</span><br></pre></td></tr></table></figure>
-
-<p><strong>添加索引</strong></p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> wallet <span class="keyword">add</span> <span class="keyword">index</span> money_index (<span class="type">money</span>);</span><br></pre></td></tr></table></figure>
-
-<p><strong>删除索引</strong></p>
-<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">index</span> money_index <span class="keyword">on</span> wallet;</span><br></pre></td></tr></table></figure>
-
-<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p><strong>delimiter更改结束符号</strong></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">delimiter <span class="operator">/</span><span class="operator">/</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>procedure存储过程</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create procedure proc()</span><br><span class="line">    -&gt; begin</span><br><span class="line">    -&gt; update wallet set money=money+50;</span><br><span class="line">    -&gt; insert into wallet values(5,3737);</span><br><span class="line">    -&gt; end //</span><br></pre></td></tr></table></figure>
-
-<p><strong>执行存储</strong></p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function">call <span class="title">proc</span>()</span>;</span><br></pre></td></tr></table></figure>
-
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210200006857.png" alt="image-20221020000510172" style="zoom:50%;" />
-
-<p><strong>函数</strong></p>
-<p><em>数字</em></p>
-<p>rand()随机数</p>
-<p>ceil()向上取整</p>
-<p>round()向下取整</p>
-<p>floor()向下取整</p>
-<p>truncate(112,2)截取数字</p>
-<p><em>字符串</em></p>
-<p>ucase()大写</p>
-<p>lcase()小写</p>
-<p>left&#x2F;right(‘fuck’,2)截取</p>
-<p>substring(‘fuck’,1,3)截取中间</p>
-<p>concat(‘fu’,’ck’)拼接字符串</p>
-<p><em>时间</em></p>
-<p>unix_timestamp()时间毫秒值</p>
-<p>year&#x2F;month&#x2F;day(now())获取当前年&#x2F;月&#x2F;日</p>
-<p><em>加密</em></p>
-<p>sha(‘fuck’);</p>
-]]></content>
-      <categories>
-        <category>Mysql</category>
-      </categories>
-      <tags>
-        <tag>code</tag>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux</title>
-    <url>/2022/10/02/Linux/</url>
-    <content><![CDATA[<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="计算机基础"><a href="#计算机基础" class="headerlink" title="计算机基础"></a>计算机基础</h2><p><strong>1.软件程序的运行</strong></p>
-<p>硬件如同人的身体，软件如同人的灵魂。没有了灵魂的躯体也不过就是行尸走肉</p>
-<p>**1.1 **机器程序与编译程序</p>
-<p>电脑只认识0与1而已，而且电脑最重要的运算与逻辑判断是在CPU内部， 而 CPU其实是具有微指令集的。因此，我们需要CPU帮忙工作时，就得要参考微指令集的内容， 然后撰写让CPU读的懂的指令码给CPU执行，这样就能够让CPU运行了。</p>
-<p>流程：</p>
-<ul>
-<li>需要了解机器语言：机器只认识0与1，因此你必须要学习直接写给机器看的语言。</li>
-<li>需要了解所有硬件的相关功能函数：因为你的程序必须要写给机器看， 当然你就得要参考机器本身的功能，然后针对该功能去撰写程序码。</li>
-<li>程序不具有可携性：每个CPU都有独特的微指令集，同样的，每个硬件都有其功能函数。</li>
-<li>程序具有专一性：因为这样的程序必须要针对硬件功能函数来撰写， 如果已经开发了一支浏览器程序，想要再开发文件管理程序时，还是得从头再参考硬件的功能函数来继续撰写。</li>
-</ul>
-<p>所以，需要开发让人类能看得懂得程序语言。然后创造一种“编译器”让人类的写的程序语言转换为机器能看懂的机器码。常见的编译器有C,C++,Java,Fortran等等。</p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220922203728264.png" alt="image-20220922203728264"></p>
-<h2 id="关于学习Linux"><a href="#关于学习Linux" class="headerlink" title="关于学习Linux"></a>关于学习Linux</h2><p>两个重要的因素是造成我们学习的原动力： </p>
-<ul>
-<li><p>创建兴趣： Linux上面可以玩的东西真的太多了，你可以选择一个有趣的课题来深入的玩 一玩！不论是Shell还是图形接口等等， 只要能够玩出兴趣，那么再怎么苦你都会不觉得喔！</p>
-</li>
-<li><p>成就感： 成就感是怎么来的？说实在话，就是“被认同”来的！怎么被认同呢？写心得分享啊！当你写了心得分享，并且公告在 BBS 上面，自然有朋友会到你的网页去瞧一瞧， 当大家觉得你的网页内容很棒的时候， 哈哈！你肯定会加油继续的分享下去而无法自拔。</p>
-</li>
-</ul>
-<h2 id="主机规划与磁盘分区"><a href="#主机规划与磁盘分区" class="headerlink" title="主机规划与磁盘分区"></a>主机规划与磁盘分区</h2><p><strong>Linux各硬件设备在系统中为文件名</strong></p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001164035525.png" alt="image-20221001164035525"></p>
-<p><strong>磁盘分区</strong></p>
-<p><strong>MBR 主要分区、延伸分区与逻辑分区的特性：</strong></p>
-<ul>
-<li>主要分区与延伸分区最多可以有四笔（硬盘的限制） ；</li>
-<li>延伸分区最多只能有一个（操作系统的限制）；</li>
-<li>逻辑分区是由延伸分区持续切割出来的分区；</li>
-<li>能够被格式化后，作为数据存取的分区为主要分区与逻辑分区。延伸分区无法格式化； </li>
-<li>逻辑分区的数量依操作系统而不同，在Linux系统中SATA硬盘已经可以突破63个以上的分区限制；</li>
-</ul>
-<p><strong>MBR分区限制：</strong></p>
-<ul>
-<li>操作系统无法抓取到 2.2T 以上的磁盘容量</li>
-<li>MBR 仅有一个区块，若被破坏后，经常无法或很难救援</li>
-<li>MBR 内的存放开机管理程序的区块仅 446Bytes，无法容纳较多的程序码</li>
-</ul>
-<p><strong>GUID partition table, GPT 磁盘分区表：</strong></p>
-<ul>
-<li>与 MBR 仅使用第一个 512Bytes 区块来纪录不同， GPT 使用了 34 个 LBA 区块来纪录分区信息</li>
-<li>GPT 除了前面 34 个 LBA 之外，整个磁盘的最后 33 个 LBA 也拿来作为另一个备份</li>
-</ul>
-<p><strong>计算机开机流程：</strong></p>
-<ol>
-<li>BIOS：开机主动执行的固件，会认识第一个可开机的设备；</li>
-<li>MBR：第一个可开机设备的第一个扇区内的主要开机记录区块，内含开机管理程序；</li>
-<li>开机管理程序（boot loader）：一支可读取核心文件来执行的软件；</li>
-<li>核心文件：开始操作系统的功能</li>
-</ol>
-<p><strong>BIOS与UEFI BIOS区别</strong></p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001200526805.png" alt="image-20221001200526805"></p>
-<p><strong>主机硬盘的规划</strong></p>
-<p>频繁读写的目录</p>
-<ul>
-<li>boot</li>
-<li>&#x2F; </li>
-<li>&#x2F;home </li>
-<li>&#x2F;var </li>
-<li>Swap</li>
-</ul>
-<h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><ul>
-<li><p>如果磁盘容量大于 2TB 以上时，系统会自动使用 GPT 分区方式来处理磁盘分区。</p>
-</li>
-<li><p>GPT 分区已经没有延伸与逻辑分区的概念，可以想像成所有的分区都是主分区，某些操作系统要使用 GPT 分区时，必须要搭配 UEFI 的新型 BIOS 格式才可安装使用。</p>
-</li>
-<li><p>Linux操作系统的文件使用目录树系统，与磁盘的对应需要有“挂载”的动作才行；</p>
-</li>
-<li><p>开机的流程由：BIOS–&gt;MBR–&gt;–&gt;boot loader–&gt;核心文件</p>
-</li>
-</ul>
-<h2 id="Vim程序编辑器"><a href="#Vim程序编辑器" class="headerlink" title="Vim程序编辑器"></a>Vim程序编辑器</h2><p><strong>三种模式</strong></p>
-<ul>
-<li>一般指令模式 （command mode）</li>
-<li>编辑模式 （insert mode）</li>
-<li>命令行命令模式 （command-line mode）</li>
-</ul>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210211616324.png" alt="image-20221021161616258" style="zoom:50%;" />
-
-<p><strong>常见命令</strong></p>
-<p><em>1.输入模式 (i):</em><br>按 i 进入insert输入模式<br>HJKL代替上下左右<br>H向左 L向右 J向下 K向上<br>Ctrl + B 向上翻页<br>Ctrl + F 想下翻页<br>Ctrl + E&#x2F;Y 滚动<br>Shift + G 末尾<br>双击gg 首字符</p>
-<p><em>2.命令模式(esc):</em><br>i 光标位置前面输入<br>a 光标位置后面输入<br>o enter到下一行输入<br>x 删除光标所在字符<br>dd 删除整个一行<br>u 撤销<br>dw 删除整个单词<br>b 跳跃单词首字母<br>e 跳跃单词尾字母<br>w 跳跃到下一个单词首字母</p>
-<p>shift 省略多个单词直接跳<br>Shift + 6 ^ 跳跃到本行的首字母<br>Shift + 4 $ 跳跃到本行的dd尾字母<br>按 0 跳跃到本行首个字符（ 包括空格）<br>{}移动整段大括号<br>yw 表示复制一个单词<br>y$ 表示从当前开始，往后复制到行末尾<br>p 粘贴剪贴板的内容<br><em>3.可视化模式</em><br>v + hjkl 进行字符选择<br>V + hjkl 进行行选择<br>v + G 全选<br>快捷选择<br>vaw 快速选择单词<br>vab 包含括号<br>vaB 包含大括号<br>shift + &lt;&gt; 前后缩进<br>v shift + · ~ 字母大小写切换<br>v + u&#x2F;U 全部转换为小写&#x2F;大写<br>行号+g<br>g 跳跃到指定的行号<br>快速查找<br>&#x2F;查找字符 按n 进入下一个<br>快速替换<br>按行:s&#x2F;查找单词&#x2F;替换单词&#x2F;g<br>全局:%s&#x2F;查找单词&#x2F;替换单词&#x2F;g<br>指定:首，尾s&#x2F;查找&#x2F;替换&#x2F;g<br>+c 询问</p>
-<h2 id="Bashshell"><a href="#Bashshell" class="headerlink" title="Bashshell"></a>Bashshell</h2><p><strong>硬件、核心与 Shell</strong></p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221653386.png" alt="image-20221022165342252" style="zoom:50%;" />
-
-<p>例子：用电脑播放音乐</p>
-<ol>
-<li>硬件：当然就是需要你的硬件有“声卡芯片”这个配备，否则怎么会有声音；</li>
-<li>核心管理：操作系统的核心可以支持这个芯片组，当然还需要提供芯片的驱动程序；</li>
-<li>应用程序：需要使用者输入发生声音的指令。</li>
-</ol>
-<p><strong>为何要学命令行的 shell？</strong></p>
-<ul>
-<li><p>命令行的 shell：大家都一样</p>
-</li>
-<li><p>远端管理：命令行就是比较快</p>
-</li>
-<li><p>Linux 的任督二脉： shell 是也</p>
-</li>
-</ul>
-<p><strong>系统的合法 shell 与 &#x2F;etc&#x2F;shells 功能</strong></p>
-<p>历史：由于早年的 Unix 年代，发展者众，所以由于 shell 依据发展者的不同就有许多的版本，例如常听到的 Bourne SHell （sh） 、在 Sun 里头默认的 C SHell、 商业上常用的 K SHell、, 还有 TCSH 等等，每一种 Shell 都各有其特点，Linux 使用的这一种版本就称为“ Bourne Again SHell （简称 bash） ”，这个 Shell 是 Bourne Shell 的增强版本，也是基准于 GNU 的架构下发展出来的。</p>
-<p><em>Linux可用的shells</em></p>
-<ul>
-<li>&#x2F;bin&#x2F;sh （已经被 &#x2F;bin&#x2F;bash 所取代）</li>
-<li>&#x2F;bin&#x2F;bash （就是 Linux 默认的 shell）</li>
-<li>&#x2F;bin&#x2F;tcsh （整合 C Shell ，提供更多的功能）</li>
-<li>&#x2F;bin&#x2F;csh （已经被 &#x2F;bin&#x2F;tcsh 所取代）</li>
-</ul>
-<blockquote>
-<p>系统某些服务在运行过程中，会去检查使用者能够使用的 shells ，而这些 shell 的查询就是借由 &#x2F;etc&#x2F;shells 这个文件</p>
-</blockquote>
-<p><strong>Bash Shell 的功能</strong></p>
-<ul>
-<li>命令编修能力 （history）：</li>
-</ul>
-<p>只要在命令行按“上下键”就可以找到前&#x2F;后一个输入的指令，而在很多distribution 里头，默认的指令记忆功能可以到达 1000 个！也就是说，曾经下达过的指令几乎都被记录下来了。<br>这么多的指令记录在哪里呢？在你的主文件夹内的 .bash_history 不过，需要留意的是，<br>~&#x2F;.bash_history 记录的是前一次登陆以前所执行过的指令， 而至于这一次登陆所执行的指令都被暂存在内存中，当你成功的登出系统后，该指令记忆才会记录到 .bash_history 当中</p>
-<ul>
-<li><p>命令与文件补全功能： （[tab] 按键的好处）</p>
-</li>
-<li><p>命令别名设置功能： （alias）</p>
-</li>
-</ul>
-<p>可以将<code>ls -al</code> 的命令通过<code>alias lm=&#39;ls -al&#39;</code>就可以将<code>lm</code>直接用来调命令了</p>
-<ul>
-<li><p>工作控制、前景背景控制： （job control, foreground, background）</p>
-</li>
-<li><p>程序化脚本： （shell scripts）</p>
-</li>
-<li><p>万用字符： （Wildcard）</p>
-</li>
-</ul>
-<p><strong>查询指令是否为 Bash shell 的内置命令： type</strong></p>
-<p>知道这个指令是来自于外部指令（指的是其他非 bash 所提供的指令） 或是内置在 bash 当中只要利用type 这个指令来观察即可。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> [-tpa] name</span><br><span class="line">选项与参数：</span><br><span class="line">：不加任何选项与参数时，<span class="built_in">type</span> 会显示出 name 是外部指令还是 bash 内置指令</span><br><span class="line">-t ：当加入 -t 参数时，<span class="built_in">type</span> 会将 name 以下面这些字眼显示出他的意义：</span><br><span class="line">file ：表示为外部指令；</span><br><span class="line"><span class="built_in">alias</span> ：表示该指令为命令别名所设置的名称；</span><br><span class="line"><span class="built_in">builtin</span> ：表示该指令为 bash 内置的指令功能；</span><br><span class="line">-p ：如果后面接的 name 为外部指令时，才会显示完整文件名；</span><br><span class="line">-a ：会由 PATH 变量定义的路径中，将所有含 name 的指令都列出来，包含 <span class="built_in">alias</span></span><br><span class="line">范例一：查询一下 <span class="built_in">ls</span> 这个指令是否为 bash 内置？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> <span class="built_in">ls</span></span><br><span class="line"><span class="built_in">ls</span> is aliased to `<span class="built_in">ls</span> --color=auto<span class="string">&#x27; &amp;lt;==未加任何参数，列出 ls 的最主要使用情况</span></span><br><span class="line"><span class="string">[dmtsai@study ~]$ type -t ls</span></span><br><span class="line"><span class="string">alias &amp;lt;==仅列出 ls 执行时的依据</span></span><br><span class="line"><span class="string">[dmtsai@study ~]$ type -a ls</span></span><br><span class="line"><span class="string">ls is aliased to `ls --color=auto&#x27;</span> &amp;lt;==最先使用 aliase</span><br><span class="line"><span class="built_in">ls</span> is /usr/bin/ls &amp;lt;==还有找到外部指令在 /bin/ls</span><br><span class="line">范例二：那么 <span class="built_in">cd</span> 呢？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> <span class="built_in">cd</span></span><br><span class="line"><span class="built_in">cd</span> is a shell <span class="built_in">builtin</span> &amp;lt;==看到了吗？ <span class="built_in">cd</span> 是 shell 内置指令</span><br></pre></td></tr></table></figure>
-
-<p><strong>指令的下达与快速编辑按钮</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">范例：如果指令串太长的话，如何使用两行来输出？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">cp</span> /var/spool/mail/root /etc/crontab \</span><br><span class="line">&amp;gt; /etc/fstab /root</span><br></pre></td></tr></table></figure>
-
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221744722.png" alt="image-20221022174441674" style="zoom: 80%;" />
-
-<p><strong>Shell 的变量功能</strong></p>
-<ul>
-<li>变量的可变性与方便性</li>
-</ul>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221748828.png" alt="image-20221022174833790" style="zoom: 67%;" />
-
-<p>由于系统已经帮我们规划好 MAIL 这个变量，所以使用者只要知道 mail 这个指 令如何使用即可， mail 会主动的取用 MAIL 这个变量，就能够如上图所示的取得自己的邮件信箱了</p>
-<ul>
-<li>影响 bash 环境操作的变量</li>
-</ul>
-<p>例如下达 ls 这个指令时，系统就是通过 PATH 这个变量里面的内容所记录的路径顺序来搜寻指令。如果在搜寻完 PATH 变量内的路径还找不到 ls 这个指令时， 就会在屏幕上显示“ command not found ”的错误讯息了。</p>
-<ul>
-<li>脚本程序设计 （shell script） 的好帮手</li>
-</ul>
-<p>例如你要写一个大 型的 script 时，有些数据因为可能由于使用者习惯的不同而有差异，比如说路径好了，由于该路径在 script 被使用在相当多的地方，如果下次换了一部主机，都要修改 script 里面的所有路径， 这个时候如果使用变量，而将该变量的定义写在最前面，后面相关的路径名称都以变量来取代， 那么你只要修改一行就等于修改整篇 script 了。</p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221753121.png" alt="image-20221022175328075" style="zoom:67%;" />
-
-<p><strong>变量的取用与设置：echo, 变量设置规则, unset</strong></p>
-<h2 id="Linux正则表达式"><a href="#Linux正则表达式" class="headerlink" title="Linux正则表达式"></a>Linux正则表达式</h2>]]></content>
-      <categories>
-        <category>web前端</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在线code安装教程</title>
-    <url>/2022/09/12/codeinstall/</url>
-    <content><![CDATA[<p>##前置条件：</p>
-<ol>
-<li>云服务器</li>
-<li>ssh的连接工具 如<a href="https://www.putty.org/">putty</a>，<a href="https://termius.com/">Termius</a>，mac用户可以直接用终端连接.</li>
-</ol>
-<h2 id="安装教程"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程</h2><p>首先使用你的ssh工具连接服务器</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>输入命令下载codeserver</span><br><span class="line">wget https:<span class="regexp">//gi</span>thub.com<span class="regexp">/coder/</span>code-server<span class="regexp">/releases/</span>download<span class="regexp">/v4.6.1/</span>code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>解压</span><br><span class="line">tar -zxvf code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>进入codeserver目录</span><br><span class="line">cd code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64</span><br><span class="line"><span class="regexp">//</span>设置密码(密码在双引号内)</span><br><span class="line">export PASSWORD=<span class="number">123456</span></span><br><span class="line"><span class="regexp">//</span>启动codeserver</span><br><span class="line">./code-server --port <span class="number">8081</span> --host <span class="number">0.0</span>.<span class="number">0.0</span> --auth password</span><br></pre></td></tr></table></figure>
-
-<p>在浏览器上方输入<code>你的服务器IP:8081</code> 即可进入登录界面</p>
-<p>这个时候输入之前设置的密码就可以进入codeserver了</p>
-<h2 id="配置Screen进程守护"><a href="#配置Screen进程守护" class="headerlink" title="配置Screen进程守护"></a>配置Screen进程守护</h2><p>之前的步骤有一个问题,就是当你退出ssh进程的时候,你会发现网站进不去了。</p>
-<p>因为当ssh进程关闭的时候，会自动清除当前进程。</p>
-<p>我们得下载Screen来给codeserver进行进程守护，防止进程自动退出。</p>
-<h2 id="安装Screen"><a href="#安装Screen" class="headerlink" title="安装Screen"></a>安装Screen</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>复制适合自己系统的命令安装</span><br><span class="line"><span class="regexp">//</span>Centos系统</span><br><span class="line">yum install screen</span><br><span class="line"><span class="regexp">//</span>Debian/Ubuntu系统</span><br><span class="line">apt-get install screen</span><br></pre></td></tr></table></figure>
-<h2 id="保护进程实现后台运行"><a href="#保护进程实现后台运行" class="headerlink" title="保护进程实现后台运行"></a>保护进程实现后台运行</h2><figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">//</span>以code_server为名字建立进程</span><br><span class="line">screen -S code_server</span><br><span class="line"><span class="string">//</span>再次输入以下命令</span><br><span class="line"><span class="keyword">cd</span> code-server-4.6.1-linux-amd64</span><br><span class="line">export PASSWORD=123456</span><br><span class="line"><span class="string">./code-server</span> <span class="params">--port</span> 8081 <span class="params">--host</span> 0.0.0.0 <span class="params">--auth</span> password</span><br></pre></td></tr></table></figure>
-
-
-
-<p>此时关闭ssh终端,也可以照常进入网页啦！</p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE-2022-09-06-215111.jpg"></p>
-<p>微软官方<a href="https://vscode.dev/">请输入链接描述</a></p>
-]]></content>
-      <categories>
-        <category>toy</category>
-      </categories>
-      <tags>
-        <tag>toy</tag>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Http基础</title>
     <url>/2022/09/12/Http/</url>
     <content><![CDATA[<h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><h4 id="Http及Https概念"><a href="#Http及Https概念" class="headerlink" title="Http及Https概念"></a><em>Http</em>及<em>Https</em>概念</h4><p>1.超文本传输协议（<em>HyperText Transfer Protocol</em> 即<em>http</em>）是一种用于分布式、协作式和超媒体信息系统的应用层协议，所有的www文件都必须遵守这个标准和协议。</p>
@@ -2129,6 +1619,516 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux</title>
+    <url>/2022/10/02/Linux/</url>
+    <content><![CDATA[<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="计算机基础"><a href="#计算机基础" class="headerlink" title="计算机基础"></a>计算机基础</h2><p><strong>1.软件程序的运行</strong></p>
+<p>硬件如同人的身体，软件如同人的灵魂。没有了灵魂的躯体也不过就是行尸走肉</p>
+<p>**1.1 **机器程序与编译程序</p>
+<p>电脑只认识0与1而已，而且电脑最重要的运算与逻辑判断是在CPU内部， 而 CPU其实是具有微指令集的。因此，我们需要CPU帮忙工作时，就得要参考微指令集的内容， 然后撰写让CPU读的懂的指令码给CPU执行，这样就能够让CPU运行了。</p>
+<p>流程：</p>
+<ul>
+<li>需要了解机器语言：机器只认识0与1，因此你必须要学习直接写给机器看的语言。</li>
+<li>需要了解所有硬件的相关功能函数：因为你的程序必须要写给机器看， 当然你就得要参考机器本身的功能，然后针对该功能去撰写程序码。</li>
+<li>程序不具有可携性：每个CPU都有独特的微指令集，同样的，每个硬件都有其功能函数。</li>
+<li>程序具有专一性：因为这样的程序必须要针对硬件功能函数来撰写， 如果已经开发了一支浏览器程序，想要再开发文件管理程序时，还是得从头再参考硬件的功能函数来继续撰写。</li>
+</ul>
+<p>所以，需要开发让人类能看得懂得程序语言。然后创造一种“编译器”让人类的写的程序语言转换为机器能看懂的机器码。常见的编译器有C,C++,Java,Fortran等等。</p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220922203728264.png" alt="image-20220922203728264"></p>
+<h2 id="关于学习Linux"><a href="#关于学习Linux" class="headerlink" title="关于学习Linux"></a>关于学习Linux</h2><p>两个重要的因素是造成我们学习的原动力： </p>
+<ul>
+<li><p>创建兴趣： Linux上面可以玩的东西真的太多了，你可以选择一个有趣的课题来深入的玩 一玩！不论是Shell还是图形接口等等， 只要能够玩出兴趣，那么再怎么苦你都会不觉得喔！</p>
+</li>
+<li><p>成就感： 成就感是怎么来的？说实在话，就是“被认同”来的！怎么被认同呢？写心得分享啊！当你写了心得分享，并且公告在 BBS 上面，自然有朋友会到你的网页去瞧一瞧， 当大家觉得你的网页内容很棒的时候， 哈哈！你肯定会加油继续的分享下去而无法自拔。</p>
+</li>
+</ul>
+<h2 id="主机规划与磁盘分区"><a href="#主机规划与磁盘分区" class="headerlink" title="主机规划与磁盘分区"></a>主机规划与磁盘分区</h2><p><strong>Linux各硬件设备在系统中为文件名</strong></p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001164035525.png" alt="image-20221001164035525"></p>
+<p><strong>磁盘分区</strong></p>
+<p><strong>MBR 主要分区、延伸分区与逻辑分区的特性：</strong></p>
+<ul>
+<li>主要分区与延伸分区最多可以有四笔（硬盘的限制） ；</li>
+<li>延伸分区最多只能有一个（操作系统的限制）；</li>
+<li>逻辑分区是由延伸分区持续切割出来的分区；</li>
+<li>能够被格式化后，作为数据存取的分区为主要分区与逻辑分区。延伸分区无法格式化； </li>
+<li>逻辑分区的数量依操作系统而不同，在Linux系统中SATA硬盘已经可以突破63个以上的分区限制；</li>
+</ul>
+<p><strong>MBR分区限制：</strong></p>
+<ul>
+<li>操作系统无法抓取到 2.2T 以上的磁盘容量</li>
+<li>MBR 仅有一个区块，若被破坏后，经常无法或很难救援</li>
+<li>MBR 内的存放开机管理程序的区块仅 446Bytes，无法容纳较多的程序码</li>
+</ul>
+<p><strong>GUID partition table, GPT 磁盘分区表：</strong></p>
+<ul>
+<li>与 MBR 仅使用第一个 512Bytes 区块来纪录不同， GPT 使用了 34 个 LBA 区块来纪录分区信息</li>
+<li>GPT 除了前面 34 个 LBA 之外，整个磁盘的最后 33 个 LBA 也拿来作为另一个备份</li>
+</ul>
+<p><strong>计算机开机流程：</strong></p>
+<ol>
+<li>BIOS：开机主动执行的固件，会认识第一个可开机的设备；</li>
+<li>MBR：第一个可开机设备的第一个扇区内的主要开机记录区块，内含开机管理程序；</li>
+<li>开机管理程序（boot loader）：一支可读取核心文件来执行的软件；</li>
+<li>核心文件：开始操作系统的功能</li>
+</ol>
+<p><strong>BIOS与UEFI BIOS区别</strong></p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001200526805.png" alt="image-20221001200526805"></p>
+<p><strong>主机硬盘的规划</strong></p>
+<p>频繁读写的目录</p>
+<ul>
+<li>boot</li>
+<li>&#x2F; </li>
+<li>&#x2F;home </li>
+<li>&#x2F;var </li>
+<li>Swap</li>
+</ul>
+<h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><ul>
+<li><p>如果磁盘容量大于 2TB 以上时，系统会自动使用 GPT 分区方式来处理磁盘分区。</p>
+</li>
+<li><p>GPT 分区已经没有延伸与逻辑分区的概念，可以想像成所有的分区都是主分区，某些操作系统要使用 GPT 分区时，必须要搭配 UEFI 的新型 BIOS 格式才可安装使用。</p>
+</li>
+<li><p>Linux操作系统的文件使用目录树系统，与磁盘的对应需要有“挂载”的动作才行；</p>
+</li>
+<li><p>开机的流程由：BIOS–&gt;MBR–&gt;–&gt;boot loader–&gt;核心文件</p>
+</li>
+</ul>
+<h2 id="Vim程序编辑器"><a href="#Vim程序编辑器" class="headerlink" title="Vim程序编辑器"></a>Vim程序编辑器</h2><p><strong>三种模式</strong></p>
+<ul>
+<li>一般指令模式 （command mode）</li>
+<li>编辑模式 （insert mode）</li>
+<li>命令行命令模式 （command-line mode）</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210211616324.png" alt="image-20221021161616258" style="zoom:50%;" />
+
+<p><strong>常见命令</strong></p>
+<p><em>1.输入模式 (i):</em><br>按 i 进入insert输入模式<br>HJKL代替上下左右<br>H向左 L向右 J向下 K向上<br>Ctrl + B 向上翻页<br>Ctrl + F 想下翻页<br>Ctrl + E&#x2F;Y 滚动<br>Shift + G 末尾<br>双击gg 首字符</p>
+<p><em>2.命令模式(esc):</em><br>i 光标位置前面输入<br>a 光标位置后面输入<br>o enter到下一行输入<br>x 删除光标所在字符<br>dd 删除整个一行<br>u 撤销<br>dw 删除整个单词<br>b 跳跃单词首字母<br>e 跳跃单词尾字母<br>w 跳跃到下一个单词首字母</p>
+<p>shift 省略多个单词直接跳<br>Shift + 6 ^ 跳跃到本行的首字母<br>Shift + 4 $ 跳跃到本行的dd尾字母<br>按 0 跳跃到本行首个字符（ 包括空格）<br>{}移动整段大括号<br>yw 表示复制一个单词<br>y$ 表示从当前开始，往后复制到行末尾<br>p 粘贴剪贴板的内容<br><em>3.可视化模式</em><br>v + hjkl 进行字符选择<br>V + hjkl 进行行选择<br>v + G 全选<br>快捷选择<br>vaw 快速选择单词<br>vab 包含括号<br>vaB 包含大括号<br>shift + &lt;&gt; 前后缩进<br>v shift + · ~ 字母大小写切换<br>v + u&#x2F;U 全部转换为小写&#x2F;大写<br>行号+g<br>g 跳跃到指定的行号<br>快速查找<br>&#x2F;查找字符 按n 进入下一个<br>快速替换<br>按行:s&#x2F;查找单词&#x2F;替换单词&#x2F;g<br>全局:%s&#x2F;查找单词&#x2F;替换单词&#x2F;g<br>指定:首，尾s&#x2F;查找&#x2F;替换&#x2F;g<br>+c 询问</p>
+<h2 id="Bashshell"><a href="#Bashshell" class="headerlink" title="Bashshell"></a>Bashshell</h2><p><strong>硬件、核心与 Shell</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221653386.png" alt="image-20221022165342252" style="zoom:50%;" />
+
+<p>例子：用电脑播放音乐</p>
+<ol>
+<li>硬件：当然就是需要你的硬件有“声卡芯片”这个配备，否则怎么会有声音；</li>
+<li>核心管理：操作系统的核心可以支持这个芯片组，当然还需要提供芯片的驱动程序；</li>
+<li>应用程序：需要使用者输入发生声音的指令。</li>
+</ol>
+<p><strong>为何要学命令行的 shell？</strong></p>
+<ul>
+<li><p>命令行的 shell：大家都一样</p>
+</li>
+<li><p>远端管理：命令行就是比较快</p>
+</li>
+<li><p>Linux 的任督二脉： shell 是也</p>
+</li>
+</ul>
+<p><strong>系统的合法 shell 与 &#x2F;etc&#x2F;shells 功能</strong></p>
+<p>历史：由于早年的 Unix 年代，发展者众，所以由于 shell 依据发展者的不同就有许多的版本，例如常听到的 Bourne SHell （sh） 、在 Sun 里头默认的 C SHell、 商业上常用的 K SHell、, 还有 TCSH 等等，每一种 Shell 都各有其特点，Linux 使用的这一种版本就称为“ Bourne Again SHell （简称 bash） ”，这个 Shell 是 Bourne Shell 的增强版本，也是基准于 GNU 的架构下发展出来的。</p>
+<p><em>Linux可用的shells</em></p>
+<ul>
+<li>&#x2F;bin&#x2F;sh （已经被 &#x2F;bin&#x2F;bash 所取代）</li>
+<li>&#x2F;bin&#x2F;bash （就是 Linux 默认的 shell）</li>
+<li>&#x2F;bin&#x2F;tcsh （整合 C Shell ，提供更多的功能）</li>
+<li>&#x2F;bin&#x2F;csh （已经被 &#x2F;bin&#x2F;tcsh 所取代）</li>
+</ul>
+<blockquote>
+<p>系统某些服务在运行过程中，会去检查使用者能够使用的 shells ，而这些 shell 的查询就是借由 &#x2F;etc&#x2F;shells 这个文件</p>
+</blockquote>
+<p><strong>Bash Shell 的功能</strong></p>
+<ul>
+<li>命令编修能力 （history）：</li>
+</ul>
+<p>只要在命令行按“上下键”就可以找到前&#x2F;后一个输入的指令，而在很多distribution 里头，默认的指令记忆功能可以到达 1000 个！也就是说，曾经下达过的指令几乎都被记录下来了。<br>这么多的指令记录在哪里呢？在你的主文件夹内的 .bash_history 不过，需要留意的是，<br>~&#x2F;.bash_history 记录的是前一次登陆以前所执行过的指令， 而至于这一次登陆所执行的指令都被暂存在内存中，当你成功的登出系统后，该指令记忆才会记录到 .bash_history 当中</p>
+<ul>
+<li><p>命令与文件补全功能： （[tab] 按键的好处）</p>
+</li>
+<li><p>命令别名设置功能： （alias）</p>
+</li>
+</ul>
+<p>可以将<code>ls -al</code> 的命令通过<code>alias lm=&#39;ls -al&#39;</code>就可以将<code>lm</code>直接用来调命令了</p>
+<ul>
+<li><p>工作控制、前景背景控制： （job control, foreground, background）</p>
+</li>
+<li><p>程序化脚本： （shell scripts）</p>
+</li>
+<li><p>万用字符： （Wildcard）</p>
+</li>
+</ul>
+<p><strong>查询指令是否为 Bash shell 的内置命令： type</strong></p>
+<p>知道这个指令是来自于外部指令（指的是其他非 bash 所提供的指令） 或是内置在 bash 当中只要利用type 这个指令来观察即可。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> [-tpa] name</span><br><span class="line">选项与参数：</span><br><span class="line">：不加任何选项与参数时，<span class="built_in">type</span> 会显示出 name 是外部指令还是 bash 内置指令</span><br><span class="line">-t ：当加入 -t 参数时，<span class="built_in">type</span> 会将 name 以下面这些字眼显示出他的意义：</span><br><span class="line">file ：表示为外部指令；</span><br><span class="line"><span class="built_in">alias</span> ：表示该指令为命令别名所设置的名称；</span><br><span class="line"><span class="built_in">builtin</span> ：表示该指令为 bash 内置的指令功能；</span><br><span class="line">-p ：如果后面接的 name 为外部指令时，才会显示完整文件名；</span><br><span class="line">-a ：会由 PATH 变量定义的路径中，将所有含 name 的指令都列出来，包含 <span class="built_in">alias</span></span><br><span class="line">范例一：查询一下 <span class="built_in">ls</span> 这个指令是否为 bash 内置？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> <span class="built_in">ls</span></span><br><span class="line"><span class="built_in">ls</span> is aliased to `<span class="built_in">ls</span> --color=auto<span class="string">&#x27; &amp;lt;==未加任何参数，列出 ls 的最主要使用情况</span></span><br><span class="line"><span class="string">[dmtsai@study ~]$ type -t ls</span></span><br><span class="line"><span class="string">alias &amp;lt;==仅列出 ls 执行时的依据</span></span><br><span class="line"><span class="string">[dmtsai@study ~]$ type -a ls</span></span><br><span class="line"><span class="string">ls is aliased to `ls --color=auto&#x27;</span> &amp;lt;==最先使用 aliase</span><br><span class="line"><span class="built_in">ls</span> is /usr/bin/ls &amp;lt;==还有找到外部指令在 /bin/ls</span><br><span class="line">范例二：那么 <span class="built_in">cd</span> 呢？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> <span class="built_in">cd</span></span><br><span class="line"><span class="built_in">cd</span> is a shell <span class="built_in">builtin</span> &amp;lt;==看到了吗？ <span class="built_in">cd</span> 是 shell 内置指令</span><br></pre></td></tr></table></figure>
+
+<p><strong>指令的下达与快速编辑按钮</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">范例：如果指令串太长的话，如何使用两行来输出？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">cp</span> /var/spool/mail/root /etc/crontab \</span><br><span class="line">&amp;gt; /etc/fstab /root</span><br></pre></td></tr></table></figure>
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221744722.png" alt="image-20221022174441674" style="zoom: 80%;" />
+
+<p><strong>Shell 的变量功能</strong></p>
+<ul>
+<li>变量的可变性与方便性</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221748828.png" alt="image-20221022174833790" style="zoom: 67%;" />
+
+<p>由于系统已经帮我们规划好 MAIL 这个变量，所以使用者只要知道 mail 这个指 令如何使用即可， mail 会主动的取用 MAIL 这个变量，就能够如上图所示的取得自己的邮件信箱了</p>
+<ul>
+<li>影响 bash 环境操作的变量</li>
+</ul>
+<p>例如下达 ls 这个指令时，系统就是通过 PATH 这个变量里面的内容所记录的路径顺序来搜寻指令。如果在搜寻完 PATH 变量内的路径还找不到 ls 这个指令时， 就会在屏幕上显示“ command not found ”的错误讯息了。</p>
+<ul>
+<li>脚本程序设计 （shell script） 的好帮手</li>
+</ul>
+<p>例如你要写一个大 型的 script 时，有些数据因为可能由于使用者习惯的不同而有差异，比如说路径好了，由于该路径在 script 被使用在相当多的地方，如果下次换了一部主机，都要修改 script 里面的所有路径， 这个时候如果使用变量，而将该变量的定义写在最前面，后面相关的路径名称都以变量来取代， 那么你只要修改一行就等于修改整篇 script 了。</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221753121.png" alt="image-20221022175328075" style="zoom:67%;" />
+
+<p><strong>变量的取用与设置：echo, 变量设置规则, unset</strong></p>
+<h2 id="Linux正则表达式"><a href="#Linux正则表达式" class="headerlink" title="Linux正则表达式"></a>Linux正则表达式</h2>]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mysql基础</title>
+    <url>/2022/09/09/MySQL/</url>
+    <content><![CDATA[<p>1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）<br>2.C R U D：增删改查的专业术语。<br>3.层次、网状、关系型模型数据库</p>
+<h2 id="数据库开始"><a href="#数据库开始" class="headerlink" title="数据库开始"></a><strong>数据库开始</strong></h2><p>show databases;</p>
+<p>imformation_schema：信息数据库，其中保存着关于 MySQL 服务器所维护的所有其他数据库的信息，如数据库名，数据库的表，表栏的数据类型与访问权限等</p>
+<p>mysql：保存了用户信息。</p>
+<p>performance_schema：监控 MySQL 运行过程的资源消耗情况。</p>
+<p>sys： 通过过视图的形式把 information_schema 和 performance_schema 结合起来，查询出更加令人容易理解的数据。</p>
+<h2 id="数据库基本操作"><a href="#数据库基本操作" class="headerlink" title="数据库基本操作"></a><strong>数据库基本操作</strong></h2><p>创建数据库</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line">语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> student;</span><br><span class="line"></span><br><span class="line">判断创建语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> student;</span><br><span class="line"></span><br><span class="line">关键字变量名语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="symbol">`database`</span>;</span><br></pre></td></tr></table></figure>
+
+<p>删除数据库</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line">语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> student;</span><br><span class="line"></span><br><span class="line">判断删除语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">exists</span> student;</span><br><span class="line"></span><br><span class="line">关键字变量名语句：</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> <span class="symbol">`database`</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查看创建数据库的 SQL：</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">database</span> student;</span><br></pre></td></tr></table></figure>
+
+<p>回退的语句：</p>
+<p>Ctrl + C（^C）</p>
+<p>创建数据库设置指定的字符编码</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> teacher charset=gbk;</span><br></pre></td></tr></table></figure>
+
+<p>修改数据库字符编码</p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">alter database student charset<span class="operator">=</span>gbk<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a><strong>表操作</strong></h3><p>进入库:</p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">use fuck_school<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>展示表：</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">tables</span>;</span><br></pre></td></tr></table></figure>
+<p>制作表：</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> student(</span><br><span class="line"></span><br><span class="line">Id <span class="type">int</span>,</span><br><span class="line"></span><br><span class="line"><span class="type">name</span> <span class="type">varchar</span>(<span class="number">30</span>),</span><br><span class="line"></span><br><span class="line">age <span class="type">int</span>);</span><br></pre></td></tr></table></figure>
+<p>有 B 格的写法：</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> teacher(</span><br><span class="line"></span><br><span class="line">Id <span class="type">int</span> auto_increment <span class="keyword">primary key</span> <span class="keyword">comment</span> <span class="string">&#x27;主键 Id&#x27;</span>, </span><br><span class="line"></span><br><span class="line"><span class="type">name</span> <span class="type">varchar</span>(<span class="number">30</span>) <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">comment</span> <span class="string">&#x27;名字&#x27;</span>,</span><br><span class="line"></span><br><span class="line">phone <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">default</span> <span class="string">&#x27;暂时未知&#x27;</span> <span class="keyword">comment</span> <span class="string">&#x27;电话&#x27;</span>, </span><br><span class="line"></span><br><span class="line">adress <span class="type">varchar</span>(<span class="number">100</span>) <span class="keyword">default</span> <span class="string">&#x27;暂时未知&#x27;</span> <span class="keyword">comment</span> <span class="string">&#x27;家庭住址&#x27;</span></span><br><span class="line"></span><br><span class="line">)engine = innodb;</span><br></pre></td></tr></table></figure>
+<p>auto_increment 自动增长 用于类似于 ID 的数据（有规律性）</p>
+<p>primary key 主键 最主要的 靠它来区分表 </p>
+<p>comment 注释</p>
+<p>not null 不能为空</p>
+<p>default 默认值</p>
+<p>engine &#x3D; innodb 数据库引擎类型</p>
+<p>展示表结构</p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">desc teacher<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>删除表</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> frank,fuck;</span><br></pre></td></tr></table></figure>
+<p>修改表：</p>
+<p>添加元素</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> address <span class="type">varchar</span>(<span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+<p>按位元素</p>
+<p>之后</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> address <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">after</span> Id；</span><br></pre></td></tr></table></figure>
+<p>位数</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> address <span class="type">varchar</span>(<span class="number">30</span>) <span class="keyword">first</span>; </span><br></pre></td></tr></table></figure>
+<p>删除元素</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> address;</span><br></pre></td></tr></table></figure>
+<p>修改元素</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student change address `<span class="keyword">Add</span>` <span class="type">varchar</span>(<span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+<p>修改类型</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student modify Id <span class="type">varchar</span>(<span class="number">11</span>);</span><br></pre></td></tr></table></figure>
+<p>修改表名</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">rename</span> <span class="keyword">to</span> students;</span><br></pre></td></tr></table></figure>
+<p>清空表</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">truncate</span> <span class="keyword">table</span> teacher;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a><strong>数据操作</strong></h3><p>插入数据</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> teacher (Id, <span class="type">name</span>, phone, adress) <span class="keyword">values</span> (<span class="number">1</span>, <span class="string">&#x27;Fuck&#x27;</span>, <span class="string">&#x27;128989&#x27;</span>, <span class="string">&#x27;GuangZhou&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>查看数据</p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> teacher;</span><br></pre></td></tr></table></figure>
+<p>一次插入多条数据</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacher <span class="keyword">values</span> (<span class="keyword">Null</span>, <span class="string">&#x27;Tom&#x27;</span>, <span class="keyword">Null</span>, <span class="keyword">default</span>), (<span class="keyword">Null</span>, <span class="string">&#x27;Jack&#x27;</span>, <span class="keyword">Null</span>, <span class="keyword">default</span>);</span><br></pre></td></tr></table></figure>
+<p>删除数据( 注意 where 后面记得带上数据，否则可能误删多条数据！)</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> teacher <span class="keyword">where</span> <span class="type">name</span> = <span class="string">&#x27;Tom&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>清空表</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">truncate</span> <span class="keyword">table</span> teacher;</span><br></pre></td></tr></table></figure>
+<p>小细节</p>
+<p>delete 与 truncate 清表时，delete 会继续接下来的的顺序编号。</p>
+<p>更新数据( 同删除数据一样必须带上 where 不然可能带来灾难性的后果）</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">update</span> teacher <span class="keyword">set</span> <span class="type">name</span> = <span class="string">&#x27;Frank&#x27;</span> <span class="keyword">where</span> <span class="type">name</span> = <span class="string">&#x27;Fuck&#x27;</span>(Id = <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>查询部分数据</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> Id, <span class="type">name</span> <span class="keyword">from</span> teacher;</span><br></pre></td></tr></table></figure>
+<p>理论部分</p>
+<p>DDL data definition language 数据库定义语言 create alter drop show</p>
+<p>DML data manipution language 数据库操纵语言 insert update delete select</p>
+<p>DCL data control language 数据库控制语言 </p>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a><strong>数据类型</strong></h3><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp(</span><br><span class="line"></span><br><span class="line">  -&gt; id <span class="type">smallint</span> unsigned auto_increment <span class="keyword">primary key</span> <span class="keyword">comment</span> <span class="string">&#x27;id&#x27;</span>, </span><br><span class="line"></span><br><span class="line">  -&gt; age tinyint unsigned <span class="keyword">comment</span> <span class="string">&#x27;年龄&#x27;</span>, </span><br><span class="line"></span><br><span class="line">  -&gt; fuck <span class="type">int</span>(<span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">  -&gt; );</span><br></pre></td></tr></table></figure>
+<p><code>unsigned </code></p>
+<p>表示正值数据</p>
+<p><code>double</code> 类型精度丢失问题</p>
+<p>浮点型数据类型会有精度丢失的问题，比如小数位设置 6 位，存入 0.45，0.45 转换成二进制是个无限循环小数 0.01110011100…，无法准确表示，存储的时候会发生精度丢失。</p>
+<p><code>Decimal</code>（定点数）</p>
+<p>四舍五入后用字符串类型数据进行存储</p>
+<p>VarChar 与 Char</p>
+<p><code>VarChar</code> 为可变长字符串 节省空间 但是性能较低</p>
+<p><code>Char</code> 为定长字符串 空间占用可能较多 但性能高</p>
+<p>性能不同原因：VarChar 存储的不仅仅是数据内容，还有字节长度以及节点位置。</p>
+<p>Boolean</p>
+<p>insert into test values(true&#x2F;false&#x2F;1&#x2F;0);</p>
+<p>enum </p>
+<p>create table Dmeo(</p>
+<p>gender enum(‘women’,’man’,’?’)</p>
+<p>);</p>
+<p>枚举类型只能用枚举列表里面的元素来赋值（也可以通过整数进行存储）</p>
+<p>好处：存储实际上使用整数，速度比字符串快，限制数据节省空间。</p>
+<p>set 集合</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> Demo(</span><br><span class="line"></span><br><span class="line">hobby_novel <span class="keyword">set</span> (<span class="string">&#x27;secience&#x27;</span>,<span class="string">&#x27;love&#x27;</span>,<span class="string">&#x27;model&#x27;</span>)</span><br><span class="line"></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Demo (<span class="string">&#x27;seciece&#x27;</span>,<span class="string">&#x27;model&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>与 enum 相比可以一次选择多个元素</p>
+<p>时间</p>
+<p>create table Demo(</p>
+<p>createdTime date</p>
+<p>);</p>
+<p>insert into Demo values(‘2022-04-09 11:23:56’);</p>
+<h3 id="列属性完整性"><a href="#列属性完整性" class="headerlink" title="列属性完整性"></a><strong>列属性完整性</strong></h3><h3 id="主键"><a href="#主键" class="headerlink" title="主键"></a>主键</h3><p>设置主键</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo <span class="keyword">add</span> <span class="keyword">primary key</span>(id,<span class="type">name</span>);</span><br></pre></td></tr></table></figure>
+<p>删除主键</p>
+<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo <span class="keyword">drop</span> <span class="keyword">primary</span> <span class="keyword">key</span>;</span><br></pre></td></tr></table></figure>
+<p>主键的唯一性</p>
+<p>一个表里只能存在一个主键（复合主键也为一个主键） 并且主键每行数据都不能为空</p>
+<h3 id="唯一键"><a href="#唯一键" class="headerlink" title="唯一键"></a>唯一键</h3><p>设置唯一键</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo <span class="keyword">add</span> <span class="keyword">unique</span> (phone);</span><br></pre></td></tr></table></figure>
+<p>删除唯一键</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> demo <span class="keyword">drop</span> <span class="keyword">index</span> (phone);</span><br></pre></td></tr></table></figure>
+<p>主键和唯一键的区别</p>
+<p>1.主键不能为空，唯一键可以为空</p>
+<p>2.主键只有一个，唯一键可以存在多个</p>
+<p>3.主键可以在别的表里用，唯一键只在自己的表里瞎折腾</p>
+<p>数据库完整性</p>
+<p>1.保证字段完整 eg.保证存在主键、是设置自动增长，有唯一数据</p>
+<p>2.保证数据类型正确</p>
+<p>3.考虑表里的字段可能会被其他的表所用</p>
+<p>4.自己定义约束</p>
+<h3 id="外键"><a href="#外键" class="headerlink" title="外键"></a>外键</h3><p>添加外键</p>
+<figure class="highlight livescript"><table><tr><td class="code"><pre><span class="line">create table eatery(</span><br><span class="line"></span><br><span class="line">  -&gt; price int,</span><br><span class="line"></span><br><span class="line">  -&gt; stuId int(<span class="number">4</span>),</span><br><span class="line"></span><br><span class="line">  -&gt; foreign key <span class="function"><span class="params">(stuId)</span> <span class="title">references</span> <span class="title">stuId</span><span class="params">(stuId)</span> </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">  -&gt;</span> );</span><br></pre></td></tr></table></figure>
+<p>后期加入外键</p>
+<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> eatery_2 <span class="keyword">add</span> <span class="keyword">foreign</span> <span class="keyword">key</span> (stuId) <span class="keyword">references</span> stuId(stuId);</span><br></pre></td></tr></table></figure>
+<p>删除外键</p>
+<p>先查询 <code>show create table eatery_2;</code></p>
+<p>再删除 <code>alter table eatery_2 drop foreign key eatery_2_ ibfk_1;</code></p>
+<p>设计时最好在定义表时就设置好外键</p>
+<p>置空：用于删除数据</p>
+<p>级联：用于更新数据</p>
+<p>操作 </p>
+<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> eatery <span class="keyword">add</span> <span class="keyword">foreign</span> <span class="keyword">key</span> (stuId) <span class="keyword">references</span> stuId(stuId) <span class="keyword">on</span> <span class="keyword">delete</span> <span class="keyword">set</span> <span class="keyword">null</span> <span class="keyword">on</span> <span class="keyword">update</span> <span class="keyword">cascade</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a><strong>关系型数据库</strong></h2><p>关系：两张表的共有字段去确定数据的完整性</p>
+<p>行：一条数据 一条数据记录 实体</p>
+<p>列：一个字段 属性</p>
+<p>数据冗余：虽然会占用空间，但是提高了性能。</p>
+<p>实体和实体的关系：一对一，一对多，多对多。</p>
+<p>Code 范式</p>
+<p>1.确保字段的原子性</p>
+<p>2.非键字段必须依赖于键字段 说白了就是别他妈没事找事</p>
+<p>3.消除传递依赖</p>
+<h3 id="数据查询语句"><a href="#数据查询语句" class="headerlink" title="数据查询语句"></a><strong>数据查询语句</strong></h3><p><strong>单表查询</strong></p>
+<p><strong>select</strong></p>
+<figure class="highlight oxygene"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="string">&#x27;go fuck yourself&#x27;</span> <span class="keyword">as</span> qnmd<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="number">2</span>*<span class="number">7</span> <span class="keyword">as</span> <span class="keyword">result</span><span class="punctuation">;</span></span><br></pre></td></tr></table></figure>
+<p><strong>from</strong></p>
+<p><strong>dual</strong></p>
+<p>伪表：该表主要目的是为了保证在使用 SELECT 语句中的语句的完整性而提供的。</p>
+<figure class="highlight oxygene"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="number">2</span>*<span class="number">7</span> <span class="keyword">as</span> <span class="keyword">result</span> <span class="keyword">from</span> dual<span class="punctuation">;</span></span><br></pre></td></tr></table></figure>
+<p><strong>where</strong> </p>
+<p>&lt; &gt; &#x3D; !&#x3D; dddd</p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t3 <span class="keyword">where</span> age &gt;= <span class="number">18</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t4 <span class="keyword">where</span> adress = <span class="string">&#x27;Beijing&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t4 <span class="keyword">where</span> adress != <span class="string">&#x27;Shanghai&#x27;</span>; </span><br></pre></td></tr></table></figure>
+<p>&#x2F;or</p>
+<p><strong>in</strong></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> t4 <span class="keyword">where</span> adress <span class="keyword">not</span> <span class="title">in</span>(<span class="params"><span class="string">&#x27;Shanghai&#x27;</span></span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> t4 <span class="keyword">where</span> adress <span class="title">in</span>(<span class="params"><span class="string">&#x27;Shanghai&#x27;</span>,<span class="string">&#x27;Beijing&#x27;</span></span>)</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>between and</strong></p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t3 <span class="keyword">where</span> age <span class="keyword">between</span> <span class="number">15</span> <span class="keyword">and</span> <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a><strong>聚合函数</strong></h3><p>总和<code> select sum(english) from score;</code></p>
+<p>平均 <code>select avg(english) from score;</code></p>
+<p>最大<code> select max(english) from score;</code></p>
+<p>最小<code>select min(english) from score;</code></p>
+<p>次数<code> select count(id) from score; / select count(*) from score;</code></p>
+<p><strong>like</strong></p>
+<p>查询’张’后面带多个字符</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">name</span> <span class="keyword">like</span> <span class="string">&#x27;张%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>‘_’个数表示元素多少个字符</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">name</span> <span class="keyword">like</span> <span class="string">&#x27;张__&#x27;</span>; </span><br></pre></td></tr></table></figure>
+<p><strong>order by</strong> </p>
+<p>升序查询</p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> score <span class="keyword">order</span> <span class="keyword">by</span> chinese <span class="keyword">asc</span>;</span><br></pre></td></tr></table></figure>
+<p>降序查询</p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> score <span class="keyword">order</span> <span class="keyword">by</span> english <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>group by</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> avg(age) <span class="keyword">as</span> <span class="string">&#x27;年龄&#x27;</span> , address <span class="keyword">as</span> <span class="string">&#x27;地区&#x27;</span> <span class="keyword">from</span> <span class="keyword">info</span> <span class="keyword">group</span> <span class="keyword">by</span> address <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>group_concat()</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> group_concat(<span class="type">name</span>) , gender <span class="keyword">as</span> <span class="string">&#x27;性别&#x27;</span> <span class="keyword">from</span> student <span class="keyword">group</span> <span class="keyword">by</span> gender;</span><br></pre></td></tr></table></figure>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210141915708.png" alt="image-20221014191523641" style="zoom:33%;" />
+
+<p><strong>having</strong></p>
+<p>表示对生成的表进行查询，相当于 where</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> avg(age) <span class="keyword">as</span> <span class="string">&#x27;age&#x27;</span> , address <span class="keyword">from</span> <span class="keyword">info</span> <span class="keyword">group</span> <span class="keyword">by</span> address <span class="keyword">having</span> age &gt; <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>limit</strong></p>
+<p>limit 开始位置，结束长度；</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">info</span> <span class="keyword">order</span> <span class="keyword">by</span> age <span class="keyword">desc</span> <span class="keyword">limit</span> <span class="number">2</span>,<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>distinct all</strong></p>
+<p>去重</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> count(<span class="keyword">distinct</span> address) <span class="keyword">from</span> <span class="keyword">info</span>; </span><br></pre></td></tr></table></figure>
+<h3 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a><strong>多表查询</strong></h3><p><strong>inner join on</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="type">name</span>,chinese <span class="keyword">from</span> student <span class="keyword">inner</span> <span class="keyword">join</span> score <span class="keyword">on</span> student.id = score.id <span class="keyword">order</span> <span class="keyword">by</span> english <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+<p>注意事项：超过两张表时直接在后面继续续写一次语句。</p>
+<p><strong>left&#x2F;right join on</strong></p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> name,english <span class="keyword">from</span> student <span class="keyword">left</span>/<span class="keyword">right</span> <span class="keyword">join</span> score <span class="keyword">on</span> student.id = score.id <span class="keyword">order</span> <span class="keyword">by</span> english <span class="keyword">asc</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>cross join</strong> </p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">cross</span> <span class="keyword">join</span> t3; </span><br></pre></td></tr></table></figure>
+<p>有笛卡尔积内味了（数学组合）</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205759542.png" alt="image-20221005205759542" style="zoom: 33%;" />
+
+<p><strong>natural join</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">natural</span> (<span class="keyword">left</span><span class="operator">/</span><span class="keyword">right</span>) <span class="keyword">left</span> <span class="keyword">join</span> t3;</span><br></pre></td></tr></table></figure>
+<p>ps.若两表之间无公共字段，则返回的依旧是笛卡尔积。</p>
+<p><strong>using</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t1 <span class="keyword">inner</span> t3 <span class="keyword">using</span> (<span class="type">name</span>);</span><br></pre></td></tr></table></figure>
+<p>ps.当两张表为相同字段时，要采用加上using的结构，否则可能empty set输出。</p>
+<h3 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a><strong>子查询</strong></h3><p><strong>基本语法</strong></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> student <span class="keyword">where</span> id <span class="title">in</span>(<span class="params"><span class="keyword">select</span> id <span class="keyword">from</span> score <span class="keyword">where</span> english &lt;= <span class="number">85</span></span>)</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>not in</strong></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> student <span class="keyword">where</span> id <span class="keyword">not</span> <span class="title">in</span>(<span class="params"><span class="keyword">select</span> id <span class="keyword">from</span> score <span class="keyword">where</span> chinese &gt;= <span class="number">85</span></span>)</span>;</span><br></pre></td></tr></table></figure>
+<p>ps.用in或者not in主要是不止一个结果。</p>
+<p><strong>exists &#x2F; not exists</strong></p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">exists</span> (<span class="keyword">select</span> id <span class="keyword">from</span> score <span class="keyword">where</span> english &gt;= <span class="number">85</span>); </span><br></pre></td></tr></table></figure>
+<p>ps.只要有存在就输出。</p>
+<h2 id="高级部分"><a href="#高级部分" class="headerlink" title="高级部分"></a>高级部分</h2><h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p> <strong>视图的创建与查询</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> stu_all <span class="keyword">as</span> <span class="keyword">select</span> <span class="type">name</span>,phone,score <span class="keyword">from</span> student </span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> vw_stu_all</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改视图</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">view</span> stu_all <span class="keyword">as</span> <span class="keyword">select</span> <span class="type">name</span>,phone <span class="keyword">from</span> student</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除视图</strong></p>
+<figure class="highlight gauss"><table><tr><td class="code"><pre><span class="line"><span class="built_in">drop</span> <span class="built_in">view</span> vw_stu_all</span><br></pre></td></tr></table></figure>
+
+<p><strong>视图算法</strong></p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> algorithm=<span class="keyword">merge</span> <span class="keyword">view</span> stu_all <span class="keyword">as</span> <span class="keyword">select</span> name,phone,score <span class="keyword">from</span> student </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Merge算法</p>
+</blockquote>
+<p>合并算法，每当执行的时候,先将视图的sql语句与外部查询视图的sql语句,合并在一起,最终执行；这样操作对效率基本上没有什么影响</p>
+<blockquote>
+<p>Temptable</p>
+</blockquote>
+<p>临时表算法，创建一个临时表用于数据的填充以及查询，当数据量越大时，效率越低，且该视图无法进行update的操作。</p>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><p><strong>开启事务</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">start</span> <span class="keyword">transaction</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>回滚事务</strong></p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">rollback<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p><strong>提交事务</strong></p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">commit<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210191611437.png" alt="image-20221019161158358" style="zoom:50%;" />
+
+<p><strong>保存回滚点</strong></p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">savapoint</span> *；</span><br></pre></td></tr></table></figure>
+
+<p><strong>回到回滚点</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">rollback</span> <span class="keyword">to</span> *;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210191631958.png" alt="image-20221019163142908"></p>
+<p><strong>特性：ACID（InnoDB引擎下）</strong></p>
+<p>原子性（atomicity，或称不可分割性）、一致性（consistency）、隔离性（isolation，又称独立性）、持久性（durability）。</p>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>增删改很慢，查很快</p>
+<p><strong>创建索引</strong></p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">index</span> money_index <span class="keyword">on</span> wallet(id);</span><br></pre></td></tr></table></figure>
+
+<p><strong>添加索引</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> wallet <span class="keyword">add</span> <span class="keyword">index</span> money_index (<span class="type">money</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除索引</strong></p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">index</span> money_index <span class="keyword">on</span> wallet;</span><br></pre></td></tr></table></figure>
+
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p><strong>delimiter更改结束符号</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">delimiter <span class="operator">/</span><span class="operator">/</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>procedure存储过程</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create procedure proc()</span><br><span class="line">    -&gt; begin</span><br><span class="line">    -&gt; update wallet set money=money+50;</span><br><span class="line">    -&gt; insert into wallet values(5,3737);</span><br><span class="line">    -&gt; end //</span><br></pre></td></tr></table></figure>
+
+<p><strong>执行存储</strong></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function">call <span class="title">proc</span>()</span>;</span><br></pre></td></tr></table></figure>
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210200006857.png" alt="image-20221020000510172" style="zoom:50%;" />
+
+<p><strong>函数</strong></p>
+<p><em>数字</em></p>
+<p>rand()随机数</p>
+<p>ceil()向上取整</p>
+<p>round()向下取整</p>
+<p>floor()向下取整</p>
+<p>truncate(112,2)截取数字</p>
+<p><em>字符串</em></p>
+<p>ucase()大写</p>
+<p>lcase()小写</p>
+<p>left&#x2F;right(‘fuck’,2)截取</p>
+<p>substring(‘fuck’,1,3)截取中间</p>
+<p>concat(‘fu’,’ck’)拼接字符串</p>
+<p><em>时间</em></p>
+<p>unix_timestamp()时间毫秒值</p>
+<p>year&#x2F;month&#x2F;day(now())获取当前年&#x2F;月&#x2F;日</p>
+<p><em>加密</em></p>
+<p>sha(‘fuck’);</p>
+]]></content>
+      <categories>
+        <category>Mysql</category>
+      </categories>
+      <tags>
+        <tag>code</tag>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在线code安装教程</title>
+    <url>/2022/09/12/codeinstall/</url>
+    <content><![CDATA[<p>##前置条件：</p>
+<ol>
+<li>云服务器</li>
+<li>ssh的连接工具 如<a href="https://www.putty.org/">putty</a>，<a href="https://termius.com/">Termius</a>，mac用户可以直接用终端连接.</li>
+</ol>
+<h2 id="安装教程"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程</h2><p>首先使用你的ssh工具连接服务器</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>输入命令下载codeserver</span><br><span class="line">wget https:<span class="regexp">//gi</span>thub.com<span class="regexp">/coder/</span>code-server<span class="regexp">/releases/</span>download<span class="regexp">/v4.6.1/</span>code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>解压</span><br><span class="line">tar -zxvf code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>进入codeserver目录</span><br><span class="line">cd code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64</span><br><span class="line"><span class="regexp">//</span>设置密码(密码在双引号内)</span><br><span class="line">export PASSWORD=<span class="number">123456</span></span><br><span class="line"><span class="regexp">//</span>启动codeserver</span><br><span class="line">./code-server --port <span class="number">8081</span> --host <span class="number">0.0</span>.<span class="number">0.0</span> --auth password</span><br></pre></td></tr></table></figure>
+
+<p>在浏览器上方输入<code>你的服务器IP:8081</code> 即可进入登录界面</p>
+<p>这个时候输入之前设置的密码就可以进入codeserver了</p>
+<h2 id="配置Screen进程守护"><a href="#配置Screen进程守护" class="headerlink" title="配置Screen进程守护"></a>配置Screen进程守护</h2><p>之前的步骤有一个问题,就是当你退出ssh进程的时候,你会发现网站进不去了。</p>
+<p>因为当ssh进程关闭的时候，会自动清除当前进程。</p>
+<p>我们得下载Screen来给codeserver进行进程守护，防止进程自动退出。</p>
+<h2 id="安装Screen"><a href="#安装Screen" class="headerlink" title="安装Screen"></a>安装Screen</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>复制适合自己系统的命令安装</span><br><span class="line"><span class="regexp">//</span>Centos系统</span><br><span class="line">yum install screen</span><br><span class="line"><span class="regexp">//</span>Debian/Ubuntu系统</span><br><span class="line">apt-get install screen</span><br></pre></td></tr></table></figure>
+<h2 id="保护进程实现后台运行"><a href="#保护进程实现后台运行" class="headerlink" title="保护进程实现后台运行"></a>保护进程实现后台运行</h2><figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">//</span>以code_server为名字建立进程</span><br><span class="line">screen -S code_server</span><br><span class="line"><span class="string">//</span>再次输入以下命令</span><br><span class="line"><span class="keyword">cd</span> code-server-4.6.1-linux-amd64</span><br><span class="line">export PASSWORD=123456</span><br><span class="line"><span class="string">./code-server</span> <span class="params">--port</span> 8081 <span class="params">--host</span> 0.0.0.0 <span class="params">--auth</span> password</span><br></pre></td></tr></table></figure>
+
+
+
+<p>此时关闭ssh终端,也可以照常进入网页啦！</p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE-2022-09-06-215111.jpg"></p>
+<p>微软官方<a href="https://vscode.dev/">请输入链接描述</a></p>
+]]></content>
+      <categories>
+        <category>toy</category>
+      </categories>
+      <tags>
+        <tag>toy</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux toy合集</title>
     <url>/2022/09/15/fucktoy/</url>
     <content><![CDATA[<h1 id="Linux命令神器-The-Fuck"><a href="#Linux命令神器-The-Fuck" class="headerlink" title="Linux命令神器 The Fuck"></a>Linux命令神器 <code>The Fuck</code></h1><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/example.gif" alt="example"></p>
@@ -3297,7 +3297,7 @@ $$
 <ul>
 <li>IP地址标识主机、路由器</li>
 <li>但IP地址不好记忆，不便人类使用(没有意义)</li>
-<li>人类一般倾向于使用一些有意义的字符串来标识Internet上的设备<br>例如：<a href="mailto:&#x71;&#122;&#x68;&#101;&#x6e;&#x67;&#x40;&#x75;&#x73;&#116;&#x63;&#46;&#x65;&#x64;&#117;&#46;&#x63;&#110;">&#x71;&#122;&#x68;&#101;&#x6e;&#x67;&#x40;&#x75;&#x73;&#116;&#x63;&#46;&#x65;&#x64;&#117;&#46;&#x63;&#110;</a> 所在的邮件服务器<br><a href="http://www.ustc.edu.cn/">www.ustc.edu.cn</a> 所在的web服务器</li>
+<li>人类一般倾向于使用一些有意义的字符串来标识Internet上的设备<br>例如：<a href="mailto:&#113;&#x7a;&#x68;&#101;&#110;&#103;&#x40;&#x75;&#115;&#x74;&#x63;&#x2e;&#101;&#x64;&#x75;&#x2e;&#x63;&#110;">&#113;&#x7a;&#x68;&#101;&#110;&#103;&#x40;&#x75;&#115;&#x74;&#x63;&#x2e;&#101;&#x64;&#x75;&#x2e;&#x63;&#110;</a> 所在的邮件服务器<br><a href="http://www.ustc.edu.cn/">www.ustc.edu.cn</a> 所在的web服务器</li>
 <li>存在着“字符串”—IP地址的转换的必要性</li>
 <li>人类用户提供要访问机器的“字符串”名称</li>
 <li>由DNS负责转换成为二进制的网络地址</li>
@@ -4515,7 +4515,287 @@ $$
 </ul>
 </li>
 </ul>
-]]></content>
+<p><strong>流水线协议：总结</strong></p>
+<p>Go-back-N:</p>
+<ul>
+<li>发送端最多在流水线中有N个未确认的分组</li>
+<li>接收端只是发送累计型确认cumulative ack<ul>
+<li>接收端如果发现gap，不确认新到来的分组</li>
+</ul>
+</li>
+<li>发送端拥有对最老的未确认分组的定时器<ul>
+<li>只需设置一个定时器</li>
+<li>当定时器到时时，重传所有未确认分组</li>
+</ul>
+</li>
+</ul>
+<p><strong>GBN：发送方扩展的FSM</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211031101379.png" alt="image-20221103110139283" style="zoom:50%;" />
+
+<p><strong>GBN：接收方扩展的FSM</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211031103693.png" alt="image-20221103110354638" style="zoom:50%;" />
++ 只发送ACK：对顺序接收的最高序号的分组
+  + 可能会产生重复的ACK
+  + 只需记住expectedseqnum；接收窗口=1
+    + 只一个变量就可表示接收窗口
++ 对乱序的分组：
+  + 丢弃（不缓存） -> 在接收方不被缓存！
+  + 对顺序接收的最高序号的分组进行确认-累计确认
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211031112757.png" alt="image-20221103111216709" style="zoom:50%;" />
+
+<p><strong>运行中的GBN</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211031113486.png" alt="image-20221103111319392" style="zoom: 50%;" />
+
+<p><strong>选择重传SR</strong></p>
+<ul>
+<li>接收方对每个正确接收的分组，分别发送ACKn（非累积确认）<ul>
+<li>接收窗口&gt;1<ul>
+<li>可以缓存乱序的分组</li>
+</ul>
+</li>
+<li>终将分组按顺序交付给上层</li>
+</ul>
+</li>
+<li>发送方只对那些没有收到ACK的分组进行重发-选择性重发<ul>
+<li>发送方为每个未确认的分组设定一个定时器</li>
+</ul>
+</li>
+<li>发送窗口的最大值（发送缓冲区）限制发送未确认分组的个数</li>
+</ul>
+<p><strong>选择重传</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211031116042.png" alt="image-20221103111658976" style="zoom:50%;" />
+
+<p><strong>选择重传SR的运行</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211031117198.png" alt="image-20221103111749132" style="zoom:50%;" />
+
+<p><strong>对比GBN和SR</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211031118708.png" alt="image-20221103111826652" style="zoom:50%;" />
++ 适用范围
+  + 出错率低：比较适合GBN，出错非常罕见，没有必要用复杂的SR，为罕见的事件做日常的准备和复杂处理
++ 链路容量大（延迟大、带宽大）：比较适合SR而不是GBN，一点出错代价太大
+
+<p><strong>窗口的最大尺寸</strong></p>
+<ul>
+<li>GBN: 2^n-1</li>
+<li>SR:2^(n-1)<br>例如：n&#x3D;2; 序列号：0,1,2,3<ul>
+<li>GBN&#x3D;3</li>
+<li>SR&#x3D;2 <img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211031122834.png" alt="image-20221103112228760" style="zoom:50%;" /></li>
+</ul>
+</li>
+</ul>
+<p>SR的例子：</p>
+<ul>
+<li>接收方看不到二者的区别！</li>
+<li>将重复数据误认为新数据 (a)</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211031123646.png" alt="image-20221103112305589" style="zoom:50%;" />
+
+<h3 id="面向连接的传输：-TCP"><a href="#面向连接的传输：-TCP" class="headerlink" title="面向连接的传输： TCP"></a>面向连接的传输： TCP</h3><p><strong>TCP：概述</strong></p>
+<ul>
+<li>点对点：<ul>
+<li>一个发送方，一个接收方</li>
+</ul>
+</li>
+<li>可靠的、按顺序的字节流：<ul>
+<li>没有报文边界</li>
+</ul>
+</li>
+<li>管道化（流水线）：<ul>
+<li>TCP拥塞控制和流量控制设置窗口大小</li>
+</ul>
+</li>
+<li>发送和接收缓存</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211031125622.png" alt="image-20221103112547571" style="zoom:50%;" />
+
+<ul>
+<li>全双工数据：<ul>
+<li>在同一连接中数据流双向流动</li>
+<li>MSS：最大报文段大小</li>
+</ul>
+</li>
+<li>面向连接：<ul>
+<li>在数据交换之前，通过握手（交换控制报文） 初始化发送方、接收方的状态变量</li>
+</ul>
+</li>
+<li>有流量控制：<ul>
+<li>发送方不会淹没接收方</li>
+</ul>
+</li>
+</ul>
+<p><strong>TCP报文段结构</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211031127913.png" alt="image-20221103112749842" style="zoom:50%;" />
+
+<p><strong>TCP 序号, 确认号</strong></p>
+<p>序号：</p>
+<ul>
+<li><p>报文段首字节的在字节流的编号<br>确认号:</p>
+</li>
+<li><p>期望从另一方收到的下一个字节的序号</p>
+</li>
+<li><p>累积确认</p>
+</li>
+</ul>
+<p>Q:接收方如何处理乱序的报文段-没有规定</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211031130498.png" alt="image-20221103113009442" style="zoom:50%;" />
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211031130222.png" alt="image-20221103113053163" style="zoom:50%;" />
+
+<p><strong>TCP往返延时（RTT）和超时</strong><br>Q： 怎样设置TCP超时？</p>
+<ul>
+<li>比RTT要长<ul>
+<li>但RTT是变化的</li>
+</ul>
+</li>
+<li>太短：太早超时<ul>
+<li>不必要的重传</li>
+</ul>
+</li>
+<li>太长：对报文段丢失反应太慢，消极</li>
+</ul>
+<p>Q：怎样估计RTT？</p>
+<ul>
+<li><p>SampleRTT：测量从报文段发出到收到确认的时间</p>
+<ul>
+<li>如果有重传，忽略此次测量</li>
+</ul>
+</li>
+<li><p>SampleRTT会变化，因此估计的RTT应该比较平滑</p>
+<ul>
+<li>对几个最近的测量值求平均，而不是仅用当前的SampleRTT</li>
+</ul>
+</li>
+<li><p>指数加权移动平均</p>
+</li>
+<li><p>过去样本的影响呈指数衰减</p>
+</li>
+<li><p>推荐值：α &#x3D; 0.125</p>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211031137200.png" alt="image-20221103113726141" style="zoom:50%;" />
+
+<p>设置置超时</p>
+<ul>
+<li>EstimtedRTT + 安全边界时间<ul>
+<li>EstimatedRTT变化大 (方差大) 较大的安全边界时间</li>
+</ul>
+</li>
+<li>SampleRTT会偏离EstimatedRTT多远</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211042151755.png" alt="image-20221104215119677" style="zoom:50%;" />
+
+<p><strong>TCP：可靠数据传输</strong></p>
+<ul>
+<li><p>TCP在IP不可靠服务的基础上建立了rdt</p>
+<ul>
+<li>管道化的报文段<ul>
+<li>GBN or SR</li>
+</ul>
+</li>
+<li>累积确认（像GBN）</li>
+<li>单个重传定时器（像GBN）</li>
+<li>是否可以接受乱序的，没有规范</li>
+</ul>
+</li>
+<li><p>通过以下事件触发重传</p>
+<ul>
+<li>超时（只重发那个最早的未确认段：SR）</li>
+<li>重复的确认<ul>
+<li>例子：收到了ACK50,之后又收到3个ACK50</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>首先考虑简化的TCP发送方：</p>
+<ul>
+<li>忽略重复的确认</li>
+<li>忽略流量控制和拥塞控制</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211042158687.png" alt="image-20221104215850584" style="zoom:50%;" />
+
+<p><strong>TCP发送方事件</strong></p>
+<p>从应用层接收数据：</p>
+<ul>
+<li>用nextseq创建报文段</li>
+<li>序号nextseq为报文段首字节的字节流编号</li>
+<li>如果还没有运行，启动定时器<ul>
+<li>定时器与最早未确认的报文段关联</li>
+<li>过期间隔：TimeOutInterval</li>
+</ul>
+</li>
+</ul>
+<p>超时：</p>
+<ul>
+<li>重传后沿最老的报文段</li>
+<li>重新启动定时</li>
+</ul>
+<p>收到确认：</p>
+<ul>
+<li>如果是对尚未确认的报文段确认<ul>
+<li>更新已被确认的报文序号</li>
+<li>如果当前还有未被确认的报文段，重新启动定时器</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211042218435.png" alt="image-20221104221826359" style="zoom: 50%;" />
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211042220153.png" alt="image-20221104222009049" style="zoom: 50%;" />
+
+<p><strong>TCP:重传</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211042220945.png" alt="image-20221104222054850" style="zoom:50%;" />
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211042224698.png" alt="image-20221104222436621" style="zoom: 50%;" />
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211042225399.png" alt="image-20221104222518297" style="zoom:50%;" />
+
+<p><strong>快速重传</strong></p>
+<ul>
+<li>超时周期往往太长：<ul>
+<li>在重传丢失报文段之前的延时太长</li>
+</ul>
+</li>
+<li>通过重复的ACK来检测报文段丢失<ul>
+<li>发送方通常连续发送大量报文段</li>
+<li>如果报文段丢失，通常会引起多个重复的ACK</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211042226060.png" alt="image-20221104222651998" style="zoom: 50%;" />
+
+<ul>
+<li>如果发送方收到同一数据的3个冗余ACK，重传最小序号的段：<ul>
+<li>快速重传：在定时器过时之前重发报文段</li>
+<li>它假设跟在被确认的数据后面的数据丢失了<ul>
+<li>第一个ACK是正常的</li>
+<li>收到第二个该段的ACK，表示接收方收到一个该段后的乱序段<br>收到第3，4个该段的ack，表示接收方收到该段之后的2个，3个乱序段，可能性非常大段丢失了</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211042228508.png" alt="image-20221104222826437" style="zoom:33%;" />
+
+<p><strong>快速重传算法</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211042228660.png" alt="image-20221104222856582" style="zoom:50%;" />
+
+<p><strong>TCP 流量控制</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211042230429.png" alt="image-20221104223000333" style="zoom:50%;" />
+
+<ul>
+<li>接收方在其向发送方的TCP段头部的rwnd字段“通告”其空闲buffer大小<ul>
+<li>RcvBuffer大小通过socket选项设置 (典型默认大小为4096 字节)</li>
+<li>很多操作系统自动调整RcvBuffer</li>
+</ul>
+</li>
+<li>发送方限制未确认(“in-flight”)字节的个数≤接收方发送过来的 rwnd 值</li>
+<li>保证接收方不会被淹没</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211042231423.png" alt="image-20221104223124358" style="zoom:50%;" />
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211042231282.png" alt="image-20221104223157199" style="zoom: 33%;" />]]></content>
       <categories>
         <category>Base</category>
       </categories>
