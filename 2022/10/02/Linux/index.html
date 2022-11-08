@@ -35,8 +35,9 @@
 <meta property="og:image" content="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221744722.png">
 <meta property="og:image" content="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221748828.png">
 <meta property="og:image" content="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221753121.png">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211061012414.png">
 <meta property="article:published_time" content="2022-10-02T03:41:10.000Z">
-<meta property="article:modified_time" content="2022-10-31T01:29:27.237Z">
+<meta property="article:modified_time" content="2022-11-06T04:38:36.029Z">
 <meta property="article:author" content="Dreamin">
 <meta property="article:tag" content="博客">
 <meta property="article:tag" content="hexo">
@@ -172,7 +173,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -183,7 +184,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -277,7 +278,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-10-31 09:29:27" itemprop="dateModified" datetime="2022-10-31T09:29:27+08:00">2022-10-31</time>
+      <time title="修改时间：2022-11-06 12:38:36" itemprop="dateModified" datetime="2022-11-06T12:38:36+08:00">2022-11-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -296,14 +297,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4.5k</span>
+      <span>6.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>6 分钟</span>
     </span>
 </div>
 
@@ -473,7 +474,35 @@
 <img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221753121.png" alt="image-20221022175328075" style="zoom:67%;" />
 
 <p><strong>变量的取用与设置：echo, 变量设置规则, unset</strong></p>
-<h2 id="Linux正则表达式"><a href="#Linux正则表达式" class="headerlink" title="Linux正则表达式"></a>Linux正则表达式</h2>
+<h2 id="Linux正则表达式"><a href="#Linux正则表达式" class="headerlink" title="Linux正则表达式"></a>Linux正则表达式</h2><p><strong>概念：</strong>正则表达式 （Regular Expression, RE, 或称为常规表达式）是通过一些特殊字符的排列，用以“搜寻&#x2F;取代&#x2F;删除”一列或多列文字字串， 简单的说，正则表达式就是用在字串的处理上面的 一项“表示式”。正则表达式并不是一个工具程序， 而是一个字串处理的标准依据，如果想要以正则表达式的方式处理字串，就得要使用支持正则表达式的工具程序才行， 这类的工具程序很多，例如 vi, sed, awk 等等</p>
+<ul>
+<li>例如</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mua@fuck:~$ <span class="keyword">grep</span> <span class="string">&#x27;ls&#x27;</span> <span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>*</span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>accounts-daemon.service:ProtectHome=<span class="keyword">false</span></span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>accounts-daemon.service:PrivateTmp=<span class="keyword">false</span></span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>accounts-daemon.service:PrivateUsers=<span class="keyword">false</span></span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>alsa-restore.service:# can be switched using a <span class="keyword">file</span> exist check - <span class="regexp">/etc/</span>alsa/state-daemon.conf .</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>正则表达式对于系统管理员的用途</li>
+</ul>
+<p>由于系统如果在繁忙的情况之下，每天产生的讯息信息会多到你无法想像的地步，运用正则表达式极度简化操作人员从千百行的数据里面找出一行有问题的讯息的效率。</p>
+<p><strong>基础正则表达式</strong></p>
+<p><em><strong>语系对正则表达式的影响</strong></em></p>
+<p>文件其实记录的仅有 0 与 1，我们看到的字符文字与数字都是通过编码表转换来的。由于不同语系的编码数据并不相同，所以就会造成数据撷取结果的差异了。所以使用正则表达式时，需要特别留意当时环境的语系为何， 否则可能会发现与别人不相同的撷取结果。</p>
+<ul>
+<li>“ LANG&#x3D;C ”语系数据“ 						<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211061012414.png" alt="image-20221106101250300" style="zoom: 67%;" /></li>
+</ul>
+<p><em><strong>grep 的一些进阶选项</strong></em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mua@fuck:~$ grep [-A] [-B] [--color=auto] <span class="string">&#x27;搜寻字串&#x27;</span> filename</span><br><span class="line">选项与参数：</span><br><span class="line">-A ：后面可加数字，为 after 的意思，除了列出该行外，后续的 n 行也列出来；</span><br><span class="line">-B ：后面可加数字，为 befer 的意思，除了列出该行外，前面的 n 行也列出来；</span><br><span class="line">--color=auto 可将正确的那个撷取数据列出颜色</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>基础正则表达式练习</strong></em></p>
+<ul>
+<li>搜寻特定字符</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mua@fuck:~$  grep -n <span class="string">&#x27;the&#x27;</span> regular_express.txt</span><br><span class="line">8:I can<span class="string">&#x27;t finish the test.^M</span></span><br><span class="line"><span class="string">12:the symbol &#x27;</span>*<span class="string">&#x27; is represented as start.</span></span><br><span class="line"><span class="string">15:You are the best is mean you are the no. 1.</span></span><br><span class="line"><span class="string">16:The world &amp;lt;Happy&amp;gt; is the same with &quot;glad&quot;.</span></span><br><span class="line"><span class="string">18:google is the best tools for search keyword.</span></span><br><span class="line"><span class="string">// 反向</span></span><br><span class="line"><span class="string">mua@fuck:~$ grep -vn &#x27;</span>the<span class="string">&#x27; regular_express.txt</span></span><br><span class="line"><span class="string">//不论大小写</span></span><br><span class="line"><span class="string">mua@fuck:~$ grep -in &#x27;</span>the<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string">8:I can&#x27;</span>t finish the <span class="built_in">test</span>.^M</span><br><span class="line">9:Oh! The soup taste good.^M</span><br><span class="line">12:the symbol <span class="string">&#x27;*&#x27;</span> is represented as start.</span><br><span class="line">14:The gd software is a library <span class="keyword">for</span> drafting programs.^M</span><br><span class="line">15:You are the best is mean you are the no. 1.</span><br><span class="line">16:The world &amp;lt;Happy&amp;gt; is the same with <span class="string">&quot;glad&quot;</span>.</span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>利用中括号[]来搜寻集合字符</li>
+</ul>
+
     </div>
 
     
@@ -509,8 +538,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/09/26/softbox/" rel="prev" title="程序员的软件抽屉(Windows)">
-                  <i class="fa fa-chevron-left"></i> 程序员的软件抽屉(Windows)
+                <a href="/2022/10/02/beatOpenWrt/" rel="prev" title="折腾OpenWrt的半个月">
+                  <i class="fa fa-chevron-left"></i> 折腾OpenWrt的半个月
                 </a>
             </div>
             <div class="post-nav-item">
@@ -548,14 +577,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">60k</span>
+    <span title="站点总字数">69k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">55 分钟</span>
+    <span title="站点阅读时长">1:03</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
