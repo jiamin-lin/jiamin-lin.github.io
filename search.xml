@@ -1619,6 +1619,252 @@
       </tags>
   </entry>
   <entry>
+    <title>折腾OpenWrt的半个月</title>
+    <url>/2022/10/02/beatOpenWrt/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>toy</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>OpenWrt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux</title>
+    <url>/2022/10/02/Linux/</url>
+    <content><![CDATA[<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="计算机基础"><a href="#计算机基础" class="headerlink" title="计算机基础"></a>计算机基础</h2><p><strong>1.软件程序的运行</strong></p>
+<p>硬件如同人的身体，软件如同人的灵魂。没有了灵魂的躯体也不过就是行尸走肉</p>
+<p>**1.1 **机器程序与编译程序</p>
+<p>电脑只认识0与1而已，而且电脑最重要的运算与逻辑判断是在CPU内部， 而 CPU其实是具有微指令集的。因此，我们需要CPU帮忙工作时，就得要参考微指令集的内容， 然后撰写让CPU读的懂的指令码给CPU执行，这样就能够让CPU运行了。</p>
+<p>流程：</p>
+<ul>
+<li>需要了解机器语言：机器只认识0与1，因此你必须要学习直接写给机器看的语言。</li>
+<li>需要了解所有硬件的相关功能函数：因为你的程序必须要写给机器看， 当然你就得要参考机器本身的功能，然后针对该功能去撰写程序码。</li>
+<li>程序不具有可携性：每个CPU都有独特的微指令集，同样的，每个硬件都有其功能函数。</li>
+<li>程序具有专一性：因为这样的程序必须要针对硬件功能函数来撰写， 如果已经开发了一支浏览器程序，想要再开发文件管理程序时，还是得从头再参考硬件的功能函数来继续撰写。</li>
+</ul>
+<p>所以，需要开发让人类能看得懂得程序语言。然后创造一种“编译器”让人类的写的程序语言转换为机器能看懂的机器码。常见的编译器有C,C++,Java,Fortran等等。</p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220922203728264.png" alt="image-20220922203728264"></p>
+<h2 id="关于学习Linux"><a href="#关于学习Linux" class="headerlink" title="关于学习Linux"></a>关于学习Linux</h2><p>两个重要的因素是造成我们学习的原动力： </p>
+<ul>
+<li><p>创建兴趣： Linux上面可以玩的东西真的太多了，你可以选择一个有趣的课题来深入的玩 一玩！不论是Shell还是图形接口等等， 只要能够玩出兴趣，那么再怎么苦你都会不觉得喔！</p>
+</li>
+<li><p>成就感： 成就感是怎么来的？说实在话，就是“被认同”来的！怎么被认同呢？写心得分享啊！当你写了心得分享，并且公告在 BBS 上面，自然有朋友会到你的网页去瞧一瞧， 当大家觉得你的网页内容很棒的时候， 哈哈！你肯定会加油继续的分享下去而无法自拔。</p>
+</li>
+</ul>
+<h2 id="主机规划与磁盘分区"><a href="#主机规划与磁盘分区" class="headerlink" title="主机规划与磁盘分区"></a>主机规划与磁盘分区</h2><p><strong>Linux各硬件设备在系统中为文件名</strong></p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001164035525.png" alt="image-20221001164035525"></p>
+<p><strong>磁盘分区</strong></p>
+<p><strong>MBR 主要分区、延伸分区与逻辑分区的特性：</strong></p>
+<ul>
+<li>主要分区与延伸分区最多可以有四笔（硬盘的限制） ；</li>
+<li>延伸分区最多只能有一个（操作系统的限制）；</li>
+<li>逻辑分区是由延伸分区持续切割出来的分区；</li>
+<li>能够被格式化后，作为数据存取的分区为主要分区与逻辑分区。延伸分区无法格式化； </li>
+<li>逻辑分区的数量依操作系统而不同，在Linux系统中SATA硬盘已经可以突破63个以上的分区限制；</li>
+</ul>
+<p><strong>MBR分区限制：</strong></p>
+<ul>
+<li>操作系统无法抓取到 2.2T 以上的磁盘容量</li>
+<li>MBR 仅有一个区块，若被破坏后，经常无法或很难救援</li>
+<li>MBR 内的存放开机管理程序的区块仅 446Bytes，无法容纳较多的程序码</li>
+</ul>
+<p><strong>GUID partition table, GPT 磁盘分区表：</strong></p>
+<ul>
+<li>与 MBR 仅使用第一个 512Bytes 区块来纪录不同， GPT 使用了 34 个 LBA 区块来纪录分区信息</li>
+<li>GPT 除了前面 34 个 LBA 之外，整个磁盘的最后 33 个 LBA 也拿来作为另一个备份</li>
+</ul>
+<p><strong>计算机开机流程：</strong></p>
+<ol>
+<li>BIOS：开机主动执行的固件，会认识第一个可开机的设备；</li>
+<li>MBR：第一个可开机设备的第一个扇区内的主要开机记录区块，内含开机管理程序；</li>
+<li>开机管理程序（boot loader）：一支可读取核心文件来执行的软件；</li>
+<li>核心文件：开始操作系统的功能</li>
+</ol>
+<p><strong>BIOS与UEFI BIOS区别</strong></p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001200526805.png" alt="image-20221001200526805"></p>
+<p><strong>主机硬盘的规划</strong></p>
+<p>频繁读写的目录</p>
+<ul>
+<li>boot</li>
+<li>&#x2F; </li>
+<li>&#x2F;home </li>
+<li>&#x2F;var </li>
+<li>Swap</li>
+</ul>
+<h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><ul>
+<li><p>如果磁盘容量大于 2TB 以上时，系统会自动使用 GPT 分区方式来处理磁盘分区。</p>
+</li>
+<li><p>GPT 分区已经没有延伸与逻辑分区的概念，可以想像成所有的分区都是主分区，某些操作系统要使用 GPT 分区时，必须要搭配 UEFI 的新型 BIOS 格式才可安装使用。</p>
+</li>
+<li><p>Linux操作系统的文件使用目录树系统，与磁盘的对应需要有“挂载”的动作才行；</p>
+</li>
+<li><p>开机的流程由：BIOS–&gt;MBR–&gt;–&gt;boot loader–&gt;核心文件</p>
+</li>
+</ul>
+<h2 id="Vim程序编辑器"><a href="#Vim程序编辑器" class="headerlink" title="Vim程序编辑器"></a>Vim程序编辑器</h2><p><strong>三种模式</strong></p>
+<ul>
+<li>一般指令模式 （command mode）</li>
+<li>编辑模式 （insert mode）</li>
+<li>命令行命令模式 （command-line mode）</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210211616324.png" alt="image-20221021161616258" style="zoom:50%;" />
+
+<p><strong>常见命令</strong></p>
+<p><em>1.输入模式 (i):</em><br>按 i 进入insert输入模式<br>HJKL代替上下左右<br>H向左 L向右 J向下 K向上<br>Ctrl + B 向上翻页<br>Ctrl + F 想下翻页<br>Ctrl + E&#x2F;Y 滚动<br>Shift + G 末尾<br>双击gg 首字符</p>
+<p><em>2.命令模式(esc):</em><br>i 光标位置前面输入<br>a 光标位置后面输入<br>o enter到下一行输入<br>x 删除光标所在字符<br>dd 删除整个一行<br>u 撤销<br>dw 删除整个单词<br>b 跳跃单词首字母<br>e 跳跃单词尾字母<br>w 跳跃到下一个单词首字母</p>
+<p>shift 省略多个单词直接跳<br>Shift + 6 ^ 跳跃到本行的首字母<br>Shift + 4 $ 跳跃到本行的dd尾字母<br>按 0 跳跃到本行首个字符（ 包括空格）<br>{}移动整段大括号<br>yw 表示复制一个单词<br>y$ 表示从当前开始，往后复制到行末尾<br>p 粘贴剪贴板的内容<br><em>3.可视化模式</em><br>v + hjkl 进行字符选择<br>V + hjkl 进行行选择<br>v + G 全选<br>快捷选择<br>vaw 快速选择单词<br>vab 包含括号<br>vaB 包含大括号<br>shift + &lt;&gt; 前后缩进<br>v shift + · ~ 字母大小写切换<br>v + u&#x2F;U 全部转换为小写&#x2F;大写<br>行号+g<br>g 跳跃到指定的行号<br>快速查找<br>&#x2F;查找字符 按n 进入下一个<br>快速替换<br>按行:s&#x2F;查找单词&#x2F;替换单词&#x2F;g<br>全局:%s&#x2F;查找单词&#x2F;替换单词&#x2F;g<br>指定:首，尾s&#x2F;查找&#x2F;替换&#x2F;g<br>+c 询问</p>
+<h2 id="Bashshell"><a href="#Bashshell" class="headerlink" title="Bashshell"></a>Bashshell</h2><p><strong>硬件、核心与 Shell</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221653386.png" alt="image-20221022165342252" style="zoom:50%;" />
+
+<p>例子：用电脑播放音乐</p>
+<ol>
+<li>硬件：当然就是需要你的硬件有“声卡芯片”这个配备，否则怎么会有声音；</li>
+<li>核心管理：操作系统的核心可以支持这个芯片组，当然还需要提供芯片的驱动程序；</li>
+<li>应用程序：需要使用者输入发生声音的指令。</li>
+</ol>
+<p><strong>为何要学命令行的 shell？</strong></p>
+<ul>
+<li><p>命令行的 shell：大家都一样</p>
+</li>
+<li><p>远端管理：命令行就是比较快</p>
+</li>
+<li><p>Linux 的任督二脉： shell 是也</p>
+</li>
+</ul>
+<p><strong>系统的合法 shell 与 &#x2F;etc&#x2F;shells 功能</strong></p>
+<p>历史：由于早年的 Unix 年代，发展者众，所以由于 shell 依据发展者的不同就有许多的版本，例如常听到的 Bourne SHell （sh） 、在 Sun 里头默认的 C SHell、 商业上常用的 K SHell、, 还有 TCSH 等等，每一种 Shell 都各有其特点，Linux 使用的这一种版本就称为“ Bourne Again SHell （简称 bash） ”，这个 Shell 是 Bourne Shell 的增强版本，也是基准于 GNU 的架构下发展出来的。</p>
+<p><em>Linux可用的shells</em></p>
+<ul>
+<li>&#x2F;bin&#x2F;sh （已经被 &#x2F;bin&#x2F;bash 所取代）</li>
+<li>&#x2F;bin&#x2F;bash （就是 Linux 默认的 shell）</li>
+<li>&#x2F;bin&#x2F;tcsh （整合 C Shell ，提供更多的功能）</li>
+<li>&#x2F;bin&#x2F;csh （已经被 &#x2F;bin&#x2F;tcsh 所取代）</li>
+</ul>
+<blockquote>
+<p>系统某些服务在运行过程中，会去检查使用者能够使用的 shells ，而这些 shell 的查询就是借由 &#x2F;etc&#x2F;shells 这个文件</p>
+</blockquote>
+<p><strong>Bash Shell 的功能</strong></p>
+<ul>
+<li>命令编修能力 （history）：</li>
+</ul>
+<p>只要在命令行按“上下键”就可以找到前&#x2F;后一个输入的指令，而在很多distribution 里头，默认的指令记忆功能可以到达 1000 个！也就是说，曾经下达过的指令几乎都被记录下来了。<br>这么多的指令记录在哪里呢？在你的主文件夹内的 .bash_history 不过，需要留意的是，<br>~&#x2F;.bash_history 记录的是前一次登陆以前所执行过的指令， 而至于这一次登陆所执行的指令都被暂存在内存中，当你成功的登出系统后，该指令记忆才会记录到 .bash_history 当中</p>
+<ul>
+<li><p>命令与文件补全功能： （[tab] 按键的好处）</p>
+</li>
+<li><p>命令别名设置功能： （alias）</p>
+</li>
+</ul>
+<p>可以将<code>ls -al</code> 的命令通过<code>alias lm=&#39;ls -al&#39;</code>就可以将<code>lm</code>直接用来调命令了</p>
+<ul>
+<li><p>工作控制、前景背景控制： （job control, foreground, background）</p>
+</li>
+<li><p>程序化脚本： （shell scripts）</p>
+</li>
+<li><p>万用字符： （Wildcard）</p>
+</li>
+</ul>
+<p><strong>查询指令是否为 Bash shell 的内置命令： type</strong></p>
+<p>知道这个指令是来自于外部指令（指的是其他非 bash 所提供的指令） 或是内置在 bash 当中只要利用type 这个指令来观察即可。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> [-tpa] name</span><br><span class="line">选项与参数：</span><br><span class="line">：不加任何选项与参数时，<span class="built_in">type</span> 会显示出 name 是外部指令还是 bash 内置指令</span><br><span class="line">-t ：当加入 -t 参数时，<span class="built_in">type</span> 会将 name 以下面这些字眼显示出他的意义：</span><br><span class="line">file ：表示为外部指令；</span><br><span class="line"><span class="built_in">alias</span> ：表示该指令为命令别名所设置的名称；</span><br><span class="line"><span class="built_in">builtin</span> ：表示该指令为 bash 内置的指令功能；</span><br><span class="line">-p ：如果后面接的 name 为外部指令时，才会显示完整文件名；</span><br><span class="line">-a ：会由 PATH 变量定义的路径中，将所有含 name 的指令都列出来，包含 <span class="built_in">alias</span></span><br><span class="line">范例一：查询一下 <span class="built_in">ls</span> 这个指令是否为 bash 内置？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> <span class="built_in">ls</span></span><br><span class="line"><span class="built_in">ls</span> is aliased to `<span class="built_in">ls</span> --color=auto<span class="string">&#x27; &amp;lt;==未加任何参数，列出 ls 的最主要使用情况</span></span><br><span class="line"><span class="string">[dmtsai@study ~]$ type -t ls</span></span><br><span class="line"><span class="string">alias &amp;lt;==仅列出 ls 执行时的依据</span></span><br><span class="line"><span class="string">[dmtsai@study ~]$ type -a ls</span></span><br><span class="line"><span class="string">ls is aliased to `ls --color=auto&#x27;</span> &amp;lt;==最先使用 aliase</span><br><span class="line"><span class="built_in">ls</span> is /usr/bin/ls &amp;lt;==还有找到外部指令在 /bin/ls</span><br><span class="line">范例二：那么 <span class="built_in">cd</span> 呢？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> <span class="built_in">cd</span></span><br><span class="line"><span class="built_in">cd</span> is a shell <span class="built_in">builtin</span> &amp;lt;==看到了吗？ <span class="built_in">cd</span> 是 shell 内置指令</span><br></pre></td></tr></table></figure>
+
+<p><strong>指令的下达与快速编辑按钮</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">范例：如果指令串太长的话，如何使用两行来输出？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">cp</span> /var/spool/mail/root /etc/crontab \</span><br><span class="line">&amp;gt; /etc/fstab /root</span><br></pre></td></tr></table></figure>
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221744722.png" alt="image-20221022174441674" style="zoom: 80%;" />
+
+<p><strong>Shell 的变量功能</strong></p>
+<ul>
+<li>变量的可变性与方便性</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221748828.png" alt="image-20221022174833790" style="zoom: 67%;" />
+
+<p>由于系统已经帮我们规划好 MAIL 这个变量，所以使用者只要知道 mail 这个指 令如何使用即可， mail 会主动的取用 MAIL 这个变量，就能够如上图所示的取得自己的邮件信箱了</p>
+<ul>
+<li>影响 bash 环境操作的变量</li>
+</ul>
+<p>例如下达 ls 这个指令时，系统就是通过 PATH 这个变量里面的内容所记录的路径顺序来搜寻指令。如果在搜寻完 PATH 变量内的路径还找不到 ls 这个指令时， 就会在屏幕上显示“ command not found ”的错误讯息了。</p>
+<ul>
+<li>脚本程序设计 （shell script） 的好帮手</li>
+</ul>
+<p>例如你要写一个大 型的 script 时，有些数据因为可能由于使用者习惯的不同而有差异，比如说路径好了，由于该路径在 script 被使用在相当多的地方，如果下次换了一部主机，都要修改 script 里面的所有路径， 这个时候如果使用变量，而将该变量的定义写在最前面，后面相关的路径名称都以变量来取代， 那么你只要修改一行就等于修改整篇 script 了。</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221753121.png" alt="image-20221022175328075" style="zoom:67%;" />
+
+<p><strong>变量的取用与设置：echo, 变量设置规则, unset</strong></p>
+<h2 id="Linux正则表达式"><a href="#Linux正则表达式" class="headerlink" title="Linux正则表达式"></a>Linux正则表达式</h2><p><strong>概念：</strong>正则表达式 （Regular Expression, RE, 或称为常规表达式）是通过一些特殊字符的排列，用以“搜寻&#x2F;取代&#x2F;删除”一列或多列文字字串， 简单的说，正则表达式就是用在字串的处理上面的 一项“表示式”。正则表达式并不是一个工具程序， 而是一个字串处理的标准依据，如果想要以正则表达式的方式处理字串，就得要使用支持正则表达式的工具程序才行， 这类的工具程序很多，例如 vi, sed, awk 等等</p>
+<ul>
+<li>例如</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">mua@fuck:~$ <span class="keyword">grep</span> <span class="string">&#x27;ls&#x27;</span> <span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>*</span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>accounts-daemon.service:ProtectHome=<span class="keyword">false</span></span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>accounts-daemon.service:PrivateTmp=<span class="keyword">false</span></span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>accounts-daemon.service:PrivateUsers=<span class="keyword">false</span></span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>alsa-restore.service:# can be switched using a <span class="keyword">file</span> exist check - <span class="regexp">/etc/</span>alsa/state-daemon.conf .</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>正则表达式对于系统管理员的用途</li>
+</ul>
+<p>由于系统如果在繁忙的情况之下，每天产生的讯息信息会多到你无法想像的地步，运用正则表达式极度简化操作人员从千百行的数据里面找出一行有问题的讯息的效率。</p>
+<p><strong>基础正则表达式</strong></p>
+<p><em><strong>语系对正则表达式的影响</strong></em></p>
+<p>文件其实记录的仅有 0 与 1，我们看到的字符文字与数字都是通过编码表转换来的。由于不同语系的编码数据并不相同，所以就会造成数据撷取结果的差异了。所以使用正则表达式时，需要特别留意当时环境的语系为何， 否则可能会发现与别人不相同的撷取结果。</p>
+<ul>
+<li>“ LANG&#x3D;C ”语系数据“ 						<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211061012414.png" alt="image-20221106101250300" style="zoom: 67%;" /></li>
+</ul>
+<p><em><strong>grep 的一些进阶选项</strong></em></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mua@fuck:~$ grep [-A] [-B] [--color=auto] <span class="string">&#x27;搜寻字串&#x27;</span> filename</span><br><span class="line">选项与参数：</span><br><span class="line">-A ：后面可加数字，为 after 的意思，除了列出该行外，后续的 n 行也列出来；</span><br><span class="line">-B ：后面可加数字，为 befer 的意思，除了列出该行外，前面的 n 行也列出来；</span><br><span class="line">--color=auto 可将正确的那个撷取数据列出颜色</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>基础正则表达式练习</strong></em></p>
+<ul>
+<li>搜寻特定字符</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mua@fuck:~$  grep -n <span class="string">&#x27;the&#x27;</span> regular_express.txt</span><br><span class="line">8:I can<span class="string">&#x27;t finish the test.^M</span></span><br><span class="line"><span class="string">12:the symbol &#x27;</span>*<span class="string">&#x27; is represented as start.</span></span><br><span class="line"><span class="string">15:You are the best is mean you are the no. 1.</span></span><br><span class="line"><span class="string">16:The world &amp;lt;Happy&amp;gt; is the same with &quot;glad&quot;.</span></span><br><span class="line"><span class="string">18:google is the best tools for search keyword.</span></span><br><span class="line"><span class="string">// 反向</span></span><br><span class="line"><span class="string">mua@fuck:~$ grep -vn &#x27;</span>the<span class="string">&#x27; regular_express.txt</span></span><br><span class="line"><span class="string">//不论大小写</span></span><br><span class="line"><span class="string">mua@fuck:~$ grep -in &#x27;</span>the<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string">8:I can&#x27;</span>t finish the <span class="built_in">test</span>.^M</span><br><span class="line">9:Oh! The soup taste good.^M</span><br><span class="line">12:the symbol <span class="string">&#x27;*&#x27;</span> is represented as start.</span><br><span class="line">14:The gd software is a library <span class="keyword">for</span> drafting programs.^M</span><br><span class="line">15:You are the best is mean you are the no. 1.</span><br><span class="line">16:The world &amp;lt;Happy&amp;gt; is the same with <span class="string">&quot;glad&quot;</span>.</span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>利用中括号[]来搜寻集合字符</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 利用字符共通点</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;t[ae]st&#x27; regular_express.txt</span></span><br><span class="line">8:I can<span class="string">&#x27;t finish the test.</span></span><br><span class="line"><span class="string">9:Oh! The soup taste good.</span></span><br><span class="line"><span class="string"># 搜寻字符带有**</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>[^g]oo<span class="string">&#x27; regular_express.txt</span></span><br><span class="line"><span class="string">2:apple is my favorite food.</span></span><br><span class="line"><span class="string">3:Football game is not use feet only.</span></span><br><span class="line"><span class="string">18:google is the best tools for search keyword.</span></span><br><span class="line"><span class="string">19:goooooogle yes!</span></span><br><span class="line"><span class="string">#  搜寻带数字</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>[0-9]<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string">5:However, this dress is about $ 3183 dollars.</span></span><br><span class="line"><span class="string">15:You are the best is mean you are the no. 1.</span></span><br><span class="line"><span class="string">//其他写法</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>[[:digit:]]<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string"># 带小写字母</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>[^a-z]oo<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string">3:Football game is not use feet only.</span></span><br><span class="line"><span class="string">//其他写法</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>[^[:lower:]]oo<span class="string">&#x27; regular_express.txt </span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>行首与行尾字符 ^ $</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 句首</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;^the&#x27; regular_express.txt </span></span><br><span class="line">12:the symbol <span class="string">&#x27;*&#x27;</span> is represented as start.</span><br><span class="line"><span class="comment"># 句首为小写</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;^[a-z]&#x27; regular_express.txt </span></span><br><span class="line">2:apple is my favorite food.</span><br><span class="line">4:this dress doesn<span class="string">&#x27;t fit me.</span></span><br><span class="line"><span class="string">10:motorcycle is cheap than car.</span></span><br><span class="line"><span class="string">12:the symbol &#x27;</span>*<span class="string">&#x27; is represented as start.</span></span><br><span class="line"><span class="string">//其他写法</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>^[[:lower:]]<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string"># 开头不是字母</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>^[^a-zA-Z]<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string">1:&quot;Open Source&quot; is a good mechanism to develop programs.</span></span><br><span class="line"><span class="string">21:# I am VBird</span></span><br><span class="line"><span class="string">//其他写法</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>^[^[:alpha:]]<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string"># 以句号作为结尾（用到跳脱字符&#x27;</span>\<span class="string">&#x27;）</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>\.$<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string"># 找出空白行</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>^$<span class="string">&#x27; regular_express.txt </span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>任意一个字符.与重复字符 *</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#  .（小数点）：代表“一定有一个任意字符”的意思；</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;g..d&#x27; regular_express.txt </span></span><br><span class="line">1:<span class="string">&quot;Open Source&quot;</span> is a good mechanism to develop programs.</span><br><span class="line">9:Oh! The soup taste good.</span><br><span class="line">16:The world &amp;lt;Happy&amp;gt; is the same with <span class="string">&quot;glad&quot;</span>.</span><br><span class="line"><span class="comment">#  *（星星号）：代表“重复前一个字符， 0 到无穷多次”的意思，为组合形态 </span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;ooo*&#x27; regular_express.txt </span></span><br><span class="line">1:<span class="string">&quot;Open Source&quot;</span> is a good mechanism to develop programs.</span><br><span class="line">2:apple is my favorite food.</span><br><span class="line">3:Football game is not use feet only.</span><br><span class="line">9:Oh! The soup taste good.</span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br><span class="line">// 中间间隔</span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;g*g&#x27; regular_express.txt </span></span><br><span class="line">1:<span class="string">&quot;Open Source&quot;</span> is a good mechanism to develop programs.</span><br><span class="line">3:Football game is not use feet only.</span><br><span class="line">9:Oh! The soup taste good.</span><br><span class="line"><span class="comment"># 单个字符 g....g</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;g.*g&#x27; regular_express.txt </span></span><br><span class="line">1:<span class="string">&quot;Open Source&quot;</span> is a good mechanism to develop programs.</span><br><span class="line">14:The gd software is a library <span class="keyword">for</span> drafting programs.</span><br><span class="line">16:The world &amp;lt;Happy&amp;gt; is the same with <span class="string">&quot;glad&quot;</span>.</span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br><span class="line"><span class="comment"># 任意数字</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;[0-9][0-9]*&#x27; regular_express.txt </span></span><br><span class="line">5:However, this dress is about $ 3183 dollars.</span><br><span class="line">15:You are the best is mean you are the no. 1.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>限定连续 RE 字符范围 {}(记得添加跳脱字符<code>\&#123;</code>）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查找特定范围</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;o\&#123;2\&#125;&#x27; regular_express.txt </span></span><br><span class="line">1:<span class="string">&quot;Open Source&quot;</span> is a good mechanism to develop programs.</span><br><span class="line">2:apple is my favorite food.</span><br><span class="line">3:Football game is not use feet only.</span><br><span class="line">9:Oh! The soup taste good.</span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br><span class="line">19:goooooogle <span class="built_in">yes</span>!</span><br><span class="line"><span class="comment"># 双端界定范围</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;go\&#123;2,5\&#125;g&#x27; regular_express.txt </span></span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br></pre></td></tr></table></figure>
+
+<p><strong>基础正则表达式字符汇整</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211092156739.png" alt="image-20221109215623614" style="zoom: 50%;" />
+
+<p><strong>sed工具</strong></p>
+<p><strong>延伸正则表达式</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@fuck:/test<span class="comment"># grep -v &#x27;^$&#x27; regular_express.txt | grep -v &#x27;^#&#x27;</span></span><br><span class="line">可以替换为</span><br><span class="line">root@fuck:/test<span class="comment"># egrep -v &#x27;^$|^#&#x27; regular_express.txt </span></span><br></pre></td></tr></table></figure>
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211092218361.png" alt="image-20221109221826302" style="zoom: 80%;" />
+
+<h3 id="文件的格式化与相关处理"><a href="#文件的格式化与相关处理" class="headerlink" title="文件的格式化与相关处理"></a><strong>文件的格式化与相关处理</strong></h3><p><strong>格式化打印： printf</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ <span class="built_in">printf</span> <span class="string">&#x27;打印格式&#x27;</span> 实际内容</span><br><span class="line">选项与参数：</span><br><span class="line">关于格式方面的几个特殊样式：</span><br><span class="line">\a 警告声音输出</span><br><span class="line">\b 倒退键（backspace）</span><br><span class="line">\f 清除屏幕 （form feed）</span><br><span class="line">\n 输出新的一行</span><br><span class="line">\r 亦即 Enter 按键</span><br><span class="line">\t 水平的 [tab] 按键</span><br><span class="line">\v 垂直的 [tab] 按键</span><br><span class="line">\xNN NN 为两位数的数字，可以转换数字成为字符。</span><br><span class="line">关于 C 程序语言内，常见的变量格式</span><br><span class="line">%ns 那个 n 是数字， s 代表 string ，亦即多少个字符；</span><br><span class="line">%ni 那个 n 是数字， i 代表 <span class="built_in">integer</span> ，亦即多少整数码数；</span><br><span class="line">%N.nf 那个 n 与 N 都是数字， f 代表 floating （浮点），如果有小数码数，</span><br><span class="line">假设我共要十个位数，但小数点有两位，即为 %10.2f</span><br><span class="line"><span class="comment"># 例如</span></span><br><span class="line">root@fuck:/test<span class="comment"># printf &#x27;%s\t s\t %s\t %s\t %s\t \n&#x27; $ (cat printf.txt)</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>awk：好用的数据处理工具</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 列出前五行登陆者命令</span></span><br><span class="line">root@fuck:/test<span class="comment"># last -n 5</span></span><br><span class="line">mua      tty2         tty2             Thu Nov 10 03:37   still logged <span class="keyword">in</span></span><br><span class="line">reboot   system boot  5.15.0-52-generi Thu Nov 10 03:37   still running</span><br><span class="line">mua      tty2         tty2             Wed Nov  2 05:56 - crash (7+21:41)</span><br><span class="line">reboot   system boot  5.15.0-52-generi Wed Nov  2 05:56   still running</span><br><span class="line">mua      tty2         tty2             Sun Oct 23 01:14 - crash (10+04:41)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mysql基础</title>
     <url>/2022/09/09/MySQL/</url>
     <content><![CDATA[<p>1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）<br>2.C R U D：增删改查的专业术语。<br>3.层次、网状、关系型模型数据库</p>
@@ -1925,217 +2171,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux</title>
-    <url>/2022/10/02/Linux/</url>
-    <content><![CDATA[<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="计算机基础"><a href="#计算机基础" class="headerlink" title="计算机基础"></a>计算机基础</h2><p><strong>1.软件程序的运行</strong></p>
-<p>硬件如同人的身体，软件如同人的灵魂。没有了灵魂的躯体也不过就是行尸走肉</p>
-<p>**1.1 **机器程序与编译程序</p>
-<p>电脑只认识0与1而已，而且电脑最重要的运算与逻辑判断是在CPU内部， 而 CPU其实是具有微指令集的。因此，我们需要CPU帮忙工作时，就得要参考微指令集的内容， 然后撰写让CPU读的懂的指令码给CPU执行，这样就能够让CPU运行了。</p>
-<p>流程：</p>
-<ul>
-<li>需要了解机器语言：机器只认识0与1，因此你必须要学习直接写给机器看的语言。</li>
-<li>需要了解所有硬件的相关功能函数：因为你的程序必须要写给机器看， 当然你就得要参考机器本身的功能，然后针对该功能去撰写程序码。</li>
-<li>程序不具有可携性：每个CPU都有独特的微指令集，同样的，每个硬件都有其功能函数。</li>
-<li>程序具有专一性：因为这样的程序必须要针对硬件功能函数来撰写， 如果已经开发了一支浏览器程序，想要再开发文件管理程序时，还是得从头再参考硬件的功能函数来继续撰写。</li>
-</ul>
-<p>所以，需要开发让人类能看得懂得程序语言。然后创造一种“编译器”让人类的写的程序语言转换为机器能看懂的机器码。常见的编译器有C,C++,Java,Fortran等等。</p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220922203728264.png" alt="image-20220922203728264"></p>
-<h2 id="关于学习Linux"><a href="#关于学习Linux" class="headerlink" title="关于学习Linux"></a>关于学习Linux</h2><p>两个重要的因素是造成我们学习的原动力： </p>
-<ul>
-<li><p>创建兴趣： Linux上面可以玩的东西真的太多了，你可以选择一个有趣的课题来深入的玩 一玩！不论是Shell还是图形接口等等， 只要能够玩出兴趣，那么再怎么苦你都会不觉得喔！</p>
-</li>
-<li><p>成就感： 成就感是怎么来的？说实在话，就是“被认同”来的！怎么被认同呢？写心得分享啊！当你写了心得分享，并且公告在 BBS 上面，自然有朋友会到你的网页去瞧一瞧， 当大家觉得你的网页内容很棒的时候， 哈哈！你肯定会加油继续的分享下去而无法自拔。</p>
-</li>
-</ul>
-<h2 id="主机规划与磁盘分区"><a href="#主机规划与磁盘分区" class="headerlink" title="主机规划与磁盘分区"></a>主机规划与磁盘分区</h2><p><strong>Linux各硬件设备在系统中为文件名</strong></p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001164035525.png" alt="image-20221001164035525"></p>
-<p><strong>磁盘分区</strong></p>
-<p><strong>MBR 主要分区、延伸分区与逻辑分区的特性：</strong></p>
-<ul>
-<li>主要分区与延伸分区最多可以有四笔（硬盘的限制） ；</li>
-<li>延伸分区最多只能有一个（操作系统的限制）；</li>
-<li>逻辑分区是由延伸分区持续切割出来的分区；</li>
-<li>能够被格式化后，作为数据存取的分区为主要分区与逻辑分区。延伸分区无法格式化； </li>
-<li>逻辑分区的数量依操作系统而不同，在Linux系统中SATA硬盘已经可以突破63个以上的分区限制；</li>
-</ul>
-<p><strong>MBR分区限制：</strong></p>
-<ul>
-<li>操作系统无法抓取到 2.2T 以上的磁盘容量</li>
-<li>MBR 仅有一个区块，若被破坏后，经常无法或很难救援</li>
-<li>MBR 内的存放开机管理程序的区块仅 446Bytes，无法容纳较多的程序码</li>
-</ul>
-<p><strong>GUID partition table, GPT 磁盘分区表：</strong></p>
-<ul>
-<li>与 MBR 仅使用第一个 512Bytes 区块来纪录不同， GPT 使用了 34 个 LBA 区块来纪录分区信息</li>
-<li>GPT 除了前面 34 个 LBA 之外，整个磁盘的最后 33 个 LBA 也拿来作为另一个备份</li>
-</ul>
-<p><strong>计算机开机流程：</strong></p>
-<ol>
-<li>BIOS：开机主动执行的固件，会认识第一个可开机的设备；</li>
-<li>MBR：第一个可开机设备的第一个扇区内的主要开机记录区块，内含开机管理程序；</li>
-<li>开机管理程序（boot loader）：一支可读取核心文件来执行的软件；</li>
-<li>核心文件：开始操作系统的功能</li>
-</ol>
-<p><strong>BIOS与UEFI BIOS区别</strong></p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001200526805.png" alt="image-20221001200526805"></p>
-<p><strong>主机硬盘的规划</strong></p>
-<p>频繁读写的目录</p>
-<ul>
-<li>boot</li>
-<li>&#x2F; </li>
-<li>&#x2F;home </li>
-<li>&#x2F;var </li>
-<li>Swap</li>
-</ul>
-<h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><ul>
-<li><p>如果磁盘容量大于 2TB 以上时，系统会自动使用 GPT 分区方式来处理磁盘分区。</p>
-</li>
-<li><p>GPT 分区已经没有延伸与逻辑分区的概念，可以想像成所有的分区都是主分区，某些操作系统要使用 GPT 分区时，必须要搭配 UEFI 的新型 BIOS 格式才可安装使用。</p>
-</li>
-<li><p>Linux操作系统的文件使用目录树系统，与磁盘的对应需要有“挂载”的动作才行；</p>
-</li>
-<li><p>开机的流程由：BIOS–&gt;MBR–&gt;–&gt;boot loader–&gt;核心文件</p>
-</li>
-</ul>
-<h2 id="Vim程序编辑器"><a href="#Vim程序编辑器" class="headerlink" title="Vim程序编辑器"></a>Vim程序编辑器</h2><p><strong>三种模式</strong></p>
-<ul>
-<li>一般指令模式 （command mode）</li>
-<li>编辑模式 （insert mode）</li>
-<li>命令行命令模式 （command-line mode）</li>
-</ul>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210211616324.png" alt="image-20221021161616258" style="zoom:50%;" />
-
-<p><strong>常见命令</strong></p>
-<p><em>1.输入模式 (i):</em><br>按 i 进入insert输入模式<br>HJKL代替上下左右<br>H向左 L向右 J向下 K向上<br>Ctrl + B 向上翻页<br>Ctrl + F 想下翻页<br>Ctrl + E&#x2F;Y 滚动<br>Shift + G 末尾<br>双击gg 首字符</p>
-<p><em>2.命令模式(esc):</em><br>i 光标位置前面输入<br>a 光标位置后面输入<br>o enter到下一行输入<br>x 删除光标所在字符<br>dd 删除整个一行<br>u 撤销<br>dw 删除整个单词<br>b 跳跃单词首字母<br>e 跳跃单词尾字母<br>w 跳跃到下一个单词首字母</p>
-<p>shift 省略多个单词直接跳<br>Shift + 6 ^ 跳跃到本行的首字母<br>Shift + 4 $ 跳跃到本行的dd尾字母<br>按 0 跳跃到本行首个字符（ 包括空格）<br>{}移动整段大括号<br>yw 表示复制一个单词<br>y$ 表示从当前开始，往后复制到行末尾<br>p 粘贴剪贴板的内容<br><em>3.可视化模式</em><br>v + hjkl 进行字符选择<br>V + hjkl 进行行选择<br>v + G 全选<br>快捷选择<br>vaw 快速选择单词<br>vab 包含括号<br>vaB 包含大括号<br>shift + &lt;&gt; 前后缩进<br>v shift + · ~ 字母大小写切换<br>v + u&#x2F;U 全部转换为小写&#x2F;大写<br>行号+g<br>g 跳跃到指定的行号<br>快速查找<br>&#x2F;查找字符 按n 进入下一个<br>快速替换<br>按行:s&#x2F;查找单词&#x2F;替换单词&#x2F;g<br>全局:%s&#x2F;查找单词&#x2F;替换单词&#x2F;g<br>指定:首，尾s&#x2F;查找&#x2F;替换&#x2F;g<br>+c 询问</p>
-<h2 id="Bashshell"><a href="#Bashshell" class="headerlink" title="Bashshell"></a>Bashshell</h2><p><strong>硬件、核心与 Shell</strong></p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221653386.png" alt="image-20221022165342252" style="zoom:50%;" />
-
-<p>例子：用电脑播放音乐</p>
-<ol>
-<li>硬件：当然就是需要你的硬件有“声卡芯片”这个配备，否则怎么会有声音；</li>
-<li>核心管理：操作系统的核心可以支持这个芯片组，当然还需要提供芯片的驱动程序；</li>
-<li>应用程序：需要使用者输入发生声音的指令。</li>
-</ol>
-<p><strong>为何要学命令行的 shell？</strong></p>
-<ul>
-<li><p>命令行的 shell：大家都一样</p>
-</li>
-<li><p>远端管理：命令行就是比较快</p>
-</li>
-<li><p>Linux 的任督二脉： shell 是也</p>
-</li>
-</ul>
-<p><strong>系统的合法 shell 与 &#x2F;etc&#x2F;shells 功能</strong></p>
-<p>历史：由于早年的 Unix 年代，发展者众，所以由于 shell 依据发展者的不同就有许多的版本，例如常听到的 Bourne SHell （sh） 、在 Sun 里头默认的 C SHell、 商业上常用的 K SHell、, 还有 TCSH 等等，每一种 Shell 都各有其特点，Linux 使用的这一种版本就称为“ Bourne Again SHell （简称 bash） ”，这个 Shell 是 Bourne Shell 的增强版本，也是基准于 GNU 的架构下发展出来的。</p>
-<p><em>Linux可用的shells</em></p>
-<ul>
-<li>&#x2F;bin&#x2F;sh （已经被 &#x2F;bin&#x2F;bash 所取代）</li>
-<li>&#x2F;bin&#x2F;bash （就是 Linux 默认的 shell）</li>
-<li>&#x2F;bin&#x2F;tcsh （整合 C Shell ，提供更多的功能）</li>
-<li>&#x2F;bin&#x2F;csh （已经被 &#x2F;bin&#x2F;tcsh 所取代）</li>
-</ul>
-<blockquote>
-<p>系统某些服务在运行过程中，会去检查使用者能够使用的 shells ，而这些 shell 的查询就是借由 &#x2F;etc&#x2F;shells 这个文件</p>
-</blockquote>
-<p><strong>Bash Shell 的功能</strong></p>
-<ul>
-<li>命令编修能力 （history）：</li>
-</ul>
-<p>只要在命令行按“上下键”就可以找到前&#x2F;后一个输入的指令，而在很多distribution 里头，默认的指令记忆功能可以到达 1000 个！也就是说，曾经下达过的指令几乎都被记录下来了。<br>这么多的指令记录在哪里呢？在你的主文件夹内的 .bash_history 不过，需要留意的是，<br>~&#x2F;.bash_history 记录的是前一次登陆以前所执行过的指令， 而至于这一次登陆所执行的指令都被暂存在内存中，当你成功的登出系统后，该指令记忆才会记录到 .bash_history 当中</p>
-<ul>
-<li><p>命令与文件补全功能： （[tab] 按键的好处）</p>
-</li>
-<li><p>命令别名设置功能： （alias）</p>
-</li>
-</ul>
-<p>可以将<code>ls -al</code> 的命令通过<code>alias lm=&#39;ls -al&#39;</code>就可以将<code>lm</code>直接用来调命令了</p>
-<ul>
-<li><p>工作控制、前景背景控制： （job control, foreground, background）</p>
-</li>
-<li><p>程序化脚本： （shell scripts）</p>
-</li>
-<li><p>万用字符： （Wildcard）</p>
-</li>
-</ul>
-<p><strong>查询指令是否为 Bash shell 的内置命令： type</strong></p>
-<p>知道这个指令是来自于外部指令（指的是其他非 bash 所提供的指令） 或是内置在 bash 当中只要利用type 这个指令来观察即可。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> [-tpa] name</span><br><span class="line">选项与参数：</span><br><span class="line">：不加任何选项与参数时，<span class="built_in">type</span> 会显示出 name 是外部指令还是 bash 内置指令</span><br><span class="line">-t ：当加入 -t 参数时，<span class="built_in">type</span> 会将 name 以下面这些字眼显示出他的意义：</span><br><span class="line">file ：表示为外部指令；</span><br><span class="line"><span class="built_in">alias</span> ：表示该指令为命令别名所设置的名称；</span><br><span class="line"><span class="built_in">builtin</span> ：表示该指令为 bash 内置的指令功能；</span><br><span class="line">-p ：如果后面接的 name 为外部指令时，才会显示完整文件名；</span><br><span class="line">-a ：会由 PATH 变量定义的路径中，将所有含 name 的指令都列出来，包含 <span class="built_in">alias</span></span><br><span class="line">范例一：查询一下 <span class="built_in">ls</span> 这个指令是否为 bash 内置？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> <span class="built_in">ls</span></span><br><span class="line"><span class="built_in">ls</span> is aliased to `<span class="built_in">ls</span> --color=auto<span class="string">&#x27; &amp;lt;==未加任何参数，列出 ls 的最主要使用情况</span></span><br><span class="line"><span class="string">[dmtsai@study ~]$ type -t ls</span></span><br><span class="line"><span class="string">alias &amp;lt;==仅列出 ls 执行时的依据</span></span><br><span class="line"><span class="string">[dmtsai@study ~]$ type -a ls</span></span><br><span class="line"><span class="string">ls is aliased to `ls --color=auto&#x27;</span> &amp;lt;==最先使用 aliase</span><br><span class="line"><span class="built_in">ls</span> is /usr/bin/ls &amp;lt;==还有找到外部指令在 /bin/ls</span><br><span class="line">范例二：那么 <span class="built_in">cd</span> 呢？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> <span class="built_in">cd</span></span><br><span class="line"><span class="built_in">cd</span> is a shell <span class="built_in">builtin</span> &amp;lt;==看到了吗？ <span class="built_in">cd</span> 是 shell 内置指令</span><br></pre></td></tr></table></figure>
-
-<p><strong>指令的下达与快速编辑按钮</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">范例：如果指令串太长的话，如何使用两行来输出？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">cp</span> /var/spool/mail/root /etc/crontab \</span><br><span class="line">&amp;gt; /etc/fstab /root</span><br></pre></td></tr></table></figure>
-
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221744722.png" alt="image-20221022174441674" style="zoom: 80%;" />
-
-<p><strong>Shell 的变量功能</strong></p>
-<ul>
-<li>变量的可变性与方便性</li>
-</ul>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221748828.png" alt="image-20221022174833790" style="zoom: 67%;" />
-
-<p>由于系统已经帮我们规划好 MAIL 这个变量，所以使用者只要知道 mail 这个指 令如何使用即可， mail 会主动的取用 MAIL 这个变量，就能够如上图所示的取得自己的邮件信箱了</p>
-<ul>
-<li>影响 bash 环境操作的变量</li>
-</ul>
-<p>例如下达 ls 这个指令时，系统就是通过 PATH 这个变量里面的内容所记录的路径顺序来搜寻指令。如果在搜寻完 PATH 变量内的路径还找不到 ls 这个指令时， 就会在屏幕上显示“ command not found ”的错误讯息了。</p>
-<ul>
-<li>脚本程序设计 （shell script） 的好帮手</li>
-</ul>
-<p>例如你要写一个大 型的 script 时，有些数据因为可能由于使用者习惯的不同而有差异，比如说路径好了，由于该路径在 script 被使用在相当多的地方，如果下次换了一部主机，都要修改 script 里面的所有路径， 这个时候如果使用变量，而将该变量的定义写在最前面，后面相关的路径名称都以变量来取代， 那么你只要修改一行就等于修改整篇 script 了。</p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221753121.png" alt="image-20221022175328075" style="zoom:67%;" />
-
-<p><strong>变量的取用与设置：echo, 变量设置规则, unset</strong></p>
-<h2 id="Linux正则表达式"><a href="#Linux正则表达式" class="headerlink" title="Linux正则表达式"></a>Linux正则表达式</h2><p><strong>概念：</strong>正则表达式 （Regular Expression, RE, 或称为常规表达式）是通过一些特殊字符的排列，用以“搜寻&#x2F;取代&#x2F;删除”一列或多列文字字串， 简单的说，正则表达式就是用在字串的处理上面的 一项“表示式”。正则表达式并不是一个工具程序， 而是一个字串处理的标准依据，如果想要以正则表达式的方式处理字串，就得要使用支持正则表达式的工具程序才行， 这类的工具程序很多，例如 vi, sed, awk 等等</p>
-<ul>
-<li>例如</li>
-</ul>
-<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">mua@fuck:~$ <span class="keyword">grep</span> <span class="string">&#x27;ls&#x27;</span> <span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>*</span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>accounts-daemon.service:ProtectHome=<span class="keyword">false</span></span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>accounts-daemon.service:PrivateTmp=<span class="keyword">false</span></span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>accounts-daemon.service:PrivateUsers=<span class="keyword">false</span></span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>alsa-restore.service:# can be switched using a <span class="keyword">file</span> exist check - <span class="regexp">/etc/</span>alsa/state-daemon.conf .</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>正则表达式对于系统管理员的用途</li>
-</ul>
-<p>由于系统如果在繁忙的情况之下，每天产生的讯息信息会多到你无法想像的地步，运用正则表达式极度简化操作人员从千百行的数据里面找出一行有问题的讯息的效率。</p>
-<p><strong>基础正则表达式</strong></p>
-<p><em><strong>语系对正则表达式的影响</strong></em></p>
-<p>文件其实记录的仅有 0 与 1，我们看到的字符文字与数字都是通过编码表转换来的。由于不同语系的编码数据并不相同，所以就会造成数据撷取结果的差异了。所以使用正则表达式时，需要特别留意当时环境的语系为何， 否则可能会发现与别人不相同的撷取结果。</p>
-<ul>
-<li>“ LANG&#x3D;C ”语系数据“ 						<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211061012414.png" alt="image-20221106101250300" style="zoom: 67%;" /></li>
-</ul>
-<p><em><strong>grep 的一些进阶选项</strong></em></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mua@fuck:~$ grep [-A] [-B] [--color=auto] <span class="string">&#x27;搜寻字串&#x27;</span> filename</span><br><span class="line">选项与参数：</span><br><span class="line">-A ：后面可加数字，为 after 的意思，除了列出该行外，后续的 n 行也列出来；</span><br><span class="line">-B ：后面可加数字，为 befer 的意思，除了列出该行外，前面的 n 行也列出来；</span><br><span class="line">--color=auto 可将正确的那个撷取数据列出颜色</span><br></pre></td></tr></table></figure>
-
-<p><em><strong>基础正则表达式练习</strong></em></p>
-<ul>
-<li>搜寻特定字符</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mua@fuck:~$  grep -n <span class="string">&#x27;the&#x27;</span> regular_express.txt</span><br><span class="line">8:I can<span class="string">&#x27;t finish the test.^M</span></span><br><span class="line"><span class="string">12:the symbol &#x27;</span>*<span class="string">&#x27; is represented as start.</span></span><br><span class="line"><span class="string">15:You are the best is mean you are the no. 1.</span></span><br><span class="line"><span class="string">16:The world &amp;lt;Happy&amp;gt; is the same with &quot;glad&quot;.</span></span><br><span class="line"><span class="string">18:google is the best tools for search keyword.</span></span><br><span class="line"><span class="string">// 反向</span></span><br><span class="line"><span class="string">mua@fuck:~$ grep -vn &#x27;</span>the<span class="string">&#x27; regular_express.txt</span></span><br><span class="line"><span class="string">//不论大小写</span></span><br><span class="line"><span class="string">mua@fuck:~$ grep -in &#x27;</span>the<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string">8:I can&#x27;</span>t finish the <span class="built_in">test</span>.^M</span><br><span class="line">9:Oh! The soup taste good.^M</span><br><span class="line">12:the symbol <span class="string">&#x27;*&#x27;</span> is represented as start.</span><br><span class="line">14:The gd software is a library <span class="keyword">for</span> drafting programs.^M</span><br><span class="line">15:You are the best is mean you are the no. 1.</span><br><span class="line">16:The world &amp;lt;Happy&amp;gt; is the same with <span class="string">&quot;glad&quot;</span>.</span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>利用中括号[]来搜寻集合字符</li>
-</ul>
-]]></content>
-      <categories>
-        <category>web前端</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>折腾OpenWrt的半个月</title>
-    <url>/2022/10/02/beatOpenWrt/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>toy</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>OpenWrt</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>在线code安装教程</title>
     <url>/2022/09/12/codeinstall/</url>
     <content><![CDATA[<p>##前置条件：</p>
@@ -2361,165 +2396,6 @@
       </categories>
       <tags>
         <tag>Docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>程序员的软件抽屉(Windows)</title>
-    <url>/2022/09/26/softbox/</url>
-    <content><![CDATA[<h2 id="工具篇-强烈推荐安装"><a href="#工具篇-强烈推荐安装" class="headerlink" title="工具篇(强烈推荐安装)"></a>工具篇(强烈推荐安装)</h2><h3 id="以打包"><a href="#以打包" class="headerlink" title="以打包"></a>以打包</h3><p>迅雷网盘<a href="https://pan.xunlei.com/s/VND5y3hj863AQVp7dM7UTo0DA1">提取码：atsp</a></p>
-<blockquote>
-<p> <a href="https://geekuninstaller.com/">Geek Uninstaller</a></p>
-</blockquote>
-<ul>
-<li>小巧（2 MB ）、绿色（无需安装）、易用（单文件）的卸载工具。</li>
-<li>卸载完成，Geek Uninstaller 会自动扫描残留的文件（夹）和注册表项目。</li>
-</ul>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210331754.png" alt="image-20221005210331754"></p>
-<blockquote>
-<p>Gism++</p>
-</blockquote>
-<p>Windows 上最强大的系统工具，简洁好用。用来清理电脑垃圾再好不过</p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210337740.png" alt="image-20221005210337740"></p>
-<blockquote>
-<p>图吧工具箱</p>
-</blockquote>
-<p>整合了大量硬件检测的工具，这不比那个经常抽烟的鲁大师好多了。</p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210346337.png" alt="image-20221005210346337"></p>
-<blockquote>
-<p>Snipaste</p>
-</blockquote>
-<p>史上最好用的截图软件，功能丰富，用了你就知道了。</p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210352208.png" alt="image-20221005210352208"></p>
-<blockquote>
-<p>FSCapture</p>
-</blockquote>
-<p>属于录屏软件的一股清流吧，大小仅为5.4M，功能却十分齐全！</p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210402012.png" alt="image-20221005210402012"></p>
-<blockquote>
-<p>TrafficMonitor</p>
-</blockquote>
-<p>用来监控现在电脑的各种硬件状态，直接在任务栏显示，简洁清楚。</p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210410408.png" alt="image-20221005210410408"></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210415503.png" alt="image-20221005210415503"></p>
-<h2 id="程序员的软件抽屉（Windows）"><a href="#程序员的软件抽屉（Windows）" class="headerlink" title="程序员的软件抽屉（Windows）"></a>程序员的软件抽屉（Windows）</h2><h3 id="杀毒软件（不需要"><a href="#杀毒软件（不需要" class="headerlink" title="杀毒软件（不需要"></a>杀毒软件（不需要</h3><p>2202年，都已经Windows11了，其实不太需要杀毒软件了，自带的 Windows defender已经足矣。</p>
-<p>如果硬要装一个，那么最推荐的应该是火绒了</p>
-<blockquote>
-<p><a href="https://www.huorong.cn/">火绒安全</a></p>
-</blockquote>
-<p>相比国内一众病毒（🐧安全管家，361安全卫视，金山中毒吧）</p>
-<ul>
-<li>火绒不会有广告弹窗等任何打扰用户的行为，也不会在安装包中随意捆绑其他软件。</li>
-<li>强悍、干净、轻巧的火绒可以让你安全、安静、自由地使用电脑。</li>
-<li>在专注的同时保留了基本的防护，家长控制，U盘保护等等，还有很多扩展工具。</li>
-</ul>
-<p>引用 <a href="https://www.jb51.net/softjc/802578.html">脚本之家</a> <a href="https://blog.k8s.li/fuck-chinese-software.html#Windows">木子的博客</a></p>
-<h3 id="重装系统"><a href="#重装系统" class="headerlink" title="重装系统"></a>重装系统</h3><p>作为一个程序员，装电脑系统对于我们来说应该是家常便饭，这里给大家推荐国产神器。</p>
-<blockquote>
-<p> <a href="http://www.wepe.com.cn/download.html">微PE</a></p>
-</blockquote>
-<ul>
-<li><p>没有杂七杂八的功能，安装系统什么的足够使用。不会给你夹带私货什么的，比较放心食用。</p>
-</li>
-<li><p>不带捆绑，配合<a href="https://msdn.itellyou.cn/">MSDN我告诉你</a>直接还你一个干净的桌面</p>
-</li>
-<li><p>体积较小，方便安装</p>
-</li>
-</ul>
-<h3 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h3><p>一款浏览器好不好，首先看它的首页。国产没一个干净又卫生的，都是一堆广告捆绑，所以不推荐使用任何一款国产浏览器，包括手机上的浏览器。</p>
-<blockquote>
-<p><a href="https://www.google.com/chrome/">Chrome</a>(强烈推荐)</p>
-</blockquote>
-<ul>
-<li>大部分浏览器（其实除了下面这款）都是基于浏览器基于Chromium，网页兼容性显而易见</li>
-<li>没有任何广告，干净又卫生，页面简洁，业界大牛</li>
-<li>当然缺点就是，账号同步404，你懂</li>
-</ul>
-<blockquote>
-<p><a href="https://www.firefox.com.cn/">Firefox</a>(国际版)</p>
-</blockquote>
-<ul>
-<li>国内版有私货，所以下载国际版，删除一些页面访问减速</li>
-<li>为非营利性组织所维护的浏览器，不会太担心访问记录被相关机构审查</li>
-<li>同步功能比Chrome好用</li>
-</ul>
-<blockquote>
-<p>Edge(无奈之举)</p>
-</blockquote>
-<ul>
-<li>比国产好用就是了</li>
-</ul>
-<h3 id="输入法"><a href="#输入法" class="headerlink" title="输入法"></a>输入法</h3><p>对于 Windows 10&#x2F;11 用户来讲，使用 Windows 默认的拼音&#x2F;五笔输入法再好不过了。少安装一些软件也就少了一些维护的成本。</p>
-<h3 id="解压缩文件"><a href="#解压缩文件" class="headerlink" title="解压缩文件"></a>解压缩文件</h3><p>依旧不推荐国产压缩软件，广告满天飞，捆绑一堆严重拖慢电脑速度的fw</p>
-<blockquote>
-<p><a href="https://www.7-zip.org/">7-Zip</a></p>
-</blockquote>
-<ul>
-<li>免费且开源，UI比较简陋，个人在用的一款，体积很小巧，功能很强大。</li>
-</ul>
-<blockquote>
-<p> <a href="https://cn.bandisoft.com/bandizip/">Bandizip</a></p>
-</blockquote>
-<ul>
-<li>轻巧、快速、免费、好看的解压缩软件。</li>
-<li>最喜欢它的「自动解压」功能：不用再担心解压出一堆散乱文件或双层文件夹。</li>
-</ul>
-<h3 id="PDF阅读器"><a href="#PDF阅读器" class="headerlink" title="PDF阅读器"></a>PDF阅读器</h3><p>微软自带的edge其实已经很不错，还自带修改功能，但是这里推荐一款。</p>
-<blockquote>
-<p> <a href="https://www.sumatrapdfreader.org/free-pdf-reader.html">Sumatra PDF</a></p>
-</blockquote>
-<ul>
-<li><p>软件小巧轻量，精简流畅，十分推荐这款 PDF 阅读软件</p>
-</li>
-<li><p>支持的格式也比较多 <strong>PDF, ePub, MOBI, CHM, XPS, DjVu, CBZ, CBR</strong></p>
-</li>
-</ul>
-<h3 id="下载工具"><a href="#下载工具" class="headerlink" title="下载工具"></a>下载工具</h3><p>其实国产迅雷很不错，但无奈不开会员还给你限速，开了会员还有广告</p>
-<blockquote>
-<p> <a href="https://www.baiduyun.wiki/zh-cn/idm.html#%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98%E7%89%B9%E5%88%AB%E8%AE%BE%E7%BD%AE">IDM</a></p>
-</blockquote>
-<p>什么是多线程下载？打个比方，现在要接满 1 桶水，浏览器下载时只能开 1 个水龙头，接满 1 桶水时间为 1 小时。多线程下载器可以 32 个水龙头同时接水，接满 1 桶水时间缩短到 2 分钟，足足快了 32 倍。</p>
-<blockquote>
-<p> <a href="https://github.com/qbittorrent/qBittorrent">qBittorrent</a></p>
-</blockquote>
-<p>没有杂七杂八的幺蛾子，轻量简洁。也可以使用它的 <a href="https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases">增强版</a> 。</p>
-<blockquote>
-<blockquote>
-<ol>
-<li><a href="https://www.qbittorrent.org/download.php">qBittorrent</a> (<strong>Win</strong>&#x2F;<strong>Linux</strong>&#x2F;<strong>Mac</strong>)</li>
-<li>推荐: <a href="https://sourceforge.net/projects/qbittorrent/files/">3.3.16</a> 及其 <a href="https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases">增强版</a></li>
-<li><a href="http://www.bittorrent.com/">BitTorrent</a> (<strong>Win</strong>&#x2F;Mac&#x2F;Android)</li>
-<li><a href="https://deluge-torrent.org/">Deluge</a> (<strong>Linux</strong>&#x2F;<strong>Mac</strong>&#x2F;Win)</li>
-<li><a href="https://transmissionbt.com/">Transmission</a> (<strong>Mac</strong>&#x2F;<strong>Linux</strong>&#x2F;Win)</li>
-<li><a href="https://github.com/rakshasa/rtorrent">rtorrent</a>+<a href="https://github.com/Novik/ruTorrent">RuTorrent</a> (<strong>Linux</strong>)</li>
-</ol>
-</blockquote>
-</blockquote>
-<blockquote>
-<h4 id="Aira2"><a href="#Aira2" class="headerlink" title="Aira2"></a>Aira2</h4></blockquote>
-<p><a href="https://p3terx.com/archives/aria2-started-guide.html">Aria2 新手入门教程</a> </p>
-<h3 id="播放器"><a href="#播放器" class="headerlink" title="播放器"></a>播放器</h3><blockquote>
-<h4 id="PotPlayer"><a href="#PotPlayer" class="headerlink" title="PotPlayer"></a>PotPlayer</h4></blockquote>
-<p>最牛逼的视频播放工具，不过需要一番调教之后才能发挥它巨大的潜力，使用默认的配置很渣。</p>
-<ul>
-<li>[<a href="https://vcb-s.com/archives/7228">VCB-Studio 科普教程 2.2] 基于 PotPlayer 和 madVR 的播放器教程（已更新 XySubFilter)</a></li>
-<li>[<a href="https://vcb-s.com/archives/5610">VCB-Studio 科普教程 2.1] madVR 渲染器配置教程（2016.08.13 更新）</a></li>
-<li>[<a href="https://vcb-s.com/archives/4567">VCB-Studio 科普教程 5] 那些播放器教程背后的知识</a></li>
-<li><a href="https://vcb-s.com/archives/4384">VCB-Studio 科普教程 1.2 PotPlayer 播放器教程（入门篇</a></li>
-</ul>
-<blockquote>
-<p>MPV</p>
-</blockquote>
-<p>mpv 是著名开源项目 MPlayer 的分支，因其对最新软硬件平台、视频标准以及各种高画质选项的支持而广受好评，也是目前非 Windows 平台上高画质播放器的不二选择。</p>
-<ul>
-<li>[<a href="https://vcb-s.com/archives/7594">VCB-Studio 科普教程 2.3] 跨平台播放器 mpv 配置入门</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>windows</category>
-      </categories>
-      <tags>
-        <tag>toy</tag>
-        <tag>windows</tag>
       </tags>
   </entry>
   <entry>
@@ -3337,7 +3213,7 @@ $$
 <ul>
 <li>IP地址标识主机、路由器</li>
 <li>但IP地址不好记忆，不便人类使用(没有意义)</li>
-<li>人类一般倾向于使用一些有意义的字符串来标识Internet上的设备<br>例如：<a href="mailto:&#x71;&#x7a;&#x68;&#101;&#110;&#x67;&#x40;&#117;&#x73;&#x74;&#99;&#46;&#x65;&#x64;&#x75;&#x2e;&#x63;&#110;">&#x71;&#x7a;&#x68;&#101;&#110;&#x67;&#x40;&#117;&#x73;&#x74;&#99;&#46;&#x65;&#x64;&#x75;&#x2e;&#x63;&#110;</a> 所在的邮件服务器<br><a href="http://www.ustc.edu.cn/">www.ustc.edu.cn</a> 所在的web服务器</li>
+<li>人类一般倾向于使用一些有意义的字符串来标识Internet上的设备<br>例如：<a href="mailto:&#113;&#x7a;&#104;&#x65;&#x6e;&#103;&#x40;&#117;&#x73;&#116;&#99;&#x2e;&#x65;&#100;&#117;&#46;&#x63;&#110;">&#113;&#x7a;&#104;&#x65;&#x6e;&#103;&#x40;&#117;&#x73;&#116;&#99;&#x2e;&#x65;&#100;&#117;&#46;&#x63;&#110;</a> 所在的邮件服务器<br><a href="http://www.ustc.edu.cn/">www.ustc.edu.cn</a> 所在的web服务器</li>
 <li>存在着“字符串”—IP地址的转换的必要性</li>
 <li>人类用户提供要访问机器的“字符串”名称</li>
 <li>由DNS负责转换成为二进制的网络地址</li>
@@ -5483,13 +5359,495 @@ $$
 <li>在一段时间内，每个队列得到的服务时间是：<br>Wi&#x2F;(XIGMA(Wi)) *t，和权重成正比</li>
 <li>每个类在每一个循环中获得不同权重的服务量</li>
 </ul>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211081922626.png" alt="image-20221108192220569" style="zoom:50%;" />]]></content>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211081922626.png" alt="image-20221108192220569" style="zoom:50%;" />
+
+<h3 id="IP-Internet-Protocol"><a href="#IP-Internet-Protocol" class="headerlink" title="IP:Internet Protocol"></a>IP:Internet Protocol</h3><p><strong>互联网的网络层</strong></p>
+<p>主机,路由器中的网络层功能:</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211100912728.png" alt="image-20221110091244629" style="zoom:50%;" />
+
+<p><strong>IP 数据报格式</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211100914365.png" alt="image-20221110091417264" style="zoom:50%;" />
+
+<p><strong>IP 分片和重组(Fragmentation &amp; Reassembly)</strong></p>
+<ul>
+<li>网络链路有MTU (最大传输单元) –链路层帧所携带的最大数据长度<ul>
+<li>不同的链路类型</li>
+<li>不同的MTU</li>
+</ul>
+</li>
+<li>大的IP数据报在网络上被分片(“fragmented”)<ul>
+<li>一个数据报被分割成若干个小的数据报<ul>
+<li>相同的ID</li>
+<li>不同的偏移量</li>
+<li>最后一个分片标记为0</li>
+</ul>
+</li>
+<li>“重组”只在最终的目标主机进行</li>
+<li>IP头部的信息被用于标识，排序相关分片</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211100917997.png" alt="image-20221110091718907" style="zoom:67%;" />
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211100930963.png" alt="image-20221110093039882" style="zoom:50%;" />
+
+<p><strong>IP 编址: 引论</strong></p>
+<ul>
+<li>IP 地址: 32位标示，对主机或者路由器的接口编址</li>
+<li>接口: 主机&#x2F;路由器和物理链路的连接处<ul>
+<li>路由器通常拥有多个接口</li>
+<li>主机也有可能有多个接口</li>
+<li>IP地址和每一个接口关联</li>
+</ul>
+</li>
+<li>一个IP地址和一个接口相关联</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211100933203.png" alt="image-20221110093341132" style="zoom:67%;" />
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211100937982.png" alt="image-20221110093704893" style="zoom:50%;" />
+
+<ul>
+<li>IP地址:<ul>
+<li>子网部分(高位bits)</li>
+<li>主机部分(地位bits)</li>
+</ul>
+</li>
+<li>什么是子网(subnet) ?<ul>
+<li>一个子网内的节点（主机或者路由器）它们的IP地址的高位部分相同，这些节点构成的网络的一部分叫做子网</li>
+<li>无需路由器介入，子网内各主机可以在物理上相互直接到达</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211100952697.png" alt="image-20221110095243600" style="zoom:50%;" />
+
+<p>方法：</p>
+<ul>
+<li>要判断一个子网, 将每一个接口从主机或者路由器上分开,构成了一个个网络的孤岛</li>
+<li>每一个孤岛（网络）都是一个都可以被称之为subnet.</li>
+</ul>
+<p>子网掩码：11111111 11111111 11111111 00000000<br>Subnet mask: &#x2F;24</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211100954846.png" alt="image-20221110095440752" style="zoom:50%;" />
+
+<ul>
+<li>Class A：126 networks ，16 million hosts</li>
+<li>Class B：16382networks ，64 K hosts</li>
+<li>Class C：2 million networks ，254 host </li>
+<li>Class D：multicast</li>
+<li>Class E：reserved for future</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211101000432.png" alt="image-20221110100035328" style="zoom: 50%;" />
+
+<p><strong>特殊IP地址</strong></p>
+<ul>
+<li>一些约定：<ul>
+<li>子网部分: 全为 0—本网络</li>
+<li>主机部分: 全为0—本主机</li>
+<li>主机部分: 全为1–广播地址，这个网络的所有主机</li>
+</ul>
+</li>
+<li>特殊IP地址</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211101014236.png" alt="image-20221110101436139" style="zoom:67%;" />
+
+<p><strong>内网(专用)IP地址</strong></p>
+<ul>
+<li>专用地址：地址空间的一部份供专用地址使用</li>
+<li>永远不会被当做公用地址来分配, 不会与公用地址重复<ul>
+<li>只在局部网络中有意义区分不同的设备</li>
+</ul>
+</li>
+<li>路由器不对目标地址是专用地址的分组进行转发</li>
+<li>专用地址范围<ul>
+<li>Class A 10.0.0.0-10.255.255.255 MASK 255.0.0.0</li>
+<li>Class B 172.16.0.0-172.31.255.255 MASK 255.255.0.0</li>
+<li>Class C 192.168.0.0-192.168.255.255 MASK 255.255.255. 0</li>
+</ul>
+</li>
+</ul>
+<p><strong>IP 编址: CIDR</strong></p>
+<p>CIDR: Classless InterDomain Routing（无类域间路由）</p>
+<ul>
+<li>子网部分可以在任意的位置</li>
+<li>地址格式: a.b.c.d&#x2F;x, 其中 x 是 地址中子网号的长度</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211101016829.png" alt="image-20221110101622727" style="zoom:50%;" />
+
+<p><strong>子网掩码(subnet mask)</strong></p>
+<ul>
+<li>32bits , 0 or 1 in each bit<ul>
+<li>1: bit位置表示子网部分</li>
+<li>0:bit位置表示主机部分</li>
+</ul>
+</li>
+<li>原始的A、B、C类网络的子网掩码分别是<ul>
+<li>A：255.0.0.0 ：11111111 00000000 0000000 00000000</li>
+<li>B：255.255.0.0：11111111 11111111 0000000 00000000</li>
+<li>C：255.255.255.0：11111111 11111111 11111111 00000000</li>
+</ul>
+</li>
+<li>CIDR下的子网掩码例子：<ul>
+<li>11111111 11111111 11111100 00000000</li>
+</ul>
+</li>
+<li>另外的一种表示子网掩码的表达方式<ul>
+<li>&#x2F;#</li>
+<li>例：&#x2F;22：表示前面22个bit为子网部分</li>
+</ul>
+</li>
+</ul>
+<p><strong>转发表和转发算法</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211101030928.png" alt="image-20221110103043837" style="zoom: 50%;" />
+
+<ul>
+<li>获得IP数据报的目标地址</li>
+<li>对于转发表中的每一个表项<br>√  如 (IP Des addr) &amp; (mask)&#x3D;&#x3D; destination, 则按照表项对应的接口转发该数据报<br>√  如果都没有找到,则使用默认表项转发数据报</li>
+</ul>
+<p><strong>如何获得一个IP地址</strong></p>
+<p>Q: 主机如何获得一个IP地址?</p>
+<ul>
+<li>系统管理员将地址配置在一个文件中<ul>
+<li>Wintel: control-panel-&gt;network-&gt;configuration-&gt;tcp&#x2F;ip-&gt;properties</li>
+<li>UNIX: &#x2F;etc&#x2F;rc.config</li>
+</ul>
+</li>
+<li>DHCP: Dynamic Host Configuration Protocol: 从服务器中动态获得一个IP地址<ul>
+<li>“plug-and-play”</li>
+</ul>
+</li>
+</ul>
+<p><strong>DHCP: Dynamic Host Configuration Protocol</strong><br>目标: 允许主机在加入网络的时候，动态地从服务器那里获得IP地址：</p>
+<ul>
+<li>可以更新对主机在用IP地址的租用期-租期快到了</li>
+<li>重新启动时，允许重新使用以前用过的IP地址</li>
+<li>支持移动用户加入到该网络（短期在网）<br>DHCP工作概况:</li>
+<li>主机广播“DHCP discover” 报文[可选]</li>
+<li>DHCP 服务器用 “DHCP offer”提供报文响应[可选]</li>
+<li>主机请求IP地址：发送 “DHCP request” 报文</li>
+<li>DHCP服务器发送地址：“DHCP ack” 报文</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211101036018.png" alt="image-20221110103606899" style="zoom:50%;" />
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211101036537.png" alt="image-20221110103633435" style="zoom:50%;" />
+
+<p><strong>DHCP: 不仅仅是IP addresses</strong></p>
+<p>DHCP 返回:</p>
+<ul>
+<li>IP 地址</li>
+<li>第一跳路由器的IP地址（默认网关）</li>
+<li>DNS服务器的域名和IP地址</li>
+<li>子网掩码 (指示地址部分的网络号和主机号)</li>
+</ul>
+<blockquote>
+<p>Q: 如何获得一个网络的子网部分? </p>
+</blockquote>
+<p>A: 从ISP获得地址块中分配一个小地址块</p>
+<blockquote>
+<p> Q: 一个ISP如何获得一个地址块? </p>
+</blockquote>
+<p>A: ICANN: Internet Corporation for Assigned  Names and Numbers</p>
+<ul>
+<li>分配地址</li>
+<li>管理DNS</li>
+<li>分配域名，解决冲突</li>
+</ul>
+<p><strong>NAT: Network Address Translation</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211101043213.png" alt="image-20221110104341106" style="zoom: 50%;" />
+
+<ul>
+<li>动机: 本地网络只有一个有效IP地址:<ul>
+<li>不需要从ISP分配一块地址，可用一个IP地址用于所有的（局域网）设备–省钱</li>
+<li>可以在局域网改变设备的地址情况下而无须通知外界</li>
+<li>可以改变ISP（地址变化）而不需要改变内部的设备地址</li>
+<li>局域网内部的设备没有明确的地址，对外是不可见的–安全</li>
+</ul>
+</li>
+</ul>
+<p>实现: NAT 路由器必须:</p>
+<ul>
+<li>外出数据包：替换源地址和端口号为NAT IP地址和新的端口号，目标IP和端口不变 …远端的C&#x2F;S将会用NAP IP地址，新端口号作为目标地址</li>
+<li>记住每个转换替换对（在NAT转换表中） .. 源IP，端口 vs NAP IP ，新端口</li>
+<li>进入数据包：替换目标IP地址和端口号，采用存储在NAT表中的mapping表项，用（源IP，端口）</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211101058953.png" alt="image-20221110105859829" style="zoom: 33%;" />
+
+<ul>
+<li>16-bit端口字段:<ul>
+<li>6万多个同时连接，一个局域网!</li>
+</ul>
+</li>
+<li>对NAT是有争议的:<ul>
+<li>路由器只应该对第3层做信息处理，而这里对端口号（4层）作了处理</li>
+<li>违反了end-to-end 原则<ul>
+<li>端到端原则：复杂性放到网络边缘<ul>
+<li>无需借助中转和变换，就可以直接传送到目标主机</li>
+</ul>
+</li>
+<li>NAT可能要被一些应用设计者考虑, eg, P2P applications</li>
+<li>外网的机器无法主动连接到内网的机器上</li>
+</ul>
+</li>
+<li>地址短缺问题可以被IPv6解决</li>
+<li>NAT穿越：如果客户端需要连接在NAT后面的服务器，如何操作</li>
+</ul>
+</li>
+</ul>
+<p><strong>NAT 穿越问题</strong></p>
+<ul>
+<li>客户端需要连接地址为10.0.0.1的服务器<ul>
+<li>服务器地址10.0.0.1 LAN本地地址 (客户端不能够使用其作为目标地址)</li>
+<li>整网只有一个外部可见地址: 138.76.29.7</li>
+</ul>
+</li>
+<li>方案1: 静态配置NAT：转发进来的对服务器特定端口连接请求<ul>
+<li>e.g., (123.76.29.7, port 2500) 总是转发到10.0.0.1 port 25000</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211101613082.png" alt="image-20221110161315995" style="zoom:50%;" />
+
+<ul>
+<li>方案2: Universal Plug and Play (UPnP) Internet Gateway Device (IGD) 协议. 允许NATted主机可以:<ul>
+<li>获知网络的公共 IP地址(138.76.29.7)</li>
+<li>列举存在的端口映射</li>
+<li>增&#x2F;删端口映射 (在租用时间内)<br>i.e., 自动化静态NAT端口映射配置</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211101614155.png" alt="image-20221110161426090" style="zoom:50%;" />
+
+<ul>
+<li>方案 3: 中继 (used in Skype)<ul>
+<li>NAT后面的服务器建立和中继的连接</li>
+<li>外部的客户端链接到中继</li>
+<li>中继在2个连接之间桥接</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211101615857.png" alt="image-20221110161523775" style="zoom:50%;" />
+
+<p><strong>IPv6：动机</strong></p>
+<ul>
+<li>初始动机: 32-bit地址空间将会被很快用完</li>
+<li>另外的动机:</li>
+<li>头部格式改变帮助加速处理和转发<ul>
+<li>TTL-1</li>
+<li>头部checksum</li>
+<li>分片</li>
+</ul>
+</li>
+<li>头部格式改变帮助QoS</li>
+</ul>
+<p>IPv6 数据报格式: </p>
+<ul>
+<li>固定的40 字节头部</li>
+<li>数据报传输过程中，不允许分片</li>
+</ul>
+<p><strong>IPv6 头部 (Cont)</strong><br>Priority: 标示流中数据报的优先级<br>Flow Label: 标示数据报在一个“flow.” ( “flow”的概念没有被严格的定义)<br>Next header: 标示上层协议</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211101632539.png" alt="image-20221110163226476" style="zoom: 33%;" />
+
+<p><strong>和IPv4的其它变化</strong></p>
+<ul>
+<li>Checksum: 被移除掉，降低在每一段中的处理速度</li>
+<li>Options: 允许，但是在头部之外, 被 “Next Header” 字段标示</li>
+<li>ICMPv6: ICMP的新版本<ul>
+<li>附加了报文类型, e.g. “Packet Too Big”</li>
+<li>多播组管理功能</li>
+</ul>
+</li>
+</ul>
+<p><strong>从IPv4到IPv6的平移</strong></p>
+<ul>
+<li>不是所有的路由器都能够同时升级的<ul>
+<li>没有一个标记日 “flag days”</li>
+<li>在IPv4和IPv6路由器混合时，网络如何运转?</li>
+</ul>
+</li>
+<li>隧道: 在IPv4路由器之间传输的IPv4数据报中携带IPv6数据报</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211101636951.png" alt="image-20221110163629884" style="zoom:50%;" />
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211101637205.png" alt="image-20221110163750114" style="zoom: 33%;" />
+
+<p>IPv6: 应用</p>
+<ul>
+<li>Google: 8% 的客户通过IPv6访问谷歌服务</li>
+<li>NIST: 全美国1&#x2F;3的政府域支持IPv6</li>
+<li>估计还需要很长时间进行部署<ul>
+<li>20年以上!</li>
+<li>看看过去20年来应用层面的变化: WWW, Facebook, streaming media, Skype, …<blockquote>
+<p>为什么?</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p>部署应用好比刷墙漆，而更换IPv6则是重新盖房子，无法很快的执行</p>
+]]></content>
       <categories>
         <category>Base</category>
       </categories>
       <tags>
         <tag>code</tag>
         <tag>computer network</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>程序员的软件抽屉(Windows)</title>
+    <url>/2022/09/26/softbox/</url>
+    <content><![CDATA[<h2 id="工具篇-强烈推荐安装"><a href="#工具篇-强烈推荐安装" class="headerlink" title="工具篇(强烈推荐安装)"></a>工具篇(强烈推荐安装)</h2><h3 id="以打包"><a href="#以打包" class="headerlink" title="以打包"></a>以打包</h3><p>迅雷网盘<a href="https://pan.xunlei.com/s/VND5y3hj863AQVp7dM7UTo0DA1">提取码：atsp</a></p>
+<blockquote>
+<p> <a href="https://geekuninstaller.com/">Geek Uninstaller</a></p>
+</blockquote>
+<ul>
+<li>小巧（2 MB ）、绿色（无需安装）、易用（单文件）的卸载工具。</li>
+<li>卸载完成，Geek Uninstaller 会自动扫描残留的文件（夹）和注册表项目。</li>
+</ul>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210331754.png" alt="image-20221005210331754"></p>
+<blockquote>
+<p>Gism++</p>
+</blockquote>
+<p>Windows 上最强大的系统工具，简洁好用。用来清理电脑垃圾再好不过</p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210337740.png" alt="image-20221005210337740"></p>
+<blockquote>
+<p>图吧工具箱</p>
+</blockquote>
+<p>整合了大量硬件检测的工具，这不比那个经常抽烟的鲁大师好多了。</p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210346337.png" alt="image-20221005210346337"></p>
+<blockquote>
+<p>Snipaste</p>
+</blockquote>
+<p>史上最好用的截图软件，功能丰富，用了你就知道了。</p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210352208.png" alt="image-20221005210352208"></p>
+<blockquote>
+<p>FSCapture</p>
+</blockquote>
+<p>属于录屏软件的一股清流吧，大小仅为5.4M，功能却十分齐全！</p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210402012.png" alt="image-20221005210402012"></p>
+<blockquote>
+<p>TrafficMonitor</p>
+</blockquote>
+<p>用来监控现在电脑的各种硬件状态，直接在任务栏显示，简洁清楚。</p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210410408.png" alt="image-20221005210410408"></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210415503.png" alt="image-20221005210415503"></p>
+<h2 id="程序员的软件抽屉（Windows）"><a href="#程序员的软件抽屉（Windows）" class="headerlink" title="程序员的软件抽屉（Windows）"></a>程序员的软件抽屉（Windows）</h2><h3 id="杀毒软件（不需要"><a href="#杀毒软件（不需要" class="headerlink" title="杀毒软件（不需要"></a>杀毒软件（不需要</h3><p>2202年，都已经Windows11了，其实不太需要杀毒软件了，自带的 Windows defender已经足矣。</p>
+<p>如果硬要装一个，那么最推荐的应该是火绒了</p>
+<blockquote>
+<p><a href="https://www.huorong.cn/">火绒安全</a></p>
+</blockquote>
+<p>相比国内一众病毒（🐧安全管家，361安全卫视，金山中毒吧）</p>
+<ul>
+<li>火绒不会有广告弹窗等任何打扰用户的行为，也不会在安装包中随意捆绑其他软件。</li>
+<li>强悍、干净、轻巧的火绒可以让你安全、安静、自由地使用电脑。</li>
+<li>在专注的同时保留了基本的防护，家长控制，U盘保护等等，还有很多扩展工具。</li>
+</ul>
+<p>引用 <a href="https://www.jb51.net/softjc/802578.html">脚本之家</a> <a href="https://blog.k8s.li/fuck-chinese-software.html#Windows">木子的博客</a></p>
+<h3 id="重装系统"><a href="#重装系统" class="headerlink" title="重装系统"></a>重装系统</h3><p>作为一个程序员，装电脑系统对于我们来说应该是家常便饭，这里给大家推荐国产神器。</p>
+<blockquote>
+<p> <a href="http://www.wepe.com.cn/download.html">微PE</a></p>
+</blockquote>
+<ul>
+<li><p>没有杂七杂八的功能，安装系统什么的足够使用。不会给你夹带私货什么的，比较放心食用。</p>
+</li>
+<li><p>不带捆绑，配合<a href="https://msdn.itellyou.cn/">MSDN我告诉你</a>直接还你一个干净的桌面</p>
+</li>
+<li><p>体积较小，方便安装</p>
+</li>
+</ul>
+<h3 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h3><p>一款浏览器好不好，首先看它的首页。国产没一个干净又卫生的，都是一堆广告捆绑，所以不推荐使用任何一款国产浏览器，包括手机上的浏览器。</p>
+<blockquote>
+<p><a href="https://www.google.com/chrome/">Chrome</a>(强烈推荐)</p>
+</blockquote>
+<ul>
+<li>大部分浏览器（其实除了下面这款）都是基于浏览器基于Chromium，网页兼容性显而易见</li>
+<li>没有任何广告，干净又卫生，页面简洁，业界大牛</li>
+<li>当然缺点就是，账号同步404，你懂</li>
+</ul>
+<blockquote>
+<p><a href="https://www.firefox.com.cn/">Firefox</a>(国际版)</p>
+</blockquote>
+<ul>
+<li>国内版有私货，所以下载国际版，删除一些页面访问减速</li>
+<li>为非营利性组织所维护的浏览器，不会太担心访问记录被相关机构审查</li>
+<li>同步功能比Chrome好用</li>
+</ul>
+<blockquote>
+<p>Edge(无奈之举)</p>
+</blockquote>
+<ul>
+<li>比国产好用就是了</li>
+</ul>
+<h3 id="输入法"><a href="#输入法" class="headerlink" title="输入法"></a>输入法</h3><p>对于 Windows 10&#x2F;11 用户来讲，使用 Windows 默认的拼音&#x2F;五笔输入法再好不过了。少安装一些软件也就少了一些维护的成本。</p>
+<h3 id="解压缩文件"><a href="#解压缩文件" class="headerlink" title="解压缩文件"></a>解压缩文件</h3><p>依旧不推荐国产压缩软件，广告满天飞，捆绑一堆严重拖慢电脑速度的fw</p>
+<blockquote>
+<p><a href="https://www.7-zip.org/">7-Zip</a></p>
+</blockquote>
+<ul>
+<li>免费且开源，UI比较简陋，个人在用的一款，体积很小巧，功能很强大。</li>
+</ul>
+<blockquote>
+<p> <a href="https://cn.bandisoft.com/bandizip/">Bandizip</a></p>
+</blockquote>
+<ul>
+<li>轻巧、快速、免费、好看的解压缩软件。</li>
+<li>最喜欢它的「自动解压」功能：不用再担心解压出一堆散乱文件或双层文件夹。</li>
+</ul>
+<h3 id="PDF阅读器"><a href="#PDF阅读器" class="headerlink" title="PDF阅读器"></a>PDF阅读器</h3><p>微软自带的edge其实已经很不错，还自带修改功能，但是这里推荐一款。</p>
+<blockquote>
+<p> <a href="https://www.sumatrapdfreader.org/free-pdf-reader.html">Sumatra PDF</a></p>
+</blockquote>
+<ul>
+<li><p>软件小巧轻量，精简流畅，十分推荐这款 PDF 阅读软件</p>
+</li>
+<li><p>支持的格式也比较多 <strong>PDF, ePub, MOBI, CHM, XPS, DjVu, CBZ, CBR</strong></p>
+</li>
+</ul>
+<h3 id="下载工具"><a href="#下载工具" class="headerlink" title="下载工具"></a>下载工具</h3><p>其实国产迅雷很不错，但无奈不开会员还给你限速，开了会员还有广告</p>
+<blockquote>
+<p> <a href="https://www.baiduyun.wiki/zh-cn/idm.html#%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98%E7%89%B9%E5%88%AB%E8%AE%BE%E7%BD%AE">IDM</a></p>
+</blockquote>
+<p>什么是多线程下载？打个比方，现在要接满 1 桶水，浏览器下载时只能开 1 个水龙头，接满 1 桶水时间为 1 小时。多线程下载器可以 32 个水龙头同时接水，接满 1 桶水时间缩短到 2 分钟，足足快了 32 倍。</p>
+<blockquote>
+<p> <a href="https://github.com/qbittorrent/qBittorrent">qBittorrent</a></p>
+</blockquote>
+<p>没有杂七杂八的幺蛾子，轻量简洁。也可以使用它的 <a href="https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases">增强版</a> 。</p>
+<blockquote>
+<blockquote>
+<ol>
+<li><a href="https://www.qbittorrent.org/download.php">qBittorrent</a> (<strong>Win</strong>&#x2F;<strong>Linux</strong>&#x2F;<strong>Mac</strong>)</li>
+<li>推荐: <a href="https://sourceforge.net/projects/qbittorrent/files/">3.3.16</a> 及其 <a href="https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases">增强版</a></li>
+<li><a href="http://www.bittorrent.com/">BitTorrent</a> (<strong>Win</strong>&#x2F;Mac&#x2F;Android)</li>
+<li><a href="https://deluge-torrent.org/">Deluge</a> (<strong>Linux</strong>&#x2F;<strong>Mac</strong>&#x2F;Win)</li>
+<li><a href="https://transmissionbt.com/">Transmission</a> (<strong>Mac</strong>&#x2F;<strong>Linux</strong>&#x2F;Win)</li>
+<li><a href="https://github.com/rakshasa/rtorrent">rtorrent</a>+<a href="https://github.com/Novik/ruTorrent">RuTorrent</a> (<strong>Linux</strong>)</li>
+</ol>
+</blockquote>
+</blockquote>
+<blockquote>
+<h4 id="Aira2"><a href="#Aira2" class="headerlink" title="Aira2"></a>Aira2</h4></blockquote>
+<p><a href="https://p3terx.com/archives/aria2-started-guide.html">Aria2 新手入门教程</a> </p>
+<h3 id="播放器"><a href="#播放器" class="headerlink" title="播放器"></a>播放器</h3><blockquote>
+<h4 id="PotPlayer"><a href="#PotPlayer" class="headerlink" title="PotPlayer"></a>PotPlayer</h4></blockquote>
+<p>最牛逼的视频播放工具，不过需要一番调教之后才能发挥它巨大的潜力，使用默认的配置很渣。</p>
+<ul>
+<li>[<a href="https://vcb-s.com/archives/7228">VCB-Studio 科普教程 2.2] 基于 PotPlayer 和 madVR 的播放器教程（已更新 XySubFilter)</a></li>
+<li>[<a href="https://vcb-s.com/archives/5610">VCB-Studio 科普教程 2.1] madVR 渲染器配置教程（2016.08.13 更新）</a></li>
+<li>[<a href="https://vcb-s.com/archives/4567">VCB-Studio 科普教程 5] 那些播放器教程背后的知识</a></li>
+<li><a href="https://vcb-s.com/archives/4384">VCB-Studio 科普教程 1.2 PotPlayer 播放器教程（入门篇</a></li>
+</ul>
+<blockquote>
+<p>MPV</p>
+</blockquote>
+<p>mpv 是著名开源项目 MPlayer 的分支，因其对最新软硬件平台、视频标准以及各种高画质选项的支持而广受好评，也是目前非 Windows 平台上高画质播放器的不二选择。</p>
+<ul>
+<li>[<a href="https://vcb-s.com/archives/7594">VCB-Studio 科普教程 2.3] 跨平台播放器 mpv 配置入门</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>windows</category>
+      </categories>
+      <tags>
+        <tag>toy</tag>
+        <tag>windows</tag>
       </tags>
   </entry>
 </search>
