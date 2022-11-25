@@ -268,6 +268,102 @@
 <p><strong>测试</strong></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 范例一：设置变量hr 内容为fuck</span></span><br><span class="line">[mua@localhost ~]$ 16hr=fuck</span><br><span class="line">bash: 16hr=fuck: 未找到命令...  <span class="comment">## 变量开头为数字</span></span><br><span class="line">[mua@localhost ~]$ 16hr = fuck</span><br><span class="line">bash: 16hr: 未找到命令...  <span class="comment">## 变量等于号两侧存在空格</span></span><br><span class="line"><span class="comment"># 范例二：当变量内容为fuck&#x27;s name</span></span><br><span class="line">[mua@localhost ~]$ hr=fuck<span class="string">&#x27;s name</span></span><br><span class="line"><span class="string">&gt; ^C ## 单引号与双引号必须要成对，当你按下 enter 后，提示继续输入变量内容</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ hr=&quot;fuck&#x27;</span>s name<span class="string">&quot; ## 成功创建</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ hr=&#x27;fuck&#x27;s name&#x27;</span></span><br><span class="line"><span class="string">&gt; ^C ## 因为前两个单引号已成对，后面就多了一个不成对的单引号，提示继续输入</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ hr=fuck\&#x27;s\ name ## 用跳脱字符成功创建</span></span><br><span class="line"><span class="string"># 范例三：要在 PATH 这个变量当中“累加”:/home/dmtsai/bin 这个目录</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ PATH=<span class="variable">$PATH</span>:/home/mua/bin</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ PATH=&quot;</span><span class="variable">$PATH</span><span class="string">&quot;:/home/mua/bin</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ PATH=<span class="variable">$&#123;PATH&#125;</span>:/home/mua/bin</span></span><br><span class="line"><span class="string"># 范例四：将 hr 的内容多出 &quot;</span><span class="built_in">yes</span><span class="string">&quot; </span></span><br><span class="line"><span class="string">[mua@localhost ~]$ echo <span class="variable">$hryes</span></span></span><br><span class="line"><span class="string">## 没有双引号，变量name 的内容就是 <span class="variable">$nameyes</span> 这个变量</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ echo &quot;</span><span class="variable">$hr</span><span class="string">&quot;yes</span></span><br><span class="line"><span class="string">yes ## 成功添加</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ echo <span class="variable">$&#123;hr&#125;</span>yes</span></span><br><span class="line"><span class="string">yes ## 成功添加，以此例子为标准</span></span><br><span class="line"><span class="string"># 范例五：让刚刚设置的 name=VBird 可以用在下个 shell 的程序</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ hr=fuck ## 赋值变量</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ bash ## 进入子进程</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ echo <span class="variable">$hr</span> </span></span><br><span class="line"><span class="string">## 调用失败</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ exit</span></span><br><span class="line"><span class="string">exit</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ export hr ## 设置系统环境变量</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ bash </span></span><br><span class="line"><span class="string">[mua@localhost ~]$ echo <span class="variable">$hr</span></span></span><br><span class="line"><span class="string">fuck ## 调用成功</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ exit</span></span><br><span class="line"><span class="string">exit</span></span><br><span class="line"><span class="string"># 范例六：进入到目前核心的模块目录</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="数据流重导向"><a href="#数据流重导向" class="headerlink" title="数据流重导向"></a>数据流重导向</h3><blockquote>
+<p>数据流:分三种，标准输入流（由键盘输入产生），标准输出流（执行命令的输出日志），标准错误输出流(同理）</p>
+</blockquote>
+<p><strong>什么是数据流重导向</strong></p>
+<p>将本应由键盘输入或输出到屏幕上的数据流重定向到文件或设备上（保存到文件或设备中），称之为数据流重定向</p>
+<p><strong>数据流重定向的作用</strong></p>
+<ul>
+<li>屏幕输出信息需要保存</li>
+<li>后台执行程序，不想将日志打在桌面上</li>
+<li>区分输出标准输出与标准错误输出处理时</li>
+<li>丢弃已知错误信息，<code>2&gt; /dev/null</code></li>
+</ul>
+<p><strong>代号与表现方式</strong></p>
+<ol>
+<li>标准输入 （stdin） ：代码为 <code>0</code> ，使用 <code>&lt; </code>或 <code>&lt;&lt;</code> ；</li>
+<li>标准输出 （stdout）：代码为 <code>1</code> ，使用 <code>&gt;</code> 或 <code>&gt;&gt;</code> ；</li>
+<li>标准错误输出（stderr）：代码为 <code>2</code> ，使用 <code>2&gt;</code> 或 <code>2&gt;&gt;</code> ；</li>
+</ol>
+<p>区别</p>
+<ul>
+<li><code>&gt;</code> ：以【覆盖】的方式，将【正确的数据】输出到文件或设备上</li>
+<li><code>&gt;&gt;</code>：以【追加】的方式，将【正确的数据】输出到文件或设备上</li>
+<li><code>2&gt;</code>：以【覆盖】的方式，将【错误的数据】输出到文件或设备上</li>
+<li><code>2&gt;&gt;</code>：以【追加】的方式，将【错误的数据】输出到文件或设备上</li>
+</ul>
+<p><strong>黑洞 &#x2F;dev&#x2F;null</strong></p>
+<p>当需要将某些日志不重要的数据流重定向走，但又不想保存文件占用空间时，重定向数据流 <code>/dev/null</code> 设备上，相当于将数据丢入黑洞</p>
+<p>Eg:</p>
+<p>将标准输出丢入黑洞</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost mua]<span class="comment"># cat /etc/profile &gt; /dev/null</span></span><br></pre></td></tr></table></figure>
+
+<p>将标准错误输出丢入黑洞</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost mua]<span class="comment"># find / -name .bashrc 2&gt; /dev/null</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>将stdout与stderr输出到同一文件或设备</strong></p>
+<p>分别设置stdout与stderr到同一文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ find / -name .bashrc &gt; /tmp/stdtestlogs1 2&gt; /tmp/stdtestlogs1</span><br></pre></td></tr></table></figure>
+
+<p>输出两者带同一文件中，语法<code>command &gt;[file]&gt;&amp;1</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ find / -name .bashrc &amp; /tmp/stdtustlogs2 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>&amp;语法<code>[command]&amp;&gt;[file] </code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ find / -name .bashrc &amp;&gt; /tmp/stdtestlogs3</span><br></pre></td></tr></table></figure>
+
+<p>将所有日志输入黑洞</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ find / -name .bashrc &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>将错误日志输入黑洞</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ find / -name .bashrc 2&gt; /dev/null</span><br></pre></td></tr></table></figure>
+
+<p><strong>标准输入流重定向 &lt; 与 &lt;&lt;</strong></p>
+<p>将原本由键盘输入的数据，改由文件内容提供（<code>&lt;</code> 表示使用文件提供数据，<code>&lt;&lt;</code> 用来【设置输入结束的字符】）</p>
+<p>例如：</p>
+<p>将<code>~/.bashrc</code>输出重定向到<code>/tmp/stdintest</code>中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ <span class="built_in">cat</span> &gt; /tmp/stdintest &lt; ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>设置【输入结束字符】，将一段文字输入到<code>/tmp/stdintest2</code>中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ <span class="built_in">cat</span> &gt; /tmp/stdintest &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">&gt; 这是一条测试</span></span><br><span class="line"><span class="string">&gt; 这是一条测</span></span><br><span class="line"><span class="string">&gt; 这是一条</span></span><br><span class="line"><span class="string">&gt; 这是一</span></span><br><span class="line"><span class="string">&gt; 这是</span></span><br><span class="line"><span class="string">&gt; 这</span></span><br><span class="line"><span class="string">&gt; EOF</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>命令执行的判断依据： ; , &amp;&amp;, ||</strong></p>
+<ul>
+<li><code>cmd</code> ; <code>cmd</code>(不考虑前者是否执行成功)</li>
+</ul>
+<p>eg.进行sync同步化再进行关机命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sync</span>; <span class="built_in">sync</span>; shutdown -h now</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>$?</code> （指令回传值） 与 <code>&amp;&amp;</code> 或 <code>||</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>执行下达情况</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cmd1&amp;&amp;cmd2</td>
+<td>1. 若 cmd1 执行完毕且正确执行（$?&#x3D;0），则开始执行 cmd2。 2. 若 cmd1 执行完毕且为错误 （$?≠0），则 cmd2 不执行。</td>
+</tr>
+<tr>
+<td>cmd1||cmd2</td>
+<td>1. 若 cmd1 执行完毕且正确执行（$?&#x3D;0），则 cmd2 不执行。 2. 若 cmd1 执 行完毕且为错误 （$?≠0），则开始执行 cmd2。</td>
+</tr>
+</tbody></table>
+<p><em>练习</em></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 先查询有无此目录再创建xixi这个文件</span></span><br><span class="line">[mua@localhost ~]$ <span class="built_in">ls</span> /tmp/abc &amp;&amp; <span class="built_in">touch</span> /tmp/abc/xixi</span><br><span class="line"><span class="built_in">ls</span>: cannot access /tmp/abc: No such file or directory <span class="comment">#查询无</span></span><br><span class="line">[mua@localhost home]$ <span class="built_in">mkdir</span> /tmp/abc <span class="comment"># 创建文件夹</span></span><br><span class="line">[mua@localhost home]$ <span class="built_in">ls</span> /tmp/abc &amp;&amp; <span class="built_in">touch</span> /tmp/abc/xixi <span class="comment">#执行成功</span></span><br><span class="line"><span class="comment">#总结 如果查询不到，就不会执行下一个语句</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
 
 
 <h2 id="Linux正则表达式"><a href="#Linux正则表达式" class="headerlink" title="Linux正则表达式"></a>Linux正则表达式</h2><p><strong>概念：</strong>正则表达式 （Regular Expression, RE, 或称为常规表达式）是通过一些特殊字符的排列，用以“搜寻&#x2F;取代&#x2F;删除”一列或多列文字字串， 简单的说，正则表达式就是用在字串的处理上面的 一项“表示式”。正则表达式并不是一个工具程序， 而是一个字串处理的标准依据，如果想要以正则表达式的方式处理字串，就得要使用支持正则表达式的工具程序才行， 这类的工具程序很多，例如 vi, sed, awk 等等</p>
@@ -3472,7 +3568,7 @@ $$
 <ul>
 <li>IP地址标识主机、路由器</li>
 <li>但IP地址不好记忆，不便人类使用(没有意义)</li>
-<li>人类一般倾向于使用一些有意义的字符串来标识Internet上的设备<br>例如：<a href="mailto:&#113;&#x7a;&#104;&#x65;&#110;&#103;&#x40;&#x75;&#115;&#116;&#x63;&#x2e;&#101;&#x64;&#x75;&#x2e;&#x63;&#x6e;">&#113;&#x7a;&#104;&#x65;&#110;&#103;&#x40;&#x75;&#115;&#116;&#x63;&#x2e;&#101;&#x64;&#x75;&#x2e;&#x63;&#x6e;</a> 所在的邮件服务器<br><a href="http://www.ustc.edu.cn/">www.ustc.edu.cn</a> 所在的web服务器</li>
+<li>人类一般倾向于使用一些有意义的字符串来标识Internet上的设备<br>例如：<a href="mailto:&#113;&#122;&#x68;&#x65;&#x6e;&#103;&#64;&#x75;&#115;&#x74;&#99;&#46;&#101;&#x64;&#117;&#46;&#x63;&#110;">&#113;&#122;&#x68;&#x65;&#x6e;&#103;&#64;&#x75;&#115;&#x74;&#99;&#46;&#101;&#x64;&#117;&#46;&#x63;&#110;</a> 所在的邮件服务器<br><a href="http://www.ustc.edu.cn/">www.ustc.edu.cn</a> 所在的web服务器</li>
 <li>存在着“字符串”—IP地址的转换的必要性</li>
 <li>人类用户提供要访问机器的“字符串”名称</li>
 <li>由DNS负责转换成为二进制的网络地址</li>
@@ -7076,9 +7172,7 @@ $$
 <li>没有特殊节点协调发送</li>
 <li>没有时钟和时隙的同步</li>
 </ul>
-<ol start="4">
-<li>简单</li>
-</ol>
+<p>4.简单</p>
 <p><strong>MAC（媒体访问控制）协议：分类</strong><br>3大类:</p>
 <ul>
 <li>信道划分<ul>
@@ -7128,6 +7222,304 @@ $$
 <li>TDM：不同的人在不同的时刻讲话</li>
 <li>FDM：不同的组在不同的小房间里通信</li>
 <li>CDMA：不同的人使用不同的语言讲话</li>
+</ul>
+</li>
+</ul>
+<p><strong>b.随机存取协议</strong></p>
+<ul>
+<li>当节点有帧要发送时<ul>
+<li>以信道带宽的全部 R bps发送</li>
+<li>没有节点间的预先协调</li>
+</ul>
+</li>
+<li>两个或更多节点同时传输，会发生➜冲突“collision”</li>
+<li>随机存取协议规定: <ul>
+<li>如何检测冲突</li>
+<li>如何从冲突中恢复（如：通过稍后的重传）</li>
+</ul>
+</li>
+<li>随机MAC协议:<ul>
+<li>时隙ALOHA</li>
+<li>ALOHA</li>
+<li>CSMA, CSMA&#x2F;CD, CSMA&#x2F;CA</li>
+</ul>
+</li>
+</ul>
+<p><strong>b.1 时隙ALOHA</strong><br>假设</p>
+<ul>
+<li>所有帧是等长的</li>
+<li>时间被划分成相等的时隙，每个时隙可发送一帧</li>
+<li>节点只在时隙开始时发送帧</li>
+<li>节点在时钟上是同步的</li>
+<li>如果两个或多个节点在一个时隙传输，所有的站点都能检测到冲突</li>
+</ul>
+<p>运行</p>
+<ul>
+<li>当节点获取新的帧，在下一个时隙传输</li>
+<li>传输时没有检测到冲突，成功<ul>
+<li>节点能够在下一时隙发送新帧</li>
+</ul>
+</li>
+<li>检测时如果检测到冲突，失败<ul>
+<li>节点在每一个随后的时隙以概率p重传帧直到成功</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211231927424.png" alt="image-20221123192758312" style="zoom:50%;" />
+
+<p>优点</p>
+<ul>
+<li>节点可以以信道带宽全速连续传输</li>
+<li>高度分布：仅需要节点之间在时隙上的同步</li>
+<li>简单</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>存在冲突，浪费时隙</li>
+<li>即使有帧要发送，仍然有可能存在空闲的时隙</li>
+<li>节点检测冲突的时间&lt;帧传输的时间 <ul>
+<li>必须传完</li>
+</ul>
+</li>
+<li>需要时钟上同步</li>
+</ul>
+<p><strong>时隙ALOHA的效率( Efficiency )</strong></p>
+<p>效率：当有很多节点，每个节点有很多帧要发送时，x%的时隙是成功传输帧的时隙</p>
+<ul>
+<li><p>假设N个节点，每个节点都有很多帧要发送，在每个时隙中的传输概率是p</p>
+</li>
+<li><p>一个节点成功传输概率是p(1-p)^N-1</p>
+</li>
+<li><p>任何一个节点的成功概率是&#x3D; Np(1-p)^N-1</p>
+</li>
+<li><p>N个节点的最大效率：求出使f(P)&#x3D;Np(1-p)N-1最大的p*</p>
+</li>
+<li><p>代入P<em>得到最大f(p</em>)&#x3D;Np*(1-p*)N-1 </p>
+</li>
+<li><p>N为无穷大时的极限为1&#x2F;e&#x3D;0.37</p>
+</li>
+</ul>
+<p>最好情况：信道利用率37%</p>
+<p><strong>b.2 纯ALOHA(非时隙)</strong></p>
+<ul>
+<li>无时隙ALOHA：简单、无须节点间在时间上同步</li>
+<li>当有帧需要传输：马上传输</li>
+<li>冲突的概率增加:<ul>
+<li>帧在to发送，和其它在[to-1, to+1]区间内开始发送的帧冲突</li>
+<li>和当前帧冲突的区间（其他帧在此区间开始传输）增大</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211232156904.png" alt="image-20221123215626805" style="zoom:50%;" />
+
+<p><strong>b.3 CSMA(载波侦听多路访问)</strong></p>
+<p>Aloha: 如何提高ALOHA的效率发之前不管有无其他节点在传输<br>CSMA: 在传输前先侦听信道:</p>
+<ul>
+<li>如果侦听到信道空闲，传送整个帧</li>
+<li>如果侦听到信道忙，推迟传送</li>
+<li>人类类比：不要打断别人正在进行的说话</li>
+</ul>
+<p><strong>b.4 CSMA&#x2F;CD(冲突检测)</strong><br>CSMA&#x2F;CD: </p>
+<ul>
+<li>载波侦听CSMA：和在CSMA中一样发送前侦听信道</li>
+<li>没有传完一个帧就可以在短时间内检测到冲突</li>
+<li>冲突发生时则传输终止，减少对信道的浪费</li>
+<li>冲突检测CD技术，有线局域网中容易实现：<ul>
+<li>检测信号强度，比较传输与接收到的信号是否相同</li>
+<li>通过周期的过零点检测</li>
+</ul>
+</li>
+<li>人类类比：礼貌的对话人</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211232202527.png" alt="image-20221123220202432" style="zoom:50%;" />
+
+<p>Ps：对信道的浪费减少了</p>
+<p><strong>以太网CSMA&#x2F;CD算法</strong></p>
+<ol>
+<li>适配器获取数据报，创建帧</li>
+<li>发送前：侦听信道CS<br> 1)闲：开始传送帧<br> 2)忙：一直等到闲再发送<br> 3.发送过程中，冲突检测CD<br> 1)没有冲突:成功<br> 2)检测到冲突:放弃,之后尝试重发</li>
+</ol>
+<p>4.发送方适配器检测到冲突，除放弃外，还发送一个Jam信号，所有听到冲突的适配器也是如此。 强化冲突：让所有站点都知道冲突</p>
+<p>5.如果放弃，适配器进入指数退避状态在第m次失败后，适配器随机选择一个{0，1，2， ， 2^m-1}中K，等待K*512位时，然后转到步骤2<br>exponential backoff二进制指数退避算法</p>
+<p>指数退避: </p>
+<ul>
+<li>目标：适配器试图适应当前负载，在一个变化的碰撞窗口中随机选择时间点尝试重发<ul>
+<li>高负载：重传窗口时间大，减少冲突，但等待时间长</li>
+<li>低负载：使得各站点等待时间少，但冲突概率大</li>
+</ul>
+</li>
+<li>首次碰撞：在{0，1}选择K；延迟K*512位时</li>
+<li>第2次碰撞：在{0，1，2，3}选择K</li>
+<li>第10次碰撞：在{0，1，2，3，……，1023}选择K</li>
+</ul>
+<p><strong>CSMA&#x2F;CD效率</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211232212271.png" alt="image-20221123221214189" style="zoom:50%;" />
+
+<p><strong>b.5 无线局域网 CSMA&#x2F;CA</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211232213893.png" alt="image-20221123221302796" style="zoom:50%;" />
+
+<ul>
+<li>冲突: 2+ 站点（AP或者站点）在同一个时刻发送</li>
+<li>802.11: CSMA – 发送前侦听信道<ul>
+<li>不会和其它节点正在进行的传输发生冲突</li>
+</ul>
+</li>
+<li>802.11: 没有冲突检测!<ul>
+<li>无法检测冲突：自身信号远远大于其他节点信号</li>
+<li>即使能CD：冲突!&#x3D;成功</li>
+<li>目标: avoid collisions: CSMA&#x2F;C(ollision)A(voidance)<ul>
+<li>无法CD，一旦发送一脑全部发送完毕，不CD</li>
+<li>为了避免无CD带来的信道利用率低的问题，事前进行冲突避免</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211232214802.png" alt="image-20221123221439722" style="zoom:50%;" />
+
+<p>发送方<br>1 如果站点侦测到信道空闲持续DIFS长，则传输整个帧 (no CD)<br>2 如果侦测到信道忙碌，那么 选择一个随机回退值，并在信道空闲时递减该值；如果信道忙碌，回退值不会变化到数到0时（只生在信道闲时）发送整个帧如果没有收到ACK, 增加回退值，重复2<br>802.11 接收方 </p>
+<ul>
+<li>如果帧正确，则在SIFS后发送ACK</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211232217374.png" alt="image-20221123221732295" style="zoom:50%;" />
+
+<p><strong>IEEE 802.11 MAC 协议: CSMA&#x2F;CA</strong></p>
+<ul>
+<li><p>在count down时，侦听到了信道空闲为什么不发送，而要等到0时在发送</p>
+<ul>
+<li>2个站点有数据帧需要发送，第三个节点正在发送</li>
+<li>LAN CD：让2者听完第三个节点发完，立即发送<ul>
+<li>冲突：放弃当前的发送，避免了信道的浪费于无用冲突帧的发送</li>
+<li>代价不昂贵</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>WLAN : CA</p>
+<ul>
+<li>无法CD，一旦发送就必须发完，如冲突信道浪费严重，代价高昂</li>
+<li>思想：尽量事先避免冲突，而不是在发生冲突时放弃然后重发<ul>
+<li><p>听到发送的站点，分别选择随机值，回退到0发送</p>
+<ul>
+<li>不同的随机值，一个站点会胜利</li>
+<li>失败站点会冻结计数器，当胜利节点发完再发</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211251944856.png" alt="image-20221125194429770" style="zoom:33%;" /></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>无法完全避免冲突</p>
+<ul>
+<li>两个站点相互隐藏：<br>• A,B 相互隐藏，C在传输<br>• A,B选择了随机回退值<br>• 一个节点如A胜利了，发送<br>• 而B节点收不到，顺利count down到0 发送<br>• A,B的发送在C附近形成了干扰 </li>
+<li>选择了非常靠近的随机回退值：<br>• A,B选择的值非常近<br>• A到0后发送<br>• 但是这个信号还没达到B时<br>• B也到0了，发送冲突</li>
+</ul>
+</li>
+</ul>
+<p><strong>冲突避免</strong><br>思想：允许发送方“预约”信道，而不是随机访问该信道: 避免长数据帧的冲突（可选项）</p>
+<ul>
+<li>发送方首先使用CSMA向BS发送一个小的RTS分组<ul>
+<li>RTS可能会冲突（但是由于比较短，浪费信道较少）</li>
+</ul>
+</li>
+<li>BS广播 clear-to-send CTS，作为RTS的响应</li>
+<li>CTS能够被所有涉及到的节点听到<ul>
+<li>发送方发送数据帧</li>
+<li>其它节点抑制发<blockquote>
+<p>采用小的预约分组，可以完全避免数据帧的冲突</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>冲突避免：RTS-CTS交换</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211251946535.png" alt="image-20221125194629422" style="zoom:50%;" />
+
+<p><strong>b.5 线缆接入网络</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211251947136.png" alt="image-20221125194741021" style="zoom: 50%;" />
++ 多个40Mbps 下行(广播)信道,FDM
+  + 下行：通过FDM分成若干信道，互联网、数字电视等 
+  + 互联网信道：只有1个CMTS在其上传输
++ 多个30 Mbps上行的信道,FDM
+  + 多路访问：所有用户使用；接着TDM分成微时隙
+  + 部分时隙：分配；部分时隙：竞争
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211251951154.png" alt="image-20221125195114062" style="zoom: 50%;" />
+
+<p>DOCSIS: data over cable service interface spec </p>
+<ul>
+<li>采用FDM进行信道的划分：若干上行、下行信道</li>
+<li>下行信道:<ul>
+<li>在下行MAP帧中：CMTS告诉各节点微时隙分配方案，分配给各站点的上行微时隙</li>
+<li>另外：头端传输下行数据（给各个用户）</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211251955187.png" alt="image-20221125195507101" style="zoom:50%;" />
+
+<p>DOCSIS: TDM上行信道</p>
+<ul>
+<li>采用TDM的方式将上行信道分成若干微时隙：MAP指定</li>
+<li>站点采用分配给它的微时隙上行数据传输：分配</li>
+<li>在特殊的上行微时隙中，各站点请求上行微时隙：竞争<ul>
+<li>各站点对于该时隙的使用是随机访问的</li>
+<li>一旦碰撞（请求不成功，结果是：在下行的MAP中没有为它分配，则二进制退避）选择时隙上传输</li>
+</ul>
+</li>
+</ul>
+<p><strong>c.轮流(Taking Turns)MAC协议</strong></p>
+<p>信道划分MAC协议:</p>
+<ul>
+<li>共享信道在高负载时是有效和公平的</li>
+<li>在低负载时效率低下<ul>
+<li>只能等到自己的时隙开始发送或者利用1&#x2F;N的信道频率发送</li>
+<li>当只有一个节点有帧传时，也只能够得到1&#x2F;N个带宽分配<br>随机访问MAC协议：</li>
+</ul>
+</li>
+<li>在低负载时效率高：单个节点可以完全利用信道全部带宽</li>
+<li>高负载时：冲突开销较大，效率极低，时间很多浪费在冲突中<br>轮流协议<br>有2者的优点!</li>
+</ul>
+<p><strong>轮询</strong><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211252007476.png" alt="image-20221125200704394" style="zoom:50%;" /></p>
+<ul>
+<li>主节点邀请从节点依次传送</li>
+<li>从节点一般比较“dumb”</li>
+<li>缺点:<ul>
+<li>轮询开销：轮询本身消耗信道带宽</li>
+<li>等待时间：每个节点需等到主节点轮询后开始传输，即使只有一个节点，也需要等到轮询一周后才能够发送</li>
+<li>单点故障：主节点失效时造成整个系统无法工作</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211252007970.png" alt="image-20221125200759875" style="zoom: 50%;" />
+
+<p>令牌传递:</p>
+<ul>
+<li>控制令牌( token)循环从一个节点到下一个节点传递</li>
+<li>令牌报文：特殊的帧</li>
+<li>缺点:<ul>
+<li>令牌开销：本身消耗带宽</li>
+<li>延迟：只有等到抓住令牌，才可传输</li>
+<li>单点故障 (token)：<ul>
+<li>令牌丢失系统级故障，整个系统无法传输</li>
+<li>复杂机制重新生成令牌</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>MAC 协议总结</strong></p>
+<ul>
+<li>多点接入问题：对于一个共享型介质，各个节点如何协调对它的访问和使用?<ul>
+<li>信道划分：按时间、频率或者编码<ul>
+<li>TDMA、FDMA、CDMA</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>随机访问 (动态)<br>• ALOHA, S-ALOHA, CSMA, CSMA&#x2F;CD<br>• 载波侦听: 在有些介质上很容易 (wire：有线介质), 但在有些介质上比较困难 (wireless：无线)<br>• CSMA&#x2F;CD ：802.3 Ethernet网中使用<br>• CSMA&#x2F;CA ：802.11WLAN中使用</li>
+<li>依次轮流协议<ul>
+<li>集中：由一个中心节点轮询；分布：通过令牌控制</li>
+<li>蓝牙、FDDI、令牌环</li>
 </ul>
 </li>
 </ul>
