@@ -354,18 +354,13 @@
 </tr>
 </tbody></table>
 <p><em>练习</em></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 先查询有无此目录再创建xixi这个文件</span></span><br><span class="line">[mua@localhost ~]$ <span class="built_in">ls</span> /tmp/abc &amp;&amp; <span class="built_in">touch</span> /tmp/abc/xixi</span><br><span class="line"><span class="built_in">ls</span>: cannot access /tmp/abc: No such file or directory <span class="comment">#查询无</span></span><br><span class="line">[mua@localhost home]$ <span class="built_in">mkdir</span> /tmp/abc <span class="comment"># 创建文件夹</span></span><br><span class="line">[mua@localhost home]$ <span class="built_in">ls</span> /tmp/abc &amp;&amp; <span class="built_in">touch</span> /tmp/abc/xixi <span class="comment">#执行成功</span></span><br><span class="line"><span class="comment">#总结 如果查询不到，就不会执行下一个语句</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 先查询有无此目录再创建xixi这个文件</span></span><br><span class="line">[mua@localhost ~]$ <span class="built_in">ls</span> /tmp/abc &amp;&amp; <span class="built_in">touch</span> /tmp/abc/xixi</span><br><span class="line"><span class="built_in">ls</span>: cannot access /tmp/abc: No such file or directory <span class="comment">#查询无</span></span><br><span class="line">[mua@localhost home]$ <span class="built_in">mkdir</span> /tmp/abc <span class="comment"># 创建文件夹</span></span><br><span class="line">[mua@localhost home]$ <span class="built_in">ls</span> /tmp/abc &amp;&amp; <span class="built_in">touch</span> /tmp/abc/xixi <span class="comment">#执行成功</span></span><br><span class="line"><span class="comment">#总结 如果查询不到，就不会执行下一个语句</span></span><br><span class="line"><span class="comment">##总是尝试执行语句</span></span><br><span class="line">[mua@localhost ~]$ <span class="built_in">ls</span> /tmp/abc &amp;<span class="comment">#124;&amp;#124; mkdir /tmp/abc &amp;&amp; /tmp/abc/hehe</span></span><br></pre></td></tr></table></figure>
 
+<p>上条执行判断流程图</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211251704834.png" alt="image-20221125170424765" style="zoom: 67%;" />
 
-
-
-
-
-
-
-
-
-
+<p>参考<a href="https://www.cnblogs.com/chengmo/archive/2010/10/20/1855805.html">linux shell数据重定向</a></p>
+<h3 id="管线命令pipe"><a href="#管线命令pipe" class="headerlink" title="管线命令pipe"></a>管线命令pipe</h3><p>管道命令的操作符时“|”，它仅能处理经由前面一个指令传出的正确输出信息，也就是 standard output 的信息，对于 stdandard<br>error 信息没有直接处理能力。然后，传递给下一个命令，作为标准的输入 standard input.</p>
 <h2 id="Linux正则表达式"><a href="#Linux正则表达式" class="headerlink" title="Linux正则表达式"></a>Linux正则表达式</h2><p><strong>概念：</strong>正则表达式 （Regular Expression, RE, 或称为常规表达式）是通过一些特殊字符的排列，用以“搜寻&#x2F;取代&#x2F;删除”一列或多列文字字串， 简单的说，正则表达式就是用在字串的处理上面的 一项“表示式”。正则表达式并不是一个工具程序， 而是一个字串处理的标准依据，如果想要以正则表达式的方式处理字串，就得要使用支持正则表达式的工具程序才行， 这类的工具程序很多，例如 vi, sed, awk 等等</p>
 <ul>
 <li>例如</li>
@@ -3568,7 +3563,7 @@ $$
 <ul>
 <li>IP地址标识主机、路由器</li>
 <li>但IP地址不好记忆，不便人类使用(没有意义)</li>
-<li>人类一般倾向于使用一些有意义的字符串来标识Internet上的设备<br>例如：<a href="mailto:&#113;&#122;&#x68;&#x65;&#x6e;&#103;&#64;&#x75;&#115;&#x74;&#99;&#46;&#101;&#x64;&#117;&#46;&#x63;&#110;">&#113;&#122;&#x68;&#x65;&#x6e;&#103;&#64;&#x75;&#115;&#x74;&#99;&#46;&#101;&#x64;&#117;&#46;&#x63;&#110;</a> 所在的邮件服务器<br><a href="http://www.ustc.edu.cn/">www.ustc.edu.cn</a> 所在的web服务器</li>
+<li>人类一般倾向于使用一些有意义的字符串来标识Internet上的设备<br>例如：<a href="mailto:&#113;&#x7a;&#x68;&#101;&#110;&#x67;&#64;&#x75;&#115;&#x74;&#x63;&#x2e;&#101;&#100;&#117;&#46;&#x63;&#110;">&#113;&#x7a;&#x68;&#101;&#110;&#x67;&#64;&#x75;&#115;&#x74;&#x63;&#x2e;&#101;&#100;&#117;&#46;&#x63;&#110;</a> 所在的邮件服务器<br><a href="http://www.ustc.edu.cn/">www.ustc.edu.cn</a> 所在的web服务器</li>
 <li>存在着“字符串”—IP地址的转换的必要性</li>
 <li>人类用户提供要访问机器的“字符串”名称</li>
 <li>由DNS负责转换成为二进制的网络地址</li>
@@ -7530,6 +7525,110 @@ $$
       <tags>
         <tag>code</tag>
         <tag>computer network</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>时间空间复杂度的分析</title>
+    <url>/2022/11/25/timeComplexity/</url>
+    <content><![CDATA[<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><h3 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h3><p><strong>事后分析估算方法</strong></p>
+<p>当执行程序时，想要计算时间最比较容易联想到的方法就是拿个定时器进行计时，但是这个方法有个缺陷：就是机器性能问题很影响计算的时间，两台不同机器运算的时间结果天差地别，所以我们需要采用下面所说的方法更可科学的估算出算法的执行时间。</p>
+<p><strong>事后分析估算方法</strong></p>
+<p>计算机程序在计算机上运行所消耗的时间取决于下列因素：</p>
+<ul>
+<li>算法采用的策略和方案</li>
+<li><del>编译产生的代码质量</del></li>
+<li>问题的输入规模（输入量的多少）</li>
+<li><del>机器执行指令的速度</del></li>
+</ul>
+<p>抛开上面的软硬件（程序员无法干预）的问题，那么我们可以知道一个软件的运行时间就是依赖于算法的好坏的问题的输入规模。如果算法固定，那么算法的执行时间就只和问题的输入规模有关系了。</p>
+<p>EG.分析下面两个算法的执行次数</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//利用一层for循环来执行</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//利用等差数列来执行</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line">        sum = (n+<span class="number">1</span>)*n/<span class="number">2</span>;</span><br><span class="line">        System.out.println(sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过以上我们不难分析，同样的一个等差和的算法，两个程序执行的次数并不相同，第一个执行了n次，而第二个只执行了1次，当n足够大时，第二个算法的运行速度远远高于另一个的速度，这个时候就体现了一个优秀算法将大大优化程序的运行时间。</p>
+<p>要分析时间复杂度（也即程序运行的时间）的时候我们只需要关心核心操作的次数和输入规模的关联情况。<code>sum += i;</code>和<code>sum = (n+1)*n/2;</code>很明显为程序的核心计算部分，所以我们可以得出第一个<code>sun += i</code> 执行了n次，所以时间复杂度为O(n)，而<code>sum = (n+1)*n/2;</code>执行了1次，则时间复杂度为O(1)。</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211252114396.png" alt="image-20221125211412336" style="zoom:33%;" />
+
+<h4 id="函数渐进增长"><a href="#函数渐进增长" class="headerlink" title="函数渐进增长"></a>函数渐进增长</h4><p>下面给出算法测试来计算不同函数执行次数的问题。</p>
+<blockquote>
+<p>EG1：假设测试输入规模都是n，分别执行四个算法，可得到下面结果</p>
+</blockquote>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211252130586.png" alt="image-20221125213058541"></p>
+<p>可以看出，前期时候某些算法的执行次数可以优于其他算法，但是到n取一定大小时，可以渐进增大</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211252138943.png" alt="image-20221125213804883" style="zoom:50%;" />
+
+<p>由此图可以得出结论：<strong>随着输入规模的增大，算法的操作次数趋同，常数操作可以忽略不计。</strong></p>
+<blockquote>
+<p>EG2：引入平方根的算法次数分析</p>
+</blockquote>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211252132884.png" alt="image-20221125213213838"></p>
+<p>可以看出：次方才是影响算法执行次数的最大因素</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211252155016.png" alt="image-20221125215539955" style="zoom:50%;" />
+
+<p>由此图可以得出结论：<strong>随着输入规模的增大，与最高次项相乘的常数可以忽略。</strong></p>
+<blockquote>
+<p>EG3：不同次方根的执行次数</p>
+</blockquote>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211252202991.png" alt="image-20221125220243943" style="zoom: 67%;" />
+
+<p>由此图可以得出结论：<strong>最高次项的指数大的，随着n的增长，结果也会增长特别快。</strong></p>
+<blockquote>
+<p>EG4:函数不同次幂的情况</p>
+</blockquote>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211252206239.png" alt="image-20221125220634188" style="zoom: 50%;" />
+
+<p>由此图可以得出结论：<strong>算法函数的最高次幂越小，算法效率越高。</strong></p>
+<h5 id="总结-sake"><a href="#总结-sake" class="headerlink" title="总结:sake:"></a>总结:sake:</h5><blockquote>
+<p>算法随着输入规模的增长量增大，可以有以下规则</p>
+</blockquote>
+<ol>
+<li><p>常数可以忽略</p>
+</li>
+<li><p>最高次幂的常数因子可以忽略</p>
+</li>
+<li><p>最高次幂越小，算法效率越高</p>
+</li>
+</ol>
+<h4 id="大O记法"><a href="#大O记法" class="headerlink" title="大O记法"></a>大O记法</h4><p>在进行算法分析时，语句总的执行次数T(n)是关于问题规模n的函数，进而分析T()n随着n的变化情况并确定T(n)的量级。算法的时间复杂度，就是算法的时间量度，记作：T(n)&#x3D;O(f(n))。它表示随着问题规模n的增大，算法执行时间的增长率和f(n)的增长率相同，称作算法的渐近时间复杂度，简称时间复杂度，其中f(n)是问题规模n的某个函数。</p>
+<p>我们需要明确一个事情：执行次数&#x3D;执行时间</p>
+<p>用大写O()来体现算法时间复杂度的记法，我们称之为大O记法,下面给出例子：</p>
+<blockquote>
+<p>EG1</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>; <span class="comment">//执行了1次</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">100</span>; <span class="comment">//执行了1次</span></span><br><span class="line">        sum = (n+<span class="number">1</span>)*n/<span class="number">2</span>; <span class="comment">//执行了1次</span></span><br><span class="line">        System.out.println(sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>EG2</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>; <span class="comment">//执行了1次</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">100</span>; <span class="comment">//执行了1次</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            sum += i; <span class="comment">//执行了n次</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>EG3</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>; <span class="comment">//执行了1次</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">100</span>; <span class="comment">//执行了1次</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= n; j++) &#123;</span><br><span class="line">                sum += i; <span class="comment">//执行了n^2次</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>忽略输入输出语句的执行次数，当输入规模为n时，三个算法の执行次数为：</p>
+<p>EG1：3次</p>
+<p>EG2：n+3次</p>
+<p>EG3：n^2+3次</p>
+<p>通过<strong>函数渐进增长</strong>的分析，大O阶的表示法有以下几个规则可以使用：</p>
+<ol>
+<li>用常数1取代运行时间中的所有加法常数</li>
+<li>在修改后的运行次数中，只保留高阶项</li>
+<li>如果最高阶项存在，且常数因子不为1，则去除与这个项相乘的常数</li>
+</ol>
+<p>所以，以上算法的大O记法为：</p>
+<p>EG1：O(1)</p>
+<p>EG2：O(n)</p>
+<p>EG3：O(n^2)</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>code</tag>
+        <tag>算法题</tag>
       </tags>
   </entry>
 </search>
