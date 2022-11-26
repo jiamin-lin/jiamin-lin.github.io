@@ -2756,7 +2756,7 @@
       </tags>
   </entry>
   <entry>
-    <title>时间空间复杂度的分析</title>
+    <title>时间复杂度的分析</title>
     <url>/2022/11/25/timeComplexity/</url>
     <content><![CDATA[<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><h3 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h3><p><strong>事后分析估算方法</strong></p>
 <p>当执行程序时，想要计算时间最比较容易联想到的方法就是拿个定时器进行计时，但是这个方法有个缺陷：就是机器性能问题很影响计算的时间，两台不同机器运算的时间结果天差地别，所以我们需要采用下面所说的方法更可科学的估算出算法的执行时间。</p>
@@ -2850,6 +2850,115 @@
 <p>EG1：O(1)</p>
 <p>EG2：O(n)</p>
 <p>EG3：O(n^2)</p>
+<h5 id="常见大O阶"><a href="#常见大O阶" class="headerlink" title="常见大O阶"></a>常见大O阶</h5><p><strong>线性阶</strong></p>
+<p>一般含有非嵌套循环，线性阶随着输入规模的扩大，对应计算的次数呈直线增长。</p>
+<blockquote>
+<p>EG 时间复杂度为O(n)</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>平方阶</strong></p>
+<p>一般嵌套循环属于这种时间复杂度</p>
+<blockquote>
+<p>EG 时间复杂度为O(n^2)</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">                sum += j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>立方阶</strong></p>
+<p>三层嵌套循环术语这种时间复杂度</p>
+<blockquote>
+<p>EG 时间复杂度为O(n^3)</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>; k &lt; n; k++) &#123;</span><br><span class="line">                    sum += j;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>对数阶</strong></p>
+<p>看下面程序，每次sum*2之后，就距离n更近一步，因为是2^sum&#x3D;n,所以得到x&#x3D;log(2)n,所以这个循环的时间复杂度为O(logn)</p>
+<blockquote>
+<p>EG 时间复杂度为O(logn)</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line">        <span class="keyword">while</span>(sum &lt; n) &#123;</span><br><span class="line">            sum = sum * <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于对数阶，随着n的增大，不管底数为多少，他们的增长趋势是一样的，所以忽略底数</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211261201078.png" alt="image-20221126120145984" style="zoom:50%;" />
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211261214740.png" alt="image-20221126121404669" style="zoom:50%;" />
+
+<p><strong>常数阶</strong></p>
+<p>一般不涉及循环操作的都是常数阶，因为不会随着n的增长而增加操作次数。</p>
+<blockquote>
+<p>EG 时间复杂度为O(1)</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line">        sum = (n+<span class="number">1</span>)*n/<span class="number">2</span>;</span><br><span class="line">        System.out.println(sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="常见时间复杂度"><a href="#常见时间复杂度" class="headerlink" title="常见时间复杂度"></a>常见时间复杂度</h5><table>
+<thead>
+<tr>
+<th>描述</th>
+<th>增长的数量级</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>常数级别</td>
+<td>1</td>
+<td>普通语句</td>
+<td>两数相加</td>
+</tr>
+<tr>
+<td>对数级别</td>
+<td>log(n)</td>
+<td>二分策略</td>
+<td>二分查找</td>
+</tr>
+<tr>
+<td>线性级别</td>
+<td>n</td>
+<td>循环</td>
+<td>找出最大元素</td>
+</tr>
+<tr>
+<td>线性对数</td>
+<td>Nlog(n)</td>
+<td>分治思想</td>
+<td>归并排序</td>
+</tr>
+<tr>
+<td>平方级别</td>
+<td>n^2</td>
+<td>双层循环</td>
+<td>检查所有元素对</td>
+</tr>
+<tr>
+<td>立方级别</td>
+<td>n^3</td>
+<td>三层循环</td>
+<td>检查所有三元组</td>
+</tr>
+<tr>
+<td>指数级别</td>
+<td>2^n</td>
+<td>穷举查找</td>
+<td>检查所有子集</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>复杂程度从低到高为 O(1)&lt;O(logn)&lt;O(nlogn)&lt;O(n^2)&lt;O(n^3)</p>
+</blockquote>
+<p>从前面的折线图不难看出，随着输入规模的增大，时间成本会急剧增大，所以当算法的时间复杂度为平方、立方或者更复杂时，我们可以认为该算法为不可取的，需要进行优化。</p>
+<h4 id="最坏情况"><a href="#最坏情况" class="headerlink" title="最坏情况"></a>最坏情况</h4><blockquote>
+<p>EG判断下面循环执行的次数</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> ?;</span><br><span class="line">        <span class="type">int</span>[] arr = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(num == arr[i])&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;该循环执行了&quot;</span>+i+<span class="string">&quot;次&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>最好情况</strong></p>
+<p>​		查找的第一次数字就是期望的数字，那么算法的时间复杂度为O(1)</p>
+<p><strong>最坏情况</strong></p>
+<p>​		查找的最后一个数字才是期望的数字，那么算法的时间复杂度为O(n)</p>
+<p><strong>平均情况</strong></p>
+<pre><code>     任何数字查找的平均成本时O(n/2)
+</code></pre>
+<p>最坏情况是一种保证，在应用中，这是一种最基本的保障，即使在最坏情况下，也能够正常提供服务，所以，除非特别指定，不然提到的运行时间都指的是<strong>最坏</strong>情况下的运行时间。</p>
 ]]></content>
       <categories>
         <category>算法</category>
