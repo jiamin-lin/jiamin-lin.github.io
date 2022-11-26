@@ -559,9 +559,7 @@
 <p>连接逻辑上是table之间先做笛卡儿积，再做对应选择操作。</p>
 <img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211262002063.png" alt="image-20221126200252024" style="zoom:50%;" />
 
-
-
-<h3 id="SQL的特点"><a href="#SQL的特点" class="headerlink" title="SQL的特点"></a>SQL的特点</h3><ol>
+<h2 id="SQL语言"><a href="#SQL语言" class="headerlink" title="SQL语言"></a>SQL语言</h2><h3 id="语法部分–点击即达"><a href="#语法部分–点击即达" class="headerlink" title="语法部分–点击即达"></a><a href="https://dreamin.space/2022/09/09/MySQL/">语法部分–点击即达</a></h3><ol>
 <li>综合统一</li>
 <li>高度非过程化</li>
 <li>面向集合的操作方式</li>
@@ -595,6 +593,11 @@
 </blockquote>
 <ol start="6">
 <li>数据模型通常由<strong>数据结构</strong>、<strong>数据操作</strong>和<strong>完整性约束</strong>三要素组成。</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://blog.csdn.net/weixin_37545024/article/details/90489308">《数据库系统概论》复习</a></li>
+<li><a href="https://blog.51cto.com/u_14540820/5003913">关系模型中三类完整性约束以及解释</a></li>
+<li><a href="https://blog.csdn.net/JavaEEKing/article/details/109223552">数据库系统之：关系代数详解-超详细</a></li>
 </ol>
 ]]></content>
       <categories>
