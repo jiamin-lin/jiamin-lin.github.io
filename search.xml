@@ -2492,9 +2492,132 @@
 <li>对象数据类型要求稳定性，需要采用稳定的归并+插入</li>
 <li>对于对象来说，比较操作相对耗时，所以用比较操作较少的归并排序</li>
 </ol>
+<h2 id="三种排序详解"><a href="#三种排序详解" class="headerlink" title="三种排序详解"></a>三种排序详解</h2><h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p><strong>1. 基本思想</strong></p>
+<blockquote>
+<p>将整个序列分为两部分：前面 <code>i</code> 个元素为有序序列，后面 <code>n - i</code> 个元素为无序序列。每一次排序，将无序序列的第 <code>1</code> 个元素，在有序序列中找到相应的位置并插入。</p>
+</blockquote>
+<p><strong>2. 算法步骤</strong></p>
+<ol>
+<li>第 <code>1</code> 趟排序：<ol>
+<li>第 <code>1</code> 个元素为有序序列，后面第 <code>2</code> ~ <code>n </code>个元素（总共 <code>n - 1</code> 个元素）为无序序列。</li>
+<li>从右至左遍历有序序列中的元素，如果遇到「有序序列的元素 &gt; 无序序列的第 <code>1</code> 个元素」的情况时，则将向有序序列的元素后移动一位。</li>
+<li>如果遇到「有序序列的元素 &lt;&#x3D; 无序序列的第 <code>1</code> 个元素」的情况或者「到达数组开始位置」时，则说明找到了插入位置。将「无序序列的第 <code>1</code> 个元素」插入该位置。</li>
+</ol>
+</li>
+<li>第 <code>2</code> 趟排序：<ol>
+<li>第 <code>1</code> ~ <code>2</code> 个元素为有序序列，后面第 <code>3</code> ~ <code>n</code> 个元素（总共 <code>n - 2</code> 个元素）为无序序列。</li>
+<li>从右至左遍历有序序列中的元素，如果遇到「有序序列的元素 &gt; 无序序列的第 <code>1</code> 个元素」的情况时，则将向有序序列的元素后移动一位。</li>
+<li>如果遇到「有序序列的元素 &lt;&#x3D; 无序序列的第 <code>1</code> 个元素」的情况或者「到达数组开始位置」时，则说明找到了插入位置。将「无序序列的第 <code>1</code> 个元素」插入该位置。</li>
+</ol>
+</li>
+<li>依次类推，对剩余 <code>n - 3</code> 个元素重复上述排序过程，直到所有元素都变为有序序列，则排序结束。</li>
+</ol>
+<p>简单来说，插入排序的算法步骤为：</p>
+<ol>
+<li>先将第 <code>1</code> 个元素作为一个有序序列，将第 <code>2</code> ~ <code>n</code> 个元素作为无序序列。</li>
+<li>从左到右遍历一遍无序序列，对于无序序列中的每一个元素：<ol>
+<li>遍历有序序列，找到适当的插入位置。</li>
+<li>将有序序列中插入位置右侧的元素依次右移一位。</li>
+<li>将该元素插入到适当位置。</li>
+</ol>
+</li>
+</ol>
+<p> <strong>3. 动画演示</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212051952620.gif" alt="img"></p>
+<p><strong>4. 算法分析</strong></p>
+<ul>
+<li>最佳时间复杂度：O(n)</li>
+<li>最差时间复杂度：O(n^2)</li>
+<li>平均时间复杂度：O(n^2)</li>
+<li>稳定性：稳定</li>
+</ul>
+<p><strong>5. 代码实现</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">toInsertSort</span><span class="params">(<span class="type">int</span> []arr)</span> &#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i&lt;arr.length;i++) &#123;	    <span class="comment">//i是当前数</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i-<span class="number">1</span> ; j&gt;=<span class="number">0</span>;j--) &#123;	   <span class="comment">//j是从i-1开始向前移动，并每次与arr[i]判断大小</span></span><br><span class="line">			<span class="keyword">if</span>(arr[i]&lt;arr[j]) &#123;		     <span class="comment">//如果arr[i]小于arr[j]说明arr[i]当前至少是要插入到arr[j]的前面</span></span><br><span class="line">				<span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> arr[j];</span><br><span class="line">				arr[j] = arr[i];</span><br><span class="line">				arr[i] = temp;</span><br><span class="line">				i = j-<span class="number">1</span>;		     <span class="comment">//互换后i也要向前移动一位</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="keyword">break</span>;              <span class="comment">//直到arr[i]比arr[j]大，因为前面从小到大已经排好序，所以没有必要继续向前判断了					</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p><strong>1. 基本思想</strong></p>
+<blockquote>
+<p>通过一趟排序将无序序列分为独立的两个序列，第一个序列的值均比第二个序列的值小。然后递归地排列两个子序列，以达到整个序列有序。</p>
+</blockquote>
+<p><strong>2. 算法步骤</strong></p>
+<ol>
+<li>从序列中找到一个基准数 <code>point</code>（这里以当前序列第 <code>1</code> 个元素作为基准数，即 <code>point = arr[low]</code>）。</li>
+<li>使用双指针，将序列中比基准数大的元素移动到基准数右侧，比他小的元素移动到基准数左侧：<ol>
+<li>使用指针 <code>i</code>，指向当前需要处理的元素位置，需要保证位置 <code>i</code> 之前的元素都小于基准数。初始时，<code>i</code> 指向当前序列的第 <code>2</code> 个元素位置。</li>
+<li>使用指针 <code>j</code> 遍历当前序列，如果遇到 <code>arr[j]</code> 小于基准数 <code>point</code>，则将 <code>arr[j]</code> 与当前需要处理的元素 <code>arr[i]</code> 交换，并将 <code>i</code> 向右移动 <code>1</code> 位，保证位置 <code>i</code> 之前的元素都小于基准数。</li>
+<li>最后遍历完，此时位置 <code>i</code> 之前的元素都小于基准数，第 <code>i - 1</code> 位置上的元素是最后一个小于基准数 <code>point</code> 的元素，此位置为基准数最终的正确位置。将基准数与该位置上的元素进行交换。此时，基准数左侧都是小于基准数的元素，右侧都是大于等于基准数的元素。</li>
+<li>然后将序列拆分为左右两个子序列。</li>
+</ol>
+</li>
+<li>对左右两个子序列分别重复第 <code>2</code> 步，直到各个子序列只有 <code>1</code> 个元素，则排序结束。</li>
+</ol>
+<p><strong>3. 动画演示</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212052003794.gif" alt="img"></p>
+<p><strong>4. 算法分析</strong></p>
+<ul>
+<li>最佳时间复杂度：O(n*log2(n))</li>
+<li>最差时间复杂度：O(n^2)</li>
+<li>平均时间复杂度：O(n*log2(n))</li>
+<li>稳定性：不稳定</li>
+</ul>
+<p><strong>5. 代码实现</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">sortPointer</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> low, <span class="type">int</span> high)</span> &#123;</span><br><span class="line">        <span class="comment">//定义基准数</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">point</span> <span class="operator">=</span> nums[high];</span><br><span class="line">        <span class="comment">//定义第二指针元素</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">pointer</span> <span class="operator">=</span> low;</span><br><span class="line">        <span class="comment">//将指针前后开并记录第二指针的位置</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> low; i &lt; high; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (center &gt;= nums[i]) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> nums[i];</span><br><span class="line">                nums[i] = nums[pointer];</span><br><span class="line">                nums[pointer] = temp;</span><br><span class="line">                pointer++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//返回第二指针的位置</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> nums[pointer];</span><br><span class="line">        nums[pointer] = nums[high];</span><br><span class="line">        nums[high] = temp;</span><br><span class="line">        <span class="keyword">return</span> pointer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">quickSort</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> low, <span class="type">int</span> high)</span> &#123;</span><br><span class="line">        <span class="comment">//运用递归的方式进行重复操作</span></span><br><span class="line">        <span class="keyword">if</span> (low &lt; high) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">position</span> <span class="operator">=</span> sortPointer(nums, low, high);</span><br><span class="line">            quickSort(nums, low, position - <span class="number">1</span>);</span><br><span class="line">            quickSort(nums, position + <span class="number">1</span>, high);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p><strong>1. 基本思想</strong></p>
+<blockquote>
+<p>采用经典的分治策略，先递归地将当前序列平均分成两半。然后将有序序列两两合并，最终合并成一个有序序列。</p>
+</blockquote>
+<p><strong>2. 算法步骤</strong></p>
+<ol>
+<li>分割过程：先递归地将当前序列平均分成两半，直到子序列长度为 1。<ol>
+<li>找到序列中心位置 <code>mid</code>，从中心位置将序列分成左右两个子序列。</li>
+<li>对左右两个子序列分别进行递归分割。</li>
+<li>最终将数组分割为 n 个长度均为 1 的有序子序列。</li>
+</ol>
+</li>
+<li>归并过程：从长度为 1 的有序子序列开始，依次进行两两归并，直到合并成一个长度为 n 的有序序列。<ol>
+<li>使用数组变量 <code>arr </code>存放归并后的有序数组。</li>
+<li>使用两个指针分别指向两个有序子序列 的开始位置。</li>
+<li>比较两个指针指向的元素，将两个有序子序列中较小元素依次存入到结果数组 <code>arr</code> 中，并将指针移动到下一位置。</li>
+<li>重复步骤 3，直到某一指针到达子序列末尾。</li>
+<li>将另一个子序列中的剩余元素存入到结果数组 <code>arr</code> 中。</li>
+<li>返回归并后的有序数组 <code>arr</code>。</li>
+</ol>
+</li>
+</ol>
+<p><strong>3. 动画演示</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212052023716.gif" alt="img"></p>
+<ol>
+<li>初始序列为 <code>[6, 2, 1, 3, 7, 5, 4, 8]</code>。</li>
+<li>将序列分解为 <code>[6, 2, 1, 3]</code>，<code>[7, 5, 4, 8]</code>。</li>
+<li>将序列分解为 <code>[6, 2]</code>，<code>[1, 3]</code>，<code>[7, 5]</code>，<code>[4, 8]</code>。</li>
+<li>将序列分为为 <code>[6]</code>，<code>[2]</code>，<code>[1]</code>，<code>[3]</code>，<code>[7]</code>，<code>[5]</code>，<code>[4]</code>，<code>[8]</code>。</li>
+<li>将序列看做是 <code>8</code> 个长度为 <code>1</code> 的子序列，即 <code>[6]</code>，<code>[2]</code>，<code>[1]</code>，<code>[3]</code>，<code>[7]</code>，<code>[5]</code>，<code>[4]</code>，<code>[8]</code>。</li>
+<li>第 <code>1</code> 趟排序：将子序列中的有序子序列两两归并，归并后的子序列为：<code>[2, 6]</code>，<code>[1, 3]</code>，<code>[5, 7]</code>，<code>[4, 8]</code>。</li>
+<li>第 <code>2</code> 趟排序：将子序列中的有序子序列两两归并，归并后的子序列为：<code>[1, 2, 3, 6]</code>，<code>[4, 5, 7, 8]</code>。</li>
+<li>第 <code>3</code> 趟排序：将子序列中的有序子序列两两归并，归并后的子序列为：<code>[1, 2, 3, 4, 5, 6, 7, 8]</code>。得到长度为 <code>n</code> 的有序序列，排序结束。</li>
+</ol>
+<p><strong>4. 算法分析</strong></p>
+<ul>
+<li>时间复杂度：O(n×log2⁡n)</li>
+<li>空间复杂度：O(n)</li>
+<li>稳定性：稳定<ul>
+<li>因为在两个有序子序列的归并过程中，如果两个有序序列中出现相同元素，归并排序能够使前一个序列中那个相同元素先被复制，从而确保这两个元素的相对次序不发生改变。</li>
+</ul>
+</li>
+</ul>
+<p><strong>5. 代码实现</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">        sortArray(nums,<span class="number">0</span>,nums.length-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">merge</span><span class="params">(<span class="type">int</span>[] array,<span class="type">int</span> start,<span class="type">int</span> mid, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">        <span class="comment">//创建一个临时数组储存排序后的数组</span></span><br><span class="line">        <span class="type">int</span>[] temp = <span class="keyword">new</span> <span class="title class_">int</span>[array.length];</span><br><span class="line">        <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start;</span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt;= mid &amp;&amp; j &lt;= end) &#123;</span><br><span class="line">            <span class="comment">//较大的元素存在数组的前面，较小的放在后面对应的位置</span></span><br><span class="line">            <span class="keyword">if</span>(array[i] &lt;= array[j]) &#123;</span><br><span class="line">                temp[k++] = array[i++];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                temp[k++] = array[j++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//将不整除时多余的元素放置于数组后面</span></span><br><span class="line">        <span class="keyword">while</span>(i &lt;= mid) &#123;</span><br><span class="line">            temp[k++] = array[i++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(j &lt;= end) &#123;</span><br><span class="line">            temp[k++] = array[j++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//临时数组赋值回原数组中</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> <span class="number">0</span>; l &lt; k; l++) &#123;</span><br><span class="line">            array[l + start] = temp[l];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sortArray</span><span class="params">(<span class="type">int</span>[] array,<span class="type">int</span> start,<span class="type">int</span> end)</span> &#123;</span><br><span class="line">        <span class="comment">//运用递归的方式进行归并排序</span></span><br><span class="line">        <span class="keyword">if</span>(start &gt;= end) <span class="keyword">return</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> (start + end) / <span class="number">2</span>;</span><br><span class="line">        sortArray(array,start,mid);</span><br><span class="line">        sortArray(array,mid + <span class="number">1</span>,end);</span><br><span class="line">        merge(array,start,mid,end);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://sort.hust.cc/">完整的排序算法分类</a></p>
 <p><a href="https://www.imooc.com/article/257268">Collection.sort()源码分析</a></p>
 <p><a href="https://cherish-ls.github.io/2020/10/14/JAVA%E5%86%85%E7%BD%AE%E6%8E%92%E5%BA%8FArrays-sort%E5%AE%9E%E7%8E%B0%E7%AE%80%E8%BF%B0/">JAVA内置排序Arrays.sort实现简述</a></p>
+<p><a href="https://algo.itcharge.cn/01.Array/02.Array-Sort">数组排序分析</a></p>
+<p><a href="https://www.yuque.com/dreamin-c68j9/hwyqcg/gydluo#">排序算法题目</a></p>
 ]]></content>
       <categories>
         <category>算法</category>
