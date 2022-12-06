@@ -1838,7 +1838,7 @@
 </blockquote>
 <p><strong>2. 算法步骤</strong></p>
 <ol>
-<li>分割过程：先递归地将当前序列平均分成两半，直到子序列长度为 1。<ol>
+<li>分割过程：将当前序列平均分成两半，直到子序列长度为 1。<ol>
 <li>在一个数组长度为n的数组中找到序列中心位置 <code>mid</code>，从中心位置将序列分成左右两个子序列。</li>
 <li>对左右两个子序列分别进行递归分割。</li>
 <li>最终将数组分割为 n 个长度均为 1 的有序子序列。</li>
@@ -4277,7 +4277,7 @@ $$
 <ul>
 <li>IP地址标识主机、路由器</li>
 <li>但IP地址不好记忆，不便人类使用(没有意义)</li>
-<li>人类一般倾向于使用一些有意义的字符串来标识Internet上的设备<br>例如：<a href="mailto:&#x71;&#x7a;&#x68;&#x65;&#x6e;&#103;&#x40;&#x75;&#x73;&#116;&#99;&#46;&#x65;&#x64;&#117;&#x2e;&#x63;&#x6e;">&#x71;&#x7a;&#x68;&#x65;&#x6e;&#103;&#x40;&#x75;&#x73;&#116;&#99;&#46;&#x65;&#x64;&#117;&#x2e;&#x63;&#x6e;</a> 所在的邮件服务器<br><a href="http://www.ustc.edu.cn/">www.ustc.edu.cn</a> 所在的web服务器</li>
+<li>人类一般倾向于使用一些有意义的字符串来标识Internet上的设备<br>例如：<a href="mailto:&#x71;&#x7a;&#104;&#101;&#x6e;&#x67;&#x40;&#117;&#x73;&#x74;&#x63;&#x2e;&#x65;&#x64;&#117;&#x2e;&#99;&#110;">&#x71;&#x7a;&#104;&#101;&#x6e;&#x67;&#x40;&#117;&#x73;&#x74;&#x63;&#x2e;&#x65;&#x64;&#117;&#x2e;&#99;&#110;</a> 所在的邮件服务器<br><a href="http://www.ustc.edu.cn/">www.ustc.edu.cn</a> 所在的web服务器</li>
 <li>存在着“字符串”—IP地址的转换的必要性</li>
 <li>人类用户提供要访问机器的“字符串”名称</li>
 <li>由DNS负责转换成为二进制的网络地址</li>
@@ -8877,7 +8877,227 @@ $$
 <img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212052207544.png" alt="image-20221205220753436" style="zoom:67%;" />
 
 <p><strong>HTTP请求和应答</strong></p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212052208350.png" alt="image-20221205220828239" style="zoom:67%;" />]]></content>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212052208350.png" alt="image-20221205220828239" style="zoom:67%;" />
+
+<h2 id="网络安全"><a href="#网络安全" class="headerlink" title="网络安全"></a>网络安全</h2><ul>
+<li>网络安全原理:<ul>
+<li>加密，不仅仅用于机密性</li>
+<li>认证</li>
+<li>报文完整性</li>
+<li>密钥分发</li>
+</ul>
+</li>
+<li>安全实践<ul>
+<li>防火墙</li>
+<li>各个层次的安全性：应用层，传输层，网络层和链路层</li>
+</ul>
+</li>
+</ul>
+<p><strong>网络安全</strong><br>机密性: 只有发送方和预订的接收方能否理解传输的报文内容</p>
+<ul>
+<li>发送方加密报文</li>
+<li>接收方解密报文<br>认证: 发送方和接收方需要确认对方的身份<br>报文完整性: 发送方、接受方需要确认报文在传输的过程中或者事后没有被改变<br>访问控制和服务的可用性: 服务可以接入以及对用户而言是可用的</li>
+</ul>
+<p><strong>朋友和敌人: Alice, Bob, Trudy</strong></p>
+<ul>
+<li>网络安全世界比较著名的模型</li>
+<li>Bob, Alice (lovers!) 需要安全的通信</li>
+<li>Trudy (intruder) 可以截获，删除和增加报文</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061651932.png" alt="image-20221206165114643" style="zoom:50%;" />
+
+<ul>
+<li>窃听: 截获报文</li>
+<li>插入：在连接上插入报文</li>
+<li>伪装: 可以在分组的源地址写上伪装的地址</li>
+<li>劫持: 将发送方或者接收方踢出，接管连接</li>
+<li>拒绝服务: 阻止服务被其他正常用户使用 (e.g.,通过对资源的过载使用)</li>
+</ul>
+<h3 id="加密原理"><a href="#加密原理" class="headerlink" title="加密原理"></a>加密原理</h3><p><strong>加密语言</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061709942.png" alt="image-20221206170909751" style="zoom:50%;" />
+
+<p>对称密钥密码学: 发送方和接收方的密钥相同<br>公开密钥密码学: 发送方使用接收方的公钥进行加密，接收方使用自己的私钥进行解密</p>
+<p><strong>对称密钥加密</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061714317.png" alt="image-20221206171440166" style="zoom:50%;" />
+
+<p>对称密钥密码: Bob和Alice共享一个对称式的密钥: Ka-b</p>
+<ul>
+<li>e.g., 密钥在单码替换加密方法中是替换模式</li>
+<li>Q: 但是Bob和Alice如何就这个密钥达成一致呢</li>
+</ul>
+<p>替换密码: 将一个事情换成另外一个事情</p>
+<ul>
+<li>单码替换密码: 将一个字母替换成另外一个字母</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061717456.png" alt="image-20221206171704233" style="zoom:50%;" />
+
+<p><strong>对称密钥加密学: DES</strong></p>
+<p>DES: Data Encryption Standard</p>
+<ul>
+<li><p>US 加密标准[NIST 1993]</p>
+</li>
+<li><p>56-bit 对称密钥, 64-bit明文输入</p>
+</li>
+<li><p>DES有多安全?</p>
+<ul>
+<li>DES挑战: 56-bit密钥加密的短语 (“Strong cryptography makes the world a safer place”) 被解密，用了4个月的时间</li>
+<li>可能有后门</li>
+</ul>
+</li>
+<li><p>使DES更安全:</p>
+<ul>
+<li>使用3个key， 3重DES 运算</li>
+<li>密文分组成串技术</li>
+</ul>
+</li>
+<li><p>初始替换<br>16 轮一样的函数应用，每一轮使用的不同的48bit密钥最终替换</p>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061843091.png" alt="image-20221206184335945" style="zoom:50%;" />
+
+<p><strong>块密码</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061845061.png" alt="image-20221206184548946" style="zoom:50%;" />
+
+<ul>
+<li>一个循环：一个输入bit影响8个输出bit</li>
+<li>多重循环: 每个输入比特影响所有的输出bit</li>
+<li>块密码：DES, 3DES, AE</li>
+</ul>
+<p><strong>AES: Advanced Encryption Standard</strong></p>
+<ul>
+<li>新的对称 密钥NIST标准(Nov. 2001) 用于替换DES</li>
+<li>数据128bit成组加密</li>
+<li>128, 192, or 256 bit keys</li>
+<li>穷尽法解密如果使用1秒钟破解 DES, 需要花149万亿年破解AES</li>
+</ul>
+<p><strong>密码块链</strong></p>
+<ul>
+<li>密码块：如果输入块重复，将会得到相同的密文块</li>
+<li>密码块链： 异或第i轮输入 m(i), 与前一轮的密文, c(i-1) <ul>
+<li>c(0) 明文传输到接收端</li>
+<li>what happens in “HTTP&#x2F;1.1” scenario from above?</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061848697.png" alt="image-20221206184840567" style="zoom:50%;" />
+
+<p><strong>公开密钥密码学</strong></p>
+<p>对称密钥密码学</p>
+<ul>
+<li>需要发送方和接收方对共享式对称密钥达成一致</li>
+<li>Q: 但是他们如何第一次达成一致 (特别是他们永远不可能见面的情况下)?</li>
+</ul>
+<p>公开密钥密码学</p>
+<ul>
+<li>完全不同的方法<br>[Diffie-Hellman76, RSA78]</li>
+<li>发送方和接收方无需共享密钥</li>
+<li>一个实体的公钥公诸于众</li>
+<li>私钥只有他自己知道</li>
+</ul>
+<p><strong>公开密钥加密算法</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061901146.png" alt="image-20221206190131008" style="zoom:50%;" />
+
+<p><strong>RSA: Rivest, Shamir, Adelson algorithm</strong></p>
+<p><strong>公开密钥密码学</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061902290.png" alt="image-20221206190219161" style="zoom:50%;" />
+
+<p><strong>解密的几种类型</strong></p>
+<ul>
+<li>加密算法已知，求密钥</li>
+<li>加密算法和密钥均不知道</li>
+<li>唯密文攻击</li>
+<li>已知明文攻击<ul>
+<li>已经知道部分密文和明文的对应关系</li>
+</ul>
+</li>
+<li>选择明文攻击<ul>
+<li>攻击者能够选择一段明文，并得到密</li>
+</ul>
+</li>
+</ul>
+<p><strong>认证</strong><br>目标: Bob需要Alice证明她的身份<br>Protocol ap1.0: Alice说“I am Alice”</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061905115.png" alt="image-20221206190501970" style="zoom:50%;" />
+
+<p>在网络上Bob看不到 Alice, 因此Trudy可以简单地声称她是 Alice</p>
+<p><strong>认证：重新产生</strong></p>
+<p>Protocol ap2.0: Alice 说 “I am Alice” ，在她发送的IP数据包中包括了她的IP地址</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061906383.png" alt="image-20221206190638244" style="zoom:50%;" />
+
+<p>Protocol ap3.0: Alice 说 “I am Alice” ，而且传送她的密码来证明</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061907737.png" alt="image-20221206190714562" style="zoom:50%;" />
+
+<p>Protocol ap2.0: Alice 说 “I am Alice” ，在她发送的IP数据包中包括了她的IP地址</p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061909141.png" alt="image-20221206190931987"></p>
+<p>Protocol ap3.0: Alice 说 “I am Alice” ，而且传送她的密码来证明</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061910762.png" alt="image-20221206191008638" style="zoom:50%;" />
+
+<p>Protocol ap3.1: Alice 说 “I am Alice” ，而且传送她的加密之后的密码来证明</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061912785.png" alt="image-20221206191204621" style="zoom:50%;" />
+
+<p>目标: 避免重放攻击会失败吗，有问题吗?<br>Nonce: 一生只用一次的整数 (R)<br>ap4.0: 为了证明Alice的活跃性, Bob发送给Alice一个nonce, R. Alice 必须返回加密之后的R，使用双方约定好的key</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061916067.png" alt="image-20221206191647946" style="zoom:50%;" />
+
+<p>Protocol ap3.1: Alice 说 “I am Alice” ，而且传送她的加密之后的密码来证明.</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061917190.png" alt="image-20221206191743061" style="zoom: 50%;" />
+
+<p><strong>认证: ap5.0</strong></p>
+<p>ap4.0 需要双方共享一个对称式的密钥</p>
+<ul>
+<li>是否可以通过公开密钥技术进行认证呢?<br>ap5.0: 使用nonce,公开密钥加密技术</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061919271.png" alt="image-20221206191956154" style="zoom:50%;" />
+
+<p><strong>ap5.0: 安全漏洞</strong></p>
+<p>中间攻击: Trudy 在 Alice (to Bob)和 Bob之间 (to Alice)</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061921484.png" alt="image-20221206192115330" style="zoom:50%;" />
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061922877.png" alt="image-20221206192245767" style="zoom:67%;" />
+
+<p>难以检测:</p>
+<ul>
+<li>Bob收到了Alice发送的所有报文, 反之亦然. (e.g., so Bob, Alice一个星期以后相见，回忆起以前的会话)</li>
+<li>问题时Trudy也接收到了所有的报文!</li>
+</ul>
+<p><strong>数字签名</strong></p>
+<p>数字签名类比于手写签名</p>
+<ul>
+<li>发送方 (Bob) 数字签署了文件, 前提是他(她)是文件的拥有者&#x2F;创建者.</li>
+<li>可验证性，不可伪造性，不可抵赖性<ul>
+<li>谁签署：接收方 (Alice)可以向他人证明是 Bob, 而不是其他人签署了这个文件 (包括Alice)</li>
+<li>签署了什么：这份文件，而不是其它</li>
+</ul>
+</li>
+</ul>
+<p>简单的对ｍ的数字签名：</p>
+<ul>
+<li>Bob使用他自己的私钥对m进行了签署 ，创建数字签名 KB(m)</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061926454.png" alt="image-20221206192657313" style="zoom:50%;" />
+
+<p>对长报文进行公开密钥加密算法的实施需要耗费大量的时间</p>
+<p>Goal: 固定长度，容易计算的“fingerprint”</p>
+<ul>
+<li>对m使用散列函数H，获得固定长度的 报文摘要H(m).</li>
+</ul>
+<p>散列函数的特性：</p>
+<ul>
+<li>多对1</li>
+<li>结果固定长度</li>
+<li>给定一个报文摘要x, 反向计算出原报文在计算上是不可行的x &#x3D; H(m)</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061928684.png" alt="image-20221206192852530" style="zoom:50%;" />
+
+<p><strong>Internet校验和: 弱的散列函数</strong><br>Internet 校验和拥有一些散列函数的特性:</p>
+<ul>
+<li>产生报文m的固定长度的摘要 (16-bit sum) </li>
+<li>多对1的</li>
+</ul>
+<p>但是给定一个散列值，很容易计算出另外一个报文具有同样的散列值: </p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061931304.png" alt="image-20221206193126172" style="zoom:50%;" />
+
+<p><strong>数字签名 &#x3D; 对报文摘要进行数字签署</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061932109.png" alt="image-20221206193200949" style="zoom:50%;" />
+]]></content>
       <categories>
         <category>Base</category>
       </categories>
