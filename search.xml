@@ -4277,7 +4277,7 @@ $$
 <ul>
 <li>IP地址标识主机、路由器</li>
 <li>但IP地址不好记忆，不便人类使用(没有意义)</li>
-<li>人类一般倾向于使用一些有意义的字符串来标识Internet上的设备<br>例如：<a href="mailto:&#x71;&#x7a;&#104;&#101;&#x6e;&#x67;&#x40;&#117;&#x73;&#x74;&#x63;&#x2e;&#x65;&#x64;&#117;&#x2e;&#99;&#110;">&#x71;&#x7a;&#104;&#101;&#x6e;&#x67;&#x40;&#117;&#x73;&#x74;&#x63;&#x2e;&#x65;&#x64;&#117;&#x2e;&#99;&#110;</a> 所在的邮件服务器<br><a href="http://www.ustc.edu.cn/">www.ustc.edu.cn</a> 所在的web服务器</li>
+<li>人类一般倾向于使用一些有意义的字符串来标识Internet上的设备<br>例如：<a href="mailto:&#113;&#x7a;&#x68;&#x65;&#110;&#103;&#x40;&#x75;&#x73;&#116;&#x63;&#46;&#x65;&#100;&#117;&#46;&#99;&#110;">&#113;&#x7a;&#x68;&#x65;&#110;&#103;&#x40;&#x75;&#x73;&#116;&#x63;&#46;&#x65;&#100;&#117;&#46;&#99;&#110;</a> 所在的邮件服务器<br><a href="http://www.ustc.edu.cn/">www.ustc.edu.cn</a> 所在的web服务器</li>
 <li>存在着“字符串”—IP地址的转换的必要性</li>
 <li>人类用户提供要访问机器的“字符串”名称</li>
 <li>由DNS负责转换成为二进制的网络地址</li>
@@ -9015,7 +9015,7 @@ $$
 </ul>
 </li>
 </ul>
-<p><strong>认证</strong><br>目标: Bob需要Alice证明她的身份<br>Protocol ap1.0: Alice说“I am Alice”</p>
+<h3 id="认证"><a href="#认证" class="headerlink" title="认证"></a><strong>认证</strong></h3><p>目标: Bob需要Alice证明她的身份<br>Protocol ap1.0: Alice说“I am Alice”</p>
 <img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061905115.png" alt="image-20221206190501970" style="zoom:50%;" />
 
 <p>在网络上Bob看不到 Alice, 因此Trudy可以简单地声称她是 Alice</p>
@@ -9027,7 +9027,8 @@ $$
 <img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061907737.png" alt="image-20221206190714562" style="zoom:50%;" />
 
 <p>Protocol ap2.0: Alice 说 “I am Alice” ，在她发送的IP数据包中包括了她的IP地址</p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061909141.png" alt="image-20221206190931987"></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061909141.png" alt="image-20221206190931987" style="zoom:50%;" />
+
 <p>Protocol ap3.0: Alice 说 “I am Alice” ，而且传送她的密码来证明</p>
 <img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061910762.png" alt="image-20221206191008638" style="zoom:50%;" />
 
@@ -9058,7 +9059,7 @@ $$
 <li>Bob收到了Alice发送的所有报文, 反之亦然. (e.g., so Bob, Alice一个星期以后相见，回忆起以前的会话)</li>
 <li>问题时Trudy也接收到了所有的报文!</li>
 </ul>
-<p><strong>数字签名</strong></p>
+<h3 id="报文完整性"><a href="#报文完整性" class="headerlink" title="报文完整性"></a>报文完整性</h3><p><strong>数字签名</strong></p>
 <p>数字签名类比于手写签名</p>
 <ul>
 <li>发送方 (Bob) 数字签署了文件, 前提是他(她)是文件的拥有者&#x2F;创建者.</li>
@@ -9097,6 +9098,113 @@ $$
 
 <p><strong>数字签名 &#x3D; 对报文摘要进行数字签署</strong></p>
 <img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212061932109.png" alt="image-20221206193200949" style="zoom:50%;" />
+
+<h3 id="密钥分发和证书"><a href="#密钥分发和证书" class="headerlink" title="密钥分发和证书"></a>密钥分发和证书</h3><p><strong>散列函数算法</strong></p>
+<ul>
+<li>MD5散列函数(RFC 1321)被广泛地应用<ul>
+<li>4个步骤计算出128-bit的报文摘要</li>
+<li>给定一个任意的128-bit串x, 很难构造出一个报文m具有相同的摘要x.</li>
+</ul>
+</li>
+<li>SHA-1也被使用.<ul>
+<li>US标准 [NIST, FIPS PUB 180-1]</li>
+<li>160-bit报文摘</li>
+</ul>
+</li>
+</ul>
+<p><strong>可信赖中介</strong><br>对称密钥问题</p>
+<ul>
+<li>相互通信的实体如何分享对称式的密钥?<br>解决办法:</li>
+<li>trusted key distribution center (KDC) 在实体之间扮演可信赖中介的角色。</li>
+</ul>
+<p>公共密钥问题</p>
+<ul>
+<li>当Alice获得Bob的公钥(from web site, e-mail, diskette), 她如何知道就是Bob的public key, 而不是Trudy的?<br>解决办法:</li>
+<li>可信赖的certification authority (CA)</li>
+</ul>
+<p><strong>Key Distribution Center (KDC)</strong></p>
+<ul>
+<li>Alice, Bob 需要分享对称式密钥</li>
+<li>KDC: 服务器和每一个注册用户都分享一个对称式的密钥(many users)</li>
+<li>Alice, Bob在和KDC通信的时候，知道他们自己的对称式密钥 KA-KDC KB-KDC</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212072033505.png" alt="image-20221207203325357" style="zoom:50%;" />
+
+<p><strong>Certification Authorities</strong></p>
+<ul>
+<li>Certification authority (CA): 将每一个注册实体E和他的公钥捆绑.</li>
+<li>E(person, router)到CA那里注册他的公钥<ul>
+<li>E 提供给CA，自己身份的证据 “proof of identity”</li>
+<li>CA创建一个证书，捆绑了实体信息和他的公钥</li>
+<li>Certificate包括了E的公钥，而且是被CA签署的（被CA用自己的私钥加了密的）</li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212072040126.png" alt="image-20221207204025007" style="zoom:50%;" />
+
+<blockquote>
+<p>Q: KDC如何使得 Bob和Alice在和对方通信前，就对称式会话密钥达成一致? </p>
+</blockquote>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212072041582.png" alt="image-20221207204120431" style="zoom: 50%;" />
+
+<ul>
+<li>当Alice需要拿到Bob公钥<ul>
+<li>获得Bob的证书certificate (从Bob或者其他地方).</li>
+<li>对Bob的证书，使用CA的公钥</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212072042776.png" alt="image-20221207204206667"></p>
+<p><strong>证书包括:</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212072044187.png" alt="image-20221207204420059" style="zoom:67%;" />
+
+<p><strong>信任树</strong></p>
+<ul>
+<li>根证书：根证书是未被签名的公钥证书或自签名的证书<ul>
+<li>拿到一些CA的公钥</li>
+<li>渠道：安装OS自带的数字证书；从网上下载，你信任的数字证书</li>
+</ul>
+</li>
+<li>信任树：<ul>
+<li>信任根证书CA颁发的证书，拿到了根CA的公钥(信任了根)</li>
+<li>由根CA签署的给一些机构的数字证书，包含了这些机构的数字证书</li>
+<li>由于你信任了根，从而能够可靠地拿到根CA签发的证书，可靠地拿到这些机构的公钥</li>
+</ul>
+</li>
+</ul>
+<p><strong>安全电子邮件</strong></p>
+<ul>
+<li>Alice 需要发送机密的报文m给Bob</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212072210245.png" alt="image-20221207221027147" style="zoom: 50%;" />
+
+
+<p>Alice</p>
+<ul>
+<li>产生随机的对称密钥, KS</li>
+<li>使用KS对报文加密(为了效率)</li>
+<li>对KS使用 Bob的公钥进行加密</li>
+<li>发送KS(m) 和KB(KS) 给Bob</li>
+</ul>
+<p>Bob</p>
+<ul>
+<li><p>使用自己的私钥解密 KS</p>
+</li>
+<li><p>使用 KS解密 KS(m) 得到报文</p>
+</li>
+<li><p>Alice 需要提供机密性，源端可认证性和报文的完整性</p>
+</li>
+</ul>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212072212224.png" alt="image-20221207221242114"></p>
+<p>Alice 使用了3个keys: 自己的私钥，Bob的公钥, 新产生出的对称式密钥</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212072213621.png" alt="image-20221207221329514" style="zoom:50%;" />
+
+<ul>
+<li>Alice 数字签署文件</li>
+<li>发送报文（明文）</li>
+</ul>
+<p><strong>Pretty good privacy (PGP)</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212072214614.png" alt="image-20221207221438490" style="zoom: 50%;" />
 ]]></content>
       <categories>
         <category>Base</category>
