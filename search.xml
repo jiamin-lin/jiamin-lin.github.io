@@ -3029,9 +3029,15 @@
   <entry>
     <title></title>
     <url>/2022/12/17/movehexo/</url>
-    <content><![CDATA[<figure class="highlight subunit"><table><tr><td class="code"><pre><span class="line">title: 记迁移hexo到新设备</span><br><span class="line">date: 2022<span class="string">-12</span><span class="string">-17</span> 21:41:10</span><br><span class="line"><span class="keyword">tags:</span></span><br><span class="line">- hexo </span><br><span class="line">- 博客</span><br><span class="line">categories: </span><br><span class="line">- toy</span><br></pre></td></tr></table></figure>
-
-<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>安装好<a href="https://git-scm.com/download">Git</a>以及<a href="https://nodejs.org/zh-cn/download/">NodeJs</a>.</p>
+    <content><![CDATA[<hr>
+<p>title: 记迁移hexo到新设备<br>date: 2022-12-17 21:41:10<br>tags:</p>
+<ul>
+<li>hexo </li>
+<li>博客<br>categories: </li>
+<li>toy</li>
+</ul>
+<hr>
+<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>安装好<a href="https://git-scm.com/download">Git</a>以及<a href="https://nodejs.org/zh-cn/download/">NodeJs</a>.</p>
 <img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221215174936954.png" alt="image-20221215174936954" style="zoom:50%;" />
 
 <blockquote>
