@@ -67,6 +67,701 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux</title>
+    <url>/2022/10/02/Linux/</url>
+    <content><![CDATA[<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="计算机基础"><a href="#计算机基础" class="headerlink" title="计算机基础"></a>计算机基础</h2><p><strong>1.软件程序的运行</strong></p>
+<p>硬件如同人的身体，软件如同人的灵魂。没有了灵魂的躯体也不过就是行尸走肉</p>
+<p>**1.1 **机器程序与编译程序</p>
+<p>电脑只认识0与1而已，而且电脑最重要的运算与逻辑判断是在CPU内部， 而 CPU其实是具有微指令集的。因此，我们需要CPU帮忙工作时，就得要参考微指令集的内容， 然后撰写让CPU读的懂的指令码给CPU执行，这样就能够让CPU运行了。</p>
+<p>流程：</p>
+<ul>
+<li>需要了解机器语言：机器只认识0与1，因此你必须要学习直接写给机器看的语言。</li>
+<li>需要了解所有硬件的相关功能函数：因为你的程序必须要写给机器看， 当然你就得要参考机器本身的功能，然后针对该功能去撰写程序码。</li>
+<li>程序不具有可携性：每个CPU都有独特的微指令集，同样的，每个硬件都有其功能函数。</li>
+<li>程序具有专一性：因为这样的程序必须要针对硬件功能函数来撰写， 如果已经开发了一支浏览器程序，想要再开发文件管理程序时，还是得从头再参考硬件的功能函数来继续撰写。</li>
+</ul>
+<p>所以，需要开发让人类能看得懂得程序语言。然后创造一种“编译器”让人类的写的程序语言转换为机器能看懂的机器码。常见的编译器有C,C++,Java,Fortran等等。</p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220922203728264.png" alt="image-20220922203728264"></p>
+<h2 id="关于学习Linux"><a href="#关于学习Linux" class="headerlink" title="关于学习Linux"></a>关于学习Linux</h2><p>两个重要的因素是造成我们学习的原动力： </p>
+<ul>
+<li><p>创建兴趣： Linux上面可以玩的东西真的太多了，你可以选择一个有趣的课题来深入的玩 一玩！不论是Shell还是图形接口等等， 只要能够玩出兴趣，那么再怎么苦你都会不觉得喔！</p>
+</li>
+<li><p>成就感： 成就感是怎么来的？说实在话，就是“被认同”来的！怎么被认同呢？写心得分享啊！当你写了心得分享，并且公告在 BBS 上面，自然有朋友会到你的网页去瞧一瞧， 当大家觉得你的网页内容很棒的时候， 哈哈！你肯定会加油继续的分享下去而无法自拔。</p>
+</li>
+</ul>
+<h2 id="主机规划与磁盘分区"><a href="#主机规划与磁盘分区" class="headerlink" title="主机规划与磁盘分区"></a>主机规划与磁盘分区</h2><p><strong>Linux各硬件设备在系统中为文件名</strong></p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001164035525.png" alt="image-20221001164035525"></p>
+<p><strong>磁盘分区</strong></p>
+<p><strong>MBR 主要分区、延伸分区与逻辑分区的特性：</strong></p>
+<ul>
+<li>主要分区与延伸分区最多可以有四笔（硬盘的限制） ；</li>
+<li>延伸分区最多只能有一个（操作系统的限制）；</li>
+<li>逻辑分区是由延伸分区持续切割出来的分区；</li>
+<li>能够被格式化后，作为数据存取的分区为主要分区与逻辑分区。延伸分区无法格式化； </li>
+<li>逻辑分区的数量依操作系统而不同，在Linux系统中SATA硬盘已经可以突破63个以上的分区限制；</li>
+</ul>
+<p><strong>MBR分区限制：</strong></p>
+<ul>
+<li>操作系统无法抓取到 2.2T 以上的磁盘容量</li>
+<li>MBR 仅有一个区块，若被破坏后，经常无法或很难救援</li>
+<li>MBR 内的存放开机管理程序的区块仅 446Bytes，无法容纳较多的程序码</li>
+</ul>
+<p><strong>GUID partition table, GPT 磁盘分区表：</strong></p>
+<ul>
+<li>与 MBR 仅使用第一个 512Bytes 区块来纪录不同， GPT 使用了 34 个 LBA 区块来纪录分区信息</li>
+<li>GPT 除了前面 34 个 LBA 之外，整个磁盘的最后 33 个 LBA 也拿来作为另一个备份</li>
+</ul>
+<p><strong>计算机开机流程：</strong></p>
+<ol>
+<li>BIOS：开机主动执行的固件，会认识第一个可开机的设备；</li>
+<li>MBR：第一个可开机设备的第一个扇区内的主要开机记录区块，内含开机管理程序；</li>
+<li>开机管理程序（boot loader）：一支可读取核心文件来执行的软件；</li>
+<li>核心文件：开始操作系统的功能</li>
+</ol>
+<p><strong>BIOS与UEFI BIOS区别</strong></p>
+<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001200526805.png" alt="image-20221001200526805"></p>
+<p><strong>主机硬盘的规划</strong></p>
+<p>频繁读写的目录</p>
+<ul>
+<li>boot</li>
+<li>&#x2F; </li>
+<li>&#x2F;home </li>
+<li>&#x2F;var </li>
+<li>Swap</li>
+</ul>
+<p>1):&#x2F;bin   [***]   (&#x2F;usr&#x2F;bin 、 &#x2F;usr&#x2F;local&#x2F;bin) • 是Binary的缩写, 这个目录存放着最经常使用的命令。</p>
+<p>2): &#x2F;sbin (&#x2F;usr&#x2F;sbin 、 &#x2F;usr&#x2F;local&#x2F;sbin) • s就是Super User的意思，这里存放的是系统管理员使用的系统管理程序。</p>
+<p>3):&#x2F;home [***] • 存放普通用户的主目录，在Linux中每个用户都有一个自己的目录，一般 该目录名是以用户的账号命名的。</p>
+<p>4):&#x2F;root [***] • 该目录为系统管理员，也称作超级权限者的用户主目录。</p>
+<p>5): &#x2F;lib • 系统开机所需要最基本的动态连接共享库，其作用类似于Windows里的DLL文件。几 乎所有的应用程序都需要用到这些共享库。</p>
+<p>6):&#x2F;lost+found • 这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。</p>
+<p>7):&#x2F;etc [***] • 所有的系统管理所需要的配置文件和子目录 my.conf </p>
+<p>8):&#x2F;usr  [***] • 这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似与 windows下的program files目录</p>
+<p>9):&#x2F;boot [***] • 存放的是启动Linux时使用的一些核心文件，包括一些连接文件以及镜像文件</p>
+<p>10):&#x2F;srv • service缩写，该目录存放一些服务启动之后需要提取的数据。</p>
+<p>11):&#x2F;sys • 这是linux2.6内核的一个很大的变化。该目录下安装了2.6内核中新出现的一个文件系统 sysfs</p>
+<p>12):tmp • 这个目录是用来存放一些临时文件的</p>
+<p>13):&#x2F;dev • 类似于windows的设备管理器，把所有的硬件用文件的形式存储。</p>
+<p>14):&#x2F;media [***] • linux系统会自动识别一些设备，例如U盘、光驱等等，当识别后，linux 会把识别的设备挂载到这个目录下。</p>
+<p>15):&#x2F;mnt [***] • 系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将外部的存储挂 载在&#x2F;mnt&#x2F;上，然后进入该目录就可以查看里的内容了。</p>
+<p>16):&#x2F;opt     • 这是给主机额外安装软件所摆放的目录。如安装ORACLE数据库就可放到该目录下，默认为空。</p>
+<p>17):&#x2F;usr&#x2F;local [***] • 这是另一个给主机额外安装软件所安装的目录。一般是通过编译源码方式安装的程序。</p>
+<p>18):&#x2F;var [***] • 这个目录中存放着在不断扩充着的东西，习惯将经常被修改的目录放在这个目录下。包括各种日志文件。</p>
+<h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><ul>
+<li><p>如果磁盘容量大于 2TB 以上时，系统会自动使用 GPT 分区方式来处理磁盘分区。</p>
+</li>
+<li><p>GPT 分区已经没有延伸与逻辑分区的概念，可以想像成所有的分区都是主分区，某些操作系统要使用 GPT 分区时，必须要搭配 UEFI 的新型 BIOS 格式才可安装使用。</p>
+</li>
+<li><p>Linux操作系统的文件使用目录树系统，与磁盘的对应需要有“挂载”的动作才行；</p>
+</li>
+<li><p>开机的流程由：BIOS–&gt;MBR–&gt;–&gt;boot loader–&gt;核心文件</p>
+</li>
+</ul>
+<h2 id="Vim程序编辑器"><a href="#Vim程序编辑器" class="headerlink" title="Vim程序编辑器"></a>Vim程序编辑器</h2><p><strong>三种模式</strong></p>
+<ul>
+<li>一般指令模式 （command mode）</li>
+<li>编辑模式 （insert mode）</li>
+<li>命令行命令模式 （command-line mode）</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210211616324.png" alt="image-20221021161616258" style="zoom:50%;" />
+
+<p><strong>常见命令</strong></p>
+<p><em>1.输入模式 (i):</em><br>按 i 进入insert输入模式<br>HJKL代替上下左右<br>H向左 L向右 J向下 K向上<br>Ctrl + B 向上翻页<br>Ctrl + F 想下翻页<br>Ctrl + E&#x2F;Y 滚动<br>Shift + G 末尾<br>双击gg 首字符</p>
+<p><em>2.命令模式(esc):</em><br>i 光标位置前面输入<br>a 光标位置后面输入<br>o enter到下一行输入<br>x 删除光标所在字符<br>dd 删除整个一行<br>u 撤销<br>dw 删除整个单词<br>b 跳跃单词首字母<br>e 跳跃单词尾字母<br>w 跳跃到下一个单词首字母</p>
+<p>shift 省略多个单词直接跳<br>Shift + 6 ^ 跳跃到本行的首字母<br>Shift + 4 $ 跳跃到本行的dd尾字母<br>按 0 跳跃到本行首个字符（ 包括空格）<br>{}移动整段大括号<br>yw 表示复制一个单词<br>y$ 表示从当前开始，往后复制到行末尾<br>p 粘贴剪贴板的内容<br><em>3.可视化模式</em><br>v + hjkl 进行字符选择<br>V + hjkl 进行行选择<br>v + G 全选<br>快捷选择<br>vaw 快速选择单词<br>vab 包含括号<br>vaB 包含大括号<br>shift + &lt;&gt; 前后缩进<br>v shift + · ~ 字母大小写切换<br>v + u&#x2F;U 全部转换为小写&#x2F;大写<br>行号+g<br>g 跳跃到指定的行号<br>快速查找<br>&#x2F;查找字符 按n 进入下一个<br>快速替换<br>按行:s&#x2F;查找单词&#x2F;替换单词&#x2F;g<br>全局:%s&#x2F;查找单词&#x2F;替换单词&#x2F;g<br>指定:首，尾s&#x2F;查找&#x2F;替换&#x2F;g<br>+c 询问</p>
+<h2 id="Bashshell"><a href="#Bashshell" class="headerlink" title="Bashshell"></a>Bashshell</h2><p><strong>硬件、核心与 Shell</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221653386.png" alt="image-20221022165342252" style="zoom:50%;" />
+
+<p>例子：用电脑播放音乐</p>
+<ol>
+<li>硬件：当然就是需要你的硬件有“声卡芯片”这个配备，否则怎么会有声音；</li>
+<li>核心管理：操作系统的核心可以支持这个芯片组，当然还需要提供芯片的驱动程序；</li>
+<li>应用程序：需要使用者输入发生声音的指令。</li>
+</ol>
+<p><strong>为何要学命令行的 shell？</strong></p>
+<ul>
+<li><p>命令行的 shell：大家都一样</p>
+</li>
+<li><p>远端管理：命令行就是比较快</p>
+</li>
+<li><p>Linux 的任督二脉： shell 是也</p>
+</li>
+</ul>
+<p><strong>系统的合法 shell 与 &#x2F;etc&#x2F;shells 功能</strong></p>
+<p>历史：由于早年的 Unix 年代，发展者众，所以由于 shell 依据发展者的不同就有许多的版本，例如常听到的 Bourne SHell （sh） 、在 Sun 里头默认的 C SHell、 商业上常用的 K SHell、, 还有 TCSH 等等，每一种 Shell 都各有其特点，Linux 使用的这一种版本就称为“ Bourne Again SHell （简称 bash） ”，这个 Shell 是 Bourne Shell 的增强版本，也是基准于 GNU 的架构下发展出来的。</p>
+<p><em>Linux可用的shells</em></p>
+<ul>
+<li>&#x2F;bin&#x2F;sh （已经被 &#x2F;bin&#x2F;bash 所取代）</li>
+<li>&#x2F;bin&#x2F;bash （就是 Linux 默认的 shell）</li>
+<li>&#x2F;bin&#x2F;tcsh （整合 C Shell ，提供更多的功能）</li>
+<li>&#x2F;bin&#x2F;csh （已经被 &#x2F;bin&#x2F;tcsh 所取代）</li>
+</ul>
+<blockquote>
+<p>系统某些服务在运行过程中，会去检查使用者能够使用的 shells ，而这些 shell 的查询就是借由 &#x2F;etc&#x2F;shells 这个文件</p>
+</blockquote>
+<p><strong>Bash Shell 的功能</strong></p>
+<ul>
+<li>命令编修能力 （history）：</li>
+</ul>
+<p>只要在命令行按“上下键”就可以找到前&#x2F;后一个输入的指令，而在很多distribution 里头，默认的指令记忆功能可以到达 1000 个！也就是说，曾经下达过的指令几乎都被记录下来了。<br>这么多的指令记录在哪里呢？在你的主文件夹内的 .bash_history 不过，需要留意的是，<br>~&#x2F;.bash_history 记录的是前一次登陆以前所执行过的指令， 而至于这一次登陆所执行的指令都被暂存在内存中，当你成功的登出系统后，该指令记忆才会记录到 .bash_history 当中</p>
+<ul>
+<li><p>命令与文件补全功能： （[tab] 按键的好处）</p>
+</li>
+<li><p>命令别名设置功能： （alias）</p>
+</li>
+</ul>
+<p>可以将<code>ls -al</code> 的命令通过<code>alias lm=&#39;ls -al&#39;</code>就可以将<code>lm</code>直接用来调命令了</p>
+<ul>
+<li><p>工作控制、前景背景控制： （job control, foreground, background）</p>
+</li>
+<li><p>程序化脚本： （shell scripts）</p>
+</li>
+<li><p>万用字符： （Wildcard）</p>
+</li>
+</ul>
+<p><strong>查询指令是否为 Bash shell 的内置命令： type</strong></p>
+<p>知道这个指令是来自于外部指令（指的是其他非 bash 所提供的指令） 或是内置在 bash 当中只要利用type 这个指令来观察即可。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> [-tpa] name</span><br><span class="line">选项与参数：</span><br><span class="line">：不加任何选项与参数时，<span class="built_in">type</span> 会显示出 name 是外部指令还是 bash 内置指令</span><br><span class="line">-t ：当加入 -t 参数时，<span class="built_in">type</span> 会将 name 以下面这些字眼显示出他的意义：</span><br><span class="line">file ：表示为外部指令；</span><br><span class="line"><span class="built_in">alias</span> ：表示该指令为命令别名所设置的名称；</span><br><span class="line"><span class="built_in">builtin</span> ：表示该指令为 bash 内置的指令功能；</span><br><span class="line">-p ：如果后面接的 name 为外部指令时，才会显示完整文件名；</span><br><span class="line">-a ：会由 PATH 变量定义的路径中，将所有含 name 的指令都列出来，包含 <span class="built_in">alias</span></span><br><span class="line">范例一：查询一下 <span class="built_in">ls</span> 这个指令是否为 bash 内置？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> <span class="built_in">ls</span></span><br><span class="line"><span class="built_in">ls</span> is aliased to `<span class="built_in">ls</span> --color=auto<span class="string">&#x27; &amp;lt;==未加任何参数，列出 ls 的最主要使用情况</span></span><br><span class="line"><span class="string">[dmtsai@study ~]$ type -t ls</span></span><br><span class="line"><span class="string">alias &amp;lt;==仅列出 ls 执行时的依据</span></span><br><span class="line"><span class="string">[dmtsai@study ~]$ type -a ls</span></span><br><span class="line"><span class="string">ls is aliased to `ls --color=auto&#x27;</span> &amp;lt;==最先使用 aliase</span><br><span class="line"><span class="built_in">ls</span> is /usr/bin/ls &amp;lt;==还有找到外部指令在 /bin/ls</span><br><span class="line">范例二：那么 <span class="built_in">cd</span> 呢？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> <span class="built_in">cd</span></span><br><span class="line"><span class="built_in">cd</span> is a shell <span class="built_in">builtin</span> &amp;lt;==看到了吗？ <span class="built_in">cd</span> 是 shell 内置指令</span><br></pre></td></tr></table></figure>
+
+<p><strong>指令的下达与快速编辑按钮</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">范例：如果指令串太长的话，如何使用两行来输出？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">cp</span> /var/spool/mail/root /etc/crontab \</span><br><span class="line">&amp;gt; /etc/fstab /root</span><br></pre></td></tr></table></figure>
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221744722.png" alt="image-20221022174441674" style="zoom: 80%;" />
+
+<h3 id="Shell-的变量功能"><a href="#Shell-的变量功能" class="headerlink" title="Shell 的变量功能"></a><strong>Shell 的变量功能</strong></h3><ul>
+<li>变量的可变性与方便性</li>
+</ul>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221748828.png" alt="image-20221022174833790" style="zoom: 67%;" />
+
+<p>由于系统已经帮我们规划好 MAIL 这个变量，所以使用者只要知道 mail 这个指 令如何使用即可， mail 会主动的取用 MAIL 这个变量，就能够如上图所示的取得自己的邮件信箱了</p>
+<ul>
+<li>影响 bash 环境操作的变量</li>
+</ul>
+<p>例如下达 ls 这个指令时，系统就是通过 PATH 这个变量里面的内容所记录的路径顺序来搜寻指令。如果在搜寻完 PATH 变量内的路径还找不到 ls 这个指令时， 就会在屏幕上显示“ command not found ”的错误讯息了。</p>
+<ul>
+<li>脚本程序设计 （shell script） 的好帮手</li>
+</ul>
+<p>例如你要写一个大 型的 script 时，有些数据因为可能由于使用者习惯的不同而有差异，比如说路径好了，由于该路径在 script 被使用在相当多的地方，如果下次换了一部主机，都要修改 script 里面的所有路径， 这个时候如果使用变量，而将该变量的定义写在最前面，后面相关的路径名称都以变量来取代， 那么你只要修改一行就等于修改整篇 script 了。</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221753121.png" alt="image-20221022175328075" style="zoom:67%;" />
+
+<p><strong>变量的取用与设置：echo, 变量设置规则, unset</strong></p>
+<p>可以利用 echo 这个指令来取用变量， 但是，变量在被取用时， 前面必须要加上钱字号“ $ ”才行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ <span class="built_in">echo</span> <span class="variable">$variable</span></span><br><span class="line"></span><br><span class="line">[mua@localhost ~]$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line">/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/mua/.local/bin:/home/mua/bin</span><br><span class="line">[mua@localhost ~]$ <span class="built_in">echo</span> <span class="variable">$&#123;PATH&#125;</span> <span class="comment"># 比较规范的形式</span></span><br><span class="line">/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/mua/.local/bin:/home/mua/bin</span><br><span class="line"><span class="comment"># 设置变量名</span></span><br><span class="line">[mua@localhost 桌面]$ fuck=myname</span><br><span class="line">[mua@localhost 桌面]$ <span class="built_in">echo</span> <span class="variable">$fuck</span></span><br><span class="line">myname</span><br><span class="line">[mua@localhost 桌面]$ fuck=VBird</span><br><span class="line">[mua@localhost 桌面]$ <span class="built_in">echo</span> <span class="variable">$fuck</span></span><br><span class="line">VBird</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong></p>
+<ul>
+<li>变量与变量内容以一个等号“&#x3D;”来链接，如下所示： “myname&#x3D;VBird”</li>
+<li>等号两边不能直接接空白字符，如下所示为错误： “myname &#x3D; VBird”或“myname&#x3D;VBird Tsai”</li>
+<li>变量名称只能是英文字母与数字，但是开头字符不能是数字，如下为错误：“2myname&#x3D;VBird”</li>
+<li>变量内容若有空白字符可使用双引号“””或单引号“’”将变量内容结合起来，但<ul>
+<li>双引号内的特殊字符如 $ 等，可以保有原本的特性，如下所示： “var&#x3D;”lang is$LANG””则“echo $var”可得“lang is zh_TW.UTF-8”</li>
+<li>单引号内的特殊字符则仅为一般字符 （纯文本），如下所示： “var&#x3D;’lang is $LANG’”则“echo $var”可得“lang is $LANG”</li>
+</ul>
+</li>
+<li>可用跳脱字符“ \ ”将特殊符号（如 [Enter], $, , 空白字符, ‘等）变成一般字符，如：“myname&#x3D;VBird\ Tsai”</li>
+<li>在一串指令的执行中，还需要借由其他额外的指令所提供的信息时，可以使用反单引号“ 指令 ”或 “$（指令）”。特别注意，那个 &#96; 是键盘上方的数字键 1 左边那个按键，而不是单引号！ 例如想要取得核心版本的设置： “version&#x3D;$（uname -r）”再“echo$version”可得“3.10.0-229.el7.x86_64”</li>
+<li>若该变量为扩增变量内容时，则可用 “$变量名称” 或 ${变量} 累加内容，如下所示：“PATH&#x3D;”$PATH”:&#x2F;home&#x2F;bin”或“PATH&#x3D;${PATH}:&#x2F;home&#x2F;bin”</li>
+<li>若该变量需要在其他子程序执行，则需要以 export 来使变量变成环境变量： “exportPATH”</li>
+<li>通常大写字符为系统默认变量，自行设置变量可以使用小写字符，方便判断 （纯粹依照使用者兴趣与嗜好） </li>
+<li>取消变量的方法为使用 unset ：“unset 变量名称”例如取消 myname 的设置： “unsetmyname”</li>
+</ul>
+<p><strong>测试</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 范例一：设置变量hr 内容为fuck</span></span><br><span class="line">[mua@localhost ~]$ 16hr=fuck</span><br><span class="line">bash: 16hr=fuck: 未找到命令...  <span class="comment">## 变量开头为数字</span></span><br><span class="line">[mua@localhost ~]$ 16hr = fuck</span><br><span class="line">bash: 16hr: 未找到命令...  <span class="comment">## 变量等于号两侧存在空格</span></span><br><span class="line"><span class="comment"># 范例二：当变量内容为fuck&#x27;s name</span></span><br><span class="line">[mua@localhost ~]$ hr=fuck<span class="string">&#x27;s name</span></span><br><span class="line"><span class="string">&gt; ^C ## 单引号与双引号必须要成对，当你按下 enter 后，提示继续输入变量内容</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ hr=&quot;fuck&#x27;</span>s name<span class="string">&quot; ## 成功创建</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ hr=&#x27;fuck&#x27;s name&#x27;</span></span><br><span class="line"><span class="string">&gt; ^C ## 因为前两个单引号已成对，后面就多了一个不成对的单引号，提示继续输入</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ hr=fuck\&#x27;s\ name ## 用跳脱字符成功创建</span></span><br><span class="line"><span class="string"># 范例三：要在 PATH 这个变量当中“累加”:/home/dmtsai/bin 这个目录</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ PATH=<span class="variable">$PATH</span>:/home/mua/bin</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ PATH=&quot;</span><span class="variable">$PATH</span><span class="string">&quot;:/home/mua/bin</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ PATH=<span class="variable">$&#123;PATH&#125;</span>:/home/mua/bin</span></span><br><span class="line"><span class="string"># 范例四：将 hr 的内容多出 &quot;</span><span class="built_in">yes</span><span class="string">&quot; </span></span><br><span class="line"><span class="string">[mua@localhost ~]$ echo <span class="variable">$hryes</span></span></span><br><span class="line"><span class="string">## 没有双引号，变量name 的内容就是 <span class="variable">$nameyes</span> 这个变量</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ echo &quot;</span><span class="variable">$hr</span><span class="string">&quot;yes</span></span><br><span class="line"><span class="string">yes ## 成功添加</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ echo <span class="variable">$&#123;hr&#125;</span>yes</span></span><br><span class="line"><span class="string">yes ## 成功添加，以此例子为标准</span></span><br><span class="line"><span class="string"># 范例五：让刚刚设置的 name=VBird 可以用在下个 shell 的程序</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ hr=fuck ## 赋值变量</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ bash ## 进入子进程</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ echo <span class="variable">$hr</span> </span></span><br><span class="line"><span class="string">## 调用失败</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ exit</span></span><br><span class="line"><span class="string">exit</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ export hr ## 设置系统环境变量</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ bash </span></span><br><span class="line"><span class="string">[mua@localhost ~]$ echo <span class="variable">$hr</span></span></span><br><span class="line"><span class="string">fuck ## 调用成功</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ exit</span></span><br><span class="line"><span class="string">exit</span></span><br><span class="line"><span class="string"># 范例六：进入到目前核心的模块目录</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="数据流重导向"><a href="#数据流重导向" class="headerlink" title="数据流重导向"></a>数据流重导向</h3><blockquote>
+<p>数据流:分三种，标准输入流（由键盘输入产生），标准输出流（执行命令的输出日志），标准错误输出流(同理）</p>
+</blockquote>
+<p><strong>什么是数据流重导向</strong></p>
+<p>将本应由键盘输入或输出到屏幕上的数据流重定向到文件或设备上（保存到文件或设备中），称之为数据流重定向</p>
+<p><strong>数据流重定向的作用</strong></p>
+<ul>
+<li>屏幕输出信息需要保存</li>
+<li>后台执行程序，不想将日志打在桌面上</li>
+<li>区分输出标准输出与标准错误输出处理时</li>
+<li>丢弃已知错误信息，<code>2&gt; /dev/null</code></li>
+</ul>
+<p><strong>代号与表现方式</strong></p>
+<ol>
+<li>标准输入 （stdin） ：代码为 <code>0</code> ，使用 <code>&lt; </code>或 <code>&lt;&lt;</code> ；</li>
+<li>标准输出 （stdout）：代码为 <code>1</code> ，使用 <code>&gt;</code> 或 <code>&gt;&gt;</code> ；</li>
+<li>标准错误输出（stderr）：代码为 <code>2</code> ，使用 <code>2&gt;</code> 或 <code>2&gt;&gt;</code> ；</li>
+</ol>
+<p>区别</p>
+<ul>
+<li><code>&gt;</code> ：以【覆盖】的方式，将【正确的数据】输出到文件或设备上</li>
+<li><code>&gt;&gt;</code>：以【追加】的方式，将【正确的数据】输出到文件或设备上</li>
+<li><code>2&gt;</code>：以【覆盖】的方式，将【错误的数据】输出到文件或设备上</li>
+<li><code>2&gt;&gt;</code>：以【追加】的方式，将【错误的数据】输出到文件或设备上</li>
+</ul>
+<p><strong>黑洞 &#x2F;dev&#x2F;null</strong></p>
+<p>当需要将某些日志不重要的数据流重定向走，但又不想保存文件占用空间时，重定向数据流 <code>/dev/null</code> 设备上，相当于将数据丢入黑洞</p>
+<p>Eg:</p>
+<p>将标准输出丢入黑洞</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost mua]<span class="comment"># cat /etc/profile &gt; /dev/null</span></span><br></pre></td></tr></table></figure>
+
+<p>将标准错误输出丢入黑洞</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost mua]<span class="comment"># find / -name .bashrc 2&gt; /dev/null</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>将stdout与stderr输出到同一文件或设备</strong></p>
+<p>分别设置stdout与stderr到同一文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ find / -name .bashrc &gt; /tmp/stdtestlogs1 2&gt; /tmp/stdtestlogs1</span><br></pre></td></tr></table></figure>
+
+<p>输出两者带同一文件中，语法<code>command &gt;[file]&gt;&amp;1</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ find / -name .bashrc &amp; /tmp/stdtustlogs2 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>&amp;语法<code>[command]&amp;&gt;[file] </code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ find / -name .bashrc &amp;&gt; /tmp/stdtestlogs3</span><br></pre></td></tr></table></figure>
+
+<p>将所有日志输入黑洞</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ find / -name .bashrc &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>将错误日志输入黑洞</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ find / -name .bashrc 2&gt; /dev/null</span><br></pre></td></tr></table></figure>
+
+<p><strong>标准输入流重定向 &lt; 与 &lt;&lt;</strong></p>
+<p>将原本由键盘输入的数据，改由文件内容提供（<code>&lt;</code> 表示使用文件提供数据，<code>&lt;&lt;</code> 用来【设置输入结束的字符】）</p>
+<p>例如：</p>
+<p>将<code>~/.bashrc</code>输出重定向到<code>/tmp/stdintest</code>中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ <span class="built_in">cat</span> &gt; /tmp/stdintest &lt; ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>设置【输入结束字符】，将一段文字输入到<code>/tmp/stdintest2</code>中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ <span class="built_in">cat</span> &gt; /tmp/stdintest &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">&gt; 这是一条测试</span></span><br><span class="line"><span class="string">&gt; 这是一条测</span></span><br><span class="line"><span class="string">&gt; 这是一条</span></span><br><span class="line"><span class="string">&gt; 这是一</span></span><br><span class="line"><span class="string">&gt; 这是</span></span><br><span class="line"><span class="string">&gt; 这</span></span><br><span class="line"><span class="string">&gt; EOF</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>命令执行的判断依据： ; , &amp;&amp;, ||</strong></p>
+<ul>
+<li><code>cmd</code> ; <code>cmd</code>(不考虑前者是否执行成功)</li>
+</ul>
+<p>eg.进行sync同步化再进行关机命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sync</span>; <span class="built_in">sync</span>; shutdown -h now</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>$?</code> （指令回传值） 与 <code>&amp;&amp;</code> 或 <code>||</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>执行下达情况</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cmd1&amp;&amp;cmd2</td>
+<td>1. 若 cmd1 执行完毕且正确执行（$?&#x3D;0），则开始执行 cmd2。 2. 若 cmd1 执行完毕且为错误 （$?≠0），则 cmd2 不执行。</td>
+</tr>
+<tr>
+<td>cmd1||cmd2</td>
+<td>1. 若 cmd1 执行完毕且正确执行（$?&#x3D;0），则 cmd2 不执行。 2. 若 cmd1 执 行完毕且为错误 （$?≠0），则开始执行 cmd2。</td>
+</tr>
+</tbody></table>
+<p><em>练习</em></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 先查询有无此目录再创建xixi这个文件</span></span><br><span class="line">[mua@localhost ~]$ <span class="built_in">ls</span> /tmp/abc &amp;&amp; <span class="built_in">touch</span> /tmp/abc/xixi</span><br><span class="line"><span class="built_in">ls</span>: cannot access /tmp/abc: No such file or directory <span class="comment">#查询无</span></span><br><span class="line">[mua@localhost home]$ <span class="built_in">mkdir</span> /tmp/abc <span class="comment"># 创建文件夹</span></span><br><span class="line">[mua@localhost home]$ <span class="built_in">ls</span> /tmp/abc &amp;&amp; <span class="built_in">touch</span> /tmp/abc/xixi <span class="comment">#执行成功</span></span><br><span class="line"><span class="comment">#总结 如果查询不到，就不会执行下一个语句</span></span><br><span class="line"><span class="comment">##总是尝试执行语句</span></span><br><span class="line">[mua@localhost ~]$ <span class="built_in">ls</span> /tmp/abc &amp;<span class="comment">#124;&amp;#124; mkdir /tmp/abc &amp;&amp; /tmp/abc/hehe</span></span><br></pre></td></tr></table></figure>
+
+<p>上条执行判断流程图</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211251704834.png" alt="image-20221125170424765" style="zoom: 67%;" />
+
+<p>参考<a href="https://www.cnblogs.com/chengmo/archive/2010/10/20/1855805.html">linux shell数据重定向</a></p>
+<h3 id="管线命令pipe"><a href="#管线命令pipe" class="headerlink" title="管线命令pipe"></a>管线命令pipe</h3><p>管道命令的操作符时“|”，它仅能处理经由前面一个指令传出的正确输出信息，也就是 standard output 的信息，对于 stdandard<br>error 信息没有直接处理能力。然后，传递给下一个命令，作为标准的输入 standard input.</p>
+<h2 id="Linux正则表达式"><a href="#Linux正则表达式" class="headerlink" title="Linux正则表达式"></a>Linux正则表达式</h2><p><strong>概念：</strong>正则表达式 （Regular Expression, RE, 或称为常规表达式）是通过一些特殊字符的排列，用以“搜寻&#x2F;取代&#x2F;删除”一列或多列文字字串， 简单的说，正则表达式就是用在字串的处理上面的 一项“表示式”。正则表达式并不是一个工具程序， 而是一个字串处理的标准依据，如果想要以正则表达式的方式处理字串，就得要使用支持正则表达式的工具程序才行， 这类的工具程序很多，例如 vi, sed, awk 等等</p>
+<ul>
+<li>例如</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">mua@fuck:~$ <span class="keyword">grep</span> <span class="string">&#x27;ls&#x27;</span> <span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>*</span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>accounts-daemon.service:ProtectHome=<span class="keyword">false</span></span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>accounts-daemon.service:PrivateTmp=<span class="keyword">false</span></span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>accounts-daemon.service:PrivateUsers=<span class="keyword">false</span></span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>alsa-restore.service:# can be switched using a <span class="keyword">file</span> exist check - <span class="regexp">/etc/</span>alsa/state-daemon.conf .</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>正则表达式对于系统管理员的用途</li>
+</ul>
+<p>由于系统如果在繁忙的情况之下，每天产生的讯息信息会多到你无法想像的地步，运用正则表达式极度简化操作人员从千百行的数据里面找出一行有问题的讯息的效率。</p>
+<h3 id="基础正则表达式"><a href="#基础正则表达式" class="headerlink" title="基础正则表达式"></a>基础正则表达式</h3><p><em><strong>语系对正则表达式的影响</strong></em></p>
+<p>文件其实记录的仅有 0 与 1，我们看到的字符文字与数字都是通过编码表转换来的。由于不同语系的编码数据并不相同，所以就会造成数据撷取结果的差异了。所以使用正则表达式时，需要特别留意当时环境的语系为何， 否则可能会发现与别人不相同的撷取结果。</p>
+<ul>
+<li>“ LANG&#x3D;C ”语系数据“ 						<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211061012414.png" alt="image-20221106101250300" style="zoom: 67%;" /></li>
+</ul>
+<p><em><strong>grep 的一些进阶选项</strong></em></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mua@fuck:~$ grep [-A] [-B] [--color=auto] <span class="string">&#x27;搜寻字串&#x27;</span> filename</span><br><span class="line">选项与参数：</span><br><span class="line">-A ：后面可加数字，为 after 的意思，除了列出该行外，后续的 n 行也列出来；</span><br><span class="line">-B ：后面可加数字，为 befer 的意思，除了列出该行外，前面的 n 行也列出来；</span><br><span class="line">--color=auto 可将正确的那个撷取数据列出颜色</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>基础正则表达式练习</strong></em></p>
+<ul>
+<li>搜寻特定字符</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mua@fuck:~$  grep -n <span class="string">&#x27;the&#x27;</span> regular_express.txt</span><br><span class="line">8:I can<span class="string">&#x27;t finish the test.^M</span></span><br><span class="line"><span class="string">12:the symbol &#x27;</span>*<span class="string">&#x27; is represented as start.</span></span><br><span class="line"><span class="string">15:You are the best is mean you are the no. 1.</span></span><br><span class="line"><span class="string">16:The world &amp;lt;Happy&amp;gt; is the same with &quot;glad&quot;.</span></span><br><span class="line"><span class="string">18:google is the best tools for search keyword.</span></span><br><span class="line"><span class="string">// 反向</span></span><br><span class="line"><span class="string">mua@fuck:~$ grep -vn &#x27;</span>the<span class="string">&#x27; regular_express.txt</span></span><br><span class="line"><span class="string">//不论大小写</span></span><br><span class="line"><span class="string">mua@fuck:~$ grep -in &#x27;</span>the<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string">8:I can&#x27;</span>t finish the <span class="built_in">test</span>.^M</span><br><span class="line">9:Oh! The soup taste good.^M</span><br><span class="line">12:the symbol <span class="string">&#x27;*&#x27;</span> is represented as start.</span><br><span class="line">14:The gd software is a library <span class="keyword">for</span> drafting programs.^M</span><br><span class="line">15:You are the best is mean you are the no. 1.</span><br><span class="line">16:The world &amp;lt;Happy&amp;gt; is the same with <span class="string">&quot;glad&quot;</span>.</span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>利用中括号[]来搜寻集合字符</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 利用字符共通点</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;t[ae]st&#x27; regular_express.txt</span></span><br><span class="line">8:I can<span class="string">&#x27;t finish the test.</span></span><br><span class="line"><span class="string">9:Oh! The soup taste good.</span></span><br><span class="line"><span class="string"># 搜寻字符带有**</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>[^g]oo<span class="string">&#x27; regular_express.txt</span></span><br><span class="line"><span class="string">2:apple is my favorite food.</span></span><br><span class="line"><span class="string">3:Football game is not use feet only.</span></span><br><span class="line"><span class="string">18:google is the best tools for search keyword.</span></span><br><span class="line"><span class="string">19:goooooogle yes!</span></span><br><span class="line"><span class="string">#  搜寻带数字</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>[0-9]<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string">5:However, this dress is about $ 3183 dollars.</span></span><br><span class="line"><span class="string">15:You are the best is mean you are the no. 1.</span></span><br><span class="line"><span class="string">//其他写法</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>[[:digit:]]<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string"># 带小写字母</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>[^a-z]oo<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string">3:Football game is not use feet only.</span></span><br><span class="line"><span class="string">//其他写法</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>[^[:lower:]]oo<span class="string">&#x27; regular_express.txt </span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>行首与行尾字符 ^ $</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 句首</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;^the&#x27; regular_express.txt </span></span><br><span class="line">12:the symbol <span class="string">&#x27;*&#x27;</span> is represented as start.</span><br><span class="line"><span class="comment"># 句首为小写</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;^[a-z]&#x27; regular_express.txt </span></span><br><span class="line">2:apple is my favorite food.</span><br><span class="line">4:this dress doesn<span class="string">&#x27;t fit me.</span></span><br><span class="line"><span class="string">10:motorcycle is cheap than car.</span></span><br><span class="line"><span class="string">12:the symbol &#x27;</span>*<span class="string">&#x27; is represented as start.</span></span><br><span class="line"><span class="string">//其他写法</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>^[[:lower:]]<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string"># 开头不是字母</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>^[^a-zA-Z]<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string">1:&quot;Open Source&quot; is a good mechanism to develop programs.</span></span><br><span class="line"><span class="string">21:# I am VBird</span></span><br><span class="line"><span class="string">//其他写法</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>^[^[:alpha:]]<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string"># 以句号作为结尾（用到跳脱字符&#x27;</span>\<span class="string">&#x27;）</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>\.$<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string"># 找出空白行</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>^$<span class="string">&#x27; regular_express.txt </span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>任意一个字符.与重复字符 *</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#  .（小数点）：代表“一定有一个任意字符”的意思；</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;g..d&#x27; regular_express.txt </span></span><br><span class="line">1:<span class="string">&quot;Open Source&quot;</span> is a good mechanism to develop programs.</span><br><span class="line">9:Oh! The soup taste good.</span><br><span class="line">16:The world &amp;lt;Happy&amp;gt; is the same with <span class="string">&quot;glad&quot;</span>.</span><br><span class="line"><span class="comment">#  *（星星号）：代表“重复前一个字符， 0 到无穷多次”的意思，为组合形态 </span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;ooo*&#x27; regular_express.txt </span></span><br><span class="line">1:<span class="string">&quot;Open Source&quot;</span> is a good mechanism to develop programs.</span><br><span class="line">2:apple is my favorite food.</span><br><span class="line">3:Football game is not use feet only.</span><br><span class="line">9:Oh! The soup taste good.</span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br><span class="line">// 中间间隔</span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;g*g&#x27; regular_express.txt </span></span><br><span class="line">1:<span class="string">&quot;Open Source&quot;</span> is a good mechanism to develop programs.</span><br><span class="line">3:Football game is not use feet only.</span><br><span class="line">9:Oh! The soup taste good.</span><br><span class="line"><span class="comment"># 单个字符 g....g</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;g.*g&#x27; regular_express.txt </span></span><br><span class="line">1:<span class="string">&quot;Open Source&quot;</span> is a good mechanism to develop programs.</span><br><span class="line">14:The gd software is a library <span class="keyword">for</span> drafting programs.</span><br><span class="line">16:The world &amp;lt;Happy&amp;gt; is the same with <span class="string">&quot;glad&quot;</span>.</span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br><span class="line"><span class="comment"># 任意数字</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;[0-9][0-9]*&#x27; regular_express.txt </span></span><br><span class="line">5:However, this dress is about $ 3183 dollars.</span><br><span class="line">15:You are the best is mean you are the no. 1.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>限定连续 RE 字符范围 {}(记得添加跳脱字符<code>\&#123;</code>）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查找特定范围</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;o\&#123;2\&#125;&#x27; regular_express.txt </span></span><br><span class="line">1:<span class="string">&quot;Open Source&quot;</span> is a good mechanism to develop programs.</span><br><span class="line">2:apple is my favorite food.</span><br><span class="line">3:Football game is not use feet only.</span><br><span class="line">9:Oh! The soup taste good.</span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br><span class="line">19:goooooogle <span class="built_in">yes</span>!</span><br><span class="line"><span class="comment"># 双端界定范围</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;go\&#123;2,5\&#125;g&#x27; regular_express.txt </span></span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br></pre></td></tr></table></figure>
+
+<p><strong>基础正则表达式字符汇整</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211092156739.png" alt="image-20221109215623614" style="zoom: 50%;" />
+
+<p><strong>sed工具</strong></p>
+<p><strong>延伸正则表达式</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@fuck:/test<span class="comment"># grep -v &#x27;^$&#x27; regular_express.txt | grep -v &#x27;^#&#x27;</span></span><br><span class="line">可以替换为</span><br><span class="line">root@fuck:/test<span class="comment"># egrep -v &#x27;^$|^#&#x27; regular_express.txt </span></span><br></pre></td></tr></table></figure>
+
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211092218361.png" alt="image-20221109221826302" style="zoom: 80%;" />
+
+<h3 id="文件的格式化与相关处理"><a href="#文件的格式化与相关处理" class="headerlink" title="文件的格式化与相关处理"></a><strong>文件的格式化与相关处理</strong></h3><p><strong>格式化打印： printf</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ <span class="built_in">printf</span> <span class="string">&#x27;打印格式&#x27;</span> 实际内容</span><br><span class="line">选项与参数：</span><br><span class="line">关于格式方面的几个特殊样式：</span><br><span class="line">\a 警告声音输出</span><br><span class="line">\b 倒退键（backspace）</span><br><span class="line">\f 清除屏幕 （form feed）</span><br><span class="line">\n 输出新的一行</span><br><span class="line">\r 亦即 Enter 按键</span><br><span class="line">\t 水平的 [tab] 按键</span><br><span class="line">\v 垂直的 [tab] 按键</span><br><span class="line">\xNN NN 为两位数的数字，可以转换数字成为字符。</span><br><span class="line">关于 C 程序语言内，常见的变量格式</span><br><span class="line">%ns 那个 n 是数字， s 代表 string ，亦即多少个字符；</span><br><span class="line">%ni 那个 n 是数字， i 代表 <span class="built_in">integer</span> ，亦即多少整数码数；</span><br><span class="line">%N.nf 那个 n 与 N 都是数字， f 代表 floating （浮点），如果有小数码数，</span><br><span class="line">假设我共要十个位数，但小数点有两位，即为 %10.2f</span><br><span class="line"><span class="comment"># 例如</span></span><br><span class="line">root@fuck:/test<span class="comment"># printf &#x27;%s\t s\t %s\t %s\t %s\t \n&#x27; $ (cat printf.txt)</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>awk：好用的数据处理工具</strong></p>
+<p>数据操作：<code>awk &#39;条件类型1&#123;动作1&#125; 条件类型2&#123;动作2&#125; ...&#39; filename</code></p>
+<p>awk 后面接两个单引号并加上大括号 {} 来设置想要对数据进行的处理动作。 awk 可以处理后续接的文件，也可以读取来自前个指令的 standard output。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 列出前五行登陆者命令</span></span><br><span class="line">root@fuck:/test<span class="comment"># last -n 5</span></span><br><span class="line">mua      tty2         tty2             Thu Nov 10 03:37   still logged <span class="keyword">in</span></span><br><span class="line">reboot   system boot  5.15.0-52-generi Thu Nov 10 03:37   still running</span><br><span class="line">mua      tty2         tty2             Wed Nov  2 05:56 - crash (7+21:41)</span><br><span class="line">reboot   system boot  5.15.0-52-generi Wed Nov  2 05:56   still running</span><br><span class="line">mua      tty2         tty2             Sun Oct 23 01:14 - crash (10+04:41)</span><br><span class="line"><span class="comment">#想要取出帐号与登陆者的 IP ，且帐号与 IP 之间以 [tab] 隔开</span></span><br><span class="line">[dmtsai@study ~]$ last -n 5 &amp;<span class="comment">#124; awk &#x27;&#123;print $1 &quot;\t&quot; $3&#125;&#x27;</span></span><br><span class="line">dmtsai 192.168.1.100</span><br><span class="line">dmtsai 192.168.1.100</span><br><span class="line">dmtsai 192.168.1.100</span><br><span class="line">dmtsai 192.168.1.100</span><br><span class="line">dmtsai Fri</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>awk</code>内置变量</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211131017749.png" alt="image-20221113101742717" style="zoom:67%;" />
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#列出每一行的帐号（就是 $1）；</span></span><br><span class="line"><span class="comment">#列出目前处理的行数（就是 awk 内的 NR 变量）</span></span><br><span class="line"><span class="comment">#并且说明，该行有多少字段（就是 awk 内的 NF 变量）</span></span><br><span class="line">[dmtsai@study ~]$ last -n 5&amp;<span class="comment">#124; awk &#x27;&#123;print $1 &quot;\t lines: &quot; NR &quot;\t columns: &quot; NF&#125;&#x27;</span></span><br><span class="line">dmtsai lines: 1 columns: 10</span><br><span class="line">dmtsai lines: 2 columns: 10</span><br><span class="line">dmtsai lines: 3 columns: 10</span><br><span class="line">dmtsai lines: 4 columns: 10</span><br><span class="line">dmtsai lines: 5 columns: 9</span><br></pre></td></tr></table></figure>
+
+<p><strong>逻辑运算字符</strong></p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211131019209.png" alt="image-20221113101958177" style="zoom:67%;" />
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#逻辑运算上面亦即所谓的大于、小于、等于等判断式上面，习惯上是以“ == ”来表示；</span></span><br><span class="line"><span class="comment">#如果是直接给予一个值，例如变量设置时，就直接使用 = 而已</span></span><br><span class="line"><span class="comment">#假设我要查阅，第三栏小于10 以下的数据，并且仅列出帐号与第三栏</span></span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">cat</span> /etc/passwd &amp;<span class="comment">#124; awk &#x27;&#123;FS=&quot;:&quot;&#125; $3 &amp;lt; 10 &#123;print $1 &quot;\t &quot; $3&#125;&#x27;</span></span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin 1</span><br><span class="line">daemon 2</span><br><span class="line"><span class="comment">#第一行未正确显示，利用BEGIN设置第二行</span></span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">cat</span> /etc/passwd &amp;<span class="comment">#124; awk &#x27;BEGIN &#123;FS=&quot;:&quot;&#125; $3 &amp;lt; 10 &#123;print $1 &quot;\t &quot; $3&#125;&#x27;</span></span><br><span class="line">root 0</span><br><span class="line">bin 1</span><br><span class="line">daemon 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件比对工具"><a href="#文件比对工具" class="headerlink" title="文件比对工具"></a>文件比对工具</h3><p><strong>diff</strong></p>
+<p>同一个套装软件的不同版本之间，比较配置文件与原始文件的差异就可以使用<code>diff</code>命令</p>
+<p>第一步将文件设置为一个新版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mua@fuck:~$ <span class="built_in">mkdir</span> -p /tmp/testpw &amp;lt;</span><br><span class="line">mua@fuck:~$ <span class="built_in">cd</span> /tmp/testpw/</span><br><span class="line">mua@fuck:/tmp/testpw$ <span class="built_in">cp</span> /etc/passwd passwd.old</span><br><span class="line">mua@fuck:/tmp/testpw$ <span class="built_in">cat</span> /etc/passwd &amp;<span class="comment">#124;sed -e &#x27;4d&#x27; -e &#x27;6c no six line&#x27; &amp;gt;passwd</span></span><br><span class="line"><span class="comment"># 将 /etc/passwd 处理成为一个新的版本，将第四行删除，第六行则取代成为“no six line”，新的文件放置到 /tmp/test 里面，</span></span><br></pre></td></tr></table></figure>
+
+<p><code>diff</code>的用法</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ diff [-bBi] from-file to-file</span><br><span class="line">选项与参数：</span><br><span class="line">from-file ：一个文件名，作为原始比对文件的文件名；</span><br><span class="line">to-file ：一个文件名，作为目的比对文件的文件名；</span><br><span class="line">注意，from-file 或 to-file 可以 - 取代，那个 - 代表“Standard input”之意。</span><br><span class="line">-b ：忽略一行当中，仅有多个空白的差异（例如 <span class="string">&quot;about me&quot;</span> 与 <span class="string">&quot;about me&quot;</span> 视为相同</span><br><span class="line">-B ：忽略空白行的差异。</span><br><span class="line">-i ：忽略大小写的不同。</span><br><span class="line"></span><br><span class="line">范例一：比对 passwd.old 与 passwd.new 的差异：</span><br><span class="line">[dmtsai@study testpw]$ diff passwd.old passwd.new</span><br><span class="line">4d3 &amp;lt;==左边第四行被删除 （d） 掉了，基准是右边的第三行</span><br><span class="line">&amp;lt; adm:x:3:4:adm:/var/adm:/sbin/nologin &amp;lt;==这边列出左边（&amp;lt;）文件被删除的那一行内容</span><br><span class="line">6c5 &amp;lt;==左边文件的第六行被取代 （c） 成右边文件的第五行</span><br><span class="line">&amp;lt; <span class="built_in">sync</span>:x:5:0:<span class="built_in">sync</span>:/sbin:/bin/sync &amp;lt;==左边（&amp;lt;）文件第六行内容</span><br><span class="line">---</span><br><span class="line">&amp;gt; no six line &amp;lt;==右边（&amp;gt;）文件第五行内容</span><br><span class="line"></span><br><span class="line">范例二：比较文件</span><br><span class="line">[mua@localhost testpw]$ diff /etc/rc0.d/ /etc/rc5.d/</span><br><span class="line">只在 /etc/rc0.d/ 存在：K90network</span><br><span class="line">只在 /etc/rc5.d/ 存在：S10network</span><br></pre></td></tr></table></figure>
+
+<p><code>cmp</code>命令</p>
+<p><code>cmp</code> 主要也是在比对两个文件，他 主要利用“字节”单位去比对， 因此，当然也可以比对 binary file,diff 主要是以“行”为单位比对， <code>cmp </code>则是以“字节”为单位去比对。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ cmp [-l] file1 file2</span><br><span class="line">选项与参数：</span><br><span class="line">-l ：将所有的不同点的字节处都列出来。因为 cmp 默认仅会输出第一个发现的不同点。</span><br><span class="line"></span><br><span class="line">范例一：用 cmp 比较一下 passwd.old 及 passwd.new</span><br><span class="line">[dmtsai@study testpw]$ cmp passwd.old passwd.new</span><br><span class="line">passwd.old passwd.new differ: char 106, line 4</span><br></pre></td></tr></table></figure>
+
+<p><code>patch</code>命令</p>
+<p>patch 这个指令与 diff 可是有密不可分的关系，前面提到，diff 可以用来分辨两个版本之间的差异， 举例来说，刚刚我们所创建的 passwd.old 及 passwd.new 之间就是两个不同版本的文件。 那么，如果要“升级”，就是“先比较先旧版本的差异，并将差异档制作成为补丁文件，再由补丁文件更新旧文件”即可。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">范例一：以 /tmp/testpw 内的 passwd.old 与 passwd.new 制作补丁文件</span><br><span class="line">[dmtsai@study testpw]$ diff -Naur passwd.old passwd.new &amp;gt; passwd.patch</span><br><span class="line">[dmtsai@study testpw]$ <span class="built_in">cat</span> passwd.patch</span><br><span class="line">--- passwd.old 2015-07-14 22:37:43.322535054 +0800 &amp;lt;==新旧文件的信息</span><br><span class="line">+++ passwd.new 2015-07-14 22:38:03.010535054 +0800</span><br><span class="line">@@ -1,9 +1,8 @@ &amp;lt;==新旧文件要修改数据的界定范围，旧文件在 1-9 行，新文件在 1-8 行</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">-adm:x:3:4:adm:/var/adm:/sbin/nologin &amp;lt;==左侧文件删除</span><br><span class="line">lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin</span><br><span class="line">-<span class="built_in">sync</span>:x:5:0:<span class="built_in">sync</span>:/sbin:/bin/sync &amp;lt;==左侧文件删除</span><br><span class="line">+no six line &amp;lt;==右侧新文件加入</span><br><span class="line">shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown</span><br><span class="line">halt:x:7:0:halt:/sbin:/sbin/halt</span><br><span class="line">mail:x:8:12:mail:/var/spool/mail:/sbin/nologin</span><br></pre></td></tr></table></figure>
+
+<p>文件打印工具<code>pr</code></p>
+<ul>
+<li>用于多打印“文件时间”、“文件文件名”及“页码”三大项目。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost testpw]<span class="comment"># pr passwd.new </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2022-11-17 20:04                    passwd.new                    Page 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">adm:x:3:4:adm:/var/adm:/sbin/nologin</span><br><span class="line">lp:x:4:7:lp:/var/spool/lpd:/sbin/黄蓉</span><br></pre></td></tr></table></figure>
+
+<h3 id="情景运用"><a href="#情景运用" class="headerlink" title="情景运用"></a>情景运用</h3><ul>
+<li>通过 grep 搜寻特殊字串，并配合数据流重导向来处理大量的文件搜寻问题。<ul>
+<li>目标：正确的使用正则表达式；</li>
+<li>前提：需要了解数据流重导向，以及通过子指令 $（command） 来处理文件名的搜寻； 我们简单的以搜寻星号 （*） 来处理下面的任务：<ul>
+<li>利用正则表达式找出系统中含有某些特殊关键字的文件，举例来说，找出在 &#x2F;etc 下面含有星号 （*） 的文件与内容：解决的方法必须要搭配万用字符，但是星号本身就是正则表达式的字符，因此需要这样进行：</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost testpw]<span class="comment"># grep &#x27;\*&#x27; /etc/* 2&amp;gt; /dev/null</span></span><br><span class="line">[1] 10332</span><br><span class="line">grep: /etc/abrt: Is a directory</span><br><span class="line">Binary file /etc/aliases.db matches</span><br><span class="line">grep: /etc/alsa: Is a directory</span><br><span class="line">grep: /etc/alternatives: Is a directory</span><br><span class="line">······</span><br></pre></td></tr></table></figure>
+
+<p>如果是想要连同完整的此目录数据，则</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ grep <span class="string">&#x27;\*&#x27;</span> $（find /etc -<span class="built_in">type</span> f ） 2&amp;gt; /dev/null</span><br><span class="line"><span class="comment"># 如果只想列出文件名而不要列出内容的话，使用下面的方式来处理即可喔！</span></span><br><span class="line">[dmtsai@study ~]$ grep -l <span class="string">&#x27;\*&#x27;</span> $（find /etc -<span class="built_in">type</span> f ） 2&amp;gt; /dev/null</span><br></pre></td></tr></table></figure>
+
+<p>如果文件数量太多，如同上述的案例，如果要找的是全系统（&#x2F;）呢？可以这样做:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ grep <span class="string">&#x27;\*&#x27;</span> $（find / -<span class="built_in">type</span> f 2&amp;gt; /dev/null ）</span><br><span class="line">-bash: /usr/bin/grep: Argument list too long</span><br></pre></td></tr></table></figure>
+
+<p>由于命令行的内容长度是有限制的，因此当搜寻的对象是整个系统时，上述的指令会发生错误。此时我们可以通过管线命令以及 xargs 来处理。举例来说，让 grep 每次仅能处理 10 个文件名，此时可以这样想:</p>
+<ol>
+<li>先用 find 去找出文件；</li>
+<li>用 xargs 将这些文件每次丢 10 个给 grep 来作为参数处理；</li>
+<li>grep 实际开始搜寻文件内容。 所以整个作法就会变成这样：</li>
+</ol>
+<p><code>[dmtsai@study ~]$ find / -type f 2&gt; /dev/null | xargs -n 10 grep &#39;\*&#39;</code></p>
+<p>ps.<strong>获取IP</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost testpw]<span class="comment"># ifconfig ens33 &amp;#124; grep &#x27;inet&#x27; &amp;#124;sed &#x27;s/^.*inet //g&#x27; &amp;#</span></span><br><span class="line">[1] 11088</span><br><span class="line">[root@localhost testpw]<span class="comment"># ens33: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span></span><br><span class="line">        inet 192.168.226.141  netmask 255.255.255.0  broadcast 192.168.226.255</span><br><span class="line">        inet6 fe80::d50b:4c8c:5213:8ae2  prefixlen 64  scopeid 0x20&lt;<span class="built_in">link</span>&gt;</span><br><span class="line">        ether 00:0c:29:a6:32:c5  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 2357  bytes 1990618 (1.8 MiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 1396  bytes 150431 (146.9 KiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"><span class="comment">#将命令指定为myip</span></span><br><span class="line">[root@localhost testpw]<span class="comment"># alias myip=&quot;ifconfig ens33 &amp;#124; grep &#x27;inet&#x27; &amp;#124;sed &#x27;s/^.*inet //g&#x27; &quot;</span></span><br><span class="line">[root@localhost testpw]<span class="comment"># myip</span></span><br><span class="line">[1] 11117</span><br><span class="line">[root@localhost testpw]<span class="comment"># ens33: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Shell-script"><a href="#Shell-script" class="headerlink" title="Shell  script"></a>Shell  script</h2>]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java排序算法Sort源码分析</title>
+    <url>/2022/12/05/arrayssort/</url>
+    <content><![CDATA[<h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><p>学习了数据结构与算法，作为最不能忽略的排序算法，排序可谓门类很多，主要常见的有以下几类：</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211281609568.png" alt="img" style="zoom: 50%;" />
+
+<p><strong>关于时间复杂度：</strong></p>
+<ol>
+<li>平方阶 (O(n2)) 排序 各类简单排序：直接插入、直接选择和冒泡排序。</li>
+<li>线性对数阶 (O(nlog2n)) 排序 快速排序、堆排序和归并排序；</li>
+<li>O(n1+§)) 排序，§ 是介于 0 和 1 之间的常数。 希尔排序</li>
+<li>线性阶 (O(n)) 排序 基数排序，此外还有桶、箱排序。</li>
+</ol>
+<p><strong>关于稳定性</strong>：</p>
+<ol>
+<li><p>稳定的排序算法：冒泡排序、插入排序、归并排序和基数排序。</p>
+</li>
+<li><p>不是稳定的排序算法：选择排序、快速排序、希尔排序、堆排序。</p>
+</li>
+</ol>
+<h2 id="Java的sort-包"><a href="#Java的sort-包" class="headerlink" title="Java的sort()包"></a>Java的sort()包</h2><p>本文主要讲的是JAVA内置排序<code>Arrays.sort()</code>实现的排序的类型。</p>
+<p>Java开发中，经常需要进行数组和链表的各种操作，所以数组和链表的排序是重中之重。</p>
+<p><code>Collections.sort()</code>方法用来对链表排序，而<code>Collections.sort()</code>的底层，其实使用的也是<code>Arrays.sort()</code>方法。JAVA内置排序的核心类，都在于Arrays工具类，接下来也重点剖析该类。</p>
+<h3 id="Arrays的工具类"><a href="#Arrays的工具类" class="headerlink" title="Arrays的工具类"></a>Arrays的工具类</h3><p>打开JDK9的包先看看Arrays中的sort()方法种类。</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211281720162.png" alt="image-20221128172038129" style="zoom:50%;" />
+
+
+
+<blockquote>
+<p>从排序的<strong>范围</strong>角度划分，分为了以下：</p>
+</blockquote>
+<ol>
+<li>针对数组的整体做排序的方法，如<ul>
+<li><code>sort(int[] a)</code></li>
+<li><code>sort(Object[] a)</code></li>
+<li><code>sort(T[] a, Comparator&lt;? super T&gt; c)</code></li>
+</ul>
+</li>
+<li>针对数组的局部做排序的方法，如<ul>
+<li><code>sort(int[] a, int fromIndex, int toIndex)</code></li>
+<li><code>sort(Object[] a , int fromIndex, int toIndex)</code></li>
+<li><code>sort(T[] a, int fromIndex, int toIndex,Comparator&lt;? super T&gt; c)</code></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>从排序的<strong>类型</strong>角度划分，分为了以下：</p>
+</blockquote>
+<ol>
+<li>对数组按照默认升序的方式进行排序的方法，如<ul>
+<li><code>sort(int[] a)</code></li>
+<li><code>sort(Object[] a)</code></li>
+<li><code>sort(int[] a, int fromIndex, int toIndex)</code></li>
+<li><code>sort(Object[] a , int fromIndex, int toIndex)</code></li>
+</ul>
+</li>
+<li>对数组按照自定义排序类型进行排序的方法，如<ul>
+<li><code>sort(T[] a, Comparator&lt;? super T&gt; c)</code></li>
+<li><code>sort(T[] a, int fromIndex, int toIndex,Comparator&lt;? super T&gt; c)</code></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>从<strong>操作对象</strong>的角度划分，分为了以下：</p>
+</blockquote>
+<ol>
+<li>对基本类型（byte，int，char等）数组操作的方法<ul>
+<li><code>sort(int[] a)</code></li>
+<li><code>sort(int[] a, int fromIndex, int toIndex)</code></li>
+</ul>
+</li>
+<li>对对象类型（object）数组操作的方法<ul>
+<li><code>sort(Object[] a)</code></li>
+<li><code>sort(Object[] a , int fromIndex, int toIndex)</code></li>
+<li><code>sort(T[] a, Comparator&lt;? super T&gt; c)</code></li>
+<li><code>sort(T[] a, int fromIndex, int toIndex,Comparator&lt;? super T&gt; c)</code></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>小总结：</p>
+</blockquote>
+<p>最重要的划分是从操作对象的角度进行划分，因为Java对不同类型的数组，实现了不同的实现方法。下面进行分析：</p>
+<h3 id="基本数据类型的排序"><a href="#基本数据类型的排序" class="headerlink" title="基本数据类型的排序"></a>基本数据类型的排序</h3><p>基本数据类型数组对应不同长度时使用的排序算法：</p>
+<ol>
+<li>当长度小于47时，采用<strong>插入排序</strong>算法。</li>
+<li>当长度介于47以及286中间时，先判断数组是否具备特定结构，如果具备，采用<strong>快速排序</strong>，不具备时采用一种优化形式：<strong>双轴快排</strong>算法。</li>
+<li>当长度大于286时，有特定结构的话，就是使用<strong>归并排序</strong>算法。</li>
+</ol>
+<p>下图为总结：</p>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211281746963.png" alt="up-205a0fbd3c9218e765bbbd1a17947a400d9" style="zoom: 67%;" />
+
+
+
+<h3 id="是否有具有特定结构"><a href="#是否有具有特定结构" class="headerlink" title="是否有具有特定结构"></a>是否有具有特定结构</h3><p>在判断是否使用归并排序前，要先判断数组是否具备特定结构，怎么进行判断呢，首先看源码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Check if the array is nearly sorted</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> left; k &lt; right; run[count] = k) &#123;        </span><br><span class="line">        <span class="keyword">if</span> (a[k] &lt; a[k + <span class="number">1</span>]) &#123; <span class="comment">// ascending</span></span><br><span class="line">            <span class="keyword">while</span> (++k &lt;= right &amp;&amp; a[k - <span class="number">1</span>] &lt;= a[k]);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a[k] &gt; a[k + <span class="number">1</span>]) &#123; <span class="comment">// descending</span></span><br><span class="line">            <span class="keyword">while</span> (++k &lt;= right &amp;&amp; a[k - <span class="number">1</span>] &gt;= a[k]);            </span><br><span class="line">            	<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">lo</span> <span class="operator">=</span> run[count] - <span class="number">1</span>, hi = k; ++lo &lt; --hi; ) &#123;                </span><br><span class="line">                    <span class="type">int</span> <span class="variable">t</span> <span class="operator">=</span> a[lo]; a[lo] = a[hi]; a[hi] = t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// equal</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> MAX_RUN_LENGTH; ++k &lt;= right &amp;&amp; a[k - <span class="number">1</span>] == a[k]; ) &#123;                </span><br><span class="line">                <span class="keyword">if</span> (--m == <span class="number">0</span>) &#123;</span><br><span class="line">                    sort(a, left, right, <span class="literal">true</span>);                    </span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * The array is not highly structured,</span></span><br><span class="line"><span class="comment">         * use Quicksort instead of merge sort.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">if</span> (++count == MAX_RUN_COUNT) &#123;</span><br><span class="line">            sort(a, left, right, <span class="literal">true</span>);            </span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>大概逻辑就是：每个降序序列为一个组。像<code>1,9,8,7,6,8</code>，9到6是降序，为一组，称为降序组，将其组成升序<code>1,6,7,8,9,8</code>,最后再从8往后找下一组降序组。</p>
+<p>每次遇到一个降序组，count都会进行++count的操作，当count的值大于MAX_RUN_COUNT(也即67)时，判定这个数组不具备特定结构，就是说数组的数据时升时降，还是比较适合采用<strong>快速排序</strong>。反之，小于67的时候，则证明该数组有特定结构，就继续采用<strong>归并排序</strong>。</p>
+<h3 id="对象类型数组的排序"><a href="#对象类型数组的排序" class="headerlink" title="对象类型数组的排序"></a>对象类型数组的排序</h3><p>对象类型对应不同长度时使用的排序算法：</p>
+<ol>
+<li>如果对象数组的长度小于32，采用不包含并操作的<strong>mini-TimSort</strong>算法。</li>
+<li>如果对象数组的长度大于31，采用完整的<strong>TimSort算法</strong>。</li>
+</ol>
+<p><strong>TimSort算法</strong></p>
+<p>这是一种结合了归并排序和插入排序的混合排序算法，设计初衷是为了在真实世界中的各种数据中可以由较好的性能。</p>
+<p>基本的运行过程：</p>
+<ol>
+<li>扫描数组，确定其中的单调上升段和严格单调下降段，将严格下降段反转。我们将这样的段称之为run。</li>
+<li>定义最小run长度，短于此的run通过插入排序合并为长度高于最小run长度；</li>
+<li>反复归并一些相邻run，过程中需要避免归并长度相差很大的run，直至整个排序完成；</li>
+<li>如何避免归并长度相差很大run呢， 依次将run压入栈中，若栈顶run X，run Y，run Z 的长度违反了X&gt;Y+Z 或 Y&gt;Z 则Y run与较小长度的run合并，并再次放入栈中。 依据这个法则，能够尽量使得大小相同的run合并，以提高性能。注意Timsort是稳定排序故只有相邻的run才能归并。</li>
+<li>Merge操作还可以辅之以galloping，具体细节可以自行研究。</li>
+</ol>
+<p>timsort是工业级算法，其混用插入排序与归并排序，二分搜索等算法，亮点是充分利用待排序数据可能部分有序的事实，并且依据待排序数据内容动态改变排序策略——选择性进行归并以及galloping。</p>
+<h3 id="不同的算法对于效率的影响"><a href="#不同的算法对于效率的影响" class="headerlink" title="不同的算法对于效率的影响"></a>不同的算法对于效率的影响</h3><p>对于较小长度的数组，采用时间复杂度为O(n^2)的插入排序无伤大雅，毕竟n很小，排序的性能也高于快速排序。但是在n较大的情况下，归并排序和快速排序都是性能较优秀的算法，平均时间复杂度都在O(nlogn)之间，区别在于归并排序较为稳定。</p>
+<p>对于基本数组类型，稳定性没有太大意义，所以可以使用不稳定的快排，但是对于对象类型，稳定性是比较重要的，对象相等的复杂性让我们没办法保证每个人都回重写正确的equal方法，故使用稳定算法的归并排序和插入排序结合的TimSort算法。</p>
+<p>对于归并排序来说，比较次数比快速排序少，移动次数比快排多，而对于对象来说，比较是相对耗时的操作，所以并不适合快排，对于基本数据类型来说，比较和移动都不怎么耗时，所以用归并和快速都可以。</p>
+<blockquote>
+<p>All in All</p>
+</blockquote>
+<p>基本数据类型数组使用快排+归并:</p>
+<ol>
+<li>基本数据类型无所谓稳定性，可以采用非稳定的快排</li>
+<li>对于基本数据类型来说，比较和移动都不怎么耗时，所以用归并或者快排都可以</li>
+</ol>
+<p>对象数据类型不使用快排:</p>
+<ol>
+<li>对象数据类型要求稳定性，需要采用稳定的归并+插入</li>
+<li>对于对象来说，比较操作相对耗时，所以用比较操作较少的归并排序</li>
+</ol>
+<h2 id="三种排序详解"><a href="#三种排序详解" class="headerlink" title="三种排序详解"></a>三种排序详解</h2><h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p><strong>1. 基本思想</strong></p>
+<blockquote>
+<p>将整个序列分为两部分：前面 <code>i</code> 个元素为有序序列，后面 <code>n - i</code> 个元素为无序序列。每一次排序，将无序序列的第 <code>1</code> 个元素，在有序序列中找到相应的位置并插入。</p>
+</blockquote>
+<p><strong>2. 算法步骤</strong></p>
+<ol>
+<li>第 <code>1</code> 趟排序：<ol>
+<li>第 <code>1</code> 个元素为有序序列，后面第 <code>2</code> ~ <code>n </code>个元素（总共 <code>n - 1</code> 个元素）为无序序列。</li>
+<li>从右至左遍历有序序列中的元素，如果遇到「有序序列的元素 &gt; 无序序列的第 <code>1</code> 个元素」的情况时，则将向有序序列的元素后移动一位。</li>
+<li>如果遇到「有序序列的元素 &lt;&#x3D; 无序序列的第 <code>1</code> 个元素」的情况或者「到达数组开始位置」时，则说明找到了插入位置。将「无序序列的第 <code>1</code> 个元素」插入该位置。</li>
+</ol>
+</li>
+<li>第 <code>2</code> 趟排序：<ol>
+<li>第 <code>1</code> ~ <code>2</code> 个元素为有序序列，后面第 <code>3</code> ~ <code>n</code> 个元素（总共 <code>n - 2</code> 个元素）为无序序列。</li>
+<li>从右至左遍历有序序列中的元素，如果遇到「有序序列的元素 &gt; 无序序列的第 <code>1</code> 个元素」的情况时，则将向有序序列的元素后移动一位。</li>
+<li>如果遇到「有序序列的元素 &lt;&#x3D; 无序序列的第 <code>1</code> 个元素」的情况或者「到达数组开始位置」时，则说明找到了插入位置。将「无序序列的第 <code>1</code> 个元素」插入该位置。</li>
+</ol>
+</li>
+<li>依次类推，对剩余 <code>n - 3</code> 个元素重复上述排序过程，直到所有元素都变为有序序列，则排序结束。</li>
+</ol>
+<p>简单来说，插入排序的算法步骤为：</p>
+<ol>
+<li>先将第 <code>1</code> 个元素作为一个有序序列，将第 <code>2</code> ~ <code>n</code> 个元素作为无序序列。</li>
+<li>从左到右遍历一遍无序序列，对于无序序列中的每一个元素：<ol>
+<li>遍历有序序列，找到适当的插入位置。</li>
+<li>将有序序列中插入位置右侧的元素依次右移一位。</li>
+<li>将该元素插入到适当位置。</li>
+</ol>
+</li>
+</ol>
+<p> <strong>3. 动画演示</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212051952620.gif" alt="img"></p>
+<p><strong>4. 算法分析</strong></p>
+<ul>
+<li>最佳时间复杂度：O(n)</li>
+<li>最差时间复杂度：O(n^2)</li>
+<li>平均时间复杂度：O(n^2)</li>
+<li>稳定性：稳定</li>
+</ul>
+<p><strong>5. 代码实现</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">toInsertSort</span><span class="params">(<span class="type">int</span> []arr)</span> &#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i&lt;arr.length;i++) &#123;	    <span class="comment">//i是当前数</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i-<span class="number">1</span> ; j&gt;=<span class="number">0</span>;j--) &#123;	   <span class="comment">//j是从i-1开始向前移动，并每次与arr[i]判断大小</span></span><br><span class="line">			<span class="keyword">if</span>(arr[i]&lt;arr[j]) &#123;		     <span class="comment">//如果arr[i]小于arr[j]说明arr[i]当前至少是要插入到arr[j]的前面</span></span><br><span class="line">				<span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> arr[j];</span><br><span class="line">				arr[j] = arr[i];</span><br><span class="line">				arr[i] = temp;</span><br><span class="line">				i = j-<span class="number">1</span>;		     <span class="comment">//互换后i也要向前移动一位</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="keyword">break</span>;              <span class="comment">//直到arr[i]比arr[j]大，因为前面从小到大已经排好序，所以没有必要继续向前判断了					</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p><strong>1. 基本思想</strong></p>
+<blockquote>
+<p>通过一趟排序将无序序列分为独立的两个序列，第一个序列的值均比第二个序列的值小。然后递归地排列两个子序列，以达到整个序列有序。</p>
+</blockquote>
+<p><strong>2. 算法步骤</strong></p>
+<ol>
+<li>从序列中找到一个基准数 <code>point</code>（这里以当前序列第 <code>1</code> 个元素作为基准数，即 <code>point = arr[low]</code>）。</li>
+<li>使用双指针，将序列中比基准数大的元素移动到基准数右侧，比他小的元素移动到基准数左侧：<ol>
+<li>使用指针 <code>i</code>，指向当前需要处理的元素位置，需要保证位置 <code>i</code> 之前的元素都小于基准数。初始时，<code>i</code> 指向当前序列的第 <code>2</code> 个元素位置。</li>
+<li>使用指针 <code>j</code> 遍历当前序列，如果遇到 <code>arr[j]</code> 小于基准数 <code>point</code>，则将 <code>arr[j]</code> 与当前需要处理的元素 <code>arr[i]</code> 交换，并将 <code>i</code> 向右移动 <code>1</code> 位，保证位置 <code>i</code> 之前的元素都小于基准数。</li>
+<li>最后遍历完，此时位置 <code>i</code> 之前的元素都小于基准数，第 <code>i - 1</code> 位置上的元素是最后一个小于基准数 <code>point</code> 的元素，此位置为基准数最终的正确位置。将基准数与该位置上的元素进行交换。此时，基准数左侧都是小于基准数的元素，右侧都是大于等于基准数的元素。</li>
+<li>然后将序列拆分为左右两个子序列。</li>
+</ol>
+</li>
+<li>对左右两个子序列分别重复第 <code>2</code> 步，直到各个子序列只有 <code>1</code> 个元素，则排序结束。</li>
+</ol>
+<p><strong>3. 动画演示</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212052003794.gif" alt="img"></p>
+<p><strong>4. 算法分析</strong></p>
+<ul>
+<li>最佳时间复杂度：O(n*log2(n))</li>
+<li>最差时间复杂度：O(n^2)</li>
+<li>平均时间复杂度：O(n*log2(n))</li>
+<li>稳定性：不稳定</li>
+</ul>
+<p><strong>5. 代码实现</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">sortPointer</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> low, <span class="type">int</span> high)</span> &#123;</span><br><span class="line">        <span class="comment">//定义基准数</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">point</span> <span class="operator">=</span> nums[high];</span><br><span class="line">        <span class="comment">//定义第二指针元素</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">pointer</span> <span class="operator">=</span> low;</span><br><span class="line">        <span class="comment">//将指针前后开并记录第二指针的位置</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> low; i &lt; high; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (center &gt;= nums[i]) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> nums[i];</span><br><span class="line">                nums[i] = nums[pointer];</span><br><span class="line">                nums[pointer] = temp;</span><br><span class="line">                pointer++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//返回第二指针的位置</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> nums[pointer];</span><br><span class="line">        nums[pointer] = nums[high];</span><br><span class="line">        nums[high] = temp;</span><br><span class="line">        <span class="keyword">return</span> pointer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">quickSort</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> low, <span class="type">int</span> high)</span> &#123;</span><br><span class="line">        <span class="comment">//运用递归的方式进行重复操作</span></span><br><span class="line">        <span class="keyword">if</span> (low &lt; high) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">position</span> <span class="operator">=</span> sortPointer(nums, low, high);</span><br><span class="line">            quickSort(nums, low, position - <span class="number">1</span>);</span><br><span class="line">            quickSort(nums, position + <span class="number">1</span>, high);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p><strong>1. 基本思想</strong></p>
+<blockquote>
+<p>采用经典的分治策略，先递归地将当前序列平均分成两半。然后将有序序列两两合并，最终合并成一个有序序列。</p>
+</blockquote>
+<p><strong>2. 算法步骤</strong></p>
+<ol>
+<li>分割过程：将当前序列平均分成两半，直到子序列长度为 1。<ol>
+<li>在一个数组长度为n的数组中找到序列中心位置 <code>mid</code>，从中心位置将序列分成左右两个子序列。</li>
+<li>对左右两个子序列分别进行递归分割。</li>
+<li>最终将数组分割为 n 个长度均为 1 的有序子序列。</li>
+</ol>
+</li>
+<li>归并过程：从长度为 1 的有序子序列开始，依次进行两两归并，直到合并成一个长度为 n 的有序序列。<ol>
+<li>使用数组变量 <code>arr </code>存放归并后的有序数组。</li>
+<li>使用两个指针分别指向两个有序子序列 的开始位置。</li>
+<li>比较两个指针指向的元素，将两个有序子序列中较小元素依次存入到结果数组 <code>arr</code> 中，并将指针移动到下一位置。</li>
+<li>重复步骤 3，直到某一指针到达子序列末尾。</li>
+<li>返回归并后的有序数组 <code>arr</code>。</li>
+</ol>
+</li>
+</ol>
+<p><strong>3. 动画演示</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212052023716.gif" alt="img"></p>
+<ol>
+<li>初始序列为 <code>[6, 2, 1, 3, 7, 5, 4, 8]</code>。</li>
+<li>将序列分解为 <code>[6, 2, 1, 3]</code>，<code>[7, 5, 4, 8]</code>。</li>
+<li>将序列分解为 <code>[6, 2]</code>，<code>[1, 3]</code>，<code>[7, 5]</code>，<code>[4, 8]</code>。</li>
+<li>将序列分为为 <code>[6]</code>，<code>[2]</code>，<code>[1]</code>，<code>[3]</code>，<code>[7]</code>，<code>[5]</code>，<code>[4]</code>，<code>[8]</code>。</li>
+<li>将序列看做是 <code>8</code> 个长度为 <code>1</code> 的子序列，即 <code>[6]</code>，<code>[2]</code>，<code>[1]</code>，<code>[3]</code>，<code>[7]</code>，<code>[5]</code>，<code>[4]</code>，<code>[8]</code>。</li>
+<li>第 <code>1</code> 趟排序：将子序列中的有序子序列两两归并，归并后的子序列为：<code>[2, 6]</code>，<code>[1, 3]</code>，<code>[5, 7]</code>，<code>[4, 8]</code>。</li>
+<li>第 <code>2</code> 趟排序：将子序列中的有序子序列两两归并，归并后的子序列为：<code>[1, 2, 3, 6]</code>，<code>[4, 5, 7, 8]</code>。</li>
+<li>第 <code>3</code> 趟排序：将子序列中的有序子序列两两归并，归并后的子序列为：<code>[1, 2, 3, 4, 5, 6, 7, 8]</code>。得到长度为 <code>n</code> 的有序序列，排序结束。</li>
+</ol>
+<p><strong>4. 算法分析</strong></p>
+<ul>
+<li><p>时间复杂度：O(n×log(2)⁡n)</p>
+<ul>
+<li>归并排序算法的时间复杂度等于归并趟数与每一趟归并的时间复杂度乘积。递归分解的次数为O（log(2)⁡n)，而子算法 <code>merge(int[] array,int start,int mid, int end)</code>的时间复杂度是 O(n)，因此，归并排序算法总的时间复杂度为 O(n×log2⁡n)</li>
+</ul>
+</li>
+<li><p>空间复杂度：O(n)</p>
+</li>
+<li><p>稳定性：稳定</p>
+<ul>
+<li>因为在两个有序子序列的归并过程中，如果两个有序序列中出现相同元素，归并排序能够使前一个序列中那个相同元素先被复制，从而确保这两个元素的相对次序不发生改变。</li>
+</ul>
+</li>
+</ul>
+<p><strong>5. 代码实现</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">        sortArray(nums,<span class="number">0</span>,nums.length-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">merge</span><span class="params">(<span class="type">int</span>[] array,<span class="type">int</span> start,<span class="type">int</span> mid, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">        <span class="comment">//创建一个临时数组储存排序后的数组</span></span><br><span class="line">        <span class="type">int</span>[] temp = <span class="keyword">new</span> <span class="title class_">int</span>[array.length];</span><br><span class="line">        <span class="comment">//用于遍历临时数组的指针</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//指向数组开头的指针</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start;</span><br><span class="line">        <span class="comment">//指向另一半数组的指针</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt;= mid &amp;&amp; j &lt;= end) &#123;</span><br><span class="line">            <span class="comment">//较小的元素存在数组的前面，较大的放在后面对应的位置</span></span><br><span class="line">            <span class="keyword">if</span>(array[i] &lt;= array[j]) &#123;</span><br><span class="line">                temp[k++] = array[i++];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                temp[k++] = array[j++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//将不整除时多余的元素放置于数组后面</span></span><br><span class="line">        <span class="keyword">while</span>(i &lt;= mid) &#123;</span><br><span class="line">            temp[k++] = array[i++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(j &lt;= end) &#123;</span><br><span class="line">            temp[k++] = array[j++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//临时数组赋值回原数组中</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> <span class="number">0</span>; l &lt; k; l++) &#123;</span><br><span class="line">            array[l + start] = temp[l];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sortArray</span><span class="params">(<span class="type">int</span>[] array,<span class="type">int</span> start,<span class="type">int</span> end)</span> &#123;</span><br><span class="line">        <span class="comment">//运用递归的方式进行归并排序</span></span><br><span class="line">        <span class="keyword">if</span>(start &gt;= end) <span class="keyword">return</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> (start + end) / <span class="number">2</span>;</span><br><span class="line">        sortArray(array,start,mid);</span><br><span class="line">        sortArray(array,mid + <span class="number">1</span>,end);</span><br><span class="line">        merge(array,start,mid,end);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://sort.hust.cc/">完整的排序算法分类</a></p>
+<p><a href="https://www.imooc.com/article/257268">Collection.sort()源码分析</a></p>
+<p><a href="https://cherish-ls.github.io/2020/10/14/JAVA%E5%86%85%E7%BD%AE%E6%8E%92%E5%BA%8FArrays-sort%E5%AE%9E%E7%8E%B0%E7%AE%80%E8%BF%B0/">JAVA内置排序Arrays.sort实现简述</a></p>
+<p><a href="https://algo.itcharge.cn/01.Array/02.Array-Sort">数组排序分析</a></p>
+<p><a href="https://www.yuque.com/dreamin-c68j9/hwyqcg/gydluo#">排序算法题目</a></p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>code</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Http基础</title>
     <url>/2022/09/12/Http/</url>
     <content><![CDATA[<h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><h4 id="Http及Https概念"><a href="#Http及Https概念" class="headerlink" title="Http及Https概念"></a><em>Http</em>及<em>Https</em>概念</h4><p>1.超文本传输协议（<em>HyperText Transfer Protocol</em> 即<em>http</em>）是一种用于分布式、协作式和超媒体信息系统的应用层协议，所有的www文件都必须遵守这个标准和协议。</p>
@@ -1619,6 +2314,132 @@
       </tags>
   </entry>
   <entry>
+    <title>折腾OpenWrt的半个月</title>
+    <url>/2022/11/02/beatOpenWrt/</url>
+    <content><![CDATA[<p>考试完整理</p>
+]]></content>
+      <categories>
+        <category>toy</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>OpenWrt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在线code安装教程</title>
+    <url>/2022/09/12/codeinstall/</url>
+    <content><![CDATA[<p>##前置条件：</p>
+<ol>
+<li>云服务器</li>
+<li>ssh的连接工具 如<a href="https://www.putty.org/">putty</a>，<a href="https://termius.com/">Termius</a>，mac用户可以直接用终端连接.</li>
+</ol>
+<h2 id="安装教程"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程</h2><p>首先使用你的ssh工具连接服务器</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>输入命令下载codeserver</span><br><span class="line">wget https:<span class="regexp">//gi</span>thub.com<span class="regexp">/coder/</span>code-server<span class="regexp">/releases/</span>download<span class="regexp">/v4.6.1/</span>code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>解压</span><br><span class="line">tar -zxvf code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>进入codeserver目录</span><br><span class="line">cd code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64</span><br><span class="line"><span class="regexp">//</span>设置密码(密码在双引号内)</span><br><span class="line">export PASSWORD=<span class="number">123456</span></span><br><span class="line"><span class="regexp">//</span>启动codeserver</span><br><span class="line">./code-server --port <span class="number">8081</span> --host <span class="number">0.0</span>.<span class="number">0.0</span> --auth password</span><br></pre></td></tr></table></figure>
+
+<p>在浏览器上方输入<code>你的服务器IP:8081</code> 即可进入登录界面</p>
+<p>这个时候输入之前设置的密码就可以进入codeserver了</p>
+<h2 id="配置Screen进程守护"><a href="#配置Screen进程守护" class="headerlink" title="配置Screen进程守护"></a>配置Screen进程守护</h2><p>之前的步骤有一个问题,就是当你退出ssh进程的时候,你会发现网站进不去了。</p>
+<p>因为当ssh进程关闭的时候，会自动清除当前进程。</p>
+<p>我们得下载Screen来给codeserver进行进程守护，防止进程自动退出。</p>
+<h2 id="安装Screen"><a href="#安装Screen" class="headerlink" title="安装Screen"></a>安装Screen</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>复制适合自己系统的命令安装</span><br><span class="line"><span class="regexp">//</span>Centos系统</span><br><span class="line">yum install screen</span><br><span class="line"><span class="regexp">//</span>Debian/Ubuntu系统</span><br><span class="line">apt-get install screen</span><br></pre></td></tr></table></figure>
+<h2 id="保护进程实现后台运行"><a href="#保护进程实现后台运行" class="headerlink" title="保护进程实现后台运行"></a>保护进程实现后台运行</h2><figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">//</span>以code_server为名字建立进程</span><br><span class="line">screen -S code_server</span><br><span class="line"><span class="string">//</span>再次输入以下命令</span><br><span class="line"><span class="keyword">cd</span> code-server-4.6.1-linux-amd64</span><br><span class="line">export PASSWORD=123456</span><br><span class="line"><span class="string">./code-server</span> <span class="params">--port</span> 8081 <span class="params">--host</span> 0.0.0.0 <span class="params">--auth</span> password</span><br></pre></td></tr></table></figure>
+
+
+
+<p>此时关闭ssh终端,也可以照常进入网页啦！</p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE-2022-09-06-215111.jpg"></p>
+<p>微软官方<a href="https://vscode.dev/">请输入链接描述</a></p>
+]]></content>
+      <categories>
+        <category>toy</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>toy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux toy合集</title>
+    <url>/2022/09/15/fucktoy/</url>
+    <content><![CDATA[<h1 id="Linux命令神器-The-Fuck"><a href="#Linux命令神器-The-Fuck" class="headerlink" title="Linux命令神器 The Fuck"></a>Linux命令神器 <code>The Fuck</code></h1><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/example.gif" alt="example"></p>
+<p><strong><code>The Fuck</code>是一款能够自动修复你的错误命令行的终端应用。</strong></p>
+<p>相信大家每个人都有敲错过命令的时候,把<code>python</code><br>输入成 <code>puthon</code><br>.手速过快把<code>ls -alh</code><br>输入成 <code>ls a-lh</code><br>等等等,这时候是不是想拍一下键盘说一声<code>fuck</code></p>
+<h2 id="术前要求"><a href="#术前要求" class="headerlink" title="术前要求"></a>术前要求</h2><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Python</span> (<span class="number">2</span>.<span class="number">7</span>+ or <span class="number">3</span>.<span class="number">3</span>+)</span><br><span class="line"><span class="attribute">pip</span></span><br><span class="line"><span class="attribute">Python</span>-dev</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><p><strong>Mac 下使用 <a href="https://brew.sh/">Homebrew</a> 安装：</strong></p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>thefuck</span><br></pre></td></tr></table></figure>
+
+<p><strong>Ubuntu 下安装：</strong></p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">sudo apt <span class="keyword">update</span></span><br><span class="line">sudo apt install <span class="keyword">python3</span>-dev <span class="keyword">python3</span>-pip</span><br><span class="line">sudo pip3 install thefuck</span><br></pre></td></tr></table></figure>
+
+<p><strong>其他操作系统你可以使用 Python 的 pip 安装：</strong></p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">pip <span class="keyword">install</span> thefuck</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><strong>最后，不要忘记为 The Fuck 设置 alias</strong></p>
+<p>暂时命令</p>
+<figure class="highlight mel"><table><tr><td class="code"><pre><span class="line"><span class="keyword">eval</span> $(thefuck --<span class="keyword">alias</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在文件中永久配置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#编辑bashrc配置文件</span></span><br><span class="line">vim ~/.bashrc</span><br><span class="line"><span class="comment">#在文件尾加入一行给thefuck取别名fuck</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(thefuck --alias fuck)</span>&quot;</span></span><br><span class="line"><span class="comment">#使生效</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>最后就可以痛快的使用啦！附上<a href="https://github.com/nvbn/thefuck"><code>TheFuck</code>官方链接</a></p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><blockquote>
+<p>其实<code>TheFuck</code>的原理就是规则匹配（正则表达式），如果找到匹配规则的命令，则创建一个命令给用户选择或直接运行。</p>
+</blockquote>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line">cat_dir - 当你尝试cat目录的时候，用<span class="keyword">ls</span>替换cat;</span><br><span class="line"><span class="keyword">cd</span>_correction – 拼写检查和纠正失败的<span class="keyword">cd</span>命令；</span><br><span class="line"><span class="keyword">cd</span>_mkdir – 在进入目录之前创建目录；</span><br><span class="line"><span class="keyword">cd</span>_parent – 更改 <span class="keyword">cd</span>.. 为<span class="keyword">cd</span> <span class="string">..</span>；</span><br><span class="line">dry – 修复类似的重复问题：git git push；</span><br><span class="line">fix_alt_space – 用空格字符代替Alt + Space；</span><br><span class="line"><span class="comment"># 还有很多可以参考https://github.com/nvbn/thefuck#how-it-works</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ls的翻篇小火车sl"><a href="#ls的翻篇小火车sl" class="headerlink" title="ls的翻篇小火车sl"></a>ls的翻篇小火车<code>sl</code></h2><p><strong>敲下以下命令</strong></p>
+<p><strong>Ubantu</strong></p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">sudo</span> apt-<span class="meta">get</span> install <span class="built_in">sl</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>CentOs</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install sl </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205546460.png" alt="image-20221005205546460"></p>
+<p>嘟嘟嘟嘟~~就会看到一个小火车，从你屏幕缓缓驰过….</p>
+<p>还可以配合fuck使用就是</p>
+<figure class="highlight pf"><table><tr><td class="code"><pre><span class="line">root@iZ2ze2p9tolfgje8qghiy0Z: sudo aptget install sl</span><br><span class="line">sudo: aptget: command not found</span><br><span class="line">root@iZ2ze2p9tolfgje8qghiy0Z:~<span class="comment"># fuck</span></span><br><span class="line">sudo apt-get install sl [enter/↑/↓/ctrl+c]</span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree       </span><br><span class="line">Reading <span class="keyword">state</span> information... Done</span><br></pre></td></tr></table></figure>
+
+<h2 id="反向装逼-tac"><a href="#反向装逼-tac" class="headerlink" title="反向装逼 tac"></a>反向装逼 <code>tac</code></h2><p> <strong>Ubantu</strong></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install tac</span><br></pre></td></tr></table></figure>
+
+<p><strong>CentOs</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install tac</span><br></pre></td></tr></table></figure>
+
+<p><em>用cat看代码时</em></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205556042.png" alt="image-20221005205556042"></p>
+<p><em>tac呢</em></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205604369.png" alt="image-20221005205604369"></p>
+<h2 id="自己是黑客-jpg"><a href="#自己是黑客-jpg" class="headerlink" title="自己是黑客.jpg"></a>自己是黑客.jpg</h2><p> <strong>Ubantu</strong></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install cmatrix</span><br></pre></td></tr></table></figure>
+
+<p><strong>CentOs</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install cmatrix</span><br></pre></td></tr></table></figure>
+
+<p>安装好后只要在命令行输入</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">cmatrix</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205611298.png" alt="image-20221005205611298"></p>
+<p>Wow~</p>
+<p>只要按Ctrl+C就可以退出，适合当息屏显示</p>
+<h2 id="谨慎使用fork"><a href="#谨慎使用fork" class="headerlink" title="谨慎使用fork"></a>谨慎使用<code>fork</code></h2><p>根据你的shell，选择如下2个命令中的1个，一条命令弄死Linux：</p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="meta">:() &#123; :|:&amp;</span> &#125;;:</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">.() &#123; .<span class="string">|.&amp; &#125;;.</span></span><br></pre></td></tr></table></figure>
+
+<p>接着就可以重启啦</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>toy</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mysql基础</title>
     <url>/2022/09/09/MySQL/</url>
     <content><![CDATA[<p>1.数据库：为了增删改查数据。（文件保存数据很蠢很蠢）<br>2.C R U D：增删改查的专业术语。<br>3.层次、网状、关系型模型数据库</p>
@@ -1925,745 +2746,61 @@
       </tags>
   </entry>
   <entry>
-    <title>Java排序算法Sort源码分析</title>
-    <url>/2022/12/05/arrayssort/</url>
-    <content><![CDATA[<h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><p>学习了数据结构与算法，作为最不能忽略的排序算法，排序可谓门类很多，主要常见的有以下几类：</p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211281609568.png" alt="img" style="zoom: 50%;" />
-
-<p><strong>关于时间复杂度：</strong></p>
-<ol>
-<li>平方阶 (O(n2)) 排序 各类简单排序：直接插入、直接选择和冒泡排序。</li>
-<li>线性对数阶 (O(nlog2n)) 排序 快速排序、堆排序和归并排序；</li>
-<li>O(n1+§)) 排序，§ 是介于 0 和 1 之间的常数。 希尔排序</li>
-<li>线性阶 (O(n)) 排序 基数排序，此外还有桶、箱排序。</li>
-</ol>
-<p><strong>关于稳定性</strong>：</p>
-<ol>
-<li><p>稳定的排序算法：冒泡排序、插入排序、归并排序和基数排序。</p>
+    <title>基于腾讯云的Typora图床</title>
+    <url>/2022/09/10/maBed/</url>
+    <content><![CDATA[<h2 id="术前准备"><a href="#术前准备" class="headerlink" title="术前准备"></a>术前准备</h2><ul>
+<li><p>安装好 <em>Typora</em> ： <a href="https://pan.xunlei.com/s/VNB_VLRHiLk6wUoyXr4mCWM6A1">提取码：h9bb</a>    <em>PicGo</em>  ：<a href="https://pan.xunlei.com/s/VNB_WALBOdxS0Hkp49VZlZT_A1">提取码：k77e</a></p>
 </li>
-<li><p>不是稳定的排序算法：选择排序、快速排序、希尔排序、堆排序。</p>
+<li><p>环境配置 <em>nodejs</em>：<a href="https://nodejs.org/en/">https://nodejs.org/en/</a></p>
 </li>
-</ol>
-<h2 id="Java的sort-包"><a href="#Java的sort-包" class="headerlink" title="Java的sort()包"></a>Java的sort()包</h2><p>本文主要讲的是JAVA内置排序<code>Arrays.sort()</code>实现的排序的类型。</p>
-<p>Java开发中，经常需要进行数组和链表的各种操作，所以数组和链表的排序是重中之重。</p>
-<p><code>Collections.sort()</code>方法用来对链表排序，而<code>Collections.sort()</code>的底层，其实使用的也是<code>Arrays.sort()</code>方法。JAVA内置排序的核心类，都在于Arrays工具类，接下来也重点剖析该类。</p>
-<h3 id="Arrays的工具类"><a href="#Arrays的工具类" class="headerlink" title="Arrays的工具类"></a>Arrays的工具类</h3><p>打开JDK9的包先看看Arrays中的sort()方法种类。</p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211281720162.png" alt="image-20221128172038129" style="zoom:50%;" />
-
-
-
-<blockquote>
-<p>从排序的<strong>范围</strong>角度划分，分为了以下：</p>
-</blockquote>
-<ol>
-<li>针对数组的整体做排序的方法，如<ul>
-<li><code>sort(int[] a)</code></li>
-<li><code>sort(Object[] a)</code></li>
-<li><code>sort(T[] a, Comparator&lt;? super T&gt; c)</code></li>
+<li><p><em>Gitee</em> 账户：<a href="https://gitee.com/">https://gitee.com/</a></p>
+</li>
 </ul>
-</li>
-<li>针对数组的局部做排序的方法，如<ul>
-<li><code>sort(int[] a, int fromIndex, int toIndex)</code></li>
-<li><code>sort(Object[] a , int fromIndex, int toIndex)</code></li>
-<li><code>sort(T[] a, int fromIndex, int toIndex,Comparator&lt;? super T&gt; c)</code></li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p>从排序的<strong>类型</strong>角度划分，分为了以下：</p>
-</blockquote>
-<ol>
-<li>对数组按照默认升序的方式进行排序的方法，如<ul>
-<li><code>sort(int[] a)</code></li>
-<li><code>sort(Object[] a)</code></li>
-<li><code>sort(int[] a, int fromIndex, int toIndex)</code></li>
-<li><code>sort(Object[] a , int fromIndex, int toIndex)</code></li>
-</ul>
-</li>
-<li>对数组按照自定义排序类型进行排序的方法，如<ul>
-<li><code>sort(T[] a, Comparator&lt;? super T&gt; c)</code></li>
-<li><code>sort(T[] a, int fromIndex, int toIndex,Comparator&lt;? super T&gt; c)</code></li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p>从<strong>操作对象</strong>的角度划分，分为了以下：</p>
-</blockquote>
-<ol>
-<li>对基本类型（byte，int，char等）数组操作的方法<ul>
-<li><code>sort(int[] a)</code></li>
-<li><code>sort(int[] a, int fromIndex, int toIndex)</code></li>
-</ul>
-</li>
-<li>对对象类型（object）数组操作的方法<ul>
-<li><code>sort(Object[] a)</code></li>
-<li><code>sort(Object[] a , int fromIndex, int toIndex)</code></li>
-<li><code>sort(T[] a, Comparator&lt;? super T&gt; c)</code></li>
-<li><code>sort(T[] a, int fromIndex, int toIndex,Comparator&lt;? super T&gt; c)</code></li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p>小总结：</p>
-</blockquote>
-<p>最重要的划分是从操作对象的角度进行划分，因为Java对不同类型的数组，实现了不同的实现方法。下面进行分析：</p>
-<h3 id="基本数据类型的排序"><a href="#基本数据类型的排序" class="headerlink" title="基本数据类型的排序"></a>基本数据类型的排序</h3><p>基本数据类型数组对应不同长度时使用的排序算法：</p>
-<ol>
-<li>当长度小于47时，采用<strong>插入排序</strong>算法。</li>
-<li>当长度介于47以及286中间时，先判断数组是否具备特定结构，如果具备，采用<strong>快速排序</strong>，不具备时采用一种优化形式：<strong>双轴快排</strong>算法。</li>
-<li>当长度大于286时，有特定结构的话，就是使用<strong>归并排序</strong>算法。</li>
-</ol>
-<p>下图为总结：</p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211281746963.png" alt="up-205a0fbd3c9218e765bbbd1a17947a400d9" style="zoom: 67%;" />
+<h2 id="开搞"><a href="#开搞" class="headerlink" title="开搞"></a>开搞</h2><h3 id="01-配置完nodejs"><a href="#01-配置完nodejs" class="headerlink" title="01.配置完nodejs"></a>01.配置完<em>nodejs</em></h3><figure class="highlight plaintext"><figcaption><span>--version</span></figcaption><table><tr><td class="code"><pre><span class="line">C:\&gt;node --version</span><br><span class="line">v16.17.0</span><br><span class="line">C:\&gt;npm --verison</span><br><span class="line">8.15.0</span><br></pre></td></tr></table></figure>
 
-
-
-<h3 id="是否有具有特定结构"><a href="#是否有具有特定结构" class="headerlink" title="是否有具有特定结构"></a>是否有具有特定结构</h3><p>在判断是否使用归并排序前，要先判断数组是否具备特定结构，怎么进行判断呢，首先看源码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Check if the array is nearly sorted</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> left; k &lt; right; run[count] = k) &#123;        </span><br><span class="line">        <span class="keyword">if</span> (a[k] &lt; a[k + <span class="number">1</span>]) &#123; <span class="comment">// ascending</span></span><br><span class="line">            <span class="keyword">while</span> (++k &lt;= right &amp;&amp; a[k - <span class="number">1</span>] &lt;= a[k]);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a[k] &gt; a[k + <span class="number">1</span>]) &#123; <span class="comment">// descending</span></span><br><span class="line">            <span class="keyword">while</span> (++k &lt;= right &amp;&amp; a[k - <span class="number">1</span>] &gt;= a[k]);            </span><br><span class="line">            	<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">lo</span> <span class="operator">=</span> run[count] - <span class="number">1</span>, hi = k; ++lo &lt; --hi; ) &#123;                </span><br><span class="line">                    <span class="type">int</span> <span class="variable">t</span> <span class="operator">=</span> a[lo]; a[lo] = a[hi]; a[hi] = t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// equal</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> MAX_RUN_LENGTH; ++k &lt;= right &amp;&amp; a[k - <span class="number">1</span>] == a[k]; ) &#123;                </span><br><span class="line">                <span class="keyword">if</span> (--m == <span class="number">0</span>) &#123;</span><br><span class="line">                    sort(a, left, right, <span class="literal">true</span>);                    </span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * The array is not highly structured,</span></span><br><span class="line"><span class="comment">         * use Quicksort instead of merge sort.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">if</span> (++count == MAX_RUN_COUNT) &#123;</span><br><span class="line">            sort(a, left, right, <span class="literal">true</span>);            </span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>大概逻辑就是：每个降序序列为一个组。像<code>1,9,8,7,6,8</code>，9到6是降序，为一组，称为降序组，将其组成升序<code>1,6,7,8,9,8</code>,最后再从8往后找下一组降序组。</p>
-<p>每次遇到一个降序组，count都会进行++count的操作，当count的值大于MAX_RUN_COUNT(也即67)时，判定这个数组不具备特定结构，就是说数组的数据时升时降，还是比较适合采用<strong>快速排序</strong>。反之，小于67的时候，则证明该数组有特定结构，就继续采用<strong>归并排序</strong>。</p>
-<h3 id="对象类型数组的排序"><a href="#对象类型数组的排序" class="headerlink" title="对象类型数组的排序"></a>对象类型数组的排序</h3><p>对象类型对应不同长度时使用的排序算法：</p>
-<ol>
-<li>如果对象数组的长度小于32，采用不包含并操作的<strong>mini-TimSort</strong>算法。</li>
-<li>如果对象数组的长度大于31，采用完整的<strong>TimSort算法</strong>。</li>
-</ol>
-<p><strong>TimSort算法</strong></p>
-<p>这是一种结合了归并排序和插入排序的混合排序算法，设计初衷是为了在真实世界中的各种数据中可以由较好的性能。</p>
-<p>基本的运行过程：</p>
-<ol>
-<li>扫描数组，确定其中的单调上升段和严格单调下降段，将严格下降段反转。我们将这样的段称之为run。</li>
-<li>定义最小run长度，短于此的run通过插入排序合并为长度高于最小run长度；</li>
-<li>反复归并一些相邻run，过程中需要避免归并长度相差很大的run，直至整个排序完成；</li>
-<li>如何避免归并长度相差很大run呢， 依次将run压入栈中，若栈顶run X，run Y，run Z 的长度违反了X&gt;Y+Z 或 Y&gt;Z 则Y run与较小长度的run合并，并再次放入栈中。 依据这个法则，能够尽量使得大小相同的run合并，以提高性能。注意Timsort是稳定排序故只有相邻的run才能归并。</li>
-<li>Merge操作还可以辅之以galloping，具体细节可以自行研究。</li>
-</ol>
-<p>timsort是工业级算法，其混用插入排序与归并排序，二分搜索等算法，亮点是充分利用待排序数据可能部分有序的事实，并且依据待排序数据内容动态改变排序策略——选择性进行归并以及galloping。</p>
-<h3 id="不同的算法对于效率的影响"><a href="#不同的算法对于效率的影响" class="headerlink" title="不同的算法对于效率的影响"></a>不同的算法对于效率的影响</h3><p>对于较小长度的数组，采用时间复杂度为O(n^2)的插入排序无伤大雅，毕竟n很小，排序的性能也高于快速排序。但是在n较大的情况下，归并排序和快速排序都是性能较优秀的算法，平均时间复杂度都在O(nlogn)之间，区别在于归并排序较为稳定。</p>
-<p>对于基本数组类型，稳定性没有太大意义，所以可以使用不稳定的快排，但是对于对象类型，稳定性是比较重要的，对象相等的复杂性让我们没办法保证每个人都回重写正确的equal方法，故使用稳定算法的归并排序和插入排序结合的TimSort算法。</p>
-<p>对于归并排序来说，比较次数比快速排序少，移动次数比快排多，而对于对象来说，比较是相对耗时的操作，所以并不适合快排，对于基本数据类型来说，比较和移动都不怎么耗时，所以用归并和快速都可以。</p>
-<blockquote>
-<p>All in All</p>
-</blockquote>
-<p>基本数据类型数组使用快排+归并:</p>
-<ol>
-<li>基本数据类型无所谓稳定性，可以采用非稳定的快排</li>
-<li>对于基本数据类型来说，比较和移动都不怎么耗时，所以用归并或者快排都可以</li>
-</ol>
-<p>对象数据类型不使用快排:</p>
-<ol>
-<li>对象数据类型要求稳定性，需要采用稳定的归并+插入</li>
-<li>对于对象来说，比较操作相对耗时，所以用比较操作较少的归并排序</li>
-</ol>
-<h2 id="三种排序详解"><a href="#三种排序详解" class="headerlink" title="三种排序详解"></a>三种排序详解</h2><h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p><strong>1. 基本思想</strong></p>
-<blockquote>
-<p>将整个序列分为两部分：前面 <code>i</code> 个元素为有序序列，后面 <code>n - i</code> 个元素为无序序列。每一次排序，将无序序列的第 <code>1</code> 个元素，在有序序列中找到相应的位置并插入。</p>
-</blockquote>
-<p><strong>2. 算法步骤</strong></p>
-<ol>
-<li>第 <code>1</code> 趟排序：<ol>
-<li>第 <code>1</code> 个元素为有序序列，后面第 <code>2</code> ~ <code>n </code>个元素（总共 <code>n - 1</code> 个元素）为无序序列。</li>
-<li>从右至左遍历有序序列中的元素，如果遇到「有序序列的元素 &gt; 无序序列的第 <code>1</code> 个元素」的情况时，则将向有序序列的元素后移动一位。</li>
-<li>如果遇到「有序序列的元素 &lt;&#x3D; 无序序列的第 <code>1</code> 个元素」的情况或者「到达数组开始位置」时，则说明找到了插入位置。将「无序序列的第 <code>1</code> 个元素」插入该位置。</li>
-</ol>
-</li>
-<li>第 <code>2</code> 趟排序：<ol>
-<li>第 <code>1</code> ~ <code>2</code> 个元素为有序序列，后面第 <code>3</code> ~ <code>n</code> 个元素（总共 <code>n - 2</code> 个元素）为无序序列。</li>
-<li>从右至左遍历有序序列中的元素，如果遇到「有序序列的元素 &gt; 无序序列的第 <code>1</code> 个元素」的情况时，则将向有序序列的元素后移动一位。</li>
-<li>如果遇到「有序序列的元素 &lt;&#x3D; 无序序列的第 <code>1</code> 个元素」的情况或者「到达数组开始位置」时，则说明找到了插入位置。将「无序序列的第 <code>1</code> 个元素」插入该位置。</li>
-</ol>
-</li>
-<li>依次类推，对剩余 <code>n - 3</code> 个元素重复上述排序过程，直到所有元素都变为有序序列，则排序结束。</li>
-</ol>
-<p>简单来说，插入排序的算法步骤为：</p>
-<ol>
-<li>先将第 <code>1</code> 个元素作为一个有序序列，将第 <code>2</code> ~ <code>n</code> 个元素作为无序序列。</li>
-<li>从左到右遍历一遍无序序列，对于无序序列中的每一个元素：<ol>
-<li>遍历有序序列，找到适当的插入位置。</li>
-<li>将有序序列中插入位置右侧的元素依次右移一位。</li>
-<li>将该元素插入到适当位置。</li>
-</ol>
-</li>
-</ol>
-<p> <strong>3. 动画演示</strong></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212051952620.gif" alt="img"></p>
-<p><strong>4. 算法分析</strong></p>
+<h3 id="02-配置腾讯云对象储存"><a href="#02-配置腾讯云对象储存" class="headerlink" title="02.配置腾讯云对象储存"></a>02.配置腾讯云对象储存</h3><p><strong>创建储存桶</strong></p>
 <ul>
-<li>最佳时间复杂度：O(n)</li>
-<li>最差时间复杂度：O(n^2)</li>
-<li>平均时间复杂度：O(n^2)</li>
-<li>稳定性：稳定</li>
+<li>点击 <code>储存桶列表</code>-&gt; <code>创建储存桶</code> -&gt; <em>进行以下配置</em></li>
 </ul>
-<p><strong>5. 代码实现</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">toInsertSort</span><span class="params">(<span class="type">int</span> []arr)</span> &#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i&lt;arr.length;i++) &#123;	    <span class="comment">//i是当前数</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i-<span class="number">1</span> ; j&gt;=<span class="number">0</span>;j--) &#123;	   <span class="comment">//j是从i-1开始向前移动，并每次与arr[i]判断大小</span></span><br><span class="line">			<span class="keyword">if</span>(arr[i]&lt;arr[j]) &#123;		     <span class="comment">//如果arr[i]小于arr[j]说明arr[i]当前至少是要插入到arr[j]的前面</span></span><br><span class="line">				<span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> arr[j];</span><br><span class="line">				arr[j] = arr[i];</span><br><span class="line">				arr[i] = temp;</span><br><span class="line">				i = j-<span class="number">1</span>;		     <span class="comment">//互换后i也要向前移动一位</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="keyword">break</span>;              <span class="comment">//直到arr[i]比arr[j]大，因为前面从小到大已经排好序，所以没有必要继续向前判断了					</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p><strong>1. 基本思想</strong></p>
-<blockquote>
-<p>通过一趟排序将无序序列分为独立的两个序列，第一个序列的值均比第二个序列的值小。然后递归地排列两个子序列，以达到整个序列有序。</p>
-</blockquote>
-<p><strong>2. 算法步骤</strong></p>
-<ol>
-<li>从序列中找到一个基准数 <code>point</code>（这里以当前序列第 <code>1</code> 个元素作为基准数，即 <code>point = arr[low]</code>）。</li>
-<li>使用双指针，将序列中比基准数大的元素移动到基准数右侧，比他小的元素移动到基准数左侧：<ol>
-<li>使用指针 <code>i</code>，指向当前需要处理的元素位置，需要保证位置 <code>i</code> 之前的元素都小于基准数。初始时，<code>i</code> 指向当前序列的第 <code>2</code> 个元素位置。</li>
-<li>使用指针 <code>j</code> 遍历当前序列，如果遇到 <code>arr[j]</code> 小于基准数 <code>point</code>，则将 <code>arr[j]</code> 与当前需要处理的元素 <code>arr[i]</code> 交换，并将 <code>i</code> 向右移动 <code>1</code> 位，保证位置 <code>i</code> 之前的元素都小于基准数。</li>
-<li>最后遍历完，此时位置 <code>i</code> 之前的元素都小于基准数，第 <code>i - 1</code> 位置上的元素是最后一个小于基准数 <code>point</code> 的元素，此位置为基准数最终的正确位置。将基准数与该位置上的元素进行交换。此时，基准数左侧都是小于基准数的元素，右侧都是大于等于基准数的元素。</li>
-<li>然后将序列拆分为左右两个子序列。</li>
-</ol>
-</li>
-<li>对左右两个子序列分别重复第 <code>2</code> 步，直到各个子序列只有 <code>1</code> 个元素，则排序结束。</li>
-</ol>
-<p><strong>3. 动画演示</strong></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212052003794.gif" alt="img"></p>
-<p><strong>4. 算法分析</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210751246.png" alt="image-20221005210751246"></p>
 <ul>
-<li>最佳时间复杂度：O(n*log2(n))</li>
-<li>最差时间复杂度：O(n^2)</li>
-<li>平均时间复杂度：O(n*log2(n))</li>
-<li>稳定性：不稳定</li>
+<li>访问权限选择<strong>公有读私有写</strong>，否则图片无法读取，其他的根据自己往下填写就可以。 地域建议离你所在的位置越近越好。</li>
 </ul>
-<p><strong>5. 代码实现</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">sortPointer</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> low, <span class="type">int</span> high)</span> &#123;</span><br><span class="line">        <span class="comment">//定义基准数</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">point</span> <span class="operator">=</span> nums[high];</span><br><span class="line">        <span class="comment">//定义第二指针元素</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">pointer</span> <span class="operator">=</span> low;</span><br><span class="line">        <span class="comment">//将指针前后开并记录第二指针的位置</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> low; i &lt; high; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (center &gt;= nums[i]) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> nums[i];</span><br><span class="line">                nums[i] = nums[pointer];</span><br><span class="line">                nums[pointer] = temp;</span><br><span class="line">                pointer++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//返回第二指针的位置</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> nums[pointer];</span><br><span class="line">        nums[pointer] = nums[high];</span><br><span class="line">        nums[high] = temp;</span><br><span class="line">        <span class="keyword">return</span> pointer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">quickSort</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> low, <span class="type">int</span> high)</span> &#123;</span><br><span class="line">        <span class="comment">//运用递归的方式进行重复操作</span></span><br><span class="line">        <span class="keyword">if</span> (low &lt; high) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">position</span> <span class="operator">=</span> sortPointer(nums, low, high);</span><br><span class="line">            quickSort(nums, low, position - <span class="number">1</span>);</span><br><span class="line">            quickSort(nums, position + <span class="number">1</span>, high);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p><strong>1. 基本思想</strong></p>
-<blockquote>
-<p>采用经典的分治策略，先递归地将当前序列平均分成两半。然后将有序序列两两合并，最终合并成一个有序序列。</p>
-</blockquote>
-<p><strong>2. 算法步骤</strong></p>
-<ol>
-<li>分割过程：将当前序列平均分成两半，直到子序列长度为 1。<ol>
-<li>在一个数组长度为n的数组中找到序列中心位置 <code>mid</code>，从中心位置将序列分成左右两个子序列。</li>
-<li>对左右两个子序列分别进行递归分割。</li>
-<li>最终将数组分割为 n 个长度均为 1 的有序子序列。</li>
-</ol>
-</li>
-<li>归并过程：从长度为 1 的有序子序列开始，依次进行两两归并，直到合并成一个长度为 n 的有序序列。<ol>
-<li>使用数组变量 <code>arr </code>存放归并后的有序数组。</li>
-<li>使用两个指针分别指向两个有序子序列 的开始位置。</li>
-<li>比较两个指针指向的元素，将两个有序子序列中较小元素依次存入到结果数组 <code>arr</code> 中，并将指针移动到下一位置。</li>
-<li>重复步骤 3，直到某一指针到达子序列末尾。</li>
-<li>返回归并后的有序数组 <code>arr</code>。</li>
-</ol>
-</li>
-</ol>
-<p><strong>3. 动画演示</strong></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202212052023716.gif" alt="img"></p>
-<ol>
-<li>初始序列为 <code>[6, 2, 1, 3, 7, 5, 4, 8]</code>。</li>
-<li>将序列分解为 <code>[6, 2, 1, 3]</code>，<code>[7, 5, 4, 8]</code>。</li>
-<li>将序列分解为 <code>[6, 2]</code>，<code>[1, 3]</code>，<code>[7, 5]</code>，<code>[4, 8]</code>。</li>
-<li>将序列分为为 <code>[6]</code>，<code>[2]</code>，<code>[1]</code>，<code>[3]</code>，<code>[7]</code>，<code>[5]</code>，<code>[4]</code>，<code>[8]</code>。</li>
-<li>将序列看做是 <code>8</code> 个长度为 <code>1</code> 的子序列，即 <code>[6]</code>，<code>[2]</code>，<code>[1]</code>，<code>[3]</code>，<code>[7]</code>，<code>[5]</code>，<code>[4]</code>，<code>[8]</code>。</li>
-<li>第 <code>1</code> 趟排序：将子序列中的有序子序列两两归并，归并后的子序列为：<code>[2, 6]</code>，<code>[1, 3]</code>，<code>[5, 7]</code>，<code>[4, 8]</code>。</li>
-<li>第 <code>2</code> 趟排序：将子序列中的有序子序列两两归并，归并后的子序列为：<code>[1, 2, 3, 6]</code>，<code>[4, 5, 7, 8]</code>。</li>
-<li>第 <code>3</code> 趟排序：将子序列中的有序子序列两两归并，归并后的子序列为：<code>[1, 2, 3, 4, 5, 6, 7, 8]</code>。得到长度为 <code>n</code> 的有序序列，排序结束。</li>
-</ol>
-<p><strong>4. 算法分析</strong></p>
+<h3 id="03-获取密钥"><a href="#03-获取密钥" class="headerlink" title="03.获取密钥"></a>03.获取密钥</h3><ul>
+<li>腾讯云头像–&gt;<a href="https://cloud.tencent.com/product/cam?from=10680">访问管理</a>–&gt; API密钥管理，创建密钥，就会生成 <strong>APPID、SecretId和SecretKey</strong></li>
+</ul>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210756892.png" alt="image-20221005210756892"></p>
+<h3 id="04-PicGo配置"><a href="#04-PicGo配置" class="headerlink" title="04.PicGo配置"></a>04.<em>PicGo</em>配置</h3><ul>
+<li>点击<code>图床设置</code>-&gt; <code>腾讯云COS</code>-&gt; 填写好刚刚的密钥和存储桶的名称，记得<strong>设置COS版本为V5</strong></li>
+</ul>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210801870.png" alt="image-20221005210801870"></p>
 <ul>
-<li><p>时间复杂度：O(n×log(2)⁡n)</p>
+<li>自定义域名和存储路径未进行CDN加速可默认为空</li>
+</ul>
+<p><strong>上传测试</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210812201.png" alt="image-20221005210812201"></p>
+<p><strong>查看文件是否有保存</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210807383.png" alt="image-20221005210807383"></p>
+<h3 id="05-Typora配置"><a href="#05-Typora配置" class="headerlink" title="05.Typora配置"></a>05.Typora配置</h3><ul>
+<li>点击 <code>文件</code>-&gt;  <code>偏好设置</code> -&gt; <code>图像</code></li>
+</ul>
+<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210821839.png" alt="image-20221005210821839"></p>
 <ul>
-<li>归并排序算法的时间复杂度等于归并趟数与每一趟归并的时间复杂度乘积。递归分解的次数为O（log(2)⁡n)，而子算法 <code>merge(int[] array,int start,int mid, int end)</code>的时间复杂度是 O(n)，因此，归并排序算法总的时间复杂度为 O(n×log2⁡n)</li>
+<li>如上图配置即可使用</li>
 </ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><p><a href="https://blog.csdn.net/haojie_duan/article/details/120400386">https://blog.csdn.net/haojie_duan/article/details/120400386</a></p>
 </li>
-<li><p>空间复杂度：O(n)</p>
-</li>
-<li><p>稳定性：稳定</p>
-<ul>
-<li>因为在两个有序子序列的归并过程中，如果两个有序序列中出现相同元素，归并排序能够使前一个序列中那个相同元素先被复制，从而确保这两个元素的相对次序不发生改变。</li>
-</ul>
+<li><p><a href="https://cloud.tencent.com/developer/article/1834573">https://cloud.tencent.com/developer/article/1834573</a></p>
 </li>
 </ul>
-<p><strong>5. 代码实现</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] sortArray(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">        sortArray(nums,<span class="number">0</span>,nums.length-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">merge</span><span class="params">(<span class="type">int</span>[] array,<span class="type">int</span> start,<span class="type">int</span> mid, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">        <span class="comment">//创建一个临时数组储存排序后的数组</span></span><br><span class="line">        <span class="type">int</span>[] temp = <span class="keyword">new</span> <span class="title class_">int</span>[array.length];</span><br><span class="line">        <span class="comment">//用于遍历临时数组的指针</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//指向数组开头的指针</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start;</span><br><span class="line">        <span class="comment">//指向另一半数组的指针</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt;= mid &amp;&amp; j &lt;= end) &#123;</span><br><span class="line">            <span class="comment">//较小的元素存在数组的前面，较大的放在后面对应的位置</span></span><br><span class="line">            <span class="keyword">if</span>(array[i] &lt;= array[j]) &#123;</span><br><span class="line">                temp[k++] = array[i++];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                temp[k++] = array[j++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//将不整除时多余的元素放置于数组后面</span></span><br><span class="line">        <span class="keyword">while</span>(i &lt;= mid) &#123;</span><br><span class="line">            temp[k++] = array[i++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(j &lt;= end) &#123;</span><br><span class="line">            temp[k++] = array[j++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//临时数组赋值回原数组中</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> <span class="number">0</span>; l &lt; k; l++) &#123;</span><br><span class="line">            array[l + start] = temp[l];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sortArray</span><span class="params">(<span class="type">int</span>[] array,<span class="type">int</span> start,<span class="type">int</span> end)</span> &#123;</span><br><span class="line">        <span class="comment">//运用递归的方式进行归并排序</span></span><br><span class="line">        <span class="keyword">if</span>(start &gt;= end) <span class="keyword">return</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> (start + end) / <span class="number">2</span>;</span><br><span class="line">        sortArray(array,start,mid);</span><br><span class="line">        sortArray(array,mid + <span class="number">1</span>,end);</span><br><span class="line">        merge(array,start,mid,end);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://sort.hust.cc/">https://sort.hust.cc/</a></p>
-<p><a href="https://sort.hust.cc/">完整的排序算法分类</a></p>
-<p><a href="https://www.imooc.com/article/257268">Collection.sort()源码分析</a></p>
-<p><a href="https://cherish-ls.github.io/2020/10/14/JAVA%E5%86%85%E7%BD%AE%E6%8E%92%E5%BA%8FArrays-sort%E5%AE%9E%E7%8E%B0%E7%AE%80%E8%BF%B0/">JAVA内置排序Arrays.sort实现简述</a></p>
-<p><a href="https://algo.itcharge.cn/01.Array/02.Array-Sort">数组排序分析</a></p>
-<p><a href="https://www.yuque.com/dreamin-c68j9/hwyqcg/gydluo#">排序算法题目</a></p>
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>code</category>
       </categories>
       <tags>
+        <tag>Typora</tag>
         <tag>code</tag>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux基础</title>
-    <url>/2022/10/02/Linux/</url>
-    <content><![CDATA[<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="计算机基础"><a href="#计算机基础" class="headerlink" title="计算机基础"></a>计算机基础</h2><p><strong>1.软件程序的运行</strong></p>
-<p>硬件如同人的身体，软件如同人的灵魂。没有了灵魂的躯体也不过就是行尸走肉</p>
-<p>**1.1 **机器程序与编译程序</p>
-<p>电脑只认识0与1而已，而且电脑最重要的运算与逻辑判断是在CPU内部， 而 CPU其实是具有微指令集的。因此，我们需要CPU帮忙工作时，就得要参考微指令集的内容， 然后撰写让CPU读的懂的指令码给CPU执行，这样就能够让CPU运行了。</p>
-<p>流程：</p>
-<ul>
-<li>需要了解机器语言：机器只认识0与1，因此你必须要学习直接写给机器看的语言。</li>
-<li>需要了解所有硬件的相关功能函数：因为你的程序必须要写给机器看， 当然你就得要参考机器本身的功能，然后针对该功能去撰写程序码。</li>
-<li>程序不具有可携性：每个CPU都有独特的微指令集，同样的，每个硬件都有其功能函数。</li>
-<li>程序具有专一性：因为这样的程序必须要针对硬件功能函数来撰写， 如果已经开发了一支浏览器程序，想要再开发文件管理程序时，还是得从头再参考硬件的功能函数来继续撰写。</li>
-</ul>
-<p>所以，需要开发让人类能看得懂得程序语言。然后创造一种“编译器”让人类的写的程序语言转换为机器能看懂的机器码。常见的编译器有C,C++,Java,Fortran等等。</p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20220922203728264.png" alt="image-20220922203728264"></p>
-<h2 id="关于学习Linux"><a href="#关于学习Linux" class="headerlink" title="关于学习Linux"></a>关于学习Linux</h2><p>两个重要的因素是造成我们学习的原动力： </p>
-<ul>
-<li><p>创建兴趣： Linux上面可以玩的东西真的太多了，你可以选择一个有趣的课题来深入的玩 一玩！不论是Shell还是图形接口等等， 只要能够玩出兴趣，那么再怎么苦你都会不觉得喔！</p>
-</li>
-<li><p>成就感： 成就感是怎么来的？说实在话，就是“被认同”来的！怎么被认同呢？写心得分享啊！当你写了心得分享，并且公告在 BBS 上面，自然有朋友会到你的网页去瞧一瞧， 当大家觉得你的网页内容很棒的时候， 哈哈！你肯定会加油继续的分享下去而无法自拔。</p>
-</li>
-</ul>
-<h2 id="主机规划与磁盘分区"><a href="#主机规划与磁盘分区" class="headerlink" title="主机规划与磁盘分区"></a>主机规划与磁盘分区</h2><p><strong>Linux各硬件设备在系统中为文件名</strong></p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001164035525.png" alt="image-20221001164035525"></p>
-<p><strong>磁盘分区</strong></p>
-<p><strong>MBR 主要分区、延伸分区与逻辑分区的特性：</strong></p>
-<ul>
-<li>主要分区与延伸分区最多可以有四笔（硬盘的限制） ；</li>
-<li>延伸分区最多只能有一个（操作系统的限制）；</li>
-<li>逻辑分区是由延伸分区持续切割出来的分区；</li>
-<li>能够被格式化后，作为数据存取的分区为主要分区与逻辑分区。延伸分区无法格式化； </li>
-<li>逻辑分区的数量依操作系统而不同，在Linux系统中SATA硬盘已经可以突破63个以上的分区限制；</li>
-</ul>
-<p><strong>MBR分区限制：</strong></p>
-<ul>
-<li>操作系统无法抓取到 2.2T 以上的磁盘容量</li>
-<li>MBR 仅有一个区块，若被破坏后，经常无法或很难救援</li>
-<li>MBR 内的存放开机管理程序的区块仅 446Bytes，无法容纳较多的程序码</li>
-</ul>
-<p><strong>GUID partition table, GPT 磁盘分区表：</strong></p>
-<ul>
-<li>与 MBR 仅使用第一个 512Bytes 区块来纪录不同， GPT 使用了 34 个 LBA 区块来纪录分区信息</li>
-<li>GPT 除了前面 34 个 LBA 之外，整个磁盘的最后 33 个 LBA 也拿来作为另一个备份</li>
-</ul>
-<p><strong>计算机开机流程：</strong></p>
-<ol>
-<li>BIOS：开机主动执行的固件，会认识第一个可开机的设备；</li>
-<li>MBR：第一个可开机设备的第一个扇区内的主要开机记录区块，内含开机管理程序；</li>
-<li>开机管理程序（boot loader）：一支可读取核心文件来执行的软件；</li>
-<li>核心文件：开始操作系统的功能</li>
-</ol>
-<p><strong>BIOS与UEFI BIOS区别</strong></p>
-<p><img src="https://dreamin-1312842512.cos.ap-guangzhou.myqcloud.com/image-20221001200526805.png" alt="image-20221001200526805"></p>
-<p><strong>主机硬盘的规划</strong></p>
-<p>频繁读写的目录</p>
-<ul>
-<li>boot</li>
-<li>&#x2F; </li>
-<li>&#x2F;home </li>
-<li>&#x2F;var </li>
-<li>Swap</li>
-</ul>
-<p>1):&#x2F;bin   [***]   (&#x2F;usr&#x2F;bin 、 &#x2F;usr&#x2F;local&#x2F;bin) • 是Binary的缩写, 这个目录存放着最经常使用的命令。</p>
-<p>2): &#x2F;sbin (&#x2F;usr&#x2F;sbin 、 &#x2F;usr&#x2F;local&#x2F;sbin) • s就是Super User的意思，这里存放的是系统管理员使用的系统管理程序。</p>
-<p>3):&#x2F;home [***] • 存放普通用户的主目录，在Linux中每个用户都有一个自己的目录，一般 该目录名是以用户的账号命名的。</p>
-<p>4):&#x2F;root [***] • 该目录为系统管理员，也称作超级权限者的用户主目录。</p>
-<p>5): &#x2F;lib • 系统开机所需要最基本的动态连接共享库，其作用类似于Windows里的DLL文件。几 乎所有的应用程序都需要用到这些共享库。</p>
-<p>6):&#x2F;lost+found • 这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。</p>
-<p>7):&#x2F;etc [***] • 所有的系统管理所需要的配置文件和子目录 my.conf </p>
-<p>8):&#x2F;usr  [***] • 这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似与 windows下的program files目录</p>
-<p>9):&#x2F;boot [***] • 存放的是启动Linux时使用的一些核心文件，包括一些连接文件以及镜像文件</p>
-<p>10):&#x2F;srv • service缩写，该目录存放一些服务启动之后需要提取的数据。</p>
-<p>11):&#x2F;sys • 这是linux2.6内核的一个很大的变化。该目录下安装了2.6内核中新出现的一个文件系统 sysfs</p>
-<p>12):tmp • 这个目录是用来存放一些临时文件的</p>
-<p>13):&#x2F;dev • 类似于windows的设备管理器，把所有的硬件用文件的形式存储。</p>
-<p>14):&#x2F;media [***] • linux系统会自动识别一些设备，例如U盘、光驱等等，当识别后，linux 会把识别的设备挂载到这个目录下。</p>
-<p>15):&#x2F;mnt [***] • 系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将外部的存储挂 载在&#x2F;mnt&#x2F;上，然后进入该目录就可以查看里的内容了。</p>
-<p>16):&#x2F;opt     • 这是给主机额外安装软件所摆放的目录。如安装ORACLE数据库就可放到该目录下，默认为空。</p>
-<p>17):&#x2F;usr&#x2F;local [***] • 这是另一个给主机额外安装软件所安装的目录。一般是通过编译源码方式安装的程序。</p>
-<p>18):&#x2F;var [***] • 这个目录中存放着在不断扩充着的东西，习惯将经常被修改的目录放在这个目录下。包括各种日志文件。</p>
-<h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><ul>
-<li><p>如果磁盘容量大于 2TB 以上时，系统会自动使用 GPT 分区方式来处理磁盘分区。</p>
-</li>
-<li><p>GPT 分区已经没有延伸与逻辑分区的概念，可以想像成所有的分区都是主分区，某些操作系统要使用 GPT 分区时，必须要搭配 UEFI 的新型 BIOS 格式才可安装使用。</p>
-</li>
-<li><p>Linux操作系统的文件使用目录树系统，与磁盘的对应需要有“挂载”的动作才行；</p>
-</li>
-<li><p>开机的流程由：BIOS–&gt;MBR–&gt;–&gt;boot loader–&gt;核心文件</p>
-</li>
-</ul>
-<h2 id="Vim程序编辑器"><a href="#Vim程序编辑器" class="headerlink" title="Vim程序编辑器"></a>Vim程序编辑器</h2><p><strong>三种模式</strong></p>
-<ul>
-<li>一般指令模式 （command mode）</li>
-<li>编辑模式 （insert mode）</li>
-<li>命令行命令模式 （command-line mode）</li>
-</ul>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210211616324.png" alt="image-20221021161616258" style="zoom:50%;" />
-
-<p><strong>常见命令</strong></p>
-<p><em>1.输入模式 (i):</em><br>按 i 进入insert输入模式<br>HJKL代替上下左右<br>H向左 L向右 J向下 K向上<br>Ctrl + B 向上翻页<br>Ctrl + F 想下翻页<br>Ctrl + E&#x2F;Y 滚动<br>Shift + G 末尾<br>双击gg 首字符</p>
-<p><em>2.命令模式(esc):</em><br>i 光标位置前面输入<br>a 光标位置后面输入<br>o enter到下一行输入<br>x 删除光标所在字符<br>dd 删除整个一行<br>u 撤销<br>dw 删除整个单词<br>b 跳跃单词首字母<br>e 跳跃单词尾字母<br>w 跳跃到下一个单词首字母</p>
-<p>shift 省略多个单词直接跳<br>Shift + 6 ^ 跳跃到本行的首字母<br>Shift + 4 $ 跳跃到本行的dd尾字母<br>按 0 跳跃到本行首个字符（ 包括空格）<br>{}移动整段大括号<br>yw 表示复制一个单词<br>y$ 表示从当前开始，往后复制到行末尾<br>p 粘贴剪贴板的内容<br><em>3.可视化模式</em><br>v + hjkl 进行字符选择<br>V + hjkl 进行行选择<br>v + G 全选<br>快捷选择<br>vaw 快速选择单词<br>vab 包含括号<br>vaB 包含大括号<br>shift + &lt;&gt; 前后缩进<br>v shift + · ~ 字母大小写切换<br>v + u&#x2F;U 全部转换为小写&#x2F;大写<br>行号+g<br>g 跳跃到指定的行号<br>快速查找<br>&#x2F;查找字符 按n 进入下一个<br>快速替换<br>按行:s&#x2F;查找单词&#x2F;替换单词&#x2F;g<br>全局:%s&#x2F;查找单词&#x2F;替换单词&#x2F;g<br>指定:首，尾s&#x2F;查找&#x2F;替换&#x2F;g<br>+c 询问</p>
-<h2 id="Bashshell"><a href="#Bashshell" class="headerlink" title="Bashshell"></a>Bashshell</h2><p><strong>硬件、核心与 Shell</strong></p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221653386.png" alt="image-20221022165342252" style="zoom:50%;" />
-
-<p>例子：用电脑播放音乐</p>
-<ol>
-<li>硬件：当然就是需要你的硬件有“声卡芯片”这个配备，否则怎么会有声音；</li>
-<li>核心管理：操作系统的核心可以支持这个芯片组，当然还需要提供芯片的驱动程序；</li>
-<li>应用程序：需要使用者输入发生声音的指令。</li>
-</ol>
-<p><strong>为何要学命令行的 shell？</strong></p>
-<ul>
-<li><p>命令行的 shell：大家都一样</p>
-</li>
-<li><p>远端管理：命令行就是比较快</p>
-</li>
-<li><p>Linux 的任督二脉： shell 是也</p>
-</li>
-</ul>
-<p><strong>系统的合法 shell 与 &#x2F;etc&#x2F;shells 功能</strong></p>
-<p>历史：由于早年的 Unix 年代，发展者众，所以由于 shell 依据发展者的不同就有许多的版本，例如常听到的 Bourne SHell （sh） 、在 Sun 里头默认的 C SHell、 商业上常用的 K SHell、, 还有 TCSH 等等，每一种 Shell 都各有其特点，Linux 使用的这一种版本就称为“ Bourne Again SHell （简称 bash） ”，这个 Shell 是 Bourne Shell 的增强版本，也是基准于 GNU 的架构下发展出来的。</p>
-<p><em>Linux可用的shells</em></p>
-<ul>
-<li>&#x2F;bin&#x2F;sh （已经被 &#x2F;bin&#x2F;bash 所取代）</li>
-<li>&#x2F;bin&#x2F;bash （就是 Linux 默认的 shell）</li>
-<li>&#x2F;bin&#x2F;tcsh （整合 C Shell ，提供更多的功能）</li>
-<li>&#x2F;bin&#x2F;csh （已经被 &#x2F;bin&#x2F;tcsh 所取代）</li>
-</ul>
-<blockquote>
-<p>系统某些服务在运行过程中，会去检查使用者能够使用的 shells ，而这些 shell 的查询就是借由 &#x2F;etc&#x2F;shells 这个文件</p>
-</blockquote>
-<p><strong>Bash Shell 的功能</strong></p>
-<ul>
-<li>命令编修能力 （history）：</li>
-</ul>
-<p>只要在命令行按“上下键”就可以找到前&#x2F;后一个输入的指令，而在很多distribution 里头，默认的指令记忆功能可以到达 1000 个！也就是说，曾经下达过的指令几乎都被记录下来了。<br>这么多的指令记录在哪里呢？在你的主文件夹内的 .bash_history 不过，需要留意的是，<br>~&#x2F;.bash_history 记录的是前一次登陆以前所执行过的指令， 而至于这一次登陆所执行的指令都被暂存在内存中，当你成功的登出系统后，该指令记忆才会记录到 .bash_history 当中</p>
-<ul>
-<li><p>命令与文件补全功能： （[tab] 按键的好处）</p>
-</li>
-<li><p>命令别名设置功能： （alias）</p>
-</li>
-</ul>
-<p>可以将<code>ls -al</code> 的命令通过<code>alias lm=&#39;ls -al&#39;</code>就可以将<code>lm</code>直接用来调命令了</p>
-<ul>
-<li><p>工作控制、前景背景控制： （job control, foreground, background）</p>
-</li>
-<li><p>程序化脚本： （shell scripts）</p>
-</li>
-<li><p>万用字符： （Wildcard）</p>
-</li>
-</ul>
-<p><strong>查询指令是否为 Bash shell 的内置命令： type</strong></p>
-<p>知道这个指令是来自于外部指令（指的是其他非 bash 所提供的指令） 或是内置在 bash 当中只要利用type 这个指令来观察即可。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> [-tpa] name</span><br><span class="line">选项与参数：</span><br><span class="line">：不加任何选项与参数时，<span class="built_in">type</span> 会显示出 name 是外部指令还是 bash 内置指令</span><br><span class="line">-t ：当加入 -t 参数时，<span class="built_in">type</span> 会将 name 以下面这些字眼显示出他的意义：</span><br><span class="line">file ：表示为外部指令；</span><br><span class="line"><span class="built_in">alias</span> ：表示该指令为命令别名所设置的名称；</span><br><span class="line"><span class="built_in">builtin</span> ：表示该指令为 bash 内置的指令功能；</span><br><span class="line">-p ：如果后面接的 name 为外部指令时，才会显示完整文件名；</span><br><span class="line">-a ：会由 PATH 变量定义的路径中，将所有含 name 的指令都列出来，包含 <span class="built_in">alias</span></span><br><span class="line">范例一：查询一下 <span class="built_in">ls</span> 这个指令是否为 bash 内置？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> <span class="built_in">ls</span></span><br><span class="line"><span class="built_in">ls</span> is aliased to `<span class="built_in">ls</span> --color=auto<span class="string">&#x27; &amp;lt;==未加任何参数，列出 ls 的最主要使用情况</span></span><br><span class="line"><span class="string">[dmtsai@study ~]$ type -t ls</span></span><br><span class="line"><span class="string">alias &amp;lt;==仅列出 ls 执行时的依据</span></span><br><span class="line"><span class="string">[dmtsai@study ~]$ type -a ls</span></span><br><span class="line"><span class="string">ls is aliased to `ls --color=auto&#x27;</span> &amp;lt;==最先使用 aliase</span><br><span class="line"><span class="built_in">ls</span> is /usr/bin/ls &amp;lt;==还有找到外部指令在 /bin/ls</span><br><span class="line">范例二：那么 <span class="built_in">cd</span> 呢？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">type</span> <span class="built_in">cd</span></span><br><span class="line"><span class="built_in">cd</span> is a shell <span class="built_in">builtin</span> &amp;lt;==看到了吗？ <span class="built_in">cd</span> 是 shell 内置指令</span><br></pre></td></tr></table></figure>
-
-<p><strong>指令的下达与快速编辑按钮</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">范例：如果指令串太长的话，如何使用两行来输出？</span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">cp</span> /var/spool/mail/root /etc/crontab \</span><br><span class="line">&amp;gt; /etc/fstab /root</span><br></pre></td></tr></table></figure>
-
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221744722.png" alt="image-20221022174441674" style="zoom: 80%;" />
-
-<h3 id="Shell-的变量功能"><a href="#Shell-的变量功能" class="headerlink" title="Shell 的变量功能"></a><strong>Shell 的变量功能</strong></h3><ul>
-<li>变量的可变性与方便性</li>
-</ul>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221748828.png" alt="image-20221022174833790" style="zoom: 67%;" />
-
-<p>由于系统已经帮我们规划好 MAIL 这个变量，所以使用者只要知道 mail 这个指 令如何使用即可， mail 会主动的取用 MAIL 这个变量，就能够如上图所示的取得自己的邮件信箱了</p>
-<ul>
-<li>影响 bash 环境操作的变量</li>
-</ul>
-<p>例如下达 ls 这个指令时，系统就是通过 PATH 这个变量里面的内容所记录的路径顺序来搜寻指令。如果在搜寻完 PATH 变量内的路径还找不到 ls 这个指令时， 就会在屏幕上显示“ command not found ”的错误讯息了。</p>
-<ul>
-<li>脚本程序设计 （shell script） 的好帮手</li>
-</ul>
-<p>例如你要写一个大 型的 script 时，有些数据因为可能由于使用者习惯的不同而有差异，比如说路径好了，由于该路径在 script 被使用在相当多的地方，如果下次换了一部主机，都要修改 script 里面的所有路径， 这个时候如果使用变量，而将该变量的定义写在最前面，后面相关的路径名称都以变量来取代， 那么你只要修改一行就等于修改整篇 script 了。</p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202210221753121.png" alt="image-20221022175328075" style="zoom:67%;" />
-
-<p><strong>变量的取用与设置：echo, 变量设置规则, unset</strong></p>
-<p>可以利用 echo 这个指令来取用变量， 但是，变量在被取用时， 前面必须要加上钱字号“ $ ”才行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ <span class="built_in">echo</span> <span class="variable">$variable</span></span><br><span class="line"></span><br><span class="line">[mua@localhost ~]$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line">/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/mua/.local/bin:/home/mua/bin</span><br><span class="line">[mua@localhost ~]$ <span class="built_in">echo</span> <span class="variable">$&#123;PATH&#125;</span> <span class="comment"># 比较规范的形式</span></span><br><span class="line">/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/mua/.local/bin:/home/mua/bin</span><br><span class="line"><span class="comment"># 设置变量名</span></span><br><span class="line">[mua@localhost 桌面]$ fuck=myname</span><br><span class="line">[mua@localhost 桌面]$ <span class="built_in">echo</span> <span class="variable">$fuck</span></span><br><span class="line">myname</span><br><span class="line">[mua@localhost 桌面]$ fuck=VBird</span><br><span class="line">[mua@localhost 桌面]$ <span class="built_in">echo</span> <span class="variable">$fuck</span></span><br><span class="line">VBird</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意事项</strong></p>
-<ul>
-<li>变量与变量内容以一个等号“&#x3D;”来链接，如下所示： “myname&#x3D;VBird”</li>
-<li>等号两边不能直接接空白字符，如下所示为错误： “myname &#x3D; VBird”或“myname&#x3D;VBird Tsai”</li>
-<li>变量名称只能是英文字母与数字，但是开头字符不能是数字，如下为错误：“2myname&#x3D;VBird”</li>
-<li>变量内容若有空白字符可使用双引号“””或单引号“’”将变量内容结合起来，但<ul>
-<li>双引号内的特殊字符如 $ 等，可以保有原本的特性，如下所示： “var&#x3D;”lang is$LANG””则“echo $var”可得“lang is zh_TW.UTF-8”</li>
-<li>单引号内的特殊字符则仅为一般字符 （纯文本），如下所示： “var&#x3D;’lang is $LANG’”则“echo $var”可得“lang is $LANG”</li>
-</ul>
-</li>
-<li>可用跳脱字符“ \ ”将特殊符号（如 [Enter], $, , 空白字符, ‘等）变成一般字符，如：“myname&#x3D;VBird\ Tsai”</li>
-<li>在一串指令的执行中，还需要借由其他额外的指令所提供的信息时，可以使用反单引号“ 指令 ”或 “$（指令）”。特别注意，那个 &#96; 是键盘上方的数字键 1 左边那个按键，而不是单引号！ 例如想要取得核心版本的设置： “version&#x3D;$（uname -r）”再“echo$version”可得“3.10.0-229.el7.x86_64”</li>
-<li>若该变量为扩增变量内容时，则可用 “$变量名称” 或 ${变量} 累加内容，如下所示：“PATH&#x3D;”$PATH”:&#x2F;home&#x2F;bin”或“PATH&#x3D;${PATH}:&#x2F;home&#x2F;bin”</li>
-<li>若该变量需要在其他子程序执行，则需要以 export 来使变量变成环境变量： “exportPATH”</li>
-<li>通常大写字符为系统默认变量，自行设置变量可以使用小写字符，方便判断 （纯粹依照使用者兴趣与嗜好） </li>
-<li>取消变量的方法为使用 unset ：“unset 变量名称”例如取消 myname 的设置： “unsetmyname”</li>
-</ul>
-<p><strong>测试</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 范例一：设置变量hr 内容为fuck</span></span><br><span class="line">[mua@localhost ~]$ 16hr=fuck</span><br><span class="line">bash: 16hr=fuck: 未找到命令...  <span class="comment">## 变量开头为数字</span></span><br><span class="line">[mua@localhost ~]$ 16hr = fuck</span><br><span class="line">bash: 16hr: 未找到命令...  <span class="comment">## 变量等于号两侧存在空格</span></span><br><span class="line"><span class="comment"># 范例二：当变量内容为fuck&#x27;s name</span></span><br><span class="line">[mua@localhost ~]$ hr=fuck<span class="string">&#x27;s name</span></span><br><span class="line"><span class="string">&gt; ^C ## 单引号与双引号必须要成对，当你按下 enter 后，提示继续输入变量内容</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ hr=&quot;fuck&#x27;</span>s name<span class="string">&quot; ## 成功创建</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ hr=&#x27;fuck&#x27;s name&#x27;</span></span><br><span class="line"><span class="string">&gt; ^C ## 因为前两个单引号已成对，后面就多了一个不成对的单引号，提示继续输入</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ hr=fuck\&#x27;s\ name ## 用跳脱字符成功创建</span></span><br><span class="line"><span class="string"># 范例三：要在 PATH 这个变量当中“累加”:/home/dmtsai/bin 这个目录</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ PATH=<span class="variable">$PATH</span>:/home/mua/bin</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ PATH=&quot;</span><span class="variable">$PATH</span><span class="string">&quot;:/home/mua/bin</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ PATH=<span class="variable">$&#123;PATH&#125;</span>:/home/mua/bin</span></span><br><span class="line"><span class="string"># 范例四：将 hr 的内容多出 &quot;</span><span class="built_in">yes</span><span class="string">&quot; </span></span><br><span class="line"><span class="string">[mua@localhost ~]$ echo <span class="variable">$hryes</span></span></span><br><span class="line"><span class="string">## 没有双引号，变量name 的内容就是 <span class="variable">$nameyes</span> 这个变量</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ echo &quot;</span><span class="variable">$hr</span><span class="string">&quot;yes</span></span><br><span class="line"><span class="string">yes ## 成功添加</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ echo <span class="variable">$&#123;hr&#125;</span>yes</span></span><br><span class="line"><span class="string">yes ## 成功添加，以此例子为标准</span></span><br><span class="line"><span class="string"># 范例五：让刚刚设置的 name=VBird 可以用在下个 shell 的程序</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ hr=fuck ## 赋值变量</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ bash ## 进入子进程</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ echo <span class="variable">$hr</span> </span></span><br><span class="line"><span class="string">## 调用失败</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ exit</span></span><br><span class="line"><span class="string">exit</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ export hr ## 设置系统环境变量</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ bash </span></span><br><span class="line"><span class="string">[mua@localhost ~]$ echo <span class="variable">$hr</span></span></span><br><span class="line"><span class="string">fuck ## 调用成功</span></span><br><span class="line"><span class="string">[mua@localhost ~]$ exit</span></span><br><span class="line"><span class="string">exit</span></span><br><span class="line"><span class="string"># 范例六：进入到目前核心的模块目录</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="数据流重导向"><a href="#数据流重导向" class="headerlink" title="数据流重导向"></a>数据流重导向</h3><blockquote>
-<p>数据流:分三种，标准输入流（由键盘输入产生），标准输出流（执行命令的输出日志），标准错误输出流(同理）</p>
-</blockquote>
-<p><strong>什么是数据流重导向</strong></p>
-<p>将本应由键盘输入或输出到屏幕上的数据流重定向到文件或设备上（保存到文件或设备中），称之为数据流重定向</p>
-<p><strong>数据流重定向的作用</strong></p>
-<ul>
-<li>屏幕输出信息需要保存</li>
-<li>后台执行程序，不想将日志打在桌面上</li>
-<li>区分输出标准输出与标准错误输出处理时</li>
-<li>丢弃已知错误信息，<code>2&gt; /dev/null</code></li>
-</ul>
-<p><strong>代号与表现方式</strong></p>
-<ol>
-<li>标准输入 （stdin） ：代码为 <code>0</code> ，使用 <code>&lt; </code>或 <code>&lt;&lt;</code> ；</li>
-<li>标准输出 （stdout）：代码为 <code>1</code> ，使用 <code>&gt;</code> 或 <code>&gt;&gt;</code> ；</li>
-<li>标准错误输出（stderr）：代码为 <code>2</code> ，使用 <code>2&gt;</code> 或 <code>2&gt;&gt;</code> ；</li>
-</ol>
-<p>区别</p>
-<ul>
-<li><code>&gt;</code> ：以【覆盖】的方式，将【正确的数据】输出到文件或设备上</li>
-<li><code>&gt;&gt;</code>：以【追加】的方式，将【正确的数据】输出到文件或设备上</li>
-<li><code>2&gt;</code>：以【覆盖】的方式，将【错误的数据】输出到文件或设备上</li>
-<li><code>2&gt;&gt;</code>：以【追加】的方式，将【错误的数据】输出到文件或设备上</li>
-</ul>
-<p><strong>黑洞 &#x2F;dev&#x2F;null</strong></p>
-<p>当需要将某些日志不重要的数据流重定向走，但又不想保存文件占用空间时，重定向数据流 <code>/dev/null</code> 设备上，相当于将数据丢入黑洞</p>
-<p>Eg:</p>
-<p>将标准输出丢入黑洞</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost mua]<span class="comment"># cat /etc/profile &gt; /dev/null</span></span><br></pre></td></tr></table></figure>
-
-<p>将标准错误输出丢入黑洞</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost mua]<span class="comment"># find / -name .bashrc 2&gt; /dev/null</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>将stdout与stderr输出到同一文件或设备</strong></p>
-<p>分别设置stdout与stderr到同一文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ find / -name .bashrc &gt; /tmp/stdtestlogs1 2&gt; /tmp/stdtestlogs1</span><br></pre></td></tr></table></figure>
-
-<p>输出两者带同一文件中，语法<code>command &gt;[file]&gt;&amp;1</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ find / -name .bashrc &amp; /tmp/stdtustlogs2 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-
-<p>&amp;语法<code>[command]&amp;&gt;[file] </code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ find / -name .bashrc &amp;&gt; /tmp/stdtestlogs3</span><br></pre></td></tr></table></figure>
-
-<p>将所有日志输入黑洞</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ find / -name .bashrc &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-
-<p>将错误日志输入黑洞</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ find / -name .bashrc 2&gt; /dev/null</span><br></pre></td></tr></table></figure>
-
-<p><strong>标准输入流重定向 &lt; 与 &lt;&lt;</strong></p>
-<p>将原本由键盘输入的数据，改由文件内容提供（<code>&lt;</code> 表示使用文件提供数据，<code>&lt;&lt;</code> 用来【设置输入结束的字符】）</p>
-<p>例如：</p>
-<p>将<code>~/.bashrc</code>输出重定向到<code>/tmp/stdintest</code>中</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ <span class="built_in">cat</span> &gt; /tmp/stdintest &lt; ~/.bashrc</span><br></pre></td></tr></table></figure>
-
-<p>设置【输入结束字符】，将一段文字输入到<code>/tmp/stdintest2</code>中</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[mua@localhost ~]$ <span class="built_in">cat</span> &gt; /tmp/stdintest &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">&gt; 这是一条测试</span></span><br><span class="line"><span class="string">&gt; 这是一条测</span></span><br><span class="line"><span class="string">&gt; 这是一条</span></span><br><span class="line"><span class="string">&gt; 这是一</span></span><br><span class="line"><span class="string">&gt; 这是</span></span><br><span class="line"><span class="string">&gt; 这</span></span><br><span class="line"><span class="string">&gt; EOF</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>命令执行的判断依据： ; , &amp;&amp;, ||</strong></p>
-<ul>
-<li><code>cmd</code> ; <code>cmd</code>(不考虑前者是否执行成功)</li>
-</ul>
-<p>eg.进行sync同步化再进行关机命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sync</span>; <span class="built_in">sync</span>; shutdown -h now</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>$?</code> （指令回传值） 与 <code>&amp;&amp;</code> 或 <code>||</code></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>执行下达情况</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>cmd1&amp;&amp;cmd2</td>
-<td>1. 若 cmd1 执行完毕且正确执行（$?&#x3D;0），则开始执行 cmd2。 2. 若 cmd1 执行完毕且为错误 （$?≠0），则 cmd2 不执行。</td>
-</tr>
-<tr>
-<td>cmd1||cmd2</td>
-<td>1. 若 cmd1 执行完毕且正确执行（$?&#x3D;0），则 cmd2 不执行。 2. 若 cmd1 执 行完毕且为错误 （$?≠0），则开始执行 cmd2。</td>
-</tr>
-</tbody></table>
-<p><em>练习</em></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 先查询有无此目录再创建xixi这个文件</span></span><br><span class="line">[mua@localhost ~]$ <span class="built_in">ls</span> /tmp/abc &amp;&amp; <span class="built_in">touch</span> /tmp/abc/xixi</span><br><span class="line"><span class="built_in">ls</span>: cannot access /tmp/abc: No such file or directory <span class="comment">#查询无</span></span><br><span class="line">[mua@localhost home]$ <span class="built_in">mkdir</span> /tmp/abc <span class="comment"># 创建文件夹</span></span><br><span class="line">[mua@localhost home]$ <span class="built_in">ls</span> /tmp/abc &amp;&amp; <span class="built_in">touch</span> /tmp/abc/xixi <span class="comment">#执行成功</span></span><br><span class="line"><span class="comment">#总结 如果查询不到，就不会执行下一个语句</span></span><br><span class="line"><span class="comment">##总是尝试执行语句</span></span><br><span class="line">[mua@localhost ~]$ <span class="built_in">ls</span> /tmp/abc &amp;<span class="comment">#124;&amp;#124; mkdir /tmp/abc &amp;&amp; /tmp/abc/hehe</span></span><br></pre></td></tr></table></figure>
-
-<p>上条执行判断流程图</p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211251704834.png" alt="image-20221125170424765" style="zoom: 67%;" />
-
-<p>参考<a href="https://www.cnblogs.com/chengmo/archive/2010/10/20/1855805.html">linux shell数据重定向</a></p>
-<h3 id="管线命令pipe"><a href="#管线命令pipe" class="headerlink" title="管线命令pipe"></a>管线命令pipe</h3><p>管道命令的操作符时“|”，它仅能处理经由前面一个指令传出的正确输出信息，也就是 standard output 的信息，对于 stdandard<br>error 信息没有直接处理能力。然后，传递给下一个命令，作为标准的输入 standard input.</p>
-<h2 id="Linux正则表达式"><a href="#Linux正则表达式" class="headerlink" title="Linux正则表达式"></a>Linux正则表达式</h2><p><strong>概念：</strong>正则表达式 （Regular Expression, RE, 或称为常规表达式）是通过一些特殊字符的排列，用以“搜寻&#x2F;取代&#x2F;删除”一列或多列文字字串， 简单的说，正则表达式就是用在字串的处理上面的 一项“表示式”。正则表达式并不是一个工具程序， 而是一个字串处理的标准依据，如果想要以正则表达式的方式处理字串，就得要使用支持正则表达式的工具程序才行， 这类的工具程序很多，例如 vi, sed, awk 等等</p>
-<ul>
-<li>例如</li>
-</ul>
-<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">mua@fuck:~$ <span class="keyword">grep</span> <span class="string">&#x27;ls&#x27;</span> <span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>*</span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>accounts-daemon.service:ProtectHome=<span class="keyword">false</span></span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>accounts-daemon.service:PrivateTmp=<span class="keyword">false</span></span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>accounts-daemon.service:PrivateUsers=<span class="keyword">false</span></span><br><span class="line"><span class="regexp">/lib/</span>systemd<span class="regexp">/system/</span>alsa-restore.service:# can be switched using a <span class="keyword">file</span> exist check - <span class="regexp">/etc/</span>alsa/state-daemon.conf .</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>正则表达式对于系统管理员的用途</li>
-</ul>
-<p>由于系统如果在繁忙的情况之下，每天产生的讯息信息会多到你无法想像的地步，运用正则表达式极度简化操作人员从千百行的数据里面找出一行有问题的讯息的效率。</p>
-<h3 id="基础正则表达式"><a href="#基础正则表达式" class="headerlink" title="基础正则表达式"></a>基础正则表达式</h3><p><em><strong>语系对正则表达式的影响</strong></em></p>
-<p>文件其实记录的仅有 0 与 1，我们看到的字符文字与数字都是通过编码表转换来的。由于不同语系的编码数据并不相同，所以就会造成数据撷取结果的差异了。所以使用正则表达式时，需要特别留意当时环境的语系为何， 否则可能会发现与别人不相同的撷取结果。</p>
-<ul>
-<li>“ LANG&#x3D;C ”语系数据“ 						<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211061012414.png" alt="image-20221106101250300" style="zoom: 67%;" /></li>
-</ul>
-<p><em><strong>grep 的一些进阶选项</strong></em></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mua@fuck:~$ grep [-A] [-B] [--color=auto] <span class="string">&#x27;搜寻字串&#x27;</span> filename</span><br><span class="line">选项与参数：</span><br><span class="line">-A ：后面可加数字，为 after 的意思，除了列出该行外，后续的 n 行也列出来；</span><br><span class="line">-B ：后面可加数字，为 befer 的意思，除了列出该行外，前面的 n 行也列出来；</span><br><span class="line">--color=auto 可将正确的那个撷取数据列出颜色</span><br></pre></td></tr></table></figure>
-
-<p><em><strong>基础正则表达式练习</strong></em></p>
-<ul>
-<li>搜寻特定字符</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mua@fuck:~$  grep -n <span class="string">&#x27;the&#x27;</span> regular_express.txt</span><br><span class="line">8:I can<span class="string">&#x27;t finish the test.^M</span></span><br><span class="line"><span class="string">12:the symbol &#x27;</span>*<span class="string">&#x27; is represented as start.</span></span><br><span class="line"><span class="string">15:You are the best is mean you are the no. 1.</span></span><br><span class="line"><span class="string">16:The world &amp;lt;Happy&amp;gt; is the same with &quot;glad&quot;.</span></span><br><span class="line"><span class="string">18:google is the best tools for search keyword.</span></span><br><span class="line"><span class="string">// 反向</span></span><br><span class="line"><span class="string">mua@fuck:~$ grep -vn &#x27;</span>the<span class="string">&#x27; regular_express.txt</span></span><br><span class="line"><span class="string">//不论大小写</span></span><br><span class="line"><span class="string">mua@fuck:~$ grep -in &#x27;</span>the<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string">8:I can&#x27;</span>t finish the <span class="built_in">test</span>.^M</span><br><span class="line">9:Oh! The soup taste good.^M</span><br><span class="line">12:the symbol <span class="string">&#x27;*&#x27;</span> is represented as start.</span><br><span class="line">14:The gd software is a library <span class="keyword">for</span> drafting programs.^M</span><br><span class="line">15:You are the best is mean you are the no. 1.</span><br><span class="line">16:The world &amp;lt;Happy&amp;gt; is the same with <span class="string">&quot;glad&quot;</span>.</span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>利用中括号[]来搜寻集合字符</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 利用字符共通点</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;t[ae]st&#x27; regular_express.txt</span></span><br><span class="line">8:I can<span class="string">&#x27;t finish the test.</span></span><br><span class="line"><span class="string">9:Oh! The soup taste good.</span></span><br><span class="line"><span class="string"># 搜寻字符带有**</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>[^g]oo<span class="string">&#x27; regular_express.txt</span></span><br><span class="line"><span class="string">2:apple is my favorite food.</span></span><br><span class="line"><span class="string">3:Football game is not use feet only.</span></span><br><span class="line"><span class="string">18:google is the best tools for search keyword.</span></span><br><span class="line"><span class="string">19:goooooogle yes!</span></span><br><span class="line"><span class="string">#  搜寻带数字</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>[0-9]<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string">5:However, this dress is about $ 3183 dollars.</span></span><br><span class="line"><span class="string">15:You are the best is mean you are the no. 1.</span></span><br><span class="line"><span class="string">//其他写法</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>[[:digit:]]<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string"># 带小写字母</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>[^a-z]oo<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string">3:Football game is not use feet only.</span></span><br><span class="line"><span class="string">//其他写法</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>[^[:lower:]]oo<span class="string">&#x27; regular_express.txt </span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>行首与行尾字符 ^ $</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 句首</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;^the&#x27; regular_express.txt </span></span><br><span class="line">12:the symbol <span class="string">&#x27;*&#x27;</span> is represented as start.</span><br><span class="line"><span class="comment"># 句首为小写</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;^[a-z]&#x27; regular_express.txt </span></span><br><span class="line">2:apple is my favorite food.</span><br><span class="line">4:this dress doesn<span class="string">&#x27;t fit me.</span></span><br><span class="line"><span class="string">10:motorcycle is cheap than car.</span></span><br><span class="line"><span class="string">12:the symbol &#x27;</span>*<span class="string">&#x27; is represented as start.</span></span><br><span class="line"><span class="string">//其他写法</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>^[[:lower:]]<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string"># 开头不是字母</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>^[^a-zA-Z]<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string">1:&quot;Open Source&quot; is a good mechanism to develop programs.</span></span><br><span class="line"><span class="string">21:# I am VBird</span></span><br><span class="line"><span class="string">//其他写法</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>^[^[:alpha:]]<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string"># 以句号作为结尾（用到跳脱字符&#x27;</span>\<span class="string">&#x27;）</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>\.$<span class="string">&#x27; regular_express.txt </span></span><br><span class="line"><span class="string"># 找出空白行</span></span><br><span class="line"><span class="string">root@fuck:/test# grep -n &#x27;</span>^$<span class="string">&#x27; regular_express.txt </span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>任意一个字符.与重复字符 *</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#  .（小数点）：代表“一定有一个任意字符”的意思；</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;g..d&#x27; regular_express.txt </span></span><br><span class="line">1:<span class="string">&quot;Open Source&quot;</span> is a good mechanism to develop programs.</span><br><span class="line">9:Oh! The soup taste good.</span><br><span class="line">16:The world &amp;lt;Happy&amp;gt; is the same with <span class="string">&quot;glad&quot;</span>.</span><br><span class="line"><span class="comment">#  *（星星号）：代表“重复前一个字符， 0 到无穷多次”的意思，为组合形态 </span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;ooo*&#x27; regular_express.txt </span></span><br><span class="line">1:<span class="string">&quot;Open Source&quot;</span> is a good mechanism to develop programs.</span><br><span class="line">2:apple is my favorite food.</span><br><span class="line">3:Football game is not use feet only.</span><br><span class="line">9:Oh! The soup taste good.</span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br><span class="line">// 中间间隔</span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;g*g&#x27; regular_express.txt </span></span><br><span class="line">1:<span class="string">&quot;Open Source&quot;</span> is a good mechanism to develop programs.</span><br><span class="line">3:Football game is not use feet only.</span><br><span class="line">9:Oh! The soup taste good.</span><br><span class="line"><span class="comment"># 单个字符 g....g</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;g.*g&#x27; regular_express.txt </span></span><br><span class="line">1:<span class="string">&quot;Open Source&quot;</span> is a good mechanism to develop programs.</span><br><span class="line">14:The gd software is a library <span class="keyword">for</span> drafting programs.</span><br><span class="line">16:The world &amp;lt;Happy&amp;gt; is the same with <span class="string">&quot;glad&quot;</span>.</span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br><span class="line"><span class="comment"># 任意数字</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;[0-9][0-9]*&#x27; regular_express.txt </span></span><br><span class="line">5:However, this dress is about $ 3183 dollars.</span><br><span class="line">15:You are the best is mean you are the no. 1.</span><br></pre></td></tr></table></figure>
-<ul>
-<li>限定连续 RE 字符范围 {}(记得添加跳脱字符<code>\&#123;</code>）</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查找特定范围</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;o\&#123;2\&#125;&#x27; regular_express.txt </span></span><br><span class="line">1:<span class="string">&quot;Open Source&quot;</span> is a good mechanism to develop programs.</span><br><span class="line">2:apple is my favorite food.</span><br><span class="line">3:Football game is not use feet only.</span><br><span class="line">9:Oh! The soup taste good.</span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br><span class="line">19:goooooogle <span class="built_in">yes</span>!</span><br><span class="line"><span class="comment"># 双端界定范围</span></span><br><span class="line">root@fuck:/test<span class="comment"># grep -n &#x27;go\&#123;2,5\&#125;g&#x27; regular_express.txt </span></span><br><span class="line">18:google is the best tools <span class="keyword">for</span> search keyword.</span><br></pre></td></tr></table></figure>
-
-<p><strong>基础正则表达式字符汇整</strong></p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211092156739.png" alt="image-20221109215623614" style="zoom: 50%;" />
-
-<p><strong>sed工具</strong></p>
-<p><strong>延伸正则表达式</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@fuck:/test<span class="comment"># grep -v &#x27;^$&#x27; regular_express.txt | grep -v &#x27;^#&#x27;</span></span><br><span class="line">可以替换为</span><br><span class="line">root@fuck:/test<span class="comment"># egrep -v &#x27;^$|^#&#x27; regular_express.txt </span></span><br></pre></td></tr></table></figure>
-
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211092218361.png" alt="image-20221109221826302" style="zoom: 80%;" />
-
-<h3 id="文件的格式化与相关处理"><a href="#文件的格式化与相关处理" class="headerlink" title="文件的格式化与相关处理"></a><strong>文件的格式化与相关处理</strong></h3><p><strong>格式化打印： printf</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ <span class="built_in">printf</span> <span class="string">&#x27;打印格式&#x27;</span> 实际内容</span><br><span class="line">选项与参数：</span><br><span class="line">关于格式方面的几个特殊样式：</span><br><span class="line">\a 警告声音输出</span><br><span class="line">\b 倒退键（backspace）</span><br><span class="line">\f 清除屏幕 （form feed）</span><br><span class="line">\n 输出新的一行</span><br><span class="line">\r 亦即 Enter 按键</span><br><span class="line">\t 水平的 [tab] 按键</span><br><span class="line">\v 垂直的 [tab] 按键</span><br><span class="line">\xNN NN 为两位数的数字，可以转换数字成为字符。</span><br><span class="line">关于 C 程序语言内，常见的变量格式</span><br><span class="line">%ns 那个 n 是数字， s 代表 string ，亦即多少个字符；</span><br><span class="line">%ni 那个 n 是数字， i 代表 <span class="built_in">integer</span> ，亦即多少整数码数；</span><br><span class="line">%N.nf 那个 n 与 N 都是数字， f 代表 floating （浮点），如果有小数码数，</span><br><span class="line">假设我共要十个位数，但小数点有两位，即为 %10.2f</span><br><span class="line"><span class="comment"># 例如</span></span><br><span class="line">root@fuck:/test<span class="comment"># printf &#x27;%s\t s\t %s\t %s\t %s\t \n&#x27; $ (cat printf.txt)</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>awk：好用的数据处理工具</strong></p>
-<p>数据操作：<code>awk &#39;条件类型1&#123;动作1&#125; 条件类型2&#123;动作2&#125; ...&#39; filename</code></p>
-<p>awk 后面接两个单引号并加上大括号 {} 来设置想要对数据进行的处理动作。 awk 可以处理后续接的文件，也可以读取来自前个指令的 standard output。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 列出前五行登陆者命令</span></span><br><span class="line">root@fuck:/test<span class="comment"># last -n 5</span></span><br><span class="line">mua      tty2         tty2             Thu Nov 10 03:37   still logged <span class="keyword">in</span></span><br><span class="line">reboot   system boot  5.15.0-52-generi Thu Nov 10 03:37   still running</span><br><span class="line">mua      tty2         tty2             Wed Nov  2 05:56 - crash (7+21:41)</span><br><span class="line">reboot   system boot  5.15.0-52-generi Wed Nov  2 05:56   still running</span><br><span class="line">mua      tty2         tty2             Sun Oct 23 01:14 - crash (10+04:41)</span><br><span class="line"><span class="comment">#想要取出帐号与登陆者的 IP ，且帐号与 IP 之间以 [tab] 隔开</span></span><br><span class="line">[dmtsai@study ~]$ last -n 5 &amp;<span class="comment">#124; awk &#x27;&#123;print $1 &quot;\t&quot; $3&#125;&#x27;</span></span><br><span class="line">dmtsai 192.168.1.100</span><br><span class="line">dmtsai 192.168.1.100</span><br><span class="line">dmtsai 192.168.1.100</span><br><span class="line">dmtsai 192.168.1.100</span><br><span class="line">dmtsai Fri</span><br></pre></td></tr></table></figure>
-
-<p><strong><code>awk</code>内置变量</strong></p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211131017749.png" alt="image-20221113101742717" style="zoom:67%;" />
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#列出每一行的帐号（就是 $1）；</span></span><br><span class="line"><span class="comment">#列出目前处理的行数（就是 awk 内的 NR 变量）</span></span><br><span class="line"><span class="comment">#并且说明，该行有多少字段（就是 awk 内的 NF 变量）</span></span><br><span class="line">[dmtsai@study ~]$ last -n 5&amp;<span class="comment">#124; awk &#x27;&#123;print $1 &quot;\t lines: &quot; NR &quot;\t columns: &quot; NF&#125;&#x27;</span></span><br><span class="line">dmtsai lines: 1 columns: 10</span><br><span class="line">dmtsai lines: 2 columns: 10</span><br><span class="line">dmtsai lines: 3 columns: 10</span><br><span class="line">dmtsai lines: 4 columns: 10</span><br><span class="line">dmtsai lines: 5 columns: 9</span><br></pre></td></tr></table></figure>
-
-<p><strong>逻辑运算字符</strong></p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/202211131019209.png" alt="image-20221113101958177" style="zoom:67%;" />
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#逻辑运算上面亦即所谓的大于、小于、等于等判断式上面，习惯上是以“ == ”来表示；</span></span><br><span class="line"><span class="comment">#如果是直接给予一个值，例如变量设置时，就直接使用 = 而已</span></span><br><span class="line"><span class="comment">#假设我要查阅，第三栏小于10 以下的数据，并且仅列出帐号与第三栏</span></span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">cat</span> /etc/passwd &amp;<span class="comment">#124; awk &#x27;&#123;FS=&quot;:&quot;&#125; $3 &amp;lt; 10 &#123;print $1 &quot;\t &quot; $3&#125;&#x27;</span></span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin 1</span><br><span class="line">daemon 2</span><br><span class="line"><span class="comment">#第一行未正确显示，利用BEGIN设置第二行</span></span><br><span class="line">[dmtsai@study ~]$ <span class="built_in">cat</span> /etc/passwd &amp;<span class="comment">#124; awk &#x27;BEGIN &#123;FS=&quot;:&quot;&#125; $3 &amp;lt; 10 &#123;print $1 &quot;\t &quot; $3&#125;&#x27;</span></span><br><span class="line">root 0</span><br><span class="line">bin 1</span><br><span class="line">daemon 2</span><br></pre></td></tr></table></figure>
-
-<h3 id="文件比对工具"><a href="#文件比对工具" class="headerlink" title="文件比对工具"></a>文件比对工具</h3><p><strong>diff</strong></p>
-<p>同一个套装软件的不同版本之间，比较配置文件与原始文件的差异就可以使用<code>diff</code>命令</p>
-<p>第一步将文件设置为一个新版本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mua@fuck:~$ <span class="built_in">mkdir</span> -p /tmp/testpw &amp;lt;</span><br><span class="line">mua@fuck:~$ <span class="built_in">cd</span> /tmp/testpw/</span><br><span class="line">mua@fuck:/tmp/testpw$ <span class="built_in">cp</span> /etc/passwd passwd.old</span><br><span class="line">mua@fuck:/tmp/testpw$ <span class="built_in">cat</span> /etc/passwd &amp;<span class="comment">#124;sed -e &#x27;4d&#x27; -e &#x27;6c no six line&#x27; &amp;gt;passwd</span></span><br><span class="line"><span class="comment"># 将 /etc/passwd 处理成为一个新的版本，将第四行删除，第六行则取代成为“no six line”，新的文件放置到 /tmp/test 里面，</span></span><br></pre></td></tr></table></figure>
-
-<p><code>diff</code>的用法</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ diff [-bBi] from-file to-file</span><br><span class="line">选项与参数：</span><br><span class="line">from-file ：一个文件名，作为原始比对文件的文件名；</span><br><span class="line">to-file ：一个文件名，作为目的比对文件的文件名；</span><br><span class="line">注意，from-file 或 to-file 可以 - 取代，那个 - 代表“Standard input”之意。</span><br><span class="line">-b ：忽略一行当中，仅有多个空白的差异（例如 <span class="string">&quot;about me&quot;</span> 与 <span class="string">&quot;about me&quot;</span> 视为相同</span><br><span class="line">-B ：忽略空白行的差异。</span><br><span class="line">-i ：忽略大小写的不同。</span><br><span class="line"></span><br><span class="line">范例一：比对 passwd.old 与 passwd.new 的差异：</span><br><span class="line">[dmtsai@study testpw]$ diff passwd.old passwd.new</span><br><span class="line">4d3 &amp;lt;==左边第四行被删除 （d） 掉了，基准是右边的第三行</span><br><span class="line">&amp;lt; adm:x:3:4:adm:/var/adm:/sbin/nologin &amp;lt;==这边列出左边（&amp;lt;）文件被删除的那一行内容</span><br><span class="line">6c5 &amp;lt;==左边文件的第六行被取代 （c） 成右边文件的第五行</span><br><span class="line">&amp;lt; <span class="built_in">sync</span>:x:5:0:<span class="built_in">sync</span>:/sbin:/bin/sync &amp;lt;==左边（&amp;lt;）文件第六行内容</span><br><span class="line">---</span><br><span class="line">&amp;gt; no six line &amp;lt;==右边（&amp;gt;）文件第五行内容</span><br><span class="line"></span><br><span class="line">范例二：比较文件</span><br><span class="line">[mua@localhost testpw]$ diff /etc/rc0.d/ /etc/rc5.d/</span><br><span class="line">只在 /etc/rc0.d/ 存在：K90network</span><br><span class="line">只在 /etc/rc5.d/ 存在：S10network</span><br></pre></td></tr></table></figure>
-
-<p><code>cmp</code>命令</p>
-<p><code>cmp</code> 主要也是在比对两个文件，他 主要利用“字节”单位去比对， 因此，当然也可以比对 binary file,diff 主要是以“行”为单位比对， <code>cmp </code>则是以“字节”为单位去比对。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ cmp [-l] file1 file2</span><br><span class="line">选项与参数：</span><br><span class="line">-l ：将所有的不同点的字节处都列出来。因为 cmp 默认仅会输出第一个发现的不同点。</span><br><span class="line"></span><br><span class="line">范例一：用 cmp 比较一下 passwd.old 及 passwd.new</span><br><span class="line">[dmtsai@study testpw]$ cmp passwd.old passwd.new</span><br><span class="line">passwd.old passwd.new differ: char 106, line 4</span><br></pre></td></tr></table></figure>
-
-<p><code>patch</code>命令</p>
-<p>patch 这个指令与 diff 可是有密不可分的关系，前面提到，diff 可以用来分辨两个版本之间的差异， 举例来说，刚刚我们所创建的 passwd.old 及 passwd.new 之间就是两个不同版本的文件。 那么，如果要“升级”，就是“先比较先旧版本的差异，并将差异档制作成为补丁文件，再由补丁文件更新旧文件”即可。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">范例一：以 /tmp/testpw 内的 passwd.old 与 passwd.new 制作补丁文件</span><br><span class="line">[dmtsai@study testpw]$ diff -Naur passwd.old passwd.new &amp;gt; passwd.patch</span><br><span class="line">[dmtsai@study testpw]$ <span class="built_in">cat</span> passwd.patch</span><br><span class="line">--- passwd.old 2015-07-14 22:37:43.322535054 +0800 &amp;lt;==新旧文件的信息</span><br><span class="line">+++ passwd.new 2015-07-14 22:38:03.010535054 +0800</span><br><span class="line">@@ -1,9 +1,8 @@ &amp;lt;==新旧文件要修改数据的界定范围，旧文件在 1-9 行，新文件在 1-8 行</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">-adm:x:3:4:adm:/var/adm:/sbin/nologin &amp;lt;==左侧文件删除</span><br><span class="line">lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin</span><br><span class="line">-<span class="built_in">sync</span>:x:5:0:<span class="built_in">sync</span>:/sbin:/bin/sync &amp;lt;==左侧文件删除</span><br><span class="line">+no six line &amp;lt;==右侧新文件加入</span><br><span class="line">shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown</span><br><span class="line">halt:x:7:0:halt:/sbin:/sbin/halt</span><br><span class="line">mail:x:8:12:mail:/var/spool/mail:/sbin/nologin</span><br></pre></td></tr></table></figure>
-
-<p>文件打印工具<code>pr</code></p>
-<ul>
-<li>用于多打印“文件时间”、“文件文件名”及“页码”三大项目。</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost testpw]<span class="comment"># pr passwd.new </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2022-11-17 20:04                    passwd.new                    Page 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">adm:x:3:4:adm:/var/adm:/sbin/nologin</span><br><span class="line">lp:x:4:7:lp:/var/spool/lpd:/sbin/黄蓉</span><br></pre></td></tr></table></figure>
-
-<h3 id="情景运用"><a href="#情景运用" class="headerlink" title="情景运用"></a>情景运用</h3><ul>
-<li>通过 grep 搜寻特殊字串，并配合数据流重导向来处理大量的文件搜寻问题。<ul>
-<li>目标：正确的使用正则表达式；</li>
-<li>前提：需要了解数据流重导向，以及通过子指令 $（command） 来处理文件名的搜寻； 我们简单的以搜寻星号 （*） 来处理下面的任务：<ul>
-<li>利用正则表达式找出系统中含有某些特殊关键字的文件，举例来说，找出在 &#x2F;etc 下面含有星号 （*） 的文件与内容：解决的方法必须要搭配万用字符，但是星号本身就是正则表达式的字符，因此需要这样进行：</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost testpw]<span class="comment"># grep &#x27;\*&#x27; /etc/* 2&amp;gt; /dev/null</span></span><br><span class="line">[1] 10332</span><br><span class="line">grep: /etc/abrt: Is a directory</span><br><span class="line">Binary file /etc/aliases.db matches</span><br><span class="line">grep: /etc/alsa: Is a directory</span><br><span class="line">grep: /etc/alternatives: Is a directory</span><br><span class="line">······</span><br></pre></td></tr></table></figure>
-
-<p>如果是想要连同完整的此目录数据，则</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ grep <span class="string">&#x27;\*&#x27;</span> $（find /etc -<span class="built_in">type</span> f ） 2&amp;gt; /dev/null</span><br><span class="line"><span class="comment"># 如果只想列出文件名而不要列出内容的话，使用下面的方式来处理即可喔！</span></span><br><span class="line">[dmtsai@study ~]$ grep -l <span class="string">&#x27;\*&#x27;</span> $（find /etc -<span class="built_in">type</span> f ） 2&amp;gt; /dev/null</span><br></pre></td></tr></table></figure>
-
-<p>如果文件数量太多，如同上述的案例，如果要找的是全系统（&#x2F;）呢？可以这样做:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[dmtsai@study ~]$ grep <span class="string">&#x27;\*&#x27;</span> $（find / -<span class="built_in">type</span> f 2&amp;gt; /dev/null ）</span><br><span class="line">-bash: /usr/bin/grep: Argument list too long</span><br></pre></td></tr></table></figure>
-
-<p>由于命令行的内容长度是有限制的，因此当搜寻的对象是整个系统时，上述的指令会发生错误。此时我们可以通过管线命令以及 xargs 来处理。举例来说，让 grep 每次仅能处理 10 个文件名，此时可以这样想:</p>
-<ol>
-<li>先用 find 去找出文件；</li>
-<li>用 xargs 将这些文件每次丢 10 个给 grep 来作为参数处理；</li>
-<li>grep 实际开始搜寻文件内容。 所以整个作法就会变成这样：</li>
-</ol>
-<p><code>[dmtsai@study ~]$ find / -type f 2&gt; /dev/null | xargs -n 10 grep &#39;\*&#39;</code></p>
-<p>ps.<strong>获取IP</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost testpw]<span class="comment"># ifconfig ens33 &amp;#124; grep &#x27;inet&#x27; &amp;#124;sed &#x27;s/^.*inet //g&#x27; &amp;#</span></span><br><span class="line">[1] 11088</span><br><span class="line">[root@localhost testpw]<span class="comment"># ens33: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span></span><br><span class="line">        inet 192.168.226.141  netmask 255.255.255.0  broadcast 192.168.226.255</span><br><span class="line">        inet6 fe80::d50b:4c8c:5213:8ae2  prefixlen 64  scopeid 0x20&lt;<span class="built_in">link</span>&gt;</span><br><span class="line">        ether 00:0c:29:a6:32:c5  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 2357  bytes 1990618 (1.8 MiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 1396  bytes 150431 (146.9 KiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"><span class="comment">#将命令指定为myip</span></span><br><span class="line">[root@localhost testpw]<span class="comment"># alias myip=&quot;ifconfig ens33 &amp;#124; grep &#x27;inet&#x27; &amp;#124;sed &#x27;s/^.*inet //g&#x27; &quot;</span></span><br><span class="line">[root@localhost testpw]<span class="comment"># myip</span></span><br><span class="line">[1] 11117</span><br><span class="line">[root@localhost testpw]<span class="comment"># ens33: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="Shell-script"><a href="#Shell-script" class="headerlink" title="Shell  script"></a>Shell  script</h2>]]></content>
-      <categories>
-        <category>web前端</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在线code安装教程</title>
-    <url>/2022/09/12/codeinstall/</url>
-    <content><![CDATA[<p>##前置条件：</p>
-<ol>
-<li>云服务器</li>
-<li>ssh的连接工具 如<a href="https://www.putty.org/">putty</a>，<a href="https://termius.com/">Termius</a>，mac用户可以直接用终端连接.</li>
-</ol>
-<h2 id="安装教程"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程</h2><p>首先使用你的ssh工具连接服务器</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>输入命令下载codeserver</span><br><span class="line">wget https:<span class="regexp">//gi</span>thub.com<span class="regexp">/coder/</span>code-server<span class="regexp">/releases/</span>download<span class="regexp">/v4.6.1/</span>code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>解压</span><br><span class="line">tar -zxvf code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64.tar.gz</span><br><span class="line"><span class="regexp">//</span>进入codeserver目录</span><br><span class="line">cd code-server-<span class="number">4.6</span>.<span class="number">1</span>-linux-amd64</span><br><span class="line"><span class="regexp">//</span>设置密码(密码在双引号内)</span><br><span class="line">export PASSWORD=<span class="number">123456</span></span><br><span class="line"><span class="regexp">//</span>启动codeserver</span><br><span class="line">./code-server --port <span class="number">8081</span> --host <span class="number">0.0</span>.<span class="number">0.0</span> --auth password</span><br></pre></td></tr></table></figure>
-
-<p>在浏览器上方输入<code>你的服务器IP:8081</code> 即可进入登录界面</p>
-<p>这个时候输入之前设置的密码就可以进入codeserver了</p>
-<h2 id="配置Screen进程守护"><a href="#配置Screen进程守护" class="headerlink" title="配置Screen进程守护"></a>配置Screen进程守护</h2><p>之前的步骤有一个问题,就是当你退出ssh进程的时候,你会发现网站进不去了。</p>
-<p>因为当ssh进程关闭的时候，会自动清除当前进程。</p>
-<p>我们得下载Screen来给codeserver进行进程守护，防止进程自动退出。</p>
-<h2 id="安装Screen"><a href="#安装Screen" class="headerlink" title="安装Screen"></a>安装Screen</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span>复制适合自己系统的命令安装</span><br><span class="line"><span class="regexp">//</span>Centos系统</span><br><span class="line">yum install screen</span><br><span class="line"><span class="regexp">//</span>Debian/Ubuntu系统</span><br><span class="line">apt-get install screen</span><br></pre></td></tr></table></figure>
-<h2 id="保护进程实现后台运行"><a href="#保护进程实现后台运行" class="headerlink" title="保护进程实现后台运行"></a>保护进程实现后台运行</h2><figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">//</span>以code_server为名字建立进程</span><br><span class="line">screen -S code_server</span><br><span class="line"><span class="string">//</span>再次输入以下命令</span><br><span class="line"><span class="keyword">cd</span> code-server-4.6.1-linux-amd64</span><br><span class="line">export PASSWORD=123456</span><br><span class="line"><span class="string">./code-server</span> <span class="params">--port</span> 8081 <span class="params">--host</span> 0.0.0.0 <span class="params">--auth</span> password</span><br></pre></td></tr></table></figure>
-
-
-
-<p>此时关闭ssh终端,也可以照常进入网页啦！</p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE-2022-09-06-215111.jpg"></p>
-<p>微软官方<a href="https://vscode.dev/">请输入链接描述</a></p>
-]]></content>
-      <categories>
-        <category>toy</category>
-      </categories>
-      <tags>
-        <tag>toy</tag>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>折腾OpenWrt的半个月</title>
-    <url>/2022/11/02/beatOpenWrt/</url>
-    <content><![CDATA[<p>考试完整理</p>
-]]></content>
-      <categories>
-        <category>toy</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>OpenWrt</tag>
       </tags>
   </entry>
   <entry>
@@ -2887,185 +3024,6 @@
       <tags>
         <tag>code</tag>
         <tag>Sql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux toy合集</title>
-    <url>/2022/09/15/fucktoy/</url>
-    <content><![CDATA[<h1 id="Linux命令神器-The-Fuck"><a href="#Linux命令神器-The-Fuck" class="headerlink" title="Linux命令神器 The Fuck"></a>Linux命令神器 <code>The Fuck</code></h1><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/example.gif" alt="example"></p>
-<p><strong><code>The Fuck</code>是一款能够自动修复你的错误命令行的终端应用。</strong></p>
-<p>相信大家每个人都有敲错过命令的时候,把<code>python</code><br>输入成 <code>puthon</code><br>.手速过快把<code>ls -alh</code><br>输入成 <code>ls a-lh</code><br>等等等,这时候是不是想拍一下键盘说一声<code>fuck</code></p>
-<h2 id="术前要求"><a href="#术前要求" class="headerlink" title="术前要求"></a>术前要求</h2><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Python</span> (<span class="number">2</span>.<span class="number">7</span>+ or <span class="number">3</span>.<span class="number">3</span>+)</span><br><span class="line"><span class="attribute">pip</span></span><br><span class="line"><span class="attribute">Python</span>-dev</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><p><strong>Mac 下使用 <a href="https://brew.sh/">Homebrew</a> 安装：</strong></p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>thefuck</span><br></pre></td></tr></table></figure>
-
-<p><strong>Ubuntu 下安装：</strong></p>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">sudo apt <span class="keyword">update</span></span><br><span class="line">sudo apt install <span class="keyword">python3</span>-dev <span class="keyword">python3</span>-pip</span><br><span class="line">sudo pip3 install thefuck</span><br></pre></td></tr></table></figure>
-
-<p><strong>其他操作系统你可以使用 Python 的 pip 安装：</strong></p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">pip <span class="keyword">install</span> thefuck</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><strong>最后，不要忘记为 The Fuck 设置 alias</strong></p>
-<p>暂时命令</p>
-<figure class="highlight mel"><table><tr><td class="code"><pre><span class="line"><span class="keyword">eval</span> $(thefuck --<span class="keyword">alias</span>)</span><br></pre></td></tr></table></figure>
-
-<p>在文件中永久配置</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#编辑bashrc配置文件</span></span><br><span class="line">vim ~/.bashrc</span><br><span class="line"><span class="comment">#在文件尾加入一行给thefuck取别名fuck</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(thefuck --alias fuck)</span>&quot;</span></span><br><span class="line"><span class="comment">#使生效</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
-
-<p>最后就可以痛快的使用啦！附上<a href="https://github.com/nvbn/thefuck"><code>TheFuck</code>官方链接</a></p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><blockquote>
-<p>其实<code>TheFuck</code>的原理就是规则匹配（正则表达式），如果找到匹配规则的命令，则创建一个命令给用户选择或直接运行。</p>
-</blockquote>
-<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line">cat_dir - 当你尝试cat目录的时候，用<span class="keyword">ls</span>替换cat;</span><br><span class="line"><span class="keyword">cd</span>_correction – 拼写检查和纠正失败的<span class="keyword">cd</span>命令；</span><br><span class="line"><span class="keyword">cd</span>_mkdir – 在进入目录之前创建目录；</span><br><span class="line"><span class="keyword">cd</span>_parent – 更改 <span class="keyword">cd</span>.. 为<span class="keyword">cd</span> <span class="string">..</span>；</span><br><span class="line">dry – 修复类似的重复问题：git git push；</span><br><span class="line">fix_alt_space – 用空格字符代替Alt + Space；</span><br><span class="line"><span class="comment"># 还有很多可以参考https://github.com/nvbn/thefuck#how-it-works</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="ls的翻篇小火车sl"><a href="#ls的翻篇小火车sl" class="headerlink" title="ls的翻篇小火车sl"></a>ls的翻篇小火车<code>sl</code></h2><p><strong>敲下以下命令</strong></p>
-<p><strong>Ubantu</strong></p>
-<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">sudo</span> apt-<span class="meta">get</span> install <span class="built_in">sl</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>CentOs</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install sl </span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205546460.png" alt="image-20221005205546460"></p>
-<p>嘟嘟嘟嘟~~就会看到一个小火车，从你屏幕缓缓驰过….</p>
-<p>还可以配合fuck使用就是</p>
-<figure class="highlight pf"><table><tr><td class="code"><pre><span class="line">root@iZ2ze2p9tolfgje8qghiy0Z: sudo aptget install sl</span><br><span class="line">sudo: aptget: command not found</span><br><span class="line">root@iZ2ze2p9tolfgje8qghiy0Z:~<span class="comment"># fuck</span></span><br><span class="line">sudo apt-get install sl [enter/↑/↓/ctrl+c]</span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree       </span><br><span class="line">Reading <span class="keyword">state</span> information... Done</span><br></pre></td></tr></table></figure>
-
-<h2 id="反向装逼-tac"><a href="#反向装逼-tac" class="headerlink" title="反向装逼 tac"></a>反向装逼 <code>tac</code></h2><p> <strong>Ubantu</strong></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install tac</span><br></pre></td></tr></table></figure>
-
-<p><strong>CentOs</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install tac</span><br></pre></td></tr></table></figure>
-
-<p><em>用cat看代码时</em></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205556042.png" alt="image-20221005205556042"></p>
-<p><em>tac呢</em></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205604369.png" alt="image-20221005205604369"></p>
-<h2 id="自己是黑客-jpg"><a href="#自己是黑客-jpg" class="headerlink" title="自己是黑客.jpg"></a>自己是黑客.jpg</h2><p> <strong>Ubantu</strong></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install cmatrix</span><br></pre></td></tr></table></figure>
-
-<p><strong>CentOs</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install cmatrix</span><br></pre></td></tr></table></figure>
-
-<p>安装好后只要在命令行输入</p>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">cmatrix</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005205611298.png" alt="image-20221005205611298"></p>
-<p>Wow~</p>
-<p>只要按Ctrl+C就可以退出，适合当息屏显示</p>
-<h2 id="谨慎使用fork"><a href="#谨慎使用fork" class="headerlink" title="谨慎使用fork"></a>谨慎使用<code>fork</code></h2><p>根据你的shell，选择如下2个命令中的1个，一条命令弄死Linux：</p>
-<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="meta">:() &#123; :|:&amp;</span> &#125;;:</span><br></pre></td></tr></table></figure>
-
-<p>或者</p>
-<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">.() &#123; .<span class="string">|.&amp; &#125;;.</span></span><br></pre></td></tr></table></figure>
-
-<p>接着就可以重启啦</p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>toy</tag>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于腾讯云的Typora图床</title>
-    <url>/2022/09/10/maBed/</url>
-    <content><![CDATA[<h2 id="术前准备"><a href="#术前准备" class="headerlink" title="术前准备"></a>术前准备</h2><ul>
-<li><p>安装好 <em>Typora</em> ： <a href="https://pan.xunlei.com/s/VNB_VLRHiLk6wUoyXr4mCWM6A1">提取码：h9bb</a>    <em>PicGo</em>  ：<a href="https://pan.xunlei.com/s/VNB_WALBOdxS0Hkp49VZlZT_A1">提取码：k77e</a></p>
-</li>
-<li><p>环境配置 <em>nodejs</em>：<a href="https://nodejs.org/en/">https://nodejs.org/en/</a></p>
-</li>
-<li><p><em>Gitee</em> 账户：<a href="https://gitee.com/">https://gitee.com/</a></p>
-</li>
-</ul>
-<h2 id="开搞"><a href="#开搞" class="headerlink" title="开搞"></a>开搞</h2><h3 id="01-配置完nodejs"><a href="#01-配置完nodejs" class="headerlink" title="01.配置完nodejs"></a>01.配置完<em>nodejs</em></h3><figure class="highlight plaintext"><figcaption><span>--version</span></figcaption><table><tr><td class="code"><pre><span class="line">C:\&gt;node --version</span><br><span class="line">v16.17.0</span><br><span class="line">C:\&gt;npm --verison</span><br><span class="line">8.15.0</span><br></pre></td></tr></table></figure>
-
-<h3 id="02-配置腾讯云对象储存"><a href="#02-配置腾讯云对象储存" class="headerlink" title="02.配置腾讯云对象储存"></a>02.配置腾讯云对象储存</h3><p><strong>创建储存桶</strong></p>
-<ul>
-<li>点击 <code>储存桶列表</code>-&gt; <code>创建储存桶</code> -&gt; <em>进行以下配置</em></li>
-</ul>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210751246.png" alt="image-20221005210751246"></p>
-<ul>
-<li>访问权限选择<strong>公有读私有写</strong>，否则图片无法读取，其他的根据自己往下填写就可以。 地域建议离你所在的位置越近越好。</li>
-</ul>
-<h3 id="03-获取密钥"><a href="#03-获取密钥" class="headerlink" title="03.获取密钥"></a>03.获取密钥</h3><ul>
-<li>腾讯云头像–&gt;<a href="https://cloud.tencent.com/product/cam?from=10680">访问管理</a>–&gt; API密钥管理，创建密钥，就会生成 <strong>APPID、SecretId和SecretKey</strong></li>
-</ul>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210756892.png" alt="image-20221005210756892"></p>
-<h3 id="04-PicGo配置"><a href="#04-PicGo配置" class="headerlink" title="04.PicGo配置"></a>04.<em>PicGo</em>配置</h3><ul>
-<li>点击<code>图床设置</code>-&gt; <code>腾讯云COS</code>-&gt; 填写好刚刚的密钥和存储桶的名称，记得<strong>设置COS版本为V5</strong></li>
-</ul>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210801870.png" alt="image-20221005210801870"></p>
-<ul>
-<li>自定义域名和存储路径未进行CDN加速可默认为空</li>
-</ul>
-<p><strong>上传测试</strong></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210812201.png" alt="image-20221005210812201"></p>
-<p><strong>查看文件是否有保存</strong></p>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210807383.png" alt="image-20221005210807383"></p>
-<h3 id="05-Typora配置"><a href="#05-Typora配置" class="headerlink" title="05.Typora配置"></a>05.Typora配置</h3><ul>
-<li>点击 <code>文件</code>-&gt;  <code>偏好设置</code> -&gt; <code>图像</code></li>
-</ul>
-<p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221005210821839.png" alt="image-20221005210821839"></p>
-<ul>
-<li>如上图配置即可使用</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><p><a href="https://blog.csdn.net/haojie_duan/article/details/120400386">https://blog.csdn.net/haojie_duan/article/details/120400386</a></p>
-</li>
-<li><p><a href="https://cloud.tencent.com/developer/article/1834573">https://cloud.tencent.com/developer/article/1834573</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>Typora</tag>
-        <tag>code</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>记迁移hexo到新设备</title>
-    <url>/2022/12/17/movehexo/</url>
-    <content><![CDATA[<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>安装好<a href="https://git-scm.com/download">Git</a>以及<a href="https://nodejs.org/zh-cn/download/">NodeJs</a>.</p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221215174936954.png" alt="image-20221215174936954" style="zoom:50%;" />
-
-<blockquote>
-<p>Git配置好密钥</p>
-</blockquote>
-<p>进入命令行输入<code>ssh-keygen -t rsa -C &quot;12185744@qq.com&quot;</code>，按3次回车生成密钥</p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221215175931189.png" alt="image-20221215175931189" style="zoom:50%;" />
-
-<p>进入<a href="https://github.com/">GitHub</a>,选择<code>Settings</code>.</p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221215175756932.png" alt="image-20221215175756932" style="zoom:50%;" />
-
-<p>选择<code>SSH and GPG keys</code></p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221215180135539.png" alt="image-20221215180135539" style="zoom:50%;" />
-
-<p>选择 <code>New SSH key</code></p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221215180153086.png" alt="image-20221215180153086" style="zoom:50%;" />
-
-<p>填写好title, 复制 rsa_public 里面的内容，点击<code>Add</code>，输入密码即可完成秘钥建立</p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221215180220271.png" alt="image-20221215180220271" style="zoom:50%;" />
-
-<h3 id="开搞"><a href="#开搞" class="headerlink" title="开搞"></a>开搞</h3><h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221215180357907.png" alt="image-20221215180357907" style="zoom:50%;" />
-
-<h4 id="迁移文件到新电脑"><a href="#迁移文件到新电脑" class="headerlink" title="迁移文件到新电脑"></a>迁移文件到新电脑</h4><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221217211600036.png" alt="image-20221217211600036"></p>
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221217211721613.png" alt="image-20221217211721613" style="zoom:50%;" />
-
-<p>如果源文件没有保存的话，也不用担心，请参考此篇文<a href="https://blog.51cto.com/u_15526925/5238933">hexo迁移备份</a>。</p>
-]]></content>
-      <categories>
-        <category>toy</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -3502,38 +3460,6 @@
       <tags>
         <tag>code</tag>
         <tag>算法题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>升级Win11学到的一些技巧</title>
-    <url>/2022/12/19/upwin11/</url>
-    <content><![CDATA[<h2 id="Win11切换为Win10右键的方法"><a href="#Win11切换为Win10右键的方法" class="headerlink" title="Win11切换为Win10右键的方法"></a>Win11切换为Win10右键的方法</h2><p><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221219183840318.png" alt="image-20221219183840318" style="zoom: 33%;" /><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221219184105929.png" alt="image-20221219184105929" style="zoom:33%;" /></p>
-<p>可以看出Win11和Win10的右键菜单区别就是，win11要进入折叠选项才能得到比较清晰的命令，就比win10麻烦了些许。</p>
-<p>我觉得还是win10的右键较为人性化一点。</p>
-<p>可以用命令的方式进行恢复，首先按下<code>win</code>+<code>R</code>键输入cmd打开命令提示行窗口。</p>
-<p>先切换到Win10右键</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reg add <span class="string">&quot;HKCU\Software\Classes\CLSID\&#123;86ca1aa0-34aa-4e8b-a509-50c905bae2a2&#125;\InprocServer32&quot;</span> /f /ve</span><br></pre></td></tr></table></figure>
-
-<p>再重启Windows资源管理器</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">taskkill /f /im explorer.exe &amp; start explorer.exe</span><br></pre></td></tr></table></figure>
-
-<p>这样就可以啦！</p>
-<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20221219184655521.png" alt="image-20221219184655521" style="zoom:67%;" />
-
-<p>当然如果想恢复Win11右键，执行下面命令即可</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reg delete <span class="string">&quot;HKCU\Software\Classes\CLSID\&#123;86ca1aa0-34aa-4e8b-a509-50c905bae2a2&#125;&quot;</span> /f</span><br></pre></td></tr></table></figure>
-
-<h2 id="谷歌翻译恢复"><a href="#谷歌翻译恢复" class="headerlink" title="谷歌翻译恢复"></a>谷歌翻译恢复</h2><ul>
-<li><a href="https://github.com/Ponderfly/GoogleTranslateIpCheck">GoogleTranslateIpCheck</a>：这个工具需要使用命令行 &#x2F; 终端运行，上手可能有点难度</li>
-<li><a href="https://github.com/GoodCoder666/GoogleTranslate_IPFinder">GoogleTranslate_IPFinder</a>：这个工具带有操作界面，更容易上手</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://hcfy.app/blog/2022/09/28/ggg">谷歌翻译不能用的解决方案</a></p>
-]]></content>
-      <categories>
-        <category>toy</category>
-      </categories>
-      <tags>
-        <tag>Windows</tag>
       </tags>
   </entry>
   <entry>
@@ -4351,7 +4277,7 @@ $$
 <ul>
 <li>IP地址标识主机、路由器</li>
 <li>但IP地址不好记忆，不便人类使用(没有意义)</li>
-<li>人类一般倾向于使用一些有意义的字符串来标识Internet上的设备<br>例如：<a href="mailto:&#x71;&#x7a;&#104;&#x65;&#x6e;&#x67;&#x40;&#x75;&#x73;&#x74;&#99;&#x2e;&#x65;&#x64;&#x75;&#46;&#x63;&#110;">&#x71;&#x7a;&#104;&#x65;&#x6e;&#x67;&#x40;&#x75;&#x73;&#x74;&#99;&#x2e;&#x65;&#x64;&#x75;&#46;&#x63;&#110;</a> 所在的邮件服务器<br><a href="http://www.ustc.edu.cn/">www.ustc.edu.cn</a> 所在的web服务器</li>
+<li>人类一般倾向于使用一些有意义的字符串来标识Internet上的设备<br>例如：<a href="mailto:&#x71;&#122;&#x68;&#x65;&#110;&#x67;&#x40;&#x75;&#115;&#116;&#x63;&#46;&#x65;&#x64;&#x75;&#46;&#99;&#110;">&#x71;&#122;&#x68;&#x65;&#110;&#x67;&#x40;&#x75;&#115;&#116;&#x63;&#46;&#x65;&#x64;&#x75;&#46;&#99;&#110;</a> 所在的邮件服务器<br><a href="http://www.ustc.edu.cn/">www.ustc.edu.cn</a> 所在的web服务器</li>
 <li>存在着“字符串”—IP地址的转换的必要性</li>
 <li>人类用户提供要访问机器的“字符串”名称</li>
 <li>由DNS负责转换成为二进制的网络地址</li>
