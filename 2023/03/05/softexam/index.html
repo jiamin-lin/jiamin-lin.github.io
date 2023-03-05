@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","width":300,"display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="第一章概述 软件危机可以表现为（ ABCD ）。 A、产品不符合用户的需要 B、软件产品的质量差 C、软件的可维护性差 D、软件的价格昂贵  软件工程 什么是软件工程  软件工程是指导计算机软件开发和维护的一门学科。采用工程的概念、原理、技术和方法来开发与维护软件，把经过时间考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来，以经济地开发出高质量的软件并有效地维护它，这就是软件工程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软工导论复习">
+<meta property="og:url" content="http://example.com/2023/03/05/softexam/index.html">
+<meta property="og:site_name" content="Drzone">
+<meta property="og:description" content="第一章概述 软件危机可以表现为（ ABCD ）。 A、产品不符合用户的需要 B、软件产品的质量差 C、软件的可维护性差 D、软件的价格昂贵  软件工程 什么是软件工程  软件工程是指导计算机软件开发和维护的一门学科。采用工程的概念、原理、技术和方法来开发与维护软件，把经过时间考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来，以经济地开发出高质量的软件并有效地维护它，这就是软件工程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20230305100157550.png">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20230305112027917.png">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20230305112958911.png">
+<meta property="article:published_time" content="2023-03-05T03:11:10.000Z">
+<meta property="article:modified_time" content="2023-03-05T14:16:43.005Z">
+<meta property="article:author" content="Dreamin">
+<meta property="article:tag" content="soft">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20230305100157550.png">
+
+
+<link rel="canonical" href="http://example.com/2023/03/05/softexam/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/03/05/softexam/","path":"2023/03/05/softexam/","title":"软工导论复习"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>软工导论复习 | Drzone</title>
+  
+
+
+
+
+<link rel="dns-prefetch" href="https://comment-beige.vercel.app/">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Drzone" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Drzone</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-好康"><a href="https://drsee.notion.site/Drsee-58c29a9f56c0468e991ce3a5810427fb" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>好康</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+
+  <aside class="sidebar">
+
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0"><span class="nav-text">第一章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B"><span class="nav-text">软件工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E8%BF%87%E7%A8%8B%E5%92%8C%E8%BD%AF%E4%BB%B6%E7%94%9F%E5%AD%98%E5%91%A8%E6%9C%9F"><span class="nav-text">软件过程和软件生存周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9E%8B"><span class="nav-text">软件开发模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%92%8C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B"><span class="nav-text">传统的软件工程和面向对象的软件工程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E5%8F%AF%E8%A1%8C%E6%80%A7%E7%A0%94%E7%A9%B6"><span class="nav-text">第二章、可行性研究</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%A1%8C%E6%80%A7%E7%A0%94%E7%A9%B6%E7%9A%84%E7%9B%AE%E7%9A%84%E5%92%8C%E4%BB%BB%E5%8A%A1"><span class="nav-text">可行性研究的目的和任务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%81%E8%BD%AF%E4%BB%B6%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-text">第三章、软件需求分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%E3%80%81%E8%BD%AF%E4%BB%B6%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1"><span class="nav-text">第四章、软件总体设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%81%E8%BD%AF%E4%BB%B6%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1"><span class="nav-text">第五章、软件详细设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0%E3%80%81%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95"><span class="nav-text">第七章、软件测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0%E3%80%81%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95%E5%AD%A6"><span class="nav-text">第九章、面向对象方法学</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E7%AB%A0%E3%80%81%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%86%E6%9E%90"><span class="nav-text">第十章、面向对象的分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%E3%80%81%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-text">第十一章、面向对象的设计与实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0%E3%80%81-%E8%BD%AF%E4%BB%B6%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-text">第十三章、 软件体系结构</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Dreamin"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Dreamin</p>
+  <div class="site-description" itemprop="description">Stay hungry</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Dreamin121" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Dreamin121" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:12185744g@gmail.com" title="E-Mail → mailto:12185744g@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa-solid fa-square-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/musang152" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;musang152" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/dreaminfuck" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;dreaminfuck" rel="noopener" target="_blank"><i class="fa-brands fa-telegram fa-fw"></i>Telegram</a>
+      </span>
+  </div>
+
+
+
+        </div>
+ 
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/05/softexam/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Dreamin">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Drzone">
+      <meta itemprop="description" content="Stay hungry">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="软工导论复习 | Drzone">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          软工导论复习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-03-05 11:11:10 / 修改时间：22:16:43" itemprop="dateCreated datePublished" datetime="2023-03-05T11:11:10+08:00">2023-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2023/03/05/softexam/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2023/03/05/softexam/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a><strong>概述</strong></h2><ol>
+<li><strong>软件危机可以表现为（ ABCD ）</strong>。<br> A、产品不符合用户的需要 B、软件产品的质量差 C、软件的可维护性差 D、软件的价格昂贵</li>
+</ol>
+<h2 id="软件工程"><a href="#软件工程" class="headerlink" title="软件工程"></a>软件工程</h2><blockquote>
+<p><strong>什么是软件工程</strong></p>
+</blockquote>
+<p>软件工程是指导计算机软件开发和维护的一门学科。采用工程的概念、原理、技术和方法来开发与维护软件，把经过时间考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来，以经济地开发出高质量的软件并有效地维护它，这就是软件工程。</p>
+<h2 id="软件过程和软件生存周期"><a href="#软件过程和软件生存周期" class="headerlink" title="软件过程和软件生存周期"></a><strong>软件过程和软件生存周期</strong></h2><p>软件工程中描述软件生存周期的瀑布模型一般包括<strong>计划、需求分析、设计、编码、测试、维护</strong>等几个阶段。其中,设计阶段在管理上又可以依次分为<strong>概要设计</strong>和<strong>详细设计</strong>两个步骤。</p>
+<h2 id="软件开发模型"><a href="#软件开发模型" class="headerlink" title="软件开发模型"></a><strong>软件开发模型</strong></h2><ol>
+<li><p>瀑布模型的问题是( B )。 </p>
+<p>A、 用户容易参与开发 </p>
+<p>B、 缺乏灵活性 </p>
+<p>C、 用户与开发者易沟通 </p>
+<p>D、 适用可变需求</p>
+</li>
+<li><p>在软件开发模型中，提出最早、应用最广泛的模型是（ A ）。</p>
+<p>A、瀑布模型      B、喷泉模型    C、增量模型      D、螺旋模型</p>
+</li>
+</ol>
+<h2 id="传统的软件工程和面向对象的软件工程"><a href="#传统的软件工程和面向对象的软件工程" class="headerlink" title="传统的软件工程和面向对象的软件工程"></a><strong>传统的软件工程和面向对象的软件工程</strong></h2><blockquote>
+<p><strong>何谓面向对象软件工程？简述面向对象软件工程和传统软件工程的区别与联系。</strong></p>
+</blockquote>
+<p>面向对象软件工程方法具有下述4个特点：</p>
+<p>（1）把对象作为融合了数据及在数据上的操作行为的统一软件构架，用对象分解取代了传统方法的功能分解</p>
+<p>（2） 把所有对象都划分为类。每个类定义了一组数据和一组操作，类是对具有相同数据和相同操作的一组相似对象的定义</p>
+<p>（3） 按照父类与子类的关系，把若干个相关类组成一个层次结构的系统。下层派生类自动拥有上层基类中定义的数据和操作，这种现象称为继承</p>
+<p>（4） 对象彼此之间仅能通过发送消息互相联系，对象的所有私有信息都被封装在该对象内，不能从外界直接访问，这就是封装性</p>
+<p>传统软件工程是以结构化程序设计为基础，而面向对象软件工程是以面向对象程序设计为基础。与面向过程的软件工程的开发思想相比，面向对象开发方法不再是以功能划分为导向，而是以对象作为整个问题分析的中心，围绕对象展开系统的分析与设计工作。在开发过程方面，面向对象软件工程和传统软件工程一样也是把软件开发划分为分析、设计、编码和测试等几个阶段，但各个阶段的具体工作不同，除了在编码阶段使用的语言不同外，面向对象软件工程为待开发软件确定“类与对象”一般在需求分析阶段进行，设计阶段则主要完成对象内部的详细设计；而在传统软件工程中，将软件设计划分为“总体设计”和“详细设计”，分别完成软件的总体结构图的设计和各个模块内部算法的详细设计。即：传统软件工程开发过程包括需求分析、总体设计、详细设计、面向过程的编码和测试；面向对象软件工程开发过程包括需求分析与对象抽取、对象详细设计、面向对象的编码和测试。</p>
+<blockquote>
+<p><strong>什么是软件生存周期模型？试比较瀑布模型、快速原型模型、增量模型、螺旋模型的优缺点。</strong></p>
+</blockquote>
+<img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20230305100157550.png" alt="image-20230305100157550" style="zoom:50%;" />
+
+<h1 id="第二章、可行性研究"><a href="#第二章、可行性研究" class="headerlink" title="第二章、可行性研究"></a><strong>第二章、可行性研究</strong></h1><h2 id="可行性研究的目的和任务"><a href="#可行性研究的目的和任务" class="headerlink" title="可行性研究的目的和任务"></a><strong>可行性研究的目的和任务</strong></h2><ol>
+<li>系统定义明确之后,应对系统的可行性进行研究。可行性研究包括<strong>经济可行性、技术可行性、操作可行性</strong>。</li>
+</ol>
+<h1 id="第三章、软件需求分析"><a href="#第三章、软件需求分析" class="headerlink" title="第三章、软件需求分析"></a><strong>第三章、软件需求分析</strong></h1><ol>
+<li><p>软件需求分析阶段的工作,可以分为以下几个方面;对问题定义、分析与综合、编写需求分析文档以及<strong>需求分析评审</strong>。</p>
+</li>
+<li><p>软件需求分析的任务不应包括<strong>结构化程序设计</strong>。（只包括<strong>问题分析、信息域分析、确定逻辑模型</strong>)</p>
+</li>
+<li><p>进行需求分析可使用<strong>数据流图、判定、数据字典</strong>等工具。（PAD图，一种流程图，用于描述数据和处理之间的关系。帮助设计人员更好地理解和描述系统的数据处理过程。）</p>
+</li>
+<li><p>数据流图是常用的进行软件需求分析的图形工具，其基本符号是<strong>加工、数据流、数据存储和外部实体</strong>。</p>
+</li>
+<li><p>数据流图是用于表示软件模型的一种图示方法，在下列可采用的绘图方法中，<strong>自顶向下、分层绘制、逐步求精</strong>是最常采用的。</p>
+</li>
+<li><p>在软件开发过程中常用图作为描述工具,DFD就是面向<strong>数据流</strong>分析方法的描述工具。</p>
+</li>
+<li><p><strong>数据流图</strong>和数据字典共同构成系统的逻辑模型。</p>
+</li>
+</ol>
+<h1 id="第四章、软件总体设计"><a href="#第四章、软件总体设计" class="headerlink" title="第四章、软件总体设计"></a><strong>第四章、软件总体设计</strong></h1><ol>
+<li>1960年底Dijkstra提倡的<strong>结构化程序设计</strong>是一种有效的提高程序设计效率的方法。</li>
+<li>某个模块的作用域是指<strong>受该模块内的判定影响的所有模块</strong>。</li>
+<li>扇出是一个模块直接调用的模块数目，一般推荐的扇出为<strong>3或4</strong>。扇出过大意味着模块过分复杂，需要控制和协调过多的下级模块。</li>
+<li>模块独立性是软件模块化所提出的要求，衡量模块独立性的度量标准是模块的<strong>内聚性和耦合性</strong>。</li>
+<li>为了高质量地开发软件项目，在软件结构设计时必遵循<strong>信息隐蔽</strong>。</li>
+</ol>
+<blockquote>
+<p><strong>总体设计阶段的主要目的和任务是什么？</strong></p>
+</blockquote>
+<p>总体设计阶段的基本目标就是回答“概括地说，系统应该如何实现？”这个问题，因此总体设计又称为概要设计或初步设计。通过这个阶段的工作，开发人员将划分出组成系统的物理元素，如程序、文件、数据库等。但是这些物理元素还处于黑盒子的形式，具体的内部细节在详细设计阶段考虑。总体设计的另一项任务是设计软件的总体结构，即确定系统中的每个程序是由哪些模块组成的，每个模块的功能及模块和模块之间的接口、调用关系等，但所有这些都不要求涉及模块内部过程的细节。</p>
+<blockquote>
+<p> <strong>模块、模块化与模块独立性</strong></p>
+</blockquote>
+<p><strong>模块：</strong></p>
+<p>模块是软件结构的基础，是软件元素，是能够单独命名、独立完成一定功能的程序语句的集合。</p>
+<p><strong>模块化：</strong></p>
+<p>模块化是指解决一个复杂问题时自顶向下逐层把软件系统划分成若干模块的过程。 </p>
+<p><strong>模块的独立性：</strong></p>
+<p>模块独立性每个模块完成一个相对独立的特定子功能，并且和其他模块之间的关系很简单。模块的独立性可以从两个方面来度量：耦合衡量不同模块彼此间相互依赖的紧密程度。耦合要低，即每个模块和其他模块之间的关系要简单。内聚衡量一个模块内部各个元素之间彼此结合的紧密程度的度量。 内聚要高，每个模块完成一个相对独立的特定子功能。</p>
+<ol start="6">
+<li>软件概要设计包括<strong>软件系统结构设计以及数据结构和数据库设计</strong>。</li>
+<li>结构设计是一种应用最广泛的系统设计方法，是以<strong>数据流图</strong>为基础、自顶向下、逐步求精和模块化的过程。</li>
+<li>为了提高模块的独立性，模块内部最好是<strong>功能内聚</strong>。</li>
+</ol>
+<h1 id="第五章、软件详细设计"><a href="#第五章、软件详细设计" class="headerlink" title="第五章、软件详细设计"></a><strong>第五章、软件详细设计</strong></h1><ol>
+<li>决定软件系统中各个模块的外部特性，即其输入输出和功能是<strong>概要设计</strong>的任务。   </li>
+<li>在面向数据流的软件设计方法中,一般将信息流分为<strong>变换流和事务流</strong>。</li>
+<li>详细设计的工具有图形工具、<strong>表格工具 <strong>和</strong>语言工具</strong>。</li>
+</ol>
+<h1 id="第七章、软件测试"><a href="#第七章、软件测试" class="headerlink" title="第七章、软件测试"></a><strong>第七章、软件测试</strong></h1><p><strong>语句</strong>在白盒法技术测试用例的设计中是最弱的覆盖标准。</p>
+<h1 id="第九章、面向对象方法学"><a href="#第九章、面向对象方法学" class="headerlink" title="第九章、面向对象方法学"></a><strong>第九章、面向对象方法学</strong></h1><ol>
+<li>UML中有四种关系是:依赖,泛化,关联和<strong>实现</strong>。</li>
+<li>面向对象的分析方法主要是建立三类模型，即<strong>对象模型、动态模型、功能模型</strong>。</li>
+<li>UML提供的构建系统动态模型的机制有<strong>进程</strong>视图(包括顺序图和协作图)、<strong>逻辑</strong>视图、<strong>实现</strong>视图。</li>
+</ol>
+<blockquote>
+<p>面向对象方法的要点包括哪些内容？</p>
+</blockquote>
+<p>面向对象方法学的出发点和基本原则是尽可能模拟人类习惯的思维方式，使开发软件的方法与过程尽可能接近人类解决问题的方法与过程；面向对象方法是一种新的思维方法，它不是把程序看作是工作在数据上的一系列过程或函数的集合，而是把程序看作是相互协作而又彼此独立的对象的集合。<br>面向对象的方法学可以用下式来表述：<br>OO &#x3D; Objects + Classes + Inheritance + Communication with messages<br>即面向对象包括既使用对象，又使用类和继承等机制，而且对象之间仅能通过传递消息实现彼此通信。</p>
+<blockquote>
+<p>什么是类？什么是对象？类和对象是什么关系？</p>
+</blockquote>
+<p>（1）类是具有相同属性和操作的一组相似对象（实体）的集合，类为属于该类的全部对象提供了统一的抽象描述。 （2）对象是对问题域中客观存在的事物的抽象，是一组属性和在这些属性上的操作的封装体。 （3）类给出了属于该类的全部对象的抽象定义，而对象则是符合这种定义的一个实体。因此，对象又称为是类的一个“实例（Instance）”，类又称为是对象的“模板 （Template）”。类代表一类抽象的概念或事物。对象是在客观世界中实际存在的类的实例。</p>
+<h1 id="第十章、面向对象的分析"><a href="#第十章、面向对象的分析" class="headerlink" title="第十章、面向对象的分析"></a><strong>第十章、面向对象的分析</strong></h1><ol>
+<li>类A的一个操作调用类B的一个操作，且这两个类之间不存在其他关系，那么类A和类B之间是<strong>依赖</strong>关系。</li>
+<li>在类图中，<strong>聚合</strong>关系表达总体与局部的关系。</li>
+<li><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20230305112027917.png" alt="image-20230305112027917" style="zoom:33%;" /></li>
+</ol>
+<p>空心箭头连线表示<strong>泛化</strong>关系。</p>
+<ol start="4">
+<li><blockquote>
+<p> 用例建模包含哪几个步骤？</p>
+</blockquote>
+</li>
+</ol>
+<p>​			用例建模包括确定系统范围和系统边界、确定参与者、确定用例、 确定用例之间的关系几个步骤。</p>
+<ol start="5">
+<li><blockquote>
+<p>对象模型包含哪些内容？对象建模的步骤是什么？</p>
+</blockquote>
+<p>（1）对象模型是面向对象建模中最关键的一个模型，它的作用是描述系统 的静态结构，包括构成系统的类和对象、它们的属性和操作及它们之间的关系。</p>
+<p>（2）确定类和对象、确定关联、确定属性、建立对象类图、划分主题、优化对象模型。</p>
+</li>
+<li><p>顺序图的作用有<strong>显示在交互过程中各个对象之间的组织交互关系以及对象彼此之间的连接</strong>。</p>
+</li>
+<li><p>顺序图中的消息是以<strong>时间</strong>顺序排列的。</p>
+</li>
+</ol>
+<h1 id="第十一章、面向对象的设计与实现"><a href="#第十一章、面向对象的设计与实现" class="headerlink" title="第十一章、面向对象的设计与实现"></a><strong>第十一章、面向对象的设计与实现</strong></h1><img src="https://cdn.staticaly.com/gh/Dreamin121/picgohub@master/imgs/image-20230305112958911.png" alt="image-20230305112958911" style="zoom: 33%;" />
+
+<p>顺序图由类角色、生命线、激活期和<strong>消息</strong>组成。</p>
+<blockquote>
+<p>面向对象设计的启发式规则有哪些？</p>
+</blockquote>
+<p>设计结果应该清晰易懂 、一般-特殊结构的深度应适当、设计简单的类、使用简单的协议。</p>
+<blockquote>
+<p>从面向对象分析到面向对象设计和实现，对象模型有何变化？</p>
+</blockquote>
+<p>从面向对象分析、面向对象设计，再到面向对象的实现，实际上就变成一个逐渐扩充模型的过程，或者说，面向对象设计就是利用面向对象观点建立求解域模型的过程，面向对象的实现就是选择一种面向对象的程序设计语言进行编码、测试、审查、调试和优化的过程。</p>
+<h1 id="第十三章、-软件体系结构"><a href="#第十三章、-软件体系结构" class="headerlink" title="第十三章、 软件体系结构"></a><strong>第十三章、</strong> <strong>软件体系结构</strong></h1><ol>
+<li><strong>分层模式</strong>将整个软件系统分为若干层次，最顶层直接面向用户提供软件系统的操作界面，其余各层为紧邻其上的层次提供服务。</li>
+<li>模块化原则不仅适用于结构化软件设计，也适用于面向对象的软件设计。</li>
+</ol>
+<blockquote>
+<p>什么是软件体系结构，为什么要研究软件体系结构？</p>
+</blockquote>
+<p>软件体系结构（Software Architecture）主要由构件、连接件和配置规则组成，为软件系统提供一个结构、行为和属性的高级抽象，由构成系统的元素的描述、这些元素的相互作用、指导元素集成的模式以及这些模式的约束组成。软件体系结构是在软件系统的整体结构层次上关注软件系统的构建和组成，是设计抽象的进一步发展，满足了更好地理解软件系统，更方便地开发更大、更复杂的软件系统的需要。如同计算机系统结构在计算机工程中的重要作用一样，对于软件体系结构的概念、高层设计和复用的研究，是“现代软件工程”的一个重要组成部分。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/soft/" rel="tag"># soft</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/01/08/2022/" rel="prev" title="2022小总结">
+                  <i class="fa fa-chevron-left"></i> 2022小总结
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dreamin</span>
+</div>
+
+<div>
+本站备案号：<a href="https://icp.gov.moe/?keyword=20220418" target="_blank">萌ICP备20220418-12号</a>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">139k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:07</span>
+  </span>
+</div>
+  <div class="powered-by">本页面由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+<div class="powered-by">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <i class="fa fa-user-md"></i>
+    <span id="busuanzi_container_site_uv">
+        Vistors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_pv">
+        Views：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</div>
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>  
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("10/05/2022 13:14:21");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "在风风雨雨中运行了 "+dnum+" d ";
+        document.getElementById("times").innerHTML = hnum + " h " + mnum + " m " + snum + " s";
+    }
+setInterval("createtime()",250);
+</script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://comment-beige.vercel.app/","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"dark":"body.darkmode--activated","locale":null,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":false,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","reaction":true,"el":"#waline","comment":true,"path":"/2023/03/05/softexam/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '16px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: '',
+  backgroundColor: '',
+  buttonColorDark: '#282828',
+  buttonColorLight: '',
+  saveInCookies: false,
+  label: '🌙',
+  autoMatchOsTheme: false
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+if (window.darkmode && !window.darkmode.isActivated()) {
+  window.darkmode.toggle();
+  var toggleButtons = document.getElementsByClassName("darkmode-toggle");
+  if (toggleButtons && toggleButtons.length > 0) {
+    for (i = 0; i < toggleButtons.length; i++) {
+      toggleButtons[i].classList.add("darkmode-toggle--white");
+    }
+  }
+}
+</script>
+
+</body>
+</html>
