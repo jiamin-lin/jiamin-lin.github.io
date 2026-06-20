@@ -1,0 +1,74 @@
+notion:
+  database_id: be1e22c687994c7bbfeb6b787384015e
+  root_page_id:
+
+fields:
+  title:
+    - Name
+    - Title
+    - 标题
+  status:
+    - Status
+    - 状态
+  slug:
+    - Slug
+    - URL
+    - 路径
+  lang:
+    - Lang
+    - Language
+    - 语言
+  tags:
+    - Tags
+    - 标签
+  categories:
+    - Categories
+    - Category
+    - 分类
+  date:
+    - Published
+    - PublishedAt
+    - Date
+    - 发布日期
+  updated:
+    - Updated
+    - Last edited time
+    - 更新日期
+  summary:
+    - Summary
+    - Description
+    - 摘要
+  translation_group:
+    - TranslationGroup
+    - Translation Group
+    - 翻译组
+
+publish_statuses:
+  - Published
+  - Publish
+  - Done
+  - 已发布
+  - 发布
+
+default_category: Notion
+
+languages:
+  default: zh-cn
+  aliases:
+    zh: zh-cn
+    zh-cn: zh-cn
+    zh_CN: zh-cn
+    中文: zh-cn
+    简体中文: zh-cn
+    chinese: zh-cn
+    en: en
+    en-US: en
+    english: en
+    英文: en
+    ja: ja
+    jp: ja
+    ja-JP: ja
+    japanese: ja
+    日本語: ja
+    日文: ja
+

@@ -1,0 +1,9 @@
+node_modules/
+public/
+.deploy_git/
+.env
+.DS_Store
+db.json
+.hexo/
+npm-debug.log*
+

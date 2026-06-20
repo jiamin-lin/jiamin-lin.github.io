@@ -1,0 +1,44 @@
+{
+  "name": "hexo-notion-i18n-blog",
+  "version": "1.0.0",
+  "description": "Hexo + NexT.Muse blog with Notion sync and zh/en/ja i18n routes.",
+  "private": true,
+  "scripts": {
+    "hexo": "hexo",
+    "sync:notion": "node tools/sync-notion.mjs",
+    "clean": "hexo clean",
+    "build": "hexo clean && hexo generate",
+    "server": "hexo server --draft --port 4000"
+  },
+  "keywords": [
+    "hexo",
+    "next",
+    "notion",
+    "i18n",
+    "github-pages"
+  ],
+  "author": "Drsee",
+  "license": "MIT",
+  "type": "commonjs",
+  "hexo": {
+    "version": "8.1.2"
+  },
+  "dependencies": {
+    "@notionhq/client": "2.3.0",
+    "css": "3.0.0",
+    "dotenv": "16.4.7",
+    "hexo": "8.1.2",
+    "hexo-cli": "4.3.2",
+    "hexo-generator-feed": "3.0.0",
+    "hexo-generator-index": "3.0.0",
+    "hexo-generator-searchdb": "1.4.1",
+    "hexo-pagination": "2.0.0",
+    "hexo-renderer-marked": "6.3.0",
+    "hexo-renderer-stylus": "3.0.1",
+    "hexo-server": "3.0.0",
+    "hexo-theme-next": "8.11.1",
+    "hexo-word-counter": "0.1.0",
+    "js-yaml": "4.2.0",
+    "slugify": "1.6.6"
+  }
+}
