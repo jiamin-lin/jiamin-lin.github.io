@@ -1,19 +1,21 @@
 scheme: Muse
 darkmode: false
+custom_file_path:
+  style: source/_data/styles.styl
 motion:
-  enable: true
+  enable: false
   async: false
 
 menu:
   home: / || fa fa-home
+  archives: /archives/ || fa fa-archive
+  tags: /tags/ || fa fa-tags
+  categories: /categories/ || fa fa-th
+  links: /links/ || fa fa-people-pulling
+  about: /about/ || fa fa-user
   中文: /zh-cn/ || fa fa-language
   English: /en/ || fa fa-language
   日本語: /ja/ || fa fa-language
-  tags: /tags/ || fa fa-tags
-  categories: /categories/ || fa fa-th
-  archives: /archives/ || fa fa-archive
-  links: /links/ || fa fa-people-pulling
-  about: /about/ || fa fa-user
 
 avatar:
   url: /images/avatar.gif
@@ -43,7 +45,7 @@ footer:
     animated: false
     color: '#808080'
   copyright:
-  powered: true
+  powered: false
 
 sidebar:
   position: left
