@@ -1,0 +1,33 @@
+---
+import { languageLabels, languages, navItems, site } from '../data/site';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="shell header-shell">
+    <a class="brand" href="/" aria-label={`${site.name} home`}>
+      <span class="brand-mark">DR</span>
+      <span>
+        <strong>{site.name}</strong>
+        <small>Cloud Field Notes</small>
+      </span>
+    </a>
+
+    <nav class="main-nav" aria-label="Primary navigation">
+      {navItems.map((item) => (
+        <a class:list={[currentPath === item.href && 'active']} href={item.href}>{item.label}</a>
+      ))}
+    </nav>
+
+    <nav class="language-nav" aria-label="Language navigation">
+      {languages.map((lang) => (
+        <a href={`/${lang}/`}>{languageLabels[lang]}</a>
+      ))}
+    </nav>
+  </div>
+</header>

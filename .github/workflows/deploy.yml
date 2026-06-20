@@ -5,8 +5,6 @@ on:
     branches:
       - main
   workflow_dispatch:
-  schedule:
-    - cron: '17 */6 * * *'
 
 permissions:
   contents: read
@@ -15,15 +13,11 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-      NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-      NOTION_ROOT_PAGE_ID: ${{ secrets.NOTION_ROOT_PAGE_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,15 +25,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Sync Notion
-        if: ${{ env.NOTION_TOKEN != '' }}
-        run: npm run sync:notion
 
       - name: Build
         run: npm run build
@@ -50,7 +40,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public
+          path: ./dist
 
   deploy:
     environment:

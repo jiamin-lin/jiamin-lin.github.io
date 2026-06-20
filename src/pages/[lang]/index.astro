@@ -1,0 +1,46 @@
+---
+import ArchitectureMap from '../../components/ArchitectureMap.astro';
+import PostCard from '../../components/PostCard.astro';
+import { homeCopy, languages, type Lang } from '../../data/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedPosts } from '../../lib/content';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const copy = homeCopy[lang];
+const posts = (await getPublishedPosts(lang)).slice(0, 3);
+---
+
+<BaseLayout title={copy.title} description={copy.description} lang={lang}>
+  <section class="hero-band">
+    <div class="shell hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">{copy.eyebrow}</p>
+        <h1>{copy.title}</h1>
+        <p class="lede">{copy.description}</p>
+      </div>
+      <ArchitectureMap />
+    </div>
+  </section>
+
+  <section class="shell section-block">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Briefings</p>
+        <h2>{copy.latest}</h2>
+      </div>
+      <a class="text-link" href={`/${lang}/blog/`}>View all</a>
+    </div>
+
+    {posts.length > 0 ? (
+      <div class="post-grid">
+        {posts.map((post) => <PostCard post={post} localized />)}
+      </div>
+    ) : (
+      <p class="empty-state">{copy.empty}</p>
+    )}
+  </section>
+</BaseLayout>

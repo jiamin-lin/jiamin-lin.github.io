@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getTags } from '../../lib/content';
+
+const tags = await getTags();
+---
+
+<BaseLayout title="Tags" description="Browse cloud architecture tags">
+  <section class="shell section-block">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Tags</p>
+        <h1>Topics</h1>
+      </div>
+    </div>
+
+    {tags.length > 0 ? (
+      <ul class="topic-cloud">
+        {tags.map((tag) => (
+          <li><a href={`/tags/${tag.slug}/`}>{tag.name}<span>{tag.count}</span></a></li>
+        ))}
+      </ul>
+    ) : (
+      <p class="empty-state">Topics will appear when posts are published.</p>
+    )}
+  </section>
+</BaseLayout>

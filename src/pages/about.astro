@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About" description="About Drzone Cloud Field Notes">
+  <section class="shell article-shell">
+    <p class="eyebrow">About</p>
+    <h1>Cloud architecture notes with an SA operating cadence.</h1>
+    <p class="lede">
+      This site is a lightweight home for reusable architecture thinking: review notes,
+      migration patterns, service comparisons, and build logs.
+    </p>
+
+    <div class="article-body">
+      <h2>Focus</h2>
+      <p>
+        The writing here is biased toward practical decisions: what to standardize,
+        what to prototype, where to draw a security boundary, and how to keep cost and
+        reliability visible while a system evolves.
+      </p>
+
+      <h2>Content Shape</h2>
+      <p>
+        Posts are Markdown or MDX files in the repository. Each post carries language,
+        tags, and publish dates through frontmatter, so the site can grow into a
+        multilingual knowledge base without changing the deployment model.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

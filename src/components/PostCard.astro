@@ -1,0 +1,24 @@
+---
+import { formatDate, postPath, type BlogPost } from '../lib/content';
+
+interface Props {
+  post: BlogPost;
+  localized?: boolean;
+}
+
+const { post, localized = false } = Astro.props;
+---
+
+<article class="post-card">
+  <div class="post-card-meta">
+    <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate, post.data.lang)}</time>
+    <span>{post.data.lang}</span>
+  </div>
+  <h3><a href={postPath(post, localized)}>{post.data.title}</a></h3>
+  <p>{post.data.description}</p>
+  {post.data.tags.length > 0 && (
+    <ul class="tag-list" aria-label="Tags">
+      {post.data.tags.map((tag) => <li>{tag}</li>)}
+    </ul>
+  )}
+</article>

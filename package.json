@@ -1,44 +1,32 @@
 {
-  "name": "hexo-notion-i18n-blog",
-  "version": "1.0.0",
-  "description": "Hexo + NexT.Muse blog with Notion sync and zh/en/ja i18n routes.",
+  "name": "drzone-cloud-field-notes",
+  "version": "2.0.0",
+  "description": "Astro static site for cloud architecture field notes.",
   "private": true,
+  "type": "module",
   "scripts": {
-    "hexo": "hexo",
-    "sync:notion": "node tools/sync-notion.mjs",
-    "clean": "hexo clean",
-    "build": "hexo clean && hexo generate",
-    "server": "hexo server --draft --port 4000"
+    "dev": "astro dev --host 0.0.0.0 --port 4000",
+    "build": "astro build",
+    "preview": "astro preview --host 0.0.0.0 --port 4000",
+    "check": "astro check"
   },
   "keywords": [
-    "hexo",
-    "next",
-    "notion",
+    "astro",
+    "aws",
+    "cloud-architecture",
     "i18n",
     "github-pages"
   ],
   "author": "Drsee",
   "license": "MIT",
-  "type": "commonjs",
-  "hexo": {
-    "version": "8.1.2"
-  },
   "dependencies": {
-    "@notionhq/client": "2.3.0",
-    "css": "3.0.0",
-    "dotenv": "16.4.7",
-    "hexo": "8.1.2",
-    "hexo-cli": "4.3.2",
-    "hexo-generator-feed": "3.0.0",
-    "hexo-generator-index": "3.0.0",
-    "hexo-generator-searchdb": "1.4.1",
-    "hexo-pagination": "2.0.0",
-    "hexo-renderer-marked": "6.3.0",
-    "hexo-renderer-stylus": "3.0.1",
-    "hexo-server": "3.0.0",
-    "hexo-theme-next": "8.11.1",
-    "hexo-word-counter": "0.1.0",
-    "js-yaml": "4.2.0",
-    "slugify": "1.6.6"
+    "@astrojs/mdx": "6.0.3",
+    "@astrojs/rss": "4.0.18",
+    "@astrojs/sitemap": "3.7.3",
+    "astro": "6.4.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.9",
+    "typescript": "6.0.3"
   }
 }

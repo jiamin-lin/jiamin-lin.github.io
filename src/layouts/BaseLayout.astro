@@ -1,0 +1,44 @@
+---
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { htmlLang, site, type Lang } from '../data/site';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: Lang;
+}
+
+const {
+  title = site.title,
+  description = site.description,
+  lang = 'en'
+} = Astro.props;
+
+const pageTitle = title === site.title ? title : `${title} | ${site.name}`;
+---
+
+<!doctype html>
+<html lang={htmlLang[lang]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f8f5" />
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="alternate" type="application/rss+xml" title={site.title} href="/rss.xml" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <SiteHeader currentPath={Astro.url.pathname} />
+    <main>
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

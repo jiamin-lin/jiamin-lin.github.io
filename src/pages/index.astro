@@ -1,0 +1,66 @@
+---
+import ArchitectureMap from '../components/ArchitectureMap.astro';
+import PostCard from '../components/PostCard.astro';
+import { homeCopy, operatingPillars, site } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPublishedPosts } from '../lib/content';
+
+const posts = (await getPublishedPosts()).slice(0, 3);
+const copy = homeCopy.en;
+---
+
+<BaseLayout title={site.title} description={site.description} lang="en">
+  <section class="hero-band">
+    <div class="shell hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">{copy.eyebrow}</p>
+        <h1>{copy.title}</h1>
+        <p class="lede">{copy.description}</p>
+        <div class="signal-row" aria-label="Architecture signals">
+          <span>Resilience</span>
+          <span>Security</span>
+          <span>FinOps</span>
+          <span>GenAI</span>
+        </div>
+      </div>
+      <ArchitectureMap />
+    </div>
+  </section>
+
+  <section class="shell section-block">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Briefings</p>
+        <h2>{copy.latest}</h2>
+      </div>
+      <a class="text-link" href="/blog/">View all</a>
+    </div>
+
+    {posts.length > 0 ? (
+      <div class="post-grid">
+        {posts.map((post) => <PostCard post={post} />)}
+      </div>
+    ) : (
+      <p class="empty-state">{copy.empty}</p>
+    )}
+  </section>
+
+  <section class="section-band">
+    <div class="shell section-block">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Operating Model</p>
+          <h2>From customer context to executable architecture.</h2>
+        </div>
+      </div>
+      <div class="pillar-grid">
+        {operatingPillars.map((pillar) => (
+          <article class="pillar-card">
+            <h3>{pillar.title}</h3>
+            <p>{pillar.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+import PostCard from '../../components/PostCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedPosts, getTags, tagSlug } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const tags = await getTags();
+  return tags.map((tag) => ({ params: { tag: tag.slug }, props: { tagName: tag.name } }));
+}
+
+const { tagName } = Astro.props;
+const posts = (await getPublishedPosts()).filter((post) => {
+  return post.data.tags.some((tag) => tagSlug(tag) === Astro.params.tag);
+});
+---
+
+<BaseLayout title={`Tag: ${tagName}`} description={`Posts tagged ${tagName}`}>
+  <section class="shell section-block">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Tag</p>
+        <h1>{tagName}</h1>
+      </div>
+    </div>
+
+    <div class="post-grid">
+      {posts.map((post) => <PostCard post={post} />)}
+    </div>
+  </section>
+</BaseLayout>

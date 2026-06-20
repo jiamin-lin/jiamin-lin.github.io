@@ -1,0 +1,26 @@
+---
+import PostCard from '../../components/PostCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedPosts } from '../../lib/content';
+
+const posts = await getPublishedPosts();
+---
+
+<BaseLayout title="Blog" description="Cloud architecture field notes and briefings">
+  <section class="shell section-block">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Blog</p>
+        <h1>Architecture briefings</h1>
+      </div>
+    </div>
+
+    {posts.length > 0 ? (
+      <div class="post-grid">
+        {posts.map((post) => <PostCard post={post} />)}
+      </div>
+    ) : (
+      <p class="empty-state">Briefings are being drafted.</p>
+    )}
+  </section>
+</BaseLayout>
