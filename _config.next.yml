@@ -42,7 +42,7 @@ footer:
     name: fa fa-heart
     animated: false
     color: '#808080'
-  copyright: true
+  copyright:
   powered: true
 
 sidebar:
@@ -98,4 +98,3 @@ waline:
   comment_count: false
   requiredFields: []
   reaction: false
-
