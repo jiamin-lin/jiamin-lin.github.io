@@ -25,6 +25,7 @@ const pageTitle = title === site.title ? title : `${title} | ${site.name}`;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f7f8f5" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0e1418" />
     <meta name="description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
@@ -32,6 +33,58 @@ const pageTitle = title === site.title ? title : `${title} | ${site.name}`;
     <meta property="og:url" content={Astro.url.href} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="alternate" type="application/rss+xml" title={site.title} href="/rss.xml" />
+    <script is:inline>
+      (() => {
+        const key = 'drzone-theme';
+        const root = document.documentElement;
+        const safeStorage = {
+          get() {
+            try {
+              return window.localStorage.getItem(key);
+            } catch {
+              return null;
+            }
+          },
+          set(value) {
+            try {
+              window.localStorage.setItem(key, value);
+            } catch {}
+          }
+        };
+
+        const system = window.matchMedia('(prefers-color-scheme: dark)');
+        const resolveTheme = () => safeStorage.get() || (system.matches ? 'dark' : 'light');
+        const applyTheme = (theme) => {
+          root.dataset.theme = theme;
+          root.style.colorScheme = theme;
+          const themeColor = document.querySelector('meta[name="theme-color"]:not([media])');
+          if (themeColor) {
+            themeColor.setAttribute('content', theme === 'dark' ? '#0e1418' : '#f7f8f5');
+          }
+          const button = document.querySelector('[data-theme-toggle]');
+          if (button) {
+            const isDark = theme === 'dark';
+            button.setAttribute('aria-pressed', String(isDark));
+            button.setAttribute('title', isDark ? 'Use light mode' : 'Use dark mode');
+          }
+        };
+
+        applyTheme(resolveTheme());
+        window.addEventListener('DOMContentLoaded', () => {
+          const button = document.querySelector('[data-theme-toggle]');
+          if (!button) return;
+          applyTheme(resolveTheme());
+          button.addEventListener('click', () => {
+            const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            safeStorage.set(next);
+            applyTheme(next);
+          });
+          system.addEventListener('change', () => {
+            if (!safeStorage.get()) applyTheme(resolveTheme());
+          });
+        });
+      })();
+    </script>
     <title>{pageTitle}</title>
   </head>
   <body>

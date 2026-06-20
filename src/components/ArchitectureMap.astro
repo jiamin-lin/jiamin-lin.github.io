@@ -1,9 +1,60 @@
 <figure class="architecture-map">
-  <img
-    src="/images/aws-sa-field-map.svg"
-    alt="Reference architecture map for edge, identity, API, compute, data, and observability layers"
-    width="760"
-    height="520"
-    loading="eager"
-  />
+  <svg class="architecture-svg" viewBox="0 0 760 520" role="img" aria-labelledby="architecture-title architecture-desc">
+    <title id="architecture-title">Cloud architecture field map</title>
+    <desc id="architecture-desc">Reference architecture map for edge, identity, API, compute, data, and observability layers.</desc>
+    <rect class="map-canvas" width="760" height="520"></rect>
+    <rect class="map-panel" x="34" y="34" width="692" height="452" rx="8"></rect>
+    <text class="map-title" x="62" y="78">Reference Architecture Map</text>
+    <text class="map-caption" x="62" y="108">Edge, identity, API, compute, data, and observability flow</text>
+
+    <g class="map-node-text">
+      <rect class="map-node cool" x="62" y="154" width="132" height="72" rx="8"></rect>
+      <text x="91" y="185">Users</text>
+      <text class="map-small" x="86" y="207">web / mobile</text>
+
+      <rect class="map-node warm" x="244" y="154" width="132" height="72" rx="8"></rect>
+      <text x="277" y="185">Edge</text>
+      <text class="map-small" x="268" y="207">cdn / waf</text>
+
+      <rect class="map-node teal" x="426" y="154" width="132" height="72" rx="8"></rect>
+      <text x="454" y="185">Identity</text>
+      <text class="map-small" x="447" y="207">auth / policy</text>
+
+      <rect class="map-node blue" x="244" y="280" width="132" height="72" rx="8"></rect>
+      <text x="286" y="311">API</text>
+      <text class="map-small" x="267" y="333">gateway / events</text>
+
+      <rect class="map-node cool" x="426" y="280" width="132" height="72" rx="8"></rect>
+      <text x="455" y="311">Compute</text>
+      <text class="map-small" x="448" y="333">containers / fn</text>
+
+      <rect class="map-node warm" x="608" y="280" width="88" height="72" rx="8"></rect>
+      <text x="623" y="311">Data</text>
+      <text class="map-small" x="621" y="333">lake / db</text>
+
+      <rect class="map-observe" x="244" y="406" width="452" height="42" rx="8"></rect>
+      <text class="map-observe-text" x="386" y="432">Observability, Cost, Reliability</text>
+    </g>
+
+    <g class="map-lines">
+      <path d="M194 190 H244"></path>
+      <path d="M376 190 H426"></path>
+      <path d="M310 226 V280"></path>
+      <path d="M376 316 H426"></path>
+      <path d="M558 316 H608"></path>
+      <path d="M492 226 V280"></path>
+      <path d="M310 352 V406"></path>
+      <path d="M492 352 V406"></path>
+      <path d="M652 352 V406"></path>
+    </g>
+
+    <g class="map-dots">
+      <circle cx="194" cy="190" r="5"></circle>
+      <circle cx="376" cy="190" r="5"></circle>
+      <circle cx="310" cy="280" r="5"></circle>
+      <circle cx="426" cy="316" r="5"></circle>
+      <circle cx="608" cy="316" r="5"></circle>
+      <circle cx="492" cy="280" r="5"></circle>
+    </g>
+  </svg>
 </figure>
